@@ -1,9 +1,9 @@
 import ESlide from './ESlide.jsx';
 
-export default function Slide41() {
+export default function Slide44() {
   return (
     <ESlide
-      num="41"
+      num="44"
       variant="momentum"
       phrase="Куда уходят ваши запросы?"
       partLabel="Часть III"

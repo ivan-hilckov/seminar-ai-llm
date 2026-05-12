@@ -1,9 +1,9 @@
 import ESlide from './ESlide.jsx';
 
-export default function Slide29() {
+export default function Slide32() {
   return (
     <ESlide
-      num="29"
+      num="32"
       variant="momentum"
       phrase={
         <>

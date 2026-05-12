@@ -1,9 +1,9 @@
 import ESlide from './ESlide.jsx';
 
-export default function Slide21() {
+export default function Slide24() {
   return (
     <ESlide
-      num="21"
+      num="24"
       variant="number"
       number="100 миллионов пользователей за 2 месяца"
       caption={

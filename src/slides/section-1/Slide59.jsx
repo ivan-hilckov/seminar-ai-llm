@@ -1,9 +1,9 @@
 import ESlide from './ESlide.jsx';
 
-export default function Slide56() {
+export default function Slide59() {
   return (
     <ESlide
-      num="56"
+      num="59"
       variant="momentum"
       phrase="Перерыв 15 минут"
       partLabel="Закрытие"

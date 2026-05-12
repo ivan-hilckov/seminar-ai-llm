@@ -35,7 +35,7 @@ function Header() {
   return (
     <header className="map-header">
       <div className="map-header__left">
-        <div className="map-eyebrow">Секция 1 · 53 слайда · 90 минут</div>
+        <div className="map-eyebrow">Секция 1 · 56 слайдов · 90 минут</div>
         <h1 className="map-title">История и устройство языковых моделей</h1>
       </div>
       <div className="map-header__right">

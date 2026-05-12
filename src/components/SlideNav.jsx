@@ -17,8 +17,15 @@ export default function SlideNav({ currentId }) {
 
   // Куда возвращаться по «Назад на карту».
   const numericId = Number(currentId);
-  const mapHref = numericId >= 6 ? '/section/1' : '/opening';
-  const mapLabel = numericId >= 6 ? 'Карта Секции 1' : 'Карта открытия';
+  let mapHref = '/opening';
+  let mapLabel = 'Карта открытия';
+  if (numericId >= 62) {
+    mapHref = '/section/2';
+    mapLabel = 'Карта Секции 2';
+  } else if (numericId >= 6) {
+    mapHref = '/section/1';
+    mapLabel = 'Карта Секции 1';
+  }
 
   useEffect(() => {
     function onKey(e) {

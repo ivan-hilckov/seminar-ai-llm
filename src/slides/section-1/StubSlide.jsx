@@ -28,7 +28,7 @@ export default function StubSlide({ id, type, title, subblock }) {
 }
 
 function A({ id, title }) {
-  const roman = id <= '29' ? 'I' : id <= '39' ? 'II' : id <= '53' ? 'III' : '·';
+  const { roman } = getPartInfo(id);
   return (
     <>
       <div className="stub-a__roman">{roman}</div>
@@ -86,8 +86,7 @@ function D({ subblock, title }) {
 }
 
 function E({ id, title, subblock }) {
-  const part =
-    id <= '29' ? 'Часть I' : id <= '39' ? 'Часть II' : id <= '53' ? 'Часть III' : 'Закрытие';
+  const { label: part } = getPartInfo(id);
   return (
     <>
       <div className="stub-e__phrase">
@@ -98,4 +97,32 @@ function E({ id, title, subblock }) {
       </div>
     </>
   );
+}
+
+/**
+ * По id слайда определяем римскую цифру части и её имя.
+ * Сквозная нумерация всего семинара:
+ *   01–05 — Открытие
+ *   06–32 — Часть I  (Секция 1)
+ *   33–42 — Часть II (Секция 1)
+ *   43–56 — Часть III (Секция 1)
+ *   57–61 — Закрытие Секции 1
+ *   62    — Обложка Секции 2
+ *   63–69 — Часть IV (Секция 2)
+ *   70–87 — Часть V  (Секция 2)
+ *   88–102 — Часть VI (Секция 2)
+ *   103–104 — Закрытие Секции 2
+ */
+function getPartInfo(id) {
+  const n = Number(id);
+  if (n <= 5) return { roman: '·', label: 'Открытие' };
+  if (n <= 32) return { roman: 'I', label: 'Часть I' };
+  if (n <= 42) return { roman: 'II', label: 'Часть II' };
+  if (n <= 56) return { roman: 'III', label: 'Часть III' };
+  if (n <= 61) return { roman: '·', label: 'Закрытие' };
+  if (n === 62) return { roman: '·', label: 'Секция 2' };
+  if (n <= 69) return { roman: 'IV', label: 'Часть IV' };
+  if (n <= 87) return { roman: 'V', label: 'Часть V' };
+  if (n <= 102) return { roman: 'VI', label: 'Часть VI' };
+  return { roman: '·', label: 'Закрытие' };
 }
