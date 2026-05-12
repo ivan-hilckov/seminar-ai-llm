@@ -90,14 +90,16 @@
 }
 .visual svg { display: block; }
 
-/* Правый текстовый блок (38%, прижат к низу) — для слайдов типа C */
+/* Правый текстовый блок (38%, центрирован по вертикали относительно визуала) — для слайдов типа C */
 .right {
   position: absolute;
   left: 1254px;
   right: 96px;
-  bottom: 140px;
+  top: 140px;
+  height: 800px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .right .sub {
   font-family: 'IBM Plex Mono', monospace;
