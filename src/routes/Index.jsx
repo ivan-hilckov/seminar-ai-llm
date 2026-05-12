@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { allSlides } from '../slides/registry.js';
 import { openingSlides } from '../slides/opening/index.js';
 import { slides as section1Slides } from '../slides/section-1/index.js';
+import { slides as section2Slides } from '../slides/section-2/index.js';
 import './Index.css';
 
 export default function Index() {
@@ -27,6 +28,10 @@ export default function Index() {
             <Link to="/section/1" className="home-card">
               <strong>Секция 1 — Карта слайдов</strong>
               <span>{section1Slides.length} слайдов · 90 мин · история и устройство LLM</span>
+            </Link>
+            <Link to="/section/2" className="home-card">
+              <strong>Секция 2 — Карта слайдов</strong>
+              <span>{section2Slides.length} слайдов · 90 мин · методика работы с LLM</span>
             </Link>
           </div>
         </section>
