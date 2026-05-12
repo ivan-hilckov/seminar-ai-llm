@@ -1,0 +1,266 @@
+/* ============================================================
+   Стили открывающих слайдов (01–05).
+   Используются в комбинации с базовым .slide.
+   ============================================================ */
+
+/* ─── Service label (нижний колонтитул, два угла) ─── */
+.slide .svc {
+  position: absolute;
+  bottom: 56px;
+  left: 96px;
+  right: 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+}
+.slide .svc .brand { color: var(--mute); }
+.slide .svc .tag { color: var(--mute); }
+
+/* ============================================================
+   01 — ТИТУЛ
+   ============================================================ */
+.slide.s01 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 96px;
+}
+.s01-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 60px 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.s01-eyebrow::before {
+  content: '';
+  width: 48px;
+  height: 1px;
+  background: var(--ink-soft);
+}
+.s01-title {
+  font-size: 104px;
+  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  margin: 0;
+  white-space: nowrap;
+}
+.s01-title .amp {
+  font-family: 'IBM Plex Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+.s01-sub {
+  margin-top: 48px;
+  font-size: 32px;
+  line-height: 1.4;
+  color: var(--mute);
+  font-weight: 400;
+  max-width: 1100px;
+}
+.s01-meta {
+  position: absolute;
+  left: 96px;
+  bottom: 160px;
+  display: flex;
+  gap: 80px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+.s01-meta .col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s01-meta .k {
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+}
+.s01-meta .v {
+  color: var(--ink);
+  font-size: 22px;
+}
+
+/* ============================================================
+   02 — КАРТА ДНЯ
+   ============================================================ */
+.s02-eyebrow {
+  position: absolute;
+  top: 108px;
+  left: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.s02-title {
+  position: absolute;
+  top: 160px;
+  left: 96px;
+  right: 96px;
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.s02-grid {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 380px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px;
+}
+.pair {
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  color: var(--mute);
+  min-height: 380px;
+}
+.pair .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.pair .num .now {
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  color: var(--mute-2);
+}
+.pair h3 {
+  font-size: 42px;
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  margin: 0 0 28px 0;
+  color: var(--mute);
+  max-width: 480px;
+}
+.pair .tags {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  font-size: 24px;
+  color: var(--mute-2);
+  line-height: 1.5;
+}
+.pair .tags .sep { color: var(--rule); }
+
+.pair.current {
+  border-top: 3px solid var(--accent);
+  padding-top: 30px;
+  color: var(--ink);
+}
+.pair.current .num { color: var(--accent); }
+.pair.current h3 { color: var(--ink); }
+.pair.current .tags { color: var(--ink-soft); }
+
+.s02-foot {
+  position: absolute;
+  bottom: 130px;
+  left: 96px;
+  right: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.s02-foot::before,
+.s02-foot::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--rule);
+}
+.s02-foot span { padding: 0 4px; }
+
+/* ============================================================
+   03/04/05 — ЦЕЛИ СЕКЦИИ
+   ============================================================ */
+.s03-eyebrow {
+  position: absolute;
+  top: 108px;
+  left: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.s03-title {
+  position: absolute;
+  top: 160px;
+  left: 96px;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.1;
+  max-width: 1500px;
+}
+.s03-list {
+  position: absolute;
+  left: 160px;
+  right: 160px;
+  top: 50%;
+  transform: translateY(-46%);
+  display: flex;
+  flex-direction: column;
+}
+.s03-row {
+  display: flex;
+  align-items: baseline;
+  gap: 48px;
+  font-size: 48px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  border-top: 1px solid var(--rule);
+  padding: 36px 0;
+}
+.s03-row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.s03-row .idx {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+  min-width: 72px;
+  align-self: baseline;
+}
