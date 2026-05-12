@@ -1,0 +1,259 @@
+/* ============================================================
+   Stub slide — заглушка для черновых слайдов.
+   Использует базовую разметку .slide + dashed-placeholder элементы,
+   подсказывающие будущую композицию.
+   ============================================================ */
+
+.stub-slide {
+  background: var(--bg);
+}
+
+.stub-slide__meta-top {
+  position: absolute;
+  top: 96px;
+  left: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.stub-slide__foot-meta {
+  position: absolute;
+  left: 96px;
+  bottom: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+}
+
+.stub-slide__badge {
+  position: absolute;
+  top: 96px;
+  right: 220px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px dashed var(--mute-2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.stub-slide__badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mute-2);
+}
+
+/* ── C-stub: визуал + текст справа (как в реальном C) ── */
+.stub-c__layout {
+  position: absolute;
+  inset: 200px 96px 200px 96px;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 80px;
+}
+.stub-c__visual {
+  border: 1.5px dashed var(--mute-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  background: var(--hi);
+}
+.stub-c__text {
+  align-self: end;
+  padding-bottom: 8px;
+}
+.stub-c__sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stub-c__sub::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--mute-2);
+}
+.stub-c__title {
+  font-size: 54px;
+  line-height: 1.14;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+.stub-c__cap {
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--mute);
+  margin: 0;
+}
+
+/* ── B-stub: тезис по центру ── */
+.stub-b__sub {
+  position: absolute;
+  top: 200px;
+  left: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.stub-b__sub b {
+  color: var(--accent);
+  font-weight: 500;
+}
+.stub-b__thesis {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 56px;
+  line-height: 1.18;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  max-width: 1500px;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ── D-stub: две колонки заглушки ── */
+.stub-d__head {
+  position: absolute;
+  top: 200px;
+  left: 96px;
+  right: 96px;
+}
+.stub-d__sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 16px;
+}
+.stub-d__title {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.1;
+}
+.stub-d__cols {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 380px;
+  bottom: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+}
+.stub-d__col {
+  padding: 0 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.stub-d__col:first-child { padding-left: 0; }
+.stub-d__col:last-child { padding-right: 0; }
+.stub-d__divider {
+  background: var(--rule);
+  width: 1px;
+}
+.stub-d__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.005em;
+}
+.stub-d__placeholder {
+  height: 12px;
+  background: var(--rule);
+  border-radius: 2px;
+}
+.stub-d__placeholder--short { width: 40%; }
+.stub-d__placeholder--mid { width: 70%; }
+.stub-d__placeholder--full { width: 100%; }
+
+/* ── E-stub: фраза по центру (как в реальном E-momentum) ── */
+.stub-e__phrase {
+  position: absolute;
+  inset: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.stub-e__phrase p {
+  margin: 0;
+  font-size: 80px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--mute);
+  letter-spacing: -0.015em;
+  max-width: 1500px;
+}
+.stub-e__micro {
+  position: absolute;
+  left: 96px;
+  bottom: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+}
+
+/* ── A-stub: упрощённая версия (без огромной цифры) ── */
+.stub-a__roman {
+  position: absolute;
+  left: 96px;
+  top: 200px;
+  font-family: 'IBM Plex Serif', 'IBM Plex Sans', serif;
+  font-size: 420px;
+  line-height: 0.78;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--mute-2);
+  letter-spacing: -0.04em;
+}
+.stub-a__title {
+  position: absolute;
+  right: 96px;
+  bottom: 140px;
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  color: var(--mute);
+  text-align: right;
+  width: 700px;
+}

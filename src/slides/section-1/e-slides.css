@@ -1,0 +1,79 @@
+/* ============================================================
+   E-slide — три подтипа: momentum / number / live.
+   Базовая разметка наследуется от .slide (1920×1080).
+   ============================================================ */
+
+/* Бэйдж «Слайд XX · Часть N» в левом нижнем углу */
+.e-slide__bl-meta {
+  position: absolute;
+  left: 96px;
+  bottom: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* ───── E-momentum — фраза по центру ───── */
+.e-mom .e-mom__phrase {
+  position: absolute;
+  inset: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.e-mom .e-mom__phrase p {
+  margin: 0;
+  font-size: 96px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  max-width: 1500px;
+}
+.e-mom.is-accent .e-mom__phrase p {
+  color: var(--accent);
+}
+
+/* ───── E-число — крупное число + расшифровка под ним ───── */
+.e-num .e-num__number {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 60%;
+  transform: translateY(-100%);
+  text-align: center;
+  font-size: 120px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding: 0 96px;
+}
+.e-num .e-num__caption {
+  position: absolute;
+  left: 96px;
+  top: calc(60% + 140px);
+  max-width: calc(1920px * 0.6);
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--mute);
+  font-weight: 400;
+}
+
+/* ───── E-live — заглушка под живую демонстрацию ───── */
+.e-live .e-live__label {
+  position: absolute;
+  inset: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.4em;
+  word-spacing: 0.6em;
+  color: var(--mute);
+  text-transform: uppercase;
+}

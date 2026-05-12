@@ -1,0 +1,54 @@
+/* ============================================================
+   A-slide — section divider.
+   Гигантская римская цифра italic слева вверху,
+   заголовок справа внизу, тонкая горизонтальная линия сверху.
+   ============================================================ */
+
+.a-slide__rule {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 240px;
+  height: 1px;
+  background: var(--rule);
+}
+
+.a-slide__roman {
+  position: absolute;
+  left: 120px;
+  top: 170px;
+  font-family: 'IBM Plex Serif', 'IBM Plex Sans', serif;
+  font-size: 780px;
+  line-height: 0.78;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+  margin: 0;
+  user-select: none;
+}
+
+.a-slide__meta {
+  position: absolute;
+  left: 96px;
+  bottom: 60px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.a-slide__title {
+  position: absolute;
+  right: 96px;
+  bottom: 140px;
+  width: 800px;
+  text-align: right;
+  font-size: 68px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  margin: 0;
+  color: var(--ink);
+}
