@@ -1,0 +1,72 @@
+/* ============================================================
+   Семинар «AI и LLM для исследователей» · ФБУ ВНИИЛМ · 13.05.2026
+   Глобальная палитра, типографика, базовые сбросы.
+   ============================================================ */
+
+:root {
+  --bg: #FAFAF7;
+  --bg-2: #F2F0EA;
+  --ink: #1A1A1A;
+  --ink-soft: #2B2A28;
+  --mute: #6B6B68;
+  --mute-2: #9A9893;
+  --rule: #D9D7CF;
+  --rule-soft: #ECEAE3;
+  --accent: #8B2A1F;
+  --hi: #F0EEE8;
+
+  /* Алиасы для совместимости со старым кодом */
+  --text: var(--ink);
+  --text-secondary: var(--mute);
+  --line: var(--rule);
+  --highlight: var(--hi);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a { color: inherit; }
+
+/* ============================================================
+   ТИПОГРАФИКА — утилиты для слайдов
+   ============================================================ */
+
+.display       { font-weight: 500; font-size: 96px;  line-height: 1.1; }
+.display-large { font-weight: 500; font-size: 120px; line-height: 1.1; }
+.title         { font-weight: 500; font-size: 36px;  line-height: 1.2; }
+.title-large   { font-weight: 500; font-size: 48px;  line-height: 1.2; }
+.body          { font-weight: 400; font-size: 22px;  line-height: 1.4; }
+.body-large    { font-weight: 400; font-size: 24px;  line-height: 1.4; }
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--mute);
+}
+
+.meta-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  text-transform: uppercase;
+}
+
+.accent { color: var(--accent); }
+.text-secondary { color: var(--mute); }

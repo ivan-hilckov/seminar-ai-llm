@@ -1,0 +1,326 @@
+/* ============================================================
+   Карта Секции 1 — сетка карточек, цвет = тип слайда.
+   ============================================================ */
+
+:root {
+  /* Палитра типов: chip = заливка плашки A/B/C/D/E,
+     tint = очень мягкая подложка карточки */
+  --type-a-chip: #1F1F1F;
+  --type-a-tint: #EAE8E2;
+  --type-a-text: #FFFFFF;
+
+  --type-b-chip: #6B4F0E;
+  --type-b-tint: #F2EAD2;
+  --type-b-text: #FFFFFF;
+
+  --type-c-chip: #2C5F5F;
+  --type-c-tint: #DEE9E5;
+  --type-c-text: #FFFFFF;
+
+  --type-d-chip: #5E3F87;
+  --type-d-tint: #E5DDEE;
+  --type-d-text: #FFFFFF;
+
+  --type-e-chip: #8B2A1F;
+  --type-e-tint: #EFDDDA;
+  --type-e-text: #FFFFFF;
+}
+
+/* ─── Page ─────────────────────────────────────────────────── */
+
+.map-page {
+  min-height: 100vh;
+  padding: 48px 64px 96px;
+  background: var(--bg);
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* ─── Header ───────────────────────────────────────────────── */
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 64px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.map-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 16px;
+}
+
+.map-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.map-header__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.map-legend {
+  display: flex;
+  gap: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-item__label { color: var(--mute); }
+
+.map-legend__note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--mute-2);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Chip (type badge) ─────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 22px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.chip-A { background: var(--type-a-chip); color: var(--type-a-text); }
+.chip-B { background: var(--type-b-chip); color: var(--type-b-text); }
+.chip-C { background: var(--type-c-chip); color: var(--type-c-text); }
+.chip-D { background: var(--type-d-chip); color: var(--type-d-text); }
+.chip-E { background: var(--type-e-chip); color: var(--type-e-text); }
+
+/* ─── Part section header ──────────────────────────────────── */
+
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.part-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+}
+
+.part-head__title {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.part-marker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  min-width: 36px;
+  display: inline-block;
+}
+
+.part-name {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.part-head__stats {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Card grid ────────────────────────────────────────────── */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 8px;
+}
+
+/* ─── Card ─────────────────────────────────────────────────── */
+
+.card {
+  position: relative;
+  min-height: 108px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out, border-color 90ms ease-out;
+  outline: none;
+}
+
+.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 0 var(--rule);
+}
+
+.card:focus-visible {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+/* Тинты по типу */
+.card-A { background: var(--type-a-tint); }
+.card-B { background: var(--type-b-tint); }
+.card-C { background: var(--type-c-tint); }
+.card-D { background: var(--type-d-tint); }
+.card-E { background: var(--type-e-tint); }
+
+/* Черновики чуть бледнее */
+.card.is-draft {
+  background: var(--bg);
+}
+.card.is-draft .card-title { color: var(--mute); }
+.card.is-draft .card-num { color: var(--mute-2); }
+.card.is-draft:hover { border-color: var(--mute); }
+
+/* Главный тезис — акцентная обводка */
+.card.is-keystone {
+  border-color: var(--accent);
+  border-width: 1.5px;
+}
+.card.is-keystone .card-title {
+  color: var(--accent);
+  font-weight: 500;
+}
+.card.is-keystone:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 0 var(--accent);
+}
+
+/* ── Card content ────────────────────────────────────────── */
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.card-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+/* Чип в карточке — крупнее и жирнее, чем в легенде, чтобы буква
+   читалась даже при сильном зум-ауте. */
+.card .chip {
+  width: 34px;
+  height: 24px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.card-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-top: auto;
+  text-wrap: pretty;
+  /* Не уходит за пределы карточки */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Notes link (✎) ──────────────────────────────────────── */
+
+.card-notes {
+  position: absolute;
+  bottom: 6px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--mute);
+  opacity: 0.55;
+  text-decoration: none;
+  transition: opacity 90ms ease-out, color 90ms ease-out, transform 90ms ease-out;
+}
+.card-notes:hover {
+  opacity: 1;
+  color: var(--accent);
+  transform: scale(1.15);
+}
+
+/* ─── Footer ───────────────────────────────────────────────── */
+
+.map-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--mute);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.map-footer a { color: var(--mute); text-decoration: none; }
+.map-footer a:hover { color: var(--ink); }
+
+/* ─── Адаптация под узкие экраны ───────────────────────────── */
+
+@media (max-width: 900px) {
+  .map-page { padding: 32px 24px 64px; }
+  .map-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .map-header__right { align-items: flex-start; }
+  .map-title { font-size: 32px; }
+  .part-head { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .card-grid { grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); }
+}

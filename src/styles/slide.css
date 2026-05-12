@@ -1,0 +1,167 @@
+/* ============================================================
+   .stage — адаптивный контейнер слайда 1920×1080
+   .slide — сам слайд (абсолютное позиционирование)
+   ============================================================ */
+
+.stage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 240px; /* место под сайдбар; если его нет — сейчас всё равно ок */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0a0a0a; /* тёмная рамка вокруг слайда на экране */
+}
+
+/* Когда сайдбара нет (например, печать или прямой URL без обёртки),
+   .stage всё равно остаётся прижатым к left:240px. Если нужно вернуть
+   на всю ширину, можно добавить body-level класс. Печать справляется
+   через @media print ниже. */
+
+.slide {
+  flex: 0 0 auto;
+  width: 1920px;
+  height: 1080px;
+  min-width: 1920px;
+  min-height: 1080px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  transform-origin: center center;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   Стандартные блоки слайда
+   ============================================================ */
+
+/* Мета-плашка top-right */
+.meta {
+  position: absolute;
+  top: 48px;
+  right: 96px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.meta .num {
+  font-size: 20px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+}
+.meta .type {
+  width: 32px;
+  height: 24px;
+  background: var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+/* Нижний колонтитул */
+.foot {
+  position: absolute;
+  right: 96px;
+  bottom: 48px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--mute);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Левая визуальная зона (62%) — для слайдов типа C */
+.visual {
+  position: absolute;
+  left: 96px;
+  top: 140px;
+  width: 1094px;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.visual svg { display: block; }
+
+/* Правый текстовый блок (38%, прижат к низу) — для слайдов типа C */
+.right {
+  position: absolute;
+  left: 1254px;
+  right: 96px;
+  bottom: 140px;
+  display: flex;
+  flex-direction: column;
+}
+.right .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 32px 0;
+}
+.right .title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0 0 24px 0;
+  text-wrap: pretty;
+}
+.right .cap {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0;
+  max-width: 560px;
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   ПЕЧАТЬ — 1920×1080 single page
+   ============================================================ */
+
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    background: var(--bg) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .stage {
+    position: static;
+    display: block;
+    width: 1920px !important;
+    height: 1080px !important;
+    background: var(--bg) !important;
+    overflow: visible;
+  }
+  .slide {
+    width: 1920px !important;
+    height: 1080px !important;
+    transform: none !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    margin: 0 !important;
+  }
+}

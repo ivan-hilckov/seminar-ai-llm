@@ -1,0 +1,112 @@
+.home-page {
+  min-height: 100vh;
+  padding: 64px 64px 120px;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+}
+
+.home-wrap {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.home-hero {
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.home-hero h1 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 0 0 8px;
+}
+
+.home-hero .lead {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.home-wrap section { margin-bottom: 40px; }
+
+.home-wrap h2 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 16px;
+}
+
+.home-page .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Карточки навигации главной — отдельное имя класса, чтобы не пересекаться
+   со слайд-карточками .card в Section1/Opening. */
+.home-card {
+  display: block;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 80ms ease-out, border-color 80ms ease-out;
+}
+.home-card:hover {
+  background: var(--hi);
+  border-color: var(--mute-2);
+}
+.home-card strong {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+.home-card span {
+  color: var(--mute);
+  font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+.home-page .list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.home-page .list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+}
+.home-page .list li a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.home-page .list li a:hover { text-decoration: underline; }
+.home-page .list .hint {
+  margin-left: auto;
+  color: var(--mute);
+  font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+.home-page .list .notes-link {
+  color: var(--accent) !important;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
