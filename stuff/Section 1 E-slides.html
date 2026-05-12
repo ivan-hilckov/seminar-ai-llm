@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Секция 1 · 11 E-слайдов · AI и LLM для исследователей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:        #FAFAF7;
+    --ink:       #1A1A1A;
+    --mute:      #6B6B68;
+    --rule:      #D9D7CF;
+    --accent:    #8B2A1F;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html, body{
+    margin:0; padding:0;
+    background: #EFEDE6;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ───────── Ribbon ───────── */
+  .ribbon{
+    width: min(1280px, calc(100vw - 40px));
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  .ribbon .rule{
+    height: 1px;
+    background: var(--rule);
+    width: 100%;
+  }
+
+  /* ───────── Slide frame (scaled host) ───────── */
+  .frame{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1920 / 1080;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .slide{
+    position: absolute;
+    top: 0; left: 0;
+    width: 1920px;
+    height: 1080px;
+    background: var(--bg);
+    transform-origin: top left;
+    transform: scale(calc(min(1280, (100vw - 40) / 1) / 1920));
+  }
+  @media (min-width: 1320px){
+    .slide{ transform: scale(calc(1280 / 1920)); }
+  }
+
+  /* ───────── Slide chrome ───────── */
+  .slide .padding{
+    position:absolute;
+    top:96px; right:96px; bottom:96px; left:96px;
+  }
+
+  /* Top-right meta plate */
+  .top-meta{
+    position:absolute;
+    top:96px; right:96px;
+    display:flex; align-items:center; gap:18px;
+    font-family:"IBM Plex Mono", monospace;
+    color: var(--mute);
+  }
+  .top-meta .num{
+    font-size:20px;
+    letter-spacing:.04em;
+  }
+  .top-meta .tag{
+    width:32px; height:24px;
+    background: var(--rule);
+    color: var(--ink);
+    font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    letter-spacing:0;
+  }
+
+  /* Bottom-left slide meta */
+  .bl-meta{
+    position:absolute;
+    left:96px; bottom:96px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* Bottom-right brand foot */
+  .br-foot{
+    position:absolute;
+    right:96px; bottom:96px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* ───────── Subtype 1: E-momentum (centered phrase) ───────── */
+  .e-mom .phrase{
+    position:absolute;
+    inset: 96px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .e-mom .phrase p{
+    margin:0;
+    font-size:96px;
+    line-height:1.1;
+    font-weight:500;
+    color: var(--ink);
+    letter-spacing:-0.015em;
+    max-width: 1500px;
+  }
+
+  /* Slide 31 — accent */
+  .e-mom.accent .phrase p{
+    color: var(--accent);
+  }
+
+  /* ───────── Subtype 2: E-число ───────── */
+  .e-num .number{
+    position:absolute;
+    left:0; right:0;
+    top: calc(60% - 0px);
+    transform: translateY(-100%);
+    text-align:center;
+    font-size:120px;
+    line-height:1;
+    font-weight:500;
+    letter-spacing:-0.02em;
+    color: var(--ink);
+    padding: 0 96px;
+  }
+  .e-num .caption{
+    position:absolute;
+    left:96px;
+    top: calc(60% + 140px);
+    max-width: calc(1920px * 0.60);
+    font-size:24px;
+    line-height:1.45;
+    color: var(--mute);
+    font-weight:400;
+  }
+
+  /* ───────── Subtype 3: E-live ───────── */
+  .e-live .live{
+    position:absolute;
+    inset: 96px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:18px;
+    letter-spacing:0.2em;
+    color: var(--mute);
+    text-transform: uppercase;
+  }
+
+  /* ───────── Header above ribbon (screen-only, helps orientation) ───────── */
+  .doc-head{
+    width: min(1280px, calc(100vw - 40px));
+    margin: 80px auto 0 auto;
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+  }
+  .doc-head .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--mute);
+    margin-bottom: 12px;
+  }
+  .doc-head h1{
+    margin: 0;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .doc-head .sub{
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--mute);
+    line-height: 1.5;
+  }
+
+  /* ───────── Print ───────── */
+  @page{
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  @media print{
+    html, body{ background: var(--bg); }
+    .doc-head, .ribbon .rule{ display: none !important; }
+    .ribbon{
+      width: 1920px;
+      margin: 0;
+      gap: 0;
+    }
+    .frame{
+      width: 1920px;
+      height: 1080px;
+      aspect-ratio: auto;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+    }
+    .frame:last-child{
+      page-break-after: auto;
+      break-after: auto;
+    }
+    .slide{
+      transform: none !important;
+      width: 1920px;
+      height: 1080px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="eyebrow">Рабочий вид · Секция 1 · 11 ключевых moment-слайдов</div>
+  <h1>Ритм ключевых моментов — тип E</h1>
+  <p class="sub">Слайды 09, 13, 16, 19, 21, 24, 31, 35, 38, 43, 53 — в порядке появления в секции. Между слайдами — тонкая разделительная линия. Cmd+P → A4 landscape для печати.</p>
+</header>
+
+<main class="ribbon">
+
+  <!-- ════════════════════════════════════════════════════════════
+       09 · E-momentum · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-09">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">09</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Машина впервые угадала слово</p>
+      </div>
+      <div class="bl-meta">Слайд 09 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       13 · E-momentum · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-13">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">13</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Машина научилась достраивать фразы</p>
+      </div>
+      <div class="bl-meta">Слайд 13 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       16 · E-число · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-16">
+    <div class="slide e-num">
+      <div class="top-meta">
+        <div class="num">16</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="number">175 миллиардов параметров</div>
+      <div class="caption">На этом масштабе модель начала делать то, чему её не учили</div>
+      <div class="bl-meta">Слайд 16 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       19 · E-momentum · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-19">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">19</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>В угадывании поместилось мышление</p>
+      </div>
+      <div class="bl-meta">Слайд 19 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       21 · E-число · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-21">
+    <div class="slide e-num">
+      <div class="top-meta">
+        <div class="num">21</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="number">100 миллионов пользователей за 2 месяца</div>
+      <div class="caption">Instagram добрался до этой цифры за 2,5&nbsp;года. TikTok&nbsp;— за 9&nbsp;месяцев. ChatGPT&nbsp;— за&nbsp;2.</div>
+      <div class="bl-meta">Слайд 21 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       24 · E-momentum · Часть I
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-24">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">24</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Текст превратился в диалог</p>
+      </div>
+      <div class="bl-meta">Слайд 24 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       31 · E-momentum ГЛАВНЫЙ · Часть I  (accent)
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-31">
+    <div class="slide e-mom accent">
+      <div class="top-meta">
+        <div class="num">31</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Это не интеллект.<br/>Это статистика.</p>
+      </div>
+      <div class="bl-meta">Слайд 31 · Часть I</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       35 · E-momentum · Часть II
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-35">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">35</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Модель видит суть как вектор</p>
+      </div>
+      <div class="bl-meta">Слайд 35 · Часть II</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       38 · E-число · Часть II
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-38">
+    <div class="slide e-num">
+      <div class="top-meta">
+        <div class="num">38</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="number">128 000 токенов</div>
+      <div class="caption">Всё, что модель видит при ответе: ваша инструкция, история чата, ваш текущий вопрос</div>
+      <div class="bl-meta">Слайд 38 · Часть II</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       43 · E-momentum · Часть II
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-43">
+    <div class="slide e-mom">
+      <div class="top-meta">
+        <div class="num">43</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="phrase">
+        <p>Ваши вопросы её не меняют</p>
+      </div>
+      <div class="bl-meta">Слайд 43 · Часть II</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       53 · E-live · Часть III
+       ════════════════════════════════════════════════════════════ -->
+  <div class="frame" id="slide-53">
+    <div class="slide e-live">
+      <div class="top-meta">
+        <div class="num">53</div>
+        <div class="tag">E</div>
+      </div>
+      <div class="live">Ж&nbsp;И&nbsp;В&nbsp;А&nbsp;Я&nbsp;&nbsp;Д&nbsp;Е&nbsp;М&nbsp;О&nbsp;Н&nbsp;С&nbsp;Т&nbsp;Р&nbsp;А&nbsp;Ц&nbsp;И&nbsp;Я</div>
+      <div class="bl-meta">Слайд 53 · Часть III</div>
+      <div class="br-foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Keep transform scale in sync with the frame's actual rendered width,
+  // so the 1920×1080 slide always fits its responsive ribbon container.
+  (function(){
+    function fit(){
+      document.querySelectorAll('.frame').forEach(function(frame){
+        var slide = frame.querySelector('.slide');
+        if (!slide) return;
+        var w = frame.clientWidth;
+        slide.style.transform = 'scale(' + (w / 1920) + ')';
+      });
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    fit();
+  })();
+</script>
+
+</body>
+</html>

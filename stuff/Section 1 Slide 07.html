@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>07 · Т9 на Nokia · Секция 1 · AI и LLM для исследователей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:    #FAFAF7;
+    --ink:   #1A1A1A;
+    --mute:  #6B6B68;
+    --rule:  #D9D7CF;
+  }
+  html, body{
+    margin:0; padding:0; height:100%;
+    background:#0a0a0a;
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .stage{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .slide{
+    width:1920px; height:1080px;
+    min-width:1920px; min-height:1080px;
+    flex:0 0 auto;
+    background:var(--bg);
+    position:relative;
+    overflow:hidden;
+    transform-origin:center center;
+    box-sizing:border-box;
+  }
+
+  /* ─── Meta plate (top-right) ─── */
+  .meta{
+    position:absolute; top:48px; right:96px;
+    display:flex; align-items:center; gap:16px;
+    font-family:"IBM Plex Mono", monospace;
+  }
+  .meta .num{
+    font-size:20px;
+    color:var(--mute);
+    letter-spacing:.04em;
+  }
+  .meta .type{
+    width:32px; height:24px;
+    background:var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--ink);
+    letter-spacing:.02em;
+  }
+
+  /* ─── Footer ─── */
+  .foot{
+    position:absolute; right:96px; bottom:48px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px; color:var(--mute);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+
+  /* ─── Visual zone (62% width, ~96..1190) ─── */
+  .visual{
+    position:absolute;
+    left:96px; top:140px;
+    width:1094px; height:800px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .visual svg{
+    height:760px; width:auto;
+    display:block;
+  }
+
+  /* ─── Right text block (38% width, bottom-aligned with visual) ─── */
+  .right{
+    position:absolute;
+    left:1254px; right:96px; bottom:140px;
+    display:flex; flex-direction:column;
+  }
+  .right .sub{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:16px; color:var(--mute);
+    letter-spacing:.08em; text-transform:uppercase;
+    margin:0 0 32px 0;
+  }
+  .right .title{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:36px; line-height:1.18;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    margin:0 0 24px 0;
+    text-wrap:pretty;
+  }
+  .right .cap{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:400;
+    font-size:22px; line-height:1.4;
+    color:var(--ink);
+    text-wrap:pretty;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ─── Print: A4 landscape, single page ─── */
+  @page { size: A4 landscape; margin: 0; }
+  @media print{
+    html, body{ background:var(--bg) !important; }
+    .stage{ position:static; display:block; background:var(--bg) !important; }
+    .slide{
+      transform: scale(0.5849) !important;   /* 1123 / 1920 = fits A4 landscape width */
+      transform-origin: top left !important;
+      box-shadow:none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <article class="slide" data-screen-label="07 Т9 на Nokia">
+
+    <!-- top-right meta plate -->
+    <div class="meta">
+      <span class="num">07</span>
+      <span class="type">C</span>
+    </div>
+
+    <!-- left: phone illustration -->
+    <div class="visual">
+      <svg viewBox="0 0 400 820" xmlns="http://www.w3.org/2000/svg" aria-label="Кнопочный телефон с экраном Т9">
+        <!-- Body -->
+        <rect x="20" y="20" width="360" height="780" rx="46" ry="46"
+              fill="none" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Speaker slot -->
+        <line x1="170" y1="54" x2="230" y2="54"
+              stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- Screen (dark fill) -->
+        <rect x="60" y="90" width="280" height="240" rx="4" ry="4"
+              fill="#1A1A1A"/>
+
+        <!-- Screen content -->
+        <g font-family="IBM Plex Mono, monospace" fill="#FAFAF7">
+          <!-- status row -->
+          <text x="74" y="114" font-size="11" letter-spacing="0.12em" opacity="0.7">T9 · RU</text>
+          <text x="326" y="114" font-size="11" letter-spacing="0.12em" text-anchor="end" opacity="0.7">ABC</text>
+          <!-- thin divider -->
+          <line x1="74" y1="126" x2="326" y2="126"
+                stroke="#FAFAF7" stroke-width="0.5" opacity="0.25"/>
+        </g>
+
+        <g font-family="IBM Plex Sans, sans-serif" fill="#FAFAF7">
+          <!-- typed word -->
+          <text x="200" y="172" font-size="30" font-weight="500"
+                text-anchor="middle" letter-spacing="0.01em">привет</text>
+          <!-- caret -->
+          <rect x="278" y="151" width="2" height="26" fill="#FAFAF7"/>
+        </g>
+
+        <!-- options list -->
+        <g font-family="IBM Plex Sans, sans-serif" fill="#FAFAF7">
+          <!-- guide separator -->
+          <line x1="74" y1="194" x2="326" y2="194"
+                stroke="#FAFAF7" stroke-width="0.5" opacity="0.25"/>
+          <!-- variant 1 -->
+          <text x="86" y="220" font-size="16" opacity="0.55">прибор</text>
+          <!-- variant 2 (active) — frame + text -->
+          <rect x="78" y="230" width="244" height="28" rx="2"
+                fill="none" stroke="#FAFAF7" stroke-width="1"/>
+          <text x="86" y="250" font-size="16" font-weight="500">привет</text>
+          <text x="314" y="250" font-size="11"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.1em" text-anchor="end" opacity="0.7">2/3</text>
+          <!-- variant 3 -->
+          <text x="86" y="282" font-size="16" opacity="0.55">пример</text>
+        </g>
+
+        <!-- Soft-key bar (just two small marks under screen) -->
+        <g stroke="#1A1A1A" stroke-width="1.2" fill="none">
+          <line x1="86" y1="354" x2="120" y2="354"/>
+          <line x1="280" y1="354" x2="314" y2="354"/>
+        </g>
+
+        <!-- Central nav / OK pill -->
+        <rect x="160" y="368" width="80" height="34" rx="17"
+              fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+        <text x="200" y="390"
+              font-family="IBM Plex Mono, monospace"
+              font-size="11" letter-spacing="0.18em"
+              text-anchor="middle" fill="#1A1A1A">OK</text>
+
+        <!-- Keypad — 4 rows × 3 cols.
+             Key cell: 80×60, rx=10.
+             Columns at x = 66, 160, 254.
+             Rows at y = 430, 510, 590, 670. -->
+        <g id="keypad"
+           font-family="IBM Plex Sans, sans-serif"
+           fill="#1A1A1A"
+           stroke="#1A1A1A">
+
+          <!-- ── Row 1 ── -->
+          <!-- 1 -->
+          <rect x="66"  y="430" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="106" y="460" font-size="20" font-weight="500" text-anchor="middle" stroke="none">1</text>
+          <text x="106" y="478" font-size="8.5"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.12em" text-anchor="middle" stroke="none" fill="#6B6B68">.,?!</text>
+          <!-- 2 abc -->
+          <rect x="160" y="430" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="200" y="460" font-size="20" font-weight="500" text-anchor="middle" stroke="none">2</text>
+          <text x="200" y="478" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">ABC</text>
+          <!-- 3 def -->
+          <rect x="254" y="430" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="294" y="460" font-size="20" font-weight="500" text-anchor="middle" stroke="none">3</text>
+          <text x="294" y="478" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">DEF</text>
+
+          <!-- ── Row 2 ── -->
+          <rect x="66"  y="510" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="106" y="540" font-size="20" font-weight="500" text-anchor="middle" stroke="none">4</text>
+          <text x="106" y="558" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">GHI</text>
+
+          <rect x="160" y="510" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="200" y="540" font-size="20" font-weight="500" text-anchor="middle" stroke="none">5</text>
+          <text x="200" y="558" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">JKL</text>
+
+          <rect x="254" y="510" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="294" y="540" font-size="20" font-weight="500" text-anchor="middle" stroke="none">6</text>
+          <text x="294" y="558" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">MNO</text>
+
+          <!-- ── Row 3 ── -->
+          <rect x="66"  y="590" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="106" y="620" font-size="20" font-weight="500" text-anchor="middle" stroke="none">7</text>
+          <text x="106" y="638" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.16em" text-anchor="middle" stroke="none" fill="#6B6B68">PQRS</text>
+
+          <rect x="160" y="590" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="200" y="620" font-size="20" font-weight="500" text-anchor="middle" stroke="none">8</text>
+          <text x="200" y="638" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">TUV</text>
+
+          <rect x="254" y="590" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="294" y="620" font-size="20" font-weight="500" text-anchor="middle" stroke="none">9</text>
+          <text x="294" y="638" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.16em" text-anchor="middle" stroke="none" fill="#6B6B68">WXYZ</text>
+
+          <!-- ── Row 4 ── -->
+          <rect x="66"  y="670" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="106" y="708" font-size="22" font-weight="500" text-anchor="middle" stroke="none">*</text>
+
+          <rect x="160" y="670" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="200" y="704" font-size="20" font-weight="500" text-anchor="middle" stroke="none">0</text>
+          <text x="200" y="722" font-size="9"
+                font-family="IBM Plex Mono, monospace"
+                letter-spacing="0.18em" text-anchor="middle" stroke="none" fill="#6B6B68">+</text>
+
+          <rect x="254" y="670" width="80" height="60" rx="10" fill="none" stroke-width="1.2"/>
+          <text x="294" y="706" font-size="20" font-weight="500" text-anchor="middle" stroke="none">#</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- right: text block, bottom-aligned with visual -->
+    <div class="right">
+      <div class="sub">1.1 Т9 на Nokia</div>
+      <h2 class="title">С этого всё началось</h2>
+      <p class="cap">Конец 1990-х — начало 2000-х. Был у каждого.</p>
+    </div>
+
+    <!-- footer -->
+    <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+
+  </article>
+</div>
+
+<script>
+  // Proportional scaling: fit to viewport, cap rendered slide width at 1280px on screen.
+  (function(){
+    const slide = document.querySelector('.slide');
+    function fit(){
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const targetW = Math.min(vw, 1280);
+      const sx = targetW / 1920;
+      const sy = vh / 1080;
+      const s = Math.min(sx, sy);
+      slide.style.transform = 'scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    fit();
+  })();
+</script>
+</body>
+</html>

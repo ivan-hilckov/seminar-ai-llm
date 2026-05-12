@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Секция 1 · Открытие · AI и LLM для исследователей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+<script src="deck-stage.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<style>
+  :root{
+    --bg:        #FAFAF7;
+    --bg-2:      #F2F0EA;
+    --ink:       #1A1A1A;
+    --ink-soft:  #2B2A28;
+    --mute:      #6B6B68;
+    --mute-2:    #9A9893;
+    --rule:      #D9D7CF;
+    --rule-soft: #ECEAE3;
+    --accent:    #8B2A1F;
+  }
+  html, body { background: var(--bg); color: var(--ink); margin:0; }
+  deck-stage { background:#0a0a0a; }
+
+  section{
+    width:1920px; height:1080px;
+    background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    font-weight:400;
+    position:relative;
+    overflow:hidden;
+    box-sizing:border-box;
+  }
+
+  /* Service label — bottom corners, mono micro-type */
+  .svc{
+    position:absolute; bottom:56px; left:96px; right:96px;
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:20px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--mute-2);
+  }
+  .svc .brand{ color:var(--mute); }
+  .svc .tag{ color:var(--mute); }
+
+  /* ============ SLIDE 01 — TITLE (Moment E) ============ */
+  .s01{ display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:0 96px; }
+  .s01-eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:22px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--mute);
+    margin: 0 0 60px 0;
+    display:flex; align-items:center; gap:18px;
+  }
+  .s01-eyebrow::before{
+    content:""; width:48px; height:1px; background:var(--ink-soft);
+  }
+  .s01-title{
+    font-size:104px; line-height:1.04; font-weight:500;
+    letter-spacing:-0.022em;
+    margin: 0;
+    max-width:none;
+    white-space:nowrap;
+  }
+  .s01-title .amp{
+    font-family:"IBM Plex Serif", serif;
+    font-style:italic; font-weight:400;
+    color:var(--ink-soft);
+  }
+  .s01-sub{
+    margin-top:48px;
+    font-size:32px; line-height:1.4;
+    color:var(--mute);
+    font-weight:400;
+    max-width:1100px;
+  }
+  .s01-meta{
+    position:absolute;
+    left:96px; bottom:160px;
+    display:flex; gap:80px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:20px; letter-spacing:.06em;
+    color:var(--mute);
+  }
+  .s01-meta .col{ display:flex; flex-direction:column; gap:6px; }
+  .s01-meta .k{
+    font-size:14px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--mute-2);
+  }
+  .s01-meta .v{ color:var(--ink); font-size:22px; }
+
+  /* ============ SLIDE 02 — MAP OF THE DAY ============ */
+  .s02-title{
+    position:absolute; top:160px; left:96px; right:96px;
+    font-size:42px; font-weight:500; letter-spacing:-0.012em;
+    color:var(--ink); margin:0;
+    line-height:1.1;
+    white-space:nowrap;
+  }
+  .s02-eyebrow{
+    position:absolute; top:108px; left:96px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:18px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--mute);
+  }
+  .s02-grid{
+    position:absolute; left:96px; right:96px; top:380px;
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap:64px;
+  }
+  .pair{
+    border-top:1px solid var(--rule);
+    padding-top:32px;
+    display:flex; flex-direction:column;
+    color:var(--mute);
+    min-height:380px;
+  }
+  .pair .num{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:18px; letter-spacing:.12em; text-transform:uppercase;
+    margin-bottom:24px;
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .pair .num .now{
+    font-size:14px; letter-spacing:.16em;
+    color:var(--mute-2);
+  }
+  .pair h3{
+    font-size:42px; line-height:1.12; font-weight:500;
+    letter-spacing:-0.012em;
+    margin: 0 0 28px 0;
+    color:var(--mute);
+    max-width:480px;
+  }
+  .pair .tags{
+    margin-top:auto;
+    display:flex; flex-wrap:wrap; gap:0 18px;
+    font-size:24px; color:var(--mute-2);
+    line-height:1.5;
+  }
+  .pair .tags .sep{ color:var(--rule); }
+
+  .pair.current{
+    border-top:3px solid var(--accent);
+    padding-top:30px;
+    color:var(--ink);
+  }
+  .pair.current .num{ color:var(--accent); }
+  .pair.current h3{ color:var(--ink); }
+  .pair.current .tags{ color:var(--ink-soft); }
+
+  .s02-foot{
+    position:absolute; bottom:130px; left:96px; right:96px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:18px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--mute-2);
+    display:flex; align-items:center; gap:16px;
+  }
+  .s02-foot::before{
+    content:""; height:1px; flex:1; background:var(--rule);
+  }
+  .s02-foot::after{
+    content:""; height:1px; flex:1; background:var(--rule);
+  }
+  .s02-foot span{ padding:0 4px; }
+
+  /* ============ SLIDE 03 — GOALS (Template B) ============ */
+  .s03-eyebrow{
+    position:absolute; top:108px; left:96px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:18px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--mute);
+  }
+  .s03-title{
+    position:absolute; top:160px; left:96px;
+    font-size:48px; font-weight:500; letter-spacing:-0.012em;
+    color:var(--ink); margin:0;
+    line-height:1.1; max-width:1500px;
+  }
+  .s03-list{
+    position:absolute; left:160px; right:160px; top:50%;
+    transform: translateY(-46%);
+    display:flex; flex-direction:column;
+  }
+  .s03-row{
+    display:flex; align-items:baseline; gap:48px;
+    font-size:48px; line-height:1.15; font-weight:500;
+    letter-spacing:-0.012em;
+    border-top:1px solid var(--rule);
+    padding: 36px 0;
+  }
+  .s03-row:last-child{ border-bottom:1px solid var(--rule); }
+  .s03-row .idx{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:20px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--mute-2);
+    min-width:72px;
+    align-self:baseline;
+  }
+  .s03-foot{
+    position:absolute; left:160px; bottom:170px;
+    font-size:24px; color:var(--mute);
+    display:flex; align-items:center; gap:16px;
+  }
+  .s03-foot::before{
+    content:""; width:48px; height:1px; background:var(--rule);
+  }
+</style>
+</head>
+<body>
+<deck-stage>
+
+<!-- ============================================================
+SLIDE 01 — Титул
+============================================================= -->
+<section data-screen-label="01 Титул" class="s01">
+  <h1 class="s01-title">
+    AI <span class="amp">и</span> LLM<br/>
+    для исследователей
+  </h1>
+
+  <p class="s01-sub">Семинар для научных сотрудников</p>
+
+  <div class="s01-meta">
+    <div class="col">
+      <div class="k">Ведущие</div>
+      <div class="v" data-bind="presenters">Иван Хильков · Андрей Гиценко</div>
+    </div>
+    <div class="col">
+      <div class="k">Дата</div>
+      <div class="v" data-bind="date">13 мая 2026</div>
+    </div>
+  </div>
+
+  <div class="svc">
+    <div class="brand">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+SLIDE 02 — Карта дня
+============================================================= -->
+<section data-screen-label="02 Карта дня">
+  <div class="s02-eyebrow">Карта дня</div>
+  <h2 class="s02-title">Сегодня — три секции по 90 минут</h2>
+
+  <div class="s02-grid">
+    <div class="pair current">
+      <div class="num"><span>Секция 1</span><span class="now">→ сейчас</span></div>
+      <h3>История и устройство<br/>языковых моделей</h3>
+      <div class="tags">
+        <span>История</span><span class="sep">·</span>
+        <span>Устройство</span><span class="sep">·</span>
+        <span>Особенности</span>
+      </div>
+    </div>
+
+    <div class="pair current">
+      <div class="num"><span>Секция 2</span><span class="now">после перерыва</span></div>
+      <h3>Методика работы<br/>с языковыми моделями</h3>
+      <div class="tags">
+        <span>Инструменты</span><span class="sep">·</span>
+        <span>Промтинг</span><span class="sep">·</span>
+        <span>Границы</span>
+      </div>
+    </div>
+
+    <div class="pair current">
+      <div class="num"><span>Секция 3</span><span class="now">после обеда</span></div>
+      <h3>Практика применения<br/>языковых моделей</h3>
+      <div class="tags">
+        <span>Задачи</span><span class="sep">·</span>
+        <span>Безопасность</span><span class="sep">·</span>
+        <span>Материалы</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s02-foot"><span>15-минутные перерывы между секциями</span></div>
+
+  <div class="svc">
+    <div class="brand">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+SLIDE 03 — Цели Пары 1
+============================================================= -->
+<section data-screen-label="03 Цели пары">
+  <div class="s03-eyebrow">Цели · Секция 1</div>
+  <h2 class="s03-title" data-bind="goalsTitle">К концу первой секции</h2>
+
+  <div class="s03-list">
+    <div class="s03-row"><span class="idx">01</span><span>Как появились современные языковые модели</span></div>
+    <div class="s03-row"><span class="idx">02</span><span>Что происходит при каждом ответе модели</span></div>
+    <div class="s03-row"><span class="idx">03</span><span>Что важно учитывать в работе с LLM</span></div>
+  </div>
+
+  <div class="svc">
+    <div class="brand">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+SLIDE 04 — Цели Секции 2
+============================================================= -->
+<section data-screen-label="04 Цели · Секция 2">
+  <div class="s03-eyebrow">Цели · Секция 2</div>
+  <h2 class="s03-title">К концу второй секции</h2>
+
+  <div class="s03-list">
+    <div class="s03-row"><span class="idx">01</span><span>Какие инструменты сейчас доступны</span></div>
+    <div class="s03-row"><span class="idx">02</span><span>Как формулировать запросы и получать результат</span></div>
+    <div class="s03-row"><span class="idx">03</span><span>Сильные стороны и ограничения модели</span></div>
+  </div>
+
+  <div class="svc">
+    <div class="brand">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+SLIDE 05 — Цели Секции 3
+============================================================= -->
+<section data-screen-label="05 Цели · Секция 3">
+  <div class="s03-eyebrow">Цели · Секция 3</div>
+  <h2 class="s03-title">К концу третьей секции</h2>
+
+  <div class="s03-list">
+    <div class="s03-row"><span class="idx">01</span><span>Разбор ваших реальных задач</span></div>
+    <div class="s03-row"><span class="idx">02</span><span>Защита данных и упоминание ИИ в статьях</span></div>
+    <div class="s03-row"><span class="idx">03</span><span>Самообучение через модель и материалы семинара</span></div>
+  </div>
+
+  <div class="svc">
+    <div class="brand">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  </div>
+</section>
+
+</deck-stage>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Доброе утро. Сегодня у нас три пары по полтора часа — и эта первая называется так: «Что это такое и почему не страшно». Никаких корпоративных пресетов про AI, никаких графиков «к 2030-му всё изменится». Спокойный разговор о том, как эта штука устроена изнутри. Меня зовут Иван, рядом — Андрей. Мы провели похожие семинары в нескольких институтах и довольно хорошо знаем, какие вопросы возникают в дневном зале с проектором — поэтому день построен так, чтобы к перерыву у вас в голове сложилась рабочая картина.",
+  "Прежде чем начать — короткая навигация. Весь день — три пары. Первая, вот сейчас — про то, откуда взялись нейросети, как они устроены и какие из распространённых страхов оправданы. Это базовая картина. Вторая — как с этим работать руками: инструменты, как формулировать запросы, где у моделей границы. Третья — применение к вашим задачам, с практикумом и про безопасность. Между парами 15 минут, кофе, вопросы. Если потеряетесь по ходу — этот слайд вернётся в виде карты в конце пары.",
+  "И последний слайд перед содержанием — то, за что мы лично поручимся к концу этой пары. Не «вы освоите искусственный интеллект» — нет. Три простые вещи. Первое — поймёте, как это устроено: достаточно, чтобы перестать гадать. Второе — узнаете, чего бояться не стоит — потому что половина страхов вокруг AI просто не соответствует тому, как модели работают. И третье — получите правильную картину в голове: ту, на которую можно опираться дальше. После перерыва — переходим к практике."
+]
+</script>
+
+<div id="tweaks-root"></div>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#8B2A1F",
+  "presenters": "Иван Хильков · Андрей Гиценко",
+  "date": "13 мая 2026",
+  "goalsTitle": "К концу первой секции",
+  "brand": "AI & LLM · ФБУ ВНИИЛМ"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--accent', t.accent);
+    document.querySelectorAll('[data-bind="presenters"]').forEach(el => el.textContent = t.presenters);
+    document.querySelectorAll('[data-bind="date"]').forEach(el => el.textContent = t.date);
+    document.querySelectorAll('[data-bind="goalsTitle"]').forEach(el => el.textContent = t.goalsTitle);
+    document.querySelectorAll('.svc .brand').forEach(el => el.textContent = t.brand);
+  }, [t]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Акцент">
+        <TweakColor label="Цвет" value={t.accent}
+          options={['#8B2A1F', '#9C7A1A', '#2F4F2F']}
+          onChange={(v) => setTweak('accent', v)} />
+      </TweakSection>
+      <TweakSection label="Титул">
+        <TweakText label="Ведущие" value={t.presenters}
+          onChange={(v) => setTweak('presenters', v)} />
+        <TweakText label="Дата" value={t.date}
+          onChange={(v) => setTweak('date', v)} />
+      </TweakSection>
+      <TweakSection label="Цели">
+        <TweakText label="Заголовок" value={t.goalsTitle}
+          onChange={(v) => setTweak('goalsTitle', v)} />
+      </TweakSection>
+      <TweakSection label="Чрома">
+        <TweakText label="Бренд-метка" value={t.brand}
+          onChange={(v) => setTweak('brand', v)} />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
+</script>
+</body>
+</html>

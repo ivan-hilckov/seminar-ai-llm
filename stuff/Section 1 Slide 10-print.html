@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>10 · Т9 на Nokia · Секция 1 · AI и LLM для исследователей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:    #FAFAF7;
+    --ink:   #1A1A1A;
+    --mute:  #6B6B68;
+    --rule:  #D9D7CF;
+  }
+  html, body{
+    margin:0; padding:0; height:100%;
+    background:#0a0a0a;
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .stage{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .slide{
+    width:1920px; height:1080px;
+    min-width:1920px; min-height:1080px;
+    flex:0 0 auto;
+    background:var(--bg);
+    position:relative;
+    overflow:hidden;
+    transform-origin:center center;
+    box-sizing:border-box;
+  }
+
+  /* ─── Meta plate (top-right) ─── */
+  .meta{
+    position:absolute; top:48px; right:96px;
+    display:flex; align-items:center; gap:16px;
+    font-family:"IBM Plex Mono", monospace;
+  }
+  .meta .num{
+    font-size:20px;
+    color:var(--mute);
+    letter-spacing:.04em;
+  }
+  .meta .type{
+    width:32px; height:24px;
+    background:var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--ink);
+    letter-spacing:.02em;
+  }
+
+  /* ─── Footer ─── */
+  .foot{
+    position:absolute; right:96px; bottom:48px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px; color:var(--mute);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+
+  /* ─── Header (top-left) ─── */
+  .header{
+    position:absolute;
+    left:96px; top:96px;
+    width:1728px;
+  }
+  .header .sub{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:16px; color:var(--mute);
+    letter-spacing:.08em; text-transform:uppercase;
+    margin:0;
+    line-height:1;
+  }
+  .header .title{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:36px; line-height:1.18;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    margin:24px 0 0 0;
+  }
+
+  /* ─── Two-column comparison ─── */
+  /* Content area: left 96, right 96, width 1728.
+     Header bottom (~96 + 16 + 24 + 36*1.18 ≈ 178) → cols start at 178 + 64 = 242.
+     Cols height: 533 (≈60% of 888). Cols end at 775.
+     Gap 48 → divider in upper quarter → y = 775 + 12 = 787.
+     Summary block 25% (~222), centered between divider and bottom margin (984). */
+  .cols{
+    position:absolute;
+    left:96px; top:242px;
+    width:1728px; height:533px;
+    display:grid;
+    grid-template-columns: 1fr 1px 1fr;
+  }
+  .col{
+    padding:0 64px 0 0;
+    box-sizing:border-box;
+  }
+  .col.right{
+    padding:0 0 0 64px;
+  }
+  .vrule{
+    background:var(--rule);
+    width:1px; height:100%;
+  }
+  .col .ctitle{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:32px; line-height:1;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-.005em;
+  }
+  .col .csub{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:24px; line-height:1;
+    color:var(--mute);
+    margin:16px 0 0 0;
+  }
+  .col .cdesc{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:400;
+    font-size:22px; line-height:1.4;
+    color:var(--ink);
+    margin:32px 0 0 0;
+    max-width:680px;
+    text-wrap:pretty;
+  }
+
+  /* ─── Horizontal divider (upper quarter of cols→summary gap) ─── */
+  .hrule{
+    position:absolute;
+    left:96px; top:787px;
+    width:1728px; height:1px;
+    background:var(--rule);
+  }
+
+  /* ─── Summary block (centered) ─── */
+  .summary{
+    position:absolute;
+    left:96px; top:823px;
+    width:1728px; height:161px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .summary p{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:28px; line-height:1.2;
+    color:var(--ink);
+    margin:0;
+    text-align:center;
+    letter-spacing:-.005em;
+  }
+
+  /* ─── Print: native 1920×1080 page ─── */
+  @page { size: 1920px 1080px; margin: 0; }
+  @media print{
+    html, body{
+      margin:0 !important; padding:0 !important;
+      width:1920px !important; height:1080px !important;
+      background:var(--bg) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .stage{
+      position:static; display:block;
+      width:1920px !important; height:1080px !important;
+      background:var(--bg) !important;
+      overflow:visible;
+    }
+    .slide{
+      width:1920px !important; height:1080px !important;
+      transform:none !important;
+      box-shadow:none !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      margin:0 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <article class="slide" data-screen-label="10 Т9 vs LLM">
+
+    <!-- top-right meta plate -->
+    <div class="meta">
+      <span class="num">10</span>
+      <span class="type">D</span>
+    </div>
+
+    <!-- header -->
+    <div class="header">
+      <div class="sub">1.1 Т9 на Nokia</div>
+      <h2 class="title">Т9 vs LLM</h2>
+    </div>
+
+    <!-- two-column comparison -->
+    <div class="cols">
+      <div class="col left">
+        <div class="ctitle">Т9</div>
+        <div class="csub">Словарь</div>
+        <p class="cdesc">Машина выбирала слово из заранее зашитого набора. 20–50 тысяч слов на язык. Каждое слово либо есть, либо его нет.</p>
+      </div>
+      <div class="vrule"></div>
+      <div class="col right">
+        <div class="ctitle">LLM</div>
+        <div class="csub">Генерация</div>
+        <p class="cdesc">Модель собирает каждое слово с нуля, опираясь на статистику текстов. Готового набора нет — любое слово может оказаться следующим.</p>
+      </div>
+    </div>
+
+    <!-- horizontal divider -->
+    <div class="hrule"></div>
+
+    <!-- summary -->
+    <div class="summary">
+      <p>Оба работают на статистике. Разница — в объёме данных.</p>
+    </div>
+
+    <!-- footer -->
+    <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+
+  </article>
+</div>
+
+<script>
+  // Proportional scaling: fit to viewport, cap rendered slide width at 1280px on screen.
+  (function(){
+    const slide = document.querySelector('.slide');
+    function fit(){
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const targetW = Math.min(vw, 1280);
+      const sx = targetW / 1920;
+      const sy = vh / 1080;
+      const s = Math.min(sx, sy);
+      slide.style.transform = 'scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    fit();
+  })();
+
+  // Auto-trigger print dialog once fonts have loaded.
+  (async function(){
+    try { if (document.fonts && document.fonts.ready) { await document.fonts.ready; } } catch(e){}
+    await new Promise(r => setTimeout(r, 500));
+    window.print();
+  })();
+</script>
+</body>
+</html>

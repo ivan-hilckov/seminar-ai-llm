@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Секция 1 — Каркас (58 слайдов)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF7;
+    --ink:#1A1A1A;
+    --meta:#6B6B68;
+    --line:#D9D7CF;
+    --tag:#D9D7CF;
+    --accent:#8B2A1F;
+    --visual:#EEEDE8;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background:#000;
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  deck-stage{ display:block; width:100vw; height:100vh; }
+
+  .slide{
+    width:1920px;
+    height:1080px;
+    background:var(--bg);
+    color:var(--ink);
+    position:relative;
+    padding:96px;
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    overflow:hidden;
+  }
+
+  /* ───────── Meta plate (top-right) — скрыта ───────── */
+  .meta{ display:none; }
+
+  /* ───────── Footer ───────── */
+  .foot{
+    position:absolute; bottom:48px; right:96px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px; color:var(--meta);
+    letter-spacing:.04em;
+  }
+
+  /* ───────── Sub-block tag (top-left) ───────── */
+  .subblock{
+    position:absolute; top:48px; left:96px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px; color:var(--meta);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+
+  /* ───────── Template A — раздел ───────── */
+  .t-a .foot{ display:none; }
+  .t-a .hairline{
+    position:absolute; left:96px; right:96px; top:300px;
+    height:1px; background:var(--line);
+  }
+  .t-a .roman{
+    position:absolute; left:96px; top:212px;
+    font-family:'Playfair Display', Georgia, serif;
+    font-weight:900;
+    font-size:640px; line-height:1;
+    letter-spacing:-.02em;
+    color:var(--accent);
+  }
+  .t-a .part-meta{
+    position:absolute; left:96px; bottom:60px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px; color:var(--meta);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+  .t-a .part-title{
+    position:absolute; right:96px; bottom:140px;
+    font-size:88px; font-weight:500;
+    line-height:.98; max-width:1100px;
+    letter-spacing:-.02em; color:var(--ink);
+    text-align:right;
+  }
+
+  /* ───────── Template B — тезис ───────── */
+  .t-b .thesis{
+    position:absolute; left:96px; right:96px;
+    top:50%; transform:translateY(-50%);
+    font-size:44px; font-weight:500;
+    line-height:1.18; letter-spacing:-.005em;
+    max-width:1500px; text-wrap:pretty;
+  }
+  .t-b .thesis.small{ font-size:36px; }
+  .t-b .anchor{
+    position:absolute; left:96px; bottom:160px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px; color:var(--meta);
+    letter-spacing:.04em;
+  }
+  .t-b .anchor .arr{ margin-right:14px; }
+
+  /* ───────── Template C — визуал ───────── */
+  .t-c .visual{
+    position:absolute; left:96px; top:160px;
+    width:1080px; height:760px;
+    background:var(--visual); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .t-c .visual span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px; color:var(--meta);
+    letter-spacing:.06em; text-transform:uppercase;
+    text-align:center; max-width:860px;
+    padding:0 32px; line-height:1.5;
+  }
+  .t-c .right{
+    position:absolute; left:1216px; right:96px; bottom:160px;
+    display:flex; flex-direction:column; gap:24px;
+  }
+  .t-c .right .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px; color:var(--meta);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+  .t-c .right .title{
+    font-size:36px; font-weight:500;
+    line-height:1.15; letter-spacing:-.005em;
+  }
+  .t-c .right .cap{
+    font-size:22px; line-height:1.4;
+    color:var(--ink); text-wrap:pretty;
+  }
+
+  /* ───────── Template D — сравнение ───────── */
+  .t-d .d-head{
+    position:absolute; top:160px; left:96px; right:96px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .t-d .d-head .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px; color:var(--meta);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+  .t-d .d-head .title{
+    font-size:32px; font-weight:500;
+    line-height:1.2; max-width:1600px;
+  }
+  .t-d .cols{
+    position:absolute; top:380px; left:96px; right:96px; bottom:200px;
+    display:grid; grid-template-columns:1fr 1px 1fr; gap:48px;
+  }
+  .t-d .cols .divider{ background:var(--line); }
+  .t-d .col{ display:flex; flex-direction:column; gap:24px; }
+  .t-d .col .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px; color:var(--meta); letter-spacing:.08em;
+  }
+  .t-d .col .sub-title{
+    font-size:28px; font-weight:500;
+    line-height:1.2; letter-spacing:-.005em;
+  }
+  .t-d .col .body{
+    font-size:22px; line-height:1.45;
+    color:var(--ink); text-wrap:pretty; max-width:780px;
+  }
+
+  /* ───────── Template E — момент ───────── */
+  .t-e .moment{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:0 96px; text-align:center;
+  }
+  .t-e .phrase{
+    font-size:96px; font-weight:500;
+    line-height:1.1; letter-spacing:-.015em;
+    max-width:1700px; text-wrap:balance;
+  }
+  .t-e .micro{
+    margin-top:64px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px; color:var(--meta);
+    letter-spacing:.08em; text-transform:uppercase;
+  }
+  .t-e.accent .phrase{ color:var(--accent); }
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+<section class="slide t-a r-i" id="slide-06" data-screen-label="06 Часть I">
+  <div class="meta"><span class="num">06</span><span class="type">A</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="hairline"></div>
+  <div class="roman">I</div>
+  <div class="part-meta">ЧАСТЬ I · СЛАЙДЫ 06 — 31 · 26 СЛАЙДОВ · ≈ 45 МИН</div>
+  <div class="part-title">Откуда взялись нейросети</div>
+</section>
+
+<section class="slide t-c" id="slide-07" data-screen-label="07 Помните это?">
+  <div class="meta"><span class="num">07</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: Nokia с экраном Т9</span></div>
+  <div class="right">
+    <div class="sub">1.1 Т9 НА NOKIA</div>
+    <div class="title">Помните это?</div>
+    <div class="cap">Те же три-четыре кнопки на одну букву — и подсказка слова</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-08" data-screen-label="08 Как работал Т9">
+  <div class="meta"><span class="num">08</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: схема кнопки → словарь → слово</span></div>
+  <div class="right">
+    <div class="sub">1.1 Т9 НА NOKIA</div>
+    <div class="title">Как работал Т9</div>
+    <div class="cap">Цифры превращались в слова через встроенный словарь частотности</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-09" data-screen-label="09 Машина начала угадывать">
+  <div class="meta"><span class="num">09</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Машина впервые начала угадывать</div>
+    <div class="micro">СЛАЙД 09 · 1.1</div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-10" data-screen-label="10 Т9 vs LLM">
+  <div class="meta"><span class="num">10</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">1.1 Т9 НА NOKIA</div>
+    <div class="title">Т9 vs LLM</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Т9: фиксированный словарь</div>
+      <div class="body">Выбор из заранее заданных вариантов. Слово существует — или его нет.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">LLM: генерация</div>
+      <div class="body">Ничего не выбирается заранее. Каждый ответ собирается с нуля, слово за словом.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-11" data-screen-label="11 Smart Compose">
+  <div class="meta"><span class="num">11</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: скриншот письма с подсказкой Smart Compose</span></div>
+  <div class="right">
+    <div class="sub">1.2 АВТОЗАПОЛНЕНИЕ</div>
+    <div class="title">Smart Compose в Gmail</div>
+    <div class="cap">Та же идея предсказания, но мощнее. Достраивает не слово, а целую фразу.</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-12" data-screen-label="12 Автодополнение">
+  <div class="meta"><span class="num">12</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: скриншот строки поиска с подсказками</span></div>
+  <div class="right">
+    <div class="sub">1.2 АВТОЗАПОЛНЕНИЕ</div>
+    <div class="title">Автодополнение в поиске</div>
+    <div class="cap">Каждое следующее слово — самое вероятное продолжение запроса</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-13" data-screen-label="13 Со слов на фразы">
+  <div class="meta"><span class="num">13</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Со слов на фразы</div>
+    <div class="micro">СЛАЙД 13 · 1.2</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-14" data-screen-label="14 Transformer 2017">
+  <div class="meta"><span class="num">14</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: обложка статьи «Attention is All You Need»</span></div>
+  <div class="right">
+    <div class="sub">1.3 GPT-2 И GPT-3</div>
+    <div class="title">2017: Transformer</div>
+    <div class="cap">Восемь авторов из Google. Архитектура, на которой работают все современные модели.</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-15" data-screen-label="15 Линия GPT">
+  <div class="meta"><span class="num">15</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: график 117M → 1.5B → 175B параметров</span></div>
+  <div class="right">
+    <div class="sub">1.3 GPT-2 И GPT-3</div>
+    <div class="title">Линия GPT</div>
+    <div class="cap">GPT-1, GPT-2, GPT-3 — рост на три порядка за три года</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-16" data-screen-label="16 175 миллиардов">
+  <div class="meta"><span class="num">16</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">175 миллиардов параметров</div>
+    <div class="micro">СЛАЙД 16 · 1.3</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-17" data-screen-label="17 Emergent abilities">
+  <div class="meta"><span class="num">17</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: график emergent abilities (резкий скачок)</span></div>
+  <div class="right">
+    <div class="sub">1.3 GPT-2 И GPT-3</div>
+    <div class="title">Что-то странное произошло</div>
+    <div class="cap">Способности появились не плавно. На определённом масштабе модель начала делать то, чему её не учили.</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-18" data-screen-label="18 Модель угадывает">
+  <div class="meta"><span class="num">18</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">1.3 GPT-2 И GPT-3</div>
+  <div class="thesis">Модель не понимает — она угадывает следующее слово на огромной статистике</div>
+  <div class="anchor"><span class="arr">→</span>дальше: угадывание = мышление</div>
+</section>
+
+<section class="slide t-e" id="slide-19" data-screen-label="19 Угадывание = мышление">
+  <div class="meta"><span class="num">19</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Угадывание = мышление</div>
+    <div class="micro">СЛАЙД 19 · 1.3</div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-20" data-screen-label="20 30 ноября 2022">
+  <div class="meta"><span class="num">20</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: первый интерфейс ChatGPT (ноябрь 2022)</span></div>
+  <div class="right">
+    <div class="sub">1.4 CHATGPT 2022</div>
+    <div class="title">30 ноября 2022</div>
+    <div class="cap">Тот же GPT-3.5 — но с диалоговой обёрткой. Этого хватило, чтобы он стал явлением.</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-21" data-screen-label="21 100 миллионов">
+  <div class="meta"><span class="num">21</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">100 миллионов пользователей за 2 месяца</div>
+    <div class="micro">СЛАЙД 21 · 1.4</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-22" data-screen-label="22 Продолжатель → ассистент">
+  <div class="meta"><span class="num">22</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">1.4 CHATGPT 2022</div>
+  <div class="thesis">Продолжатель текста стал ассистентом, который отвечает на вопрос</div>
+  <div class="anchor"><span class="arr">→</span>дальше: как именно его «дрессировали»</div>
+</section>
+
+<section class="slide t-c" id="slide-23" data-screen-label="23 RLHF">
+  <div class="meta"><span class="num">23</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: схема обучения с человеческими оценками (RLHF)</span></div>
+  <div class="right">
+    <div class="sub">1.4 CHATGPT 2022</div>
+    <div class="title">RLHF</div>
+    <div class="cap">Люди оценивают ответы модели. Модель учится давать те, которые оценивают выше.</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-24" data-screen-label="24 Дрессировка">
+  <div class="meta"><span class="num">24</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Дрессировка начитанного человека</div>
+    <div class="micro">СЛАЙД 24 · 1.4</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-25" data-screen-label="25 Думающие модели">
+  <div class="meta"><span class="num">25</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">1.5 ДУМАЮЩИЕ МОДЕЛИ</div>
+  <div class="thesis">2024–2025: o1, R1, GPT-5 — модели, которые сначала рассуждают, потом отвечают</div>
+  <div class="anchor"><span class="arr">→</span>дальше: что это значит на практике</div>
+</section>
+
+<section class="slide t-c" id="slide-26" data-screen-label="26 Chain of Thought">
+  <div class="meta"><span class="num">26</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: ответ модели с блоком &lt;think&gt;…&lt;/think&gt;</span></div>
+  <div class="right">
+    <div class="sub">1.5 ДУМАЮЩИЕ МОДЕЛИ</div>
+    <div class="title">Chain of Thought</div>
+    <div class="cap">Перед ответом модель проговаривает рассуждение про себя — это видно прямо в выводе.</div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-27" data-screen-label="27 Метафора студентов">
+  <div class="meta"><span class="num">27</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">1.5 ДУМАЮЩИЕ МОДЕЛИ</div>
+    <div class="title">Метафора студентов</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Студент-выскочка</div>
+      <div class="body">Отвечает первое, что пришло в голову. Быстро, уверенно — иногда мимо.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">Студент с черновиком</div>
+      <div class="body">Подумает, набросает план, проверит — потом отвечает.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-28" data-screen-label="28 Что меняется">
+  <div class="meta"><span class="num">28</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">1.5 ДУМАЮЩИЕ МОДЕЛИ</div>
+    <div class="title">Что меняется</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Обычная модель</div>
+      <div class="body">Быстрее, меньше токенов, дешевле. Простые задачи — без потерь.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">Думающая модель</div>
+      <div class="body">Медленнее, дороже — но точнее на задачах с несколькими шагами.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-29" data-screen-label="29 Ловушка">
+  <div class="meta"><span class="num">29</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">1.5 ДУМАЮЩИЕ МОДЕЛИ</div>
+    <div class="title">Ловушка</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">DeepSeek-V3 · 3.9%</div>
+      <div class="body">Обычная модель. Доля галлюцинаций — низкая.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">DeepSeek-R1 · 14.3%</div>
+      <div class="body">Думающая модель. Рассуждение увеличивает риск выдумать факт.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-c" id="slide-30" data-screen-label="30 Линия времени">
+  <div class="meta"><span class="num">30</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: T9 → автозаполнение → GPT-3 → ChatGPT → o1 / R1</span></div>
+  <div class="right">
+    <div class="sub">1.6 ГЛАВНЫЙ ВЫВОД</div>
+    <div class="title">Линия времени</div>
+    <div class="cap">От подсказки слова до модели, которая рассуждает — двадцать лет одной идеи</div>
+  </div>
+</section>
+
+<section class="slide t-e accent" id="slide-31" data-screen-label="31 Это статистика">
+  <div class="meta"><span class="num">31</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Это не интеллект. Это статистика.</div>
+    <div class="micro">СЛАЙД 31 · 1.6 · ГЛАВНЫЙ МОМЕНТ СЕКЦИИ</div>
+  </div>
+</section>
+
+<section class="slide t-a r-ii" id="slide-32" data-screen-label="32 Часть II">
+  <div class="meta"><span class="num">32</span><span class="type">A</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="hairline"></div>
+  <div class="roman">II</div>
+  <div class="part-meta">ЧАСТЬ II · СЛАЙДЫ 32 — 43 · 12 СЛАЙДОВ · ≈ 22 МИН</div>
+  <div class="part-title">Как это работает внутри</div>
+</section>
+
+<section class="slide t-b" id="slide-33" data-screen-label="33 Врач и доктор">
+  <div class="meta"><span class="num">33</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">2.1 ВЕКТОРЫ СМЫСЛОВ</div>
+  <div class="thesis">Откуда модель знает, что «врач» и «доктор» — почти одно?</div>
+  <div class="anchor"><span class="arr">→</span>дальше: слова в пространстве</div>
+</section>
+
+<section class="slide t-c" id="slide-34" data-screen-label="34 Слова в пространстве">
+  <div class="meta"><span class="num">34</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: точки-кластеры в 2D-пространстве</span></div>
+  <div class="right">
+    <div class="sub">2.1 ВЕКТОРЫ СМЫСЛОВ</div>
+    <div class="title">Слова в пространстве</div>
+    <div class="cap">Каждое слово — точка. Близкие по смыслу — рядом. Это получилось само из текста.</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-35" data-screen-label="35 Близость = смысл">
+  <div class="meta"><span class="num">35</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Близость = смысл</div>
+    <div class="micro">СЛАЙД 35 · 2.1</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-36" data-screen-label="36 Геометрия слов">
+  <div class="meta"><span class="num">36</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">2.1 ВЕКТОРЫ СМЫСЛОВ</div>
+  <div class="thesis">Синонимы, перевод, парафраз — всё из одной геометрии слов</div>
+  <div class="anchor"><span class="arr">→</span>дальше: контекст и память</div>
+</section>
+
+<section class="slide t-c" id="slide-37" data-screen-label="37 Что такое контекст">
+  <div class="meta"><span class="num">37</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: системный промт + история + запрос</span></div>
+  <div class="right">
+    <div class="sub">2.2 КОНТЕКСТ И ПАМЯТЬ</div>
+    <div class="title">Что такое контекст</div>
+    <div class="cap">Всё, что модель видит при ответе: служебная инструкция, история чата, ваш текущий вопрос.</div>
+  </div>
+</section>
+
+<section class="slide t-e" id="slide-38" data-screen-label="38 128к токенов">
+  <div class="meta"><span class="num">38</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">128 000 токенов ≈ 200 страниц</div>
+    <div class="micro">СЛАЙД 38 · 2.2</div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-39" data-screen-label="39 Между чатами">
+  <div class="meta"><span class="num">39</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">2.2 КОНТЕКСТ И ПАМЯТЬ</div>
+    <div class="title">Между чатами</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Чат №1</div>
+      <div class="body">Внутри одного чата модель помнит всё, что в нём было.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">Чат №2</div>
+      <div class="body">Открыли новый чат — с нуля. Ничего из чата №1 не помнит.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-40" data-screen-label="40 Память в ChatGPT">
+  <div class="meta"><span class="num">40</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">2.2 КОНТЕКСТ И ПАМЯТЬ</div>
+    <div class="title">Память в ChatGPT</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Контекст чата</div>
+      <div class="body">Работает сам, в рамках одного чата. Никаких настроек.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">Memory</div>
+      <div class="body">Отдельная функция, отдельный файл. Переносит данные между чатами.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-41" data-screen-label="41 Училась один раз">
+  <div class="meta"><span class="num">41</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">2.3 ОБУЧЕНИЕ И ЗАМОРОЗКА</div>
+  <div class="thesis">Модель училась один раз — на терабайтах текста, за месяцы</div>
+  <div class="anchor"><span class="arr">→</span>дальше: что происходит после релиза</div>
+</section>
+
+<section class="slide t-b" id="slide-42" data-screen-label="42 Веса заморожены">
+  <div class="meta"><span class="num">42</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">2.3 ОБУЧЕНИЕ И ЗАМОРОЗКА</div>
+  <div class="thesis">После релиза веса модели больше не меняются</div>
+  <div class="anchor"><span class="arr">→</span>дальше: ваши вопросы её не меняют</div>
+</section>
+
+<section class="slide t-e" id="slide-43" data-screen-label="43 Вопросы не меняют">
+  <div class="meta"><span class="num">43</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Ваши вопросы её не меняют</div>
+    <div class="micro">СЛАЙД 43 · 2.3</div>
+  </div>
+</section>
+
+<section class="slide t-a r-iii" id="slide-44" data-screen-label="44 Часть III">
+  <div class="meta"><span class="num">44</span><span class="type">A</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="hairline"></div>
+  <div class="roman">III</div>
+  <div class="part-meta">ЧАСТЬ III · СЛАЙДЫ 44 — 56 · 13 СЛАЙДОВ · ≈ 20 МИН</div>
+  <div class="part-title">Важные особенности</div>
+</section>
+
+<section class="slide t-b" id="slide-45" data-screen-label="45 Облако vs локально">
+  <div class="meta"><span class="num">45</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.1 ДАННЫЕ И ПРИВАТНОСТЬ</div>
+  <div class="thesis">Облачный сервис видит ваш запрос. Локальная модель — нет.</div>
+  <div class="anchor"><span class="arr">→</span>дальше: как отключить обучение на ваших данных</div>
+</section>
+
+<section class="slide t-c" id="slide-46" data-screen-label="46 Toggle обучения">
+  <div class="meta"><span class="num">46</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: настройка-переключатель «Improve the model for everyone»</span></div>
+  <div class="right">
+    <div class="sub">3.1 ДАННЫЕ И ПРИВАТНОСТЬ</div>
+    <div class="title">Отключить обучение на ваших данных</div>
+    <div class="cap">В ChatGPT, Claude, Gemini — отдельный переключатель. Один раз нашли — выключили — забыли.</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-47" data-screen-label="47 Конфиденциальное">
+  <div class="meta"><span class="num">47</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.1 ДАННЫЕ И ПРИВАТНОСТЬ</div>
+  <div class="thesis">Конфиденциальная информация — не в облако. Никогда.</div>
+</section>
+
+<section class="slide t-b" id="slide-48" data-screen-label="48 Новый чат с нуля">
+  <div class="meta"><span class="num">48</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.2 ПАМЯТЬ И КОНТЕКСТ</div>
+  <div class="thesis">Каждый новый чат — модель начинает с нуля</div>
+  <div class="anchor"><span class="arr">→</span>дальше: когда Memory полезна</div>
+</section>
+
+<section class="slide t-b" id="slide-49" data-screen-label="49 Memory: за и против">
+  <div class="meta"><span class="num">49</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.2 ПАМЯТЬ И КОНТЕКСТ</div>
+  <div class="thesis">Memory полезна для предпочтений. Мешает, когда нужна чистая постановка.</div>
+</section>
+
+<section class="slide t-b" id="slide-50" data-screen-label="50 Поиск — отдельно">
+  <div class="meta"><span class="num">50</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.3 ДОСТУП К ИНТЕРНЕТУ</div>
+  <div class="thesis">Поиск — отдельная функция, не базовое поведение модели</div>
+  <div class="anchor"><span class="arr">→</span>дальше: когда включать, когда выключать</div>
+</section>
+
+<section class="slide t-b" id="slide-51" data-screen-label="51 Когда включать поиск">
+  <div class="meta"><span class="num">51</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.3 ДОСТУП К ИНТЕРНЕТУ</div>
+  <div class="thesis">Включайте на свежих фактах. Выключайте на формулировках и текстах.</div>
+</section>
+
+<section class="slide t-b" id="slide-52" data-screen-label="52 Статистика, не факты">
+  <div class="meta"><span class="num">52</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.4 ТОЧНОСТЬ И ГАЛЛЮЦИНАЦИИ</div>
+  <div class="thesis">Модель знает не факты — она знает статистику текстов о них</div>
+  <div class="anchor"><span class="arr">→</span>дальше: живая демонстрация в зале</div>
+</section>
+
+<section class="slide t-e" id="slide-53" data-screen-label="53 Демо галлюцинации">
+  <div class="meta"><span class="num">53</span><span class="type">E</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="moment">
+    <div class="phrase">Демонстрация галлюцинации</div>
+    <div class="micro">СЛАЙД 53 · 3.4 · ЖИВАЯ ДЕМО</div>
+  </div>
+</section>
+
+<section class="slide t-d" id="slide-54" data-screen-label="54 Где проверять">
+  <div class="meta"><span class="num">54</span><span class="type">D</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="d-head">
+    <div class="sub">3.4 ТОЧНОСТЬ И ГАЛЛЮЦИНАЦИИ</div>
+    <div class="title">Где проверять обязательно</div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <div class="label">А</div>
+      <div class="sub-title">Проверять</div>
+      <div class="body">Цифры, цитаты, источники, имена, даты — всё, что может быть выдумано правдоподобно.</div>
+    </div>
+    <div class="divider"></div>
+    <div class="col">
+      <div class="label">Б</div>
+      <div class="sub-title">Можно доверять</div>
+      <div class="body">Структура, стиль, формулировки, переводы — там, где факт не проверяется фактом.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-55" data-screen-label="55 Задачи, не профессии">
+  <div class="meta"><span class="num">55</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.5 ГРАНИЦЫ ПРИМЕНЕНИЯ</div>
+  <div class="thesis small">AI заменяет задачи, не профессии — как статпакеты заменили счёты, не статистов</div>
+</section>
+
+<section class="slide t-b" id="slide-56" data-screen-label="56 Читает буквально">
+  <div class="meta"><span class="num">56</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">3.5 ГРАНИЦЫ ПРИМЕНЕНИЯ</div>
+  <div class="thesis">Модель читает буквально. Об этом — во второй секции.</div>
+  <div class="anchor"><span class="arr">→</span>мост к Секции 2</div>
+</section>
+
+<section class="slide t-c" id="slide-57" data-screen-label="57 Что мы прошли">
+  <div class="meta"><span class="num">57</span><span class="type">C</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="visual"><span>ВИЗУАЛ: карта Секции 1 с галочками по подблокам</span></div>
+  <div class="right">
+    <div class="sub">ЗАКРЫТИЕ</div>
+    <div class="title">Что мы прошли</div>
+    <div class="cap">История · Устройство · Особенности — три блока пройдены</div>
+  </div>
+</section>
+
+<section class="slide t-b" id="slide-58" data-screen-label="58 Перерыв">
+  <div class="meta"><span class="num">58</span><span class="type">B</span></div>
+  <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+  <div class="subblock">ЗАКРЫТИЕ</div>
+  <div class="thesis">Перерыв 15 минут</div>
+</section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+<script>
+(async () => {
+  try { await customElements.whenDefined('deck-stage'); } catch (e) {}
+  const ds = document.querySelector('deck-stage');
+  if (ds) {
+    // Weigh only slide children — same filter as deck-stage.length. Skipping
+    // slotted script/style/template keeps inline Babel/CSS from registering
+    // as stable "content" before the framework has mounted anything.
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of ds.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll('img,svg,canvas,video').length;
+      }
+      return text + media * 100;
+    };
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      if (n > 0 && n === last) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  try { await document.fonts.ready; } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>

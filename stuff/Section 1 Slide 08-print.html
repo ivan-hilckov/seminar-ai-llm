@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>08 · Т9 на Nokia · Секция 1 · AI и LLM для исследователей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:    #FAFAF7;
+    --ink:   #1A1A1A;
+    --mute:  #6B6B68;
+    --rule:  #D9D7CF;
+    --hi:    #F0EEE8;
+  }
+  html, body{
+    margin:0; padding:0; height:100%;
+    background:#0a0a0a;
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .stage{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .slide{
+    width:1920px; height:1080px;
+    min-width:1920px; min-height:1080px;
+    flex:0 0 auto;
+    background:var(--bg);
+    position:relative;
+    overflow:hidden;
+    transform-origin:center center;
+    box-sizing:border-box;
+  }
+
+  /* ─── Meta plate (top-right) ─── */
+  .meta{
+    position:absolute; top:48px; right:96px;
+    display:flex; align-items:center; gap:16px;
+    font-family:"IBM Plex Mono", monospace;
+  }
+  .meta .num{
+    font-size:20px;
+    color:var(--mute);
+    letter-spacing:.04em;
+  }
+  .meta .type{
+    width:32px; height:24px;
+    background:var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--ink);
+    letter-spacing:.02em;
+  }
+
+  /* ─── Footer ─── */
+  .foot{
+    position:absolute; right:96px; bottom:48px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px; color:var(--mute);
+    letter-spacing:.06em; text-transform:uppercase;
+  }
+
+  /* ─── Visual zone (62% width) ─── */
+  .visual{
+    position:absolute;
+    left:96px; top:140px;
+    width:1094px; height:800px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .visual svg{
+    width:1080px; height:auto;
+    display:block;
+  }
+
+  /* ─── Right text block (38% width, bottom-aligned with visual) ─── */
+  .right{
+    position:absolute;
+    left:1254px; right:96px; bottom:140px;
+    display:flex; flex-direction:column;
+  }
+  .right .sub{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:16px; color:var(--mute);
+    letter-spacing:.08em; text-transform:uppercase;
+    margin:0 0 32px 0;
+  }
+  .right .title{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:36px; line-height:1.18;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    margin:0 0 24px 0;
+    text-wrap:pretty;
+  }
+  .right .cap{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:400;
+    font-size:22px; line-height:1.4;
+    color:var(--ink);
+    text-wrap:pretty;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ─── Print: native 1920×1080 page ─── */
+  @page { size: 1920px 1080px; margin: 0; }
+  @media print{
+    html, body{
+      background:var(--bg) !important;
+      margin:0 !important; padding:0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .stage{ position:static; display:block; width:1920px; height:1080px; background:var(--bg) !important; overflow:visible; }
+    .slide{
+      transform:none !important;
+      box-shadow:none !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <article class="slide" data-screen-label="08 Как работал Т9">
+
+    <!-- top-right meta plate -->
+    <div class="meta">
+      <span class="num">08</span>
+      <span class="type">C</span>
+    </div>
+
+    <!-- left: T9 schema in three blocks -->
+    <div class="visual">
+      <svg viewBox="0 0 1080 260" xmlns="http://www.w3.org/2000/svg"
+           aria-label="Схема работы Т9: клавиши, словарь, экран">
+
+        <!-- ─── Block 1: КЛАВИШИ (x 0..280) ─── -->
+        <g>
+          <rect x="0.5" y="0.5" width="279" height="259" rx="8" ry="8"
+                fill="none" stroke="#D9D7CF" stroke-width="1"/>
+
+          <!-- label -->
+          <text x="24" y="46"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.1em"
+                fill="#6B6B68">КЛАВИШИ</text>
+
+          <!-- digits 7 4 4 3 3 6 -->
+          <text x="140" y="168"
+                font-family="IBM Plex Sans, sans-serif"
+                font-weight="500" font-size="48"
+                text-anchor="middle"
+                letter-spacing="0.06em"
+                font-feature-settings='&quot;tnum&quot; 1, &quot;lnum&quot; 1'
+                fill="#1A1A1A">7 4 4 3 3 6</text>
+        </g>
+
+        <!-- ─── Arrow 1 → ─── -->
+        <g stroke="#1A1A1A" fill="#1A1A1A">
+          <line x1="286" y1="130" x2="334" y2="130" stroke-width="1"/>
+          <polygon points="334,126 334,134 340,130" stroke="none"/>
+        </g>
+
+        <!-- ─── Block 2: СЛОВАРЬ (x 340..740) ─── -->
+        <g>
+          <rect x="340.5" y="0.5" width="399" height="259" rx="8" ry="8"
+                fill="none" stroke="#D9D7CF" stroke-width="1"/>
+
+          <!-- label -->
+          <text x="364" y="46"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.1em"
+                fill="#6B6B68">СЛОВАРЬ</text>
+
+          <!-- Row 1 — прибор · редкое -->
+          <text x="364" y="111"
+                font-family="IBM Plex Sans, sans-serif"
+                font-weight="500" font-size="24"
+                fill="#1A1A1A">прибор</text>
+          <text x="716" y="111"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.06em"
+                text-anchor="end"
+                fill="#6B6B68">редкое</text>
+
+          <!-- Row 2 — привет · частое (highlighted) -->
+          <rect x="352" y="135" width="376" height="40" rx="4" ry="4"
+                fill="#F0EEE8"/>
+          <!-- thin tick marker before highlighted word -->
+          <line x1="354" y1="155" x2="354" y2="155"
+                stroke="#1A1A1A" stroke-width="1"/>
+          <text x="364" y="163"
+                font-family="IBM Plex Sans, sans-serif"
+                font-weight="500" font-size="24"
+                fill="#1A1A1A">привет</text>
+          <text x="716" y="163"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.06em"
+                text-anchor="end"
+                fill="#6B6B68">частое</text>
+
+          <!-- Row 3 — пример · редкое -->
+          <text x="364" y="215"
+                font-family="IBM Plex Sans, sans-serif"
+                font-weight="500" font-size="24"
+                fill="#1A1A1A">пример</text>
+          <text x="716" y="215"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.06em"
+                text-anchor="end"
+                fill="#6B6B68">редкое</text>
+        </g>
+
+        <!-- ─── Arrow 2 → ─── -->
+        <g stroke="#1A1A1A" fill="#1A1A1A">
+          <line x1="746" y1="130" x2="794" y2="130" stroke-width="1"/>
+          <polygon points="794,126 794,134 800,130" stroke="none"/>
+        </g>
+
+        <!-- ─── Block 3: НА ЭКРАНЕ (x 800..1080) ─── -->
+        <g>
+          <rect x="800.5" y="0.5" width="279" height="259" rx="8" ry="8"
+                fill="none" stroke="#D9D7CF" stroke-width="1"/>
+
+          <!-- label -->
+          <text x="824" y="46"
+                font-family="IBM Plex Mono, monospace"
+                font-size="14" letter-spacing="0.1em"
+                fill="#6B6B68">НА ЭКРАНЕ</text>
+
+          <!-- output word -->
+          <text x="940" y="168"
+                font-family="IBM Plex Sans, sans-serif"
+                font-weight="500" font-size="48"
+                text-anchor="middle"
+                fill="#1A1A1A">привет</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- right: text block, bottom-aligned with visual -->
+    <div class="right">
+      <div class="sub">1.1 Т9 на Nokia</div>
+      <h2 class="title">Как работал Т9</h2>
+      <p class="cap">Несколько слов на одну комбинацию. Самое частое выигрывает.</p>
+    </div>
+
+    <!-- footer -->
+    <div class="foot">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+
+  </article>
+</div>
+
+<script>
+  // Proportional scaling: fit to viewport, cap rendered slide width at 1280px on screen.
+  (function(){
+    const slide = document.querySelector('.slide');
+    function fit(){
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const targetW = Math.min(vw, 1280);
+      const sx = targetW / 1920;
+      const sy = vh / 1080;
+      const s = Math.min(sx, sy);
+      slide.style.transform = 'scale(' + s + ')';
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    fit();
+  })();
+
+  // Auto-trigger print dialog once fonts have loaded.
+  (async function(){
+    try { if (document.fonts && document.fonts.ready) { await document.fonts.ready; } } catch(e){}
+    await new Promise(r => setTimeout(r, 500));
+    window.print();
+  })();
+</script>
+</body>
+</html>

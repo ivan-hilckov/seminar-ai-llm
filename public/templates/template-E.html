@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Слайд XX · Момент</title>
+<link rel="stylesheet" href="../shared/styles.css">
+<style>
+  /* ========== ШАБЛОН E — ТРИ ПОДТИПА ==========
+     1. E-momentum — одна фраза по центру
+     2. E-число — крупное число + расшифровка внизу
+     3. E-live — пустой слайд под живую демонстрацию
+     Оставить нужный класс на .slide, удалить остальные блоки.
+  */
+  
+  /* ===== E-momentum ===== */
+  .slide-e__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: calc(100% - 192px);
+  }
+  .slide-e__phrase {
+    font-size: 96px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .slide-e__phrase--accent {
+    color: var(--accent);
+  }
+  .slide-e__sub-meta {
+    position: absolute;
+    bottom: 96px;
+    left: 96px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+  }
+  
+  /* ===== E-число ===== */
+  .slide-e__number-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .slide-e__number {
+    font-size: 120px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--text);
+    text-align: center;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .slide-e__explanation {
+    position: absolute;
+    top: 60%;
+    left: 96px;
+    right: 96px;
+    margin-top: 160px;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    max-width: 1100px;
+  }
+  
+  /* ===== E-live ===== */
+  .slide-e__live {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="screen-wrapper">
+  <div class="slide">
+    
+    <!-- Мета-плашка -->
+    <div class="slide-meta">
+      <span class="slide-number">XX</span>
+      <span class="slide-type">E</span>
+    </div>
+    
+    <!-- ===== ПОДТИП 1: E-momentum ===== -->
+    <div class="slide-e__center">
+      <p class="slide-e__phrase">
+        Главная фраза слайда
+      </p>
+    </div>
+    <div class="slide-e__sub-meta">
+      СЛАЙД XX · ЧАСТЬ I
+    </div>
+    
+    <!-- ===== ПОДТИП 2: E-число — раскомментировать если нужно ===== -->
+    <!--
+    <div class="slide-e__number-zone">
+      <div class="slide-e__number">100 миллионов пользователей</div>
+    </div>
+    <p class="slide-e__explanation">
+      Расшифровка числа — что за этой цифрой стоит, почему она важна.
+    </p>
+    <div class="slide-e__sub-meta">
+      СЛАЙД XX · ЧАСТЬ I
+    </div>
+    -->
+    
+    <!-- ===== ПОДТИП 3: E-live — раскомментировать если нужно ===== -->
+    <!--
+    <div class="slide-e__live">
+      Живая демонстрация
+    </div>
+    <div class="slide-e__sub-meta">
+      СЛАЙД XX · ЧАСТЬ III
+    </div>
+    -->
+    
+    <!-- Колонтитул -->
+    <div class="slide-footer">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    
+  </div>
+</div>
+</body>
+</html>

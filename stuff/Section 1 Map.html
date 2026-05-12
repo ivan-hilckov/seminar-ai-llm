@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Секция 1 — карта 53 слайдов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF7;
+    --ink:#1A1A1A;
+    --meta:#6B6B68;
+    --line:#D9D7CF;
+    --accent:#8B2A1F;
+    /* type colors — muted, equal-weight */
+    --type-a: oklch(0.42 0.015 60);   /* section · graphite */
+    --type-b: oklch(0.55 0.085 75);   /* тезис · warm olive */
+    --type-c: oklch(0.55 0.075 200);  /* визуал · muted teal */
+    --type-d: oklch(0.50 0.085 320);  /* сравнение · muted plum */
+    --type-e: #8B2A1F;                /* moment · accent */
+  }
+  html,body{margin:0;padding:0;background:#222;}
+  body{
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1c1c1b;
+  }
+  .slide{
+    width:1920px;
+    height:1080px;
+    background:var(--bg);
+    color:var(--ink);
+    position:relative;
+    padding:96px 96px 60px 96px;
+    box-sizing:border-box;
+    transform-origin:center center;
+    display:flex;
+    flex-direction:column;
+  }
+  /* scale to fit viewport */
+  @media (max-aspect-ratio: 16/9){
+    .slide{ transform:scale(calc(100vw / 1920)); }
+  }
+  @media (min-aspect-ratio: 16/9){
+    .slide{ transform:scale(calc(100vh / 1080)); }
+  }
+
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; }
+
+  /* ───── Header ───── */
+  .header{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    align-items:start;
+    column-gap:48px;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:16px;
+    color:var(--meta);
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  .title{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:44px;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin-top:18px;
+    max-width:1100px;
+  }
+  .legend{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--meta);
+    text-align:right;
+    line-height:1;
+    letter-spacing:0.02em;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:10px;
+  }
+  .legend-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .legend-item{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    white-space:nowrap;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:16px; height:16px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    font-weight:500;
+    color:#FAFAF7;
+    letter-spacing:0;
+    line-height:1;
+  }
+  .chip.a{ background:var(--type-a); }
+  .chip.b{ background:var(--type-b); }
+  .chip.c{ background:var(--type-c); }
+  .chip.d{ background:var(--type-d); }
+  .chip.e{ background:var(--type-e); }
+
+  /* ───── Map body ───── */
+  .body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding-top:24px;
+  }
+
+  .block{
+    display:flex;
+    flex-direction:column;
+  }
+  .block + .block{ margin-top:14px; padding-top:14px; border-top:1px solid var(--line); }
+
+  .block-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .block-title{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+  }
+  .roman{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:14px;
+    color:var(--meta);
+    letter-spacing:0.08em;
+  }
+  .part-name{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:20px;
+    color:var(--ink);
+    letter-spacing:-0.005em;
+  }
+  .block-meta{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--meta);
+    letter-spacing:0.04em;
+  }
+
+  /* card grid — 13 columns */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(13, 1fr);
+    column-gap:14px;
+    row-gap:12px;
+  }
+
+  .card{
+    height:86px;
+    border:1px solid var(--line);
+    background:#FFFFFF;
+    position:relative;
+    padding:7px 9px 8px 9px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .card .row1{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--meta);
+    line-height:1;
+  }
+  .card .num{ font-size:14px; }
+  .card .ty{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:18px; height:18px;
+    font-size:11px;
+    font-weight:500;
+    color:#FAFAF7;
+    letter-spacing:0;
+  }
+  .card[data-type="A"] .ty{ background:var(--type-a); }
+  .card[data-type="B"] .ty{ background:var(--type-b); }
+  .card[data-type="C"] .ty{ background:var(--type-c); }
+  .card[data-type="D"] .ty{ background:var(--type-d); }
+  .card[data-type="E"] .ty{ background:var(--type-e); }
+  /* pale tinted fill in type color — lighter than the legend chip */
+  .card[data-type="A"]{
+    background: color-mix(in oklch, var(--type-a) 8%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--type-a) 22%, var(--line));
+  }
+  .card[data-type="B"]{
+    background: color-mix(in oklch, var(--type-b) 9%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--type-b) 22%, var(--line));
+  }
+  .card[data-type="C"]{
+    background: color-mix(in oklch, var(--type-c) 9%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--type-c) 22%, var(--line));
+  }
+  .card[data-type="D"]{
+    background: color-mix(in oklch, var(--type-d) 9%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--type-d) 22%, var(--line));
+  }
+  .card[data-type="E"]{
+    background: color-mix(in oklch, var(--type-e) 8%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--type-e) 28%, var(--line));
+  }
+  .card .ttl{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-weight:500;
+    font-size:13px;
+    line-height:1.18;
+    color:var(--ink);
+    letter-spacing:-0.005em;
+    text-wrap:pretty;
+    word-break:normal;
+    hyphens:auto;
+  }
+  /* main moment slide 31 — stronger than other E cards */
+  .card.moment-main{
+    background: color-mix(in oklch, var(--accent) 16%, #FFFFFF);
+    border-color: color-mix(in oklch, var(--accent) 55%, var(--line));
+  }
+  .card.moment-main .num{ color:var(--accent); }
+  .card.moment-main .ttl{ color:var(--accent); }
+
+  /* ───── Footer ───── */
+  .footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--meta);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+
+  /* print: one page 1920×1080 */
+  @page{ size: 1920px 1080px; margin:0; }
+  @media print{
+    html,body{ background:#fff; }
+    .stage{ width:auto; height:auto; background:#fff; display:block; }
+    .slide{ transform:none !important; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<section class="slide" data-screen-label="Секция 1 — карта слайдов">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <div class="eyebrow">Секция 1 · 53 слайда · 90 минут</div>
+      <h1 class="title">История и устройство языковых моделей</h1>
+    </div>
+    <div class="legend">
+      <div class="legend-row">
+        <span class="legend-item"><span class="chip a">A</span>раздел</span>
+        <span class="legend-item"><span class="chip b">B</span>тезис</span>
+        <span class="legend-item"><span class="chip c">C</span>визуал</span>
+        <span class="legend-item"><span class="chip d">D</span>сравнение</span>
+        <span class="legend-item"><span class="chip e">E</span>момент</span>
+      </div>
+      <div style="opacity:.85">5 типов шаблонов · цвет = тип слайда</div>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- PART I -->
+    <section class="block">
+      <div class="block-head">
+        <div class="block-title">
+          <span class="roman">I</span>
+          <span class="part-name">Как появились современные языковые модели</span>
+        </div>
+        <div class="block-meta">06 — 31 · 26 слайдов · ≈ 45 мин</div>
+      </div>
+      <div class="grid">
+        <div class="card" data-type="A"><div class="row1"><span class="num">06</span><span class="ty">A</span></div><div class="ttl">Часть I · откуда взялись</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">07</span><span class="ty">C</span></div><div class="ttl">Помните это?</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">08</span><span class="ty">C</span></div><div class="ttl">Как работал T9</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">09</span><span class="ty">E</span></div><div class="ttl">Машина начала угадывать</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">10</span><span class="ty">D</span></div><div class="ttl">T9 vs LLM</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">11</span><span class="ty">C</span></div><div class="ttl">Smart Compose</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">12</span><span class="ty">C</span></div><div class="ttl">Автодополнение в поиске</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">13</span><span class="ty">E</span></div><div class="ttl">Со слов на фразы</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">14</span><span class="ty">C</span></div><div class="ttl">2017 · Transformer</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">15</span><span class="ty">C</span></div><div class="ttl">Линия GPT</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">16</span><span class="ty">E</span></div><div class="ttl">175 миллиардов параметров</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">17</span><span class="ty">C</span></div><div class="ttl">Emergent abilities</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">18</span><span class="ty">B</span></div><div class="ttl">Метафора попугая</div></div>
+
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">19</span><span class="ty">E</span></div><div class="ttl">Угадывание = мышление</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">20</span><span class="ty">C</span></div><div class="ttl">30 ноября 2022</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">21</span><span class="ty">E</span></div><div class="ttl">100 млн за 2 месяца</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">22</span><span class="ty">B</span></div><div class="ttl">Продолжатель vs ассистент</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">23</span><span class="ty">C</span></div><div class="ttl">RLHF — схема</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">24</span><span class="ty">E</span></div><div class="ttl">Дрессировка</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">25</span><span class="ty">B</span></div><div class="ttl">2024–25 · думающие</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">26</span><span class="ty">C</span></div><div class="ttl">Chain of Thought</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">27</span><span class="ty">D</span></div><div class="ttl">Студент-выскочка / с&nbsp;черновиком</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">28</span><span class="ty">D</span></div><div class="ttl">Что меняется</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">29</span><span class="ty">D</span></div><div class="ttl">Ловушка галлюцинаций</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">30</span><span class="ty">C</span></div><div class="ttl">Линия времени</div></div>
+        <div class="card moment moment-main" data-type="E"><div class="row1"><span class="num">31</span><span class="ty">E</span></div><div class="ttl">Не интеллект · статистика</div></div>
+      </div>
+    </section>
+
+    <!-- PART II -->
+    <section class="block">
+      <div class="block-head">
+        <div class="block-title">
+          <span class="roman">II</span>
+          <span class="part-name">Что происходит при каждом ответе модели</span>
+        </div>
+        <div class="block-meta">32 — 43 · 12 слайдов · ≈ 22 мин</div>
+      </div>
+      <div class="grid">
+        <div class="card" data-type="A"><div class="row1"><span class="num">32</span><span class="ty">A</span></div><div class="ttl">Часть II · как работает</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">33</span><span class="ty">B</span></div><div class="ttl">Врач = доктор</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">34</span><span class="ty">C</span></div><div class="ttl">Слова в пространстве</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">35</span><span class="ty">E</span></div><div class="ttl">Близость = смысл</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">36</span><span class="ty">B</span></div><div class="ttl">Что это даёт</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">37</span><span class="ty">C</span></div><div class="ttl">Что такое контекст</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">38</span><span class="ty">E</span></div><div class="ttl">128k токенов</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">39</span><span class="ty">D</span></div><div class="ttl">Между чатами пусто</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">40</span><span class="ty">D</span></div><div class="ttl">Память — функция</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">41</span><span class="ty">B</span></div><div class="ttl">Один раз училась</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">42</span><span class="ty">B</span></div><div class="ttl">После релиза — заморозка</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">43</span><span class="ty">E</span></div><div class="ttl">Вопросы её не меняют</div></div>
+      </div>
+    </section>
+
+    <!-- PART III -->
+    <section class="block">
+      <div class="block-head">
+        <div class="block-title">
+          <span class="roman">III</span>
+          <span class="part-name">Что важно учитывать в работе с LLM</span>
+        </div>
+        <div class="block-meta">44 — 56 · 13 слайдов · ≈ 20 мин</div>
+      </div>
+      <div class="grid">
+        <div class="card" data-type="A"><div class="row1"><span class="num">44</span><span class="ty">A</span></div><div class="ttl">Часть III · особенности</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">45</span><span class="ty">B</span></div><div class="ttl">Куда уходят данные</div></div>
+        <div class="card" data-type="C"><div class="row1"><span class="num">46</span><span class="ty">C</span></div><div class="ttl">Отключить обучение</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">47</span><span class="ty">B</span></div><div class="ttl">Что нельзя в&nbsp;облако</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">48</span><span class="ty">B</span></div><div class="ttl">Каждый чат с&nbsp;нуля</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">49</span><span class="ty">B</span></div><div class="ttl">Memory · когда нужна</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">50</span><span class="ty">B</span></div><div class="ttl">Поиск — функция</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">51</span><span class="ty">B</span></div><div class="ttl">Когда включать поиск</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">52</span><span class="ty">B</span></div><div class="ttl">Знает статистику текстов</div></div>
+        <div class="card moment" data-type="E"><div class="row1"><span class="num">53</span><span class="ty">E</span></div><div class="ttl">Демонстрация галлюцинации</div></div>
+        <div class="card" data-type="D"><div class="row1"><span class="num">54</span><span class="ty">D</span></div><div class="ttl">Где проверять обязательно</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">55</span><span class="ty">B</span></div><div class="ttl">Задачи, не&nbsp;профессии</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">56</span><span class="ty">B</span></div><div class="ttl">Читает буквально</div></div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="block">
+      <div class="block-head">
+        <div class="block-title">
+          <span class="roman">·</span>
+          <span class="part-name">Закрытие секции</span>
+        </div>
+        <div class="block-meta">57 — 58 · 2 слайда · ≈ 3 мин</div>
+      </div>
+      <div class="grid">
+        <div class="card" data-type="C"><div class="row1"><span class="num">57</span><span class="ty">C</span></div><div class="ttl">Карта пройденного</div></div>
+        <div class="card" data-type="B"><div class="row1"><span class="num">58</span><span class="ty">B</span></div><div class="ttl">Перерыв 15 минут</div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>AI &amp; LLM · ФБУ ВНИИЛМ · 13 мая 2026</div>
+    <div>Секция 1 / 6 · обзор</div>
+  </footer>
+
+</section>
+</div>
+</body>
+</html>

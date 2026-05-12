@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Слайд XX · Часть N</title>
+<link rel="stylesheet" href="../shared/styles.css">
+<style>
+  /* Специфика шаблона A */
+  .slide-a__roman {
+    position: absolute;
+    left: 96px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 320px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--text);
+  }
+  .slide-a__content {
+    position: absolute;
+    left: 480px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 1280px;
+  }
+  .slide-a__meta {
+    margin-bottom: 24px;
+  }
+  .slide-a__title {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+<div class="screen-wrapper">
+  <div class="slide">
+    
+    <!-- Мета-плашка -->
+    <div class="slide-meta">
+      <span class="slide-number">XX</span>
+      <span class="slide-type">A</span>
+    </div>
+    
+    <!-- Римская цифра -->
+    <div class="slide-a__roman">I</div>
+    
+    <!-- Контент -->
+    <div class="slide-a__content">
+      <div class="slide-a__meta meta-tag">
+        Часть I · 26 слайдов · ≈ 45 мин
+      </div>
+      <h1 class="slide-a__title">
+        Откуда взялись современные модели
+      </h1>
+    </div>
+    
+    <!-- Колонтитул -->
+    <div class="slide-footer">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    
+  </div>
+</div>
+</body>
+</html>

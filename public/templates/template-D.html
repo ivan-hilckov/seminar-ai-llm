@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Слайд XX · Сравнение</title>
+<link rel="stylesheet" href="../shared/styles.css">
+<style>
+  /* Специфика шаблона D */
+  .slide-d__header {
+    position: absolute;
+    top: 96px;
+    left: 96px;
+    right: 96px;
+  }
+  .slide-d__meta {
+    margin-bottom: 24px;
+  }
+  .slide-d__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  
+  .slide-d__columns {
+    position: absolute;
+    top: 280px;
+    left: 96px;
+    right: 96px;
+    bottom: 320px;
+    display: flex;
+    gap: 0;
+  }
+  .slide-d__column {
+    flex: 1;
+    padding: 0 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide-d__column:first-child {
+    padding-left: 0;
+    border-right: 1px solid var(--line);
+  }
+  .slide-d__column:last-child {
+    padding-right: 0;
+  }
+  .slide-d__col-title {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .slide-d__col-subtitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+  }
+  .slide-d__col-description {
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  
+  /* Опциональный итоговый блок снизу (β-вариант) */
+  .slide-d__conclusion {
+    position: absolute;
+    bottom: 180px;
+    left: 96px;
+    right: 96px;
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .slide-d__conclusion-text {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+<div class="screen-wrapper">
+  <div class="slide">
+    
+    <!-- Мета-плашка -->
+    <div class="slide-meta">
+      <span class="slide-number">XX</span>
+      <span class="slide-type">D</span>
+    </div>
+    
+    <!-- Заголовок -->
+    <div class="slide-d__header">
+      <div class="slide-d__meta meta-tag">
+        1.X ПОДБЛОК
+      </div>
+      <h1 class="slide-d__title">Заголовок сравнения</h1>
+    </div>
+    
+    <!-- Две колонки -->
+    <div class="slide-d__columns">
+      
+      <div class="slide-d__column">
+        <h2 class="slide-d__col-title">Название А</h2>
+        <p class="slide-d__col-subtitle">Краткая характеристика</p>
+        <p class="slide-d__col-description">
+          Описание левой колонки — две-три строки.
+        </p>
+      </div>
+      
+      <div class="slide-d__column">
+        <h2 class="slide-d__col-title">Название Б</h2>
+        <p class="slide-d__col-subtitle">Краткая характеристика</p>
+        <p class="slide-d__col-description">
+          Описание правой колонки — две-три строки.
+        </p>
+      </div>
+      
+    </div>
+    
+    <!-- Итоговый тезис (опционально, удалить если не нужен) -->
+    <div class="slide-d__conclusion">
+      <p class="slide-d__conclusion-text">
+        Общий вывод из сравнения, одна строка
+      </p>
+    </div>
+    
+    <!-- Колонтитул -->
+    <div class="slide-footer">AI &amp; LLM · ФБУ ВНИИЛМ</div>
+    
+  </div>
+</div>
+</body>
+</html>
