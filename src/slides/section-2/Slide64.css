@@ -1,0 +1,125 @@
+.s64-header {
+  position: absolute;
+  left: 96px;
+  top: 96px;
+  width: 1728px;
+}
+.s64-header .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.s64-header .title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 18px 0 0 0;
+}
+.s64-header .lead {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--mute);
+  margin: 12px 0 0 0;
+}
+
+.s64-cols {
+  position: absolute;
+  left: 96px;
+  top: 280px;
+  width: 1728px;
+  height: 540px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+}
+.s64-cols .col {
+  padding: 0 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.s64-cols .col.first { padding-left: 0; padding-right: 28px; }
+.s64-cols .col.last { padding-right: 0; padding-left: 28px; }
+.s64-cols .vrule {
+  background: var(--rule);
+  width: 1px;
+  height: 100%;
+}
+
+.s64-cols .ctitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0 0 36px 0;
+  letter-spacing: -0.005em;
+}
+
+.s64-axes {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.s64-axis {
+  display: flex;
+  flex-direction: column;
+}
+.s64-axis-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.s64-axis-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 10px 0 0 0;
+  letter-spacing: -0.003em;
+  text-wrap: pretty;
+}
+
+.s64-hrule {
+  position: absolute;
+  left: 96px;
+  top: 860px;
+  width: 1728px;
+  height: 1px;
+  background: var(--rule);
+}
+
+.s64-summary {
+  position: absolute;
+  left: 96px;
+  top: 890px;
+  width: 1728px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s64-summary p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.005em;
+  max-width: 1500px;
+}
