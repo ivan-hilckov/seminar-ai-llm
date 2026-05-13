@@ -47,6 +47,8 @@ import Slide51 from './Slide51.jsx';
 import Slide52 from './Slide52.jsx';
 import Slide53 from './Slide53.jsx';
 import Slide54 from './Slide54.jsx';
+import Slide55 from './Slide55.jsx';
+import Slide56 from './Slide56.jsx';
 
 /**
  * Реестр всех слайдов Секции 1 (06–56 · 51 слайд · 90 мин).
@@ -164,8 +166,8 @@ export const slides = [
   ready('54', 'B', 'Она понимает буквально — не интуитивно', '3.5 Границы применения', Slide54),
 
   // ── Закрытие (55–56)
-  draft('55', 'C', 'Карта пройденного', 'Закрытие'),
-  draft('56', 'E', 'Что мы прошли — главные тезисы', 'Закрытие'),
+  ready('55', 'C', 'Что мы прошли', 'Закрытие', Slide55),
+  ready('56', 'B', 'Главные тезисы', 'Закрытие', Slide56),
 ];
 
 export const slideById = Object.fromEntries(slides.map((s) => [s.id, s]));
