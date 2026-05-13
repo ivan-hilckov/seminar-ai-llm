@@ -16,6 +16,7 @@ import './e-slides.css';
  *   num         — "29" — номер на верхнем мете
  *   variant     — "momentum" | "number" | "live"
  *   phrase      — текст или ReactNode для momentum
+ *   anchor      — мелкая поясняющая строка под фразой (momentum variant)
  *   number      — текст для number
  *   caption     — пояснение под числом для number
  *   metaLabel   — мелкий мета-лейбл над числом (number variant); включает
@@ -28,6 +29,7 @@ export default function ESlide({
   num,
   variant = 'momentum',
   phrase,
+  anchor,
   number,
   caption,
   metaLabel,
@@ -51,6 +53,7 @@ export default function ESlide({
       {variant === 'momentum' && (
         <div className="e-mom__phrase">
           <p>{phrase}</p>
+          {anchor && <div className="e-mom__anchor">{anchor}</div>}
         </div>
       )}
 

@@ -20,6 +20,7 @@
   position: absolute;
   inset: 96px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -35,6 +36,16 @@
 }
 .e-mom.is-accent .e-mom__phrase p {
   color: var(--accent);
+}
+.e-mom .e-mom__anchor {
+  margin: 56px 0 0 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--mute);
+  letter-spacing: -0.002em;
+  max-width: 1500px;
 }
 
 /* ───── E-число — крупное число + расшифровка под ним ───── */
