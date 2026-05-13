@@ -1,0 +1,102 @@
+.s28-header {
+  position: absolute;
+  left: 96px;
+  top: 96px;
+  width: 1728px;
+}
+.s28-header .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.s28-header .title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 24px 0 0 0;
+}
+
+.s28-cols {
+  position: absolute;
+  left: 96px;
+  top: 242px;
+  width: 1728px;
+  height: 533px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+}
+.s28-cols .col { padding: 0 64px 0 0; box-sizing: border-box; }
+.s28-cols .col.right-col { padding: 0 0 0 64px; }
+.s28-cols .vrule { background: var(--rule); width: 1px; height: 100%; }
+
+.s28-cols .ctitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0 0 56px 0;
+  letter-spacing: -0.005em;
+}
+
+.s28-axes {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.s28-axis-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.s28-axis-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 12px 0 0 0;
+  letter-spacing: -0.003em;
+  text-wrap: pretty;
+}
+
+.s28-hrule {
+  position: absolute;
+  left: 96px;
+  top: 787px;
+  width: 1728px;
+  height: 1px;
+  background: var(--rule);
+}
+
+.s28-summary {
+  position: absolute;
+  left: 96px;
+  top: 823px;
+  width: 1728px;
+  height: 161px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s28-summary p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.005em;
+}
