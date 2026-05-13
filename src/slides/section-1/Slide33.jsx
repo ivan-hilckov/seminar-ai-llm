@@ -5,7 +5,6 @@ export default function Slide33() {
     <ASlide
       num="33"
       roman="II"
-      meta="Часть II · слайды 33 — 42 · 10 слайдов · ≈ 25 мин"
       title={
         <>
           Как это работает

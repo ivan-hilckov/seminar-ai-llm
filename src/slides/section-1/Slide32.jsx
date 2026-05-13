@@ -9,11 +9,9 @@ export default function Slide32() {
         <>
           Это не интеллект.
           <br />
-          Это статистика.
+          Это <span style={{ color: 'var(--accent)' }}>статистика</span>.
         </>
       }
-      partLabel="Часть I"
-      accent
     />
   );
 }
