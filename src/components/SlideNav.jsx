@@ -78,8 +78,22 @@ export default function SlideNav({ currentId }) {
 
       <div className="slide-nav__divider" />
 
-      <Link to={mapHref} className="slide-nav__map" title={mapLabel}>
-        ↻
+      <Link to={mapHref} className="slide-nav__map" title={mapLabel} aria-label={mapLabel}>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="2" y="2" width="5" height="5" rx="0.5" />
+          <rect x="9" y="2" width="5" height="5" rx="0.5" />
+          <rect x="2" y="9" width="5" height="5" rx="0.5" />
+          <rect x="9" y="9" width="5" height="5" rx="0.5" />
+        </svg>
       </Link>
     </div>
   );

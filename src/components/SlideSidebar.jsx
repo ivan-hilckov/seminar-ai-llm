@@ -21,8 +21,21 @@ export default function SlideSidebar({ currentId }) {
   return (
     <aside className="slide-sidebar">
       <div className="slide-sidebar__head">
-        <Link to="/" className="slide-sidebar__home" title="На главную">
-          ↻
+        <Link to="/" className="slide-sidebar__home" title="На главную" aria-label="На главную">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M2 7 L8 2 L14 7 V13.5 H2 Z" />
+            <path d="M6.25 13.5 V9.5 H9.75 V13.5" />
+          </svg>
         </Link>
         <span className="slide-sidebar__count">{allSlides.length}</span>
       </div>
