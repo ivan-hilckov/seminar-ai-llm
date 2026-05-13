@@ -18,6 +18,8 @@ import './e-slides.css';
  *   phrase      — текст или ReactNode для momentum
  *   number      — текст для number
  *   caption     — пояснение под числом для number
+ *   metaLabel   — мелкий мета-лейбл над числом (number variant); включает
+ *                 центрированную «стек»-композицию: метка → число → caption
  *   liveLabel   — текст для live (default "Живая демонстрация")
  *   partLabel   — "Часть I" — для левого нижнего бэйджа
  *   accent      — boolean
@@ -28,11 +30,17 @@ export default function ESlide({
   phrase,
   number,
   caption,
+  metaLabel,
   liveLabel = 'Живая демонстрация',
   partLabel,
   accent = false,
 }) {
-  const classes = ['e-slide', `e-${variantSlug(variant)}`, accent ? 'is-accent' : '']
+  const classes = [
+    'e-slide',
+    `e-${variantSlug(variant)}`,
+    accent ? 'is-accent' : '',
+    variant === 'number' && metaLabel ? 'e-num--stacked' : '',
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -48,6 +56,7 @@ export default function ESlide({
 
       {variant === 'number' && (
         <>
+          {metaLabel && <div className="e-num__meta">{metaLabel}</div>}
           <div className="e-num__number">{number}</div>
           {caption && <div className="e-num__caption">{caption}</div>}
         </>

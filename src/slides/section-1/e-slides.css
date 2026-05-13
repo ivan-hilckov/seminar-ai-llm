@@ -38,6 +38,20 @@
 }
 
 /* ───── E-число — крупное число + расшифровка под ним ───── */
+.e-num .e-num__meta {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 30%;
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0;
+}
+
 .e-num .e-num__number {
   position: absolute;
   left: 0;
@@ -61,6 +75,37 @@
   line-height: 1.45;
   color: var(--mute);
   font-weight: 400;
+}
+
+/* «Стек»-композиция: meta-label → число → caption по центру.
+   Включается, когда у E-число задан metaLabel. Перебивает стандартные
+   absolute-позиции из правил выше за счёт большей специфичности. */
+.e-num--stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.e-num--stacked .e-num__meta,
+.e-num--stacked .e-num__number,
+.e-num--stacked .e-num__caption {
+  position: static;
+  left: auto;
+  right: auto;
+  top: auto;
+  max-width: none;
+  padding: 0;
+}
+.e-num--stacked .e-num__meta {
+  margin: 0 0 32px 0;
+}
+.e-num--stacked .e-num__number {
+  transform: none;
+  margin: 0;
+}
+.e-num--stacked .e-num__caption {
+  margin: 14px 0 0 0;
+  text-align: center;
 }
 
 /* ───── E-live — заглушка под живую демонстрацию ───── */
