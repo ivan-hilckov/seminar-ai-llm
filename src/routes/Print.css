@@ -1,0 +1,120 @@
+/* ============================================================
+   /print — все слайды один за другим для экспорта в PDF
+   ============================================================ */
+
+.print-page {
+  background: #2a2a2a;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 56px 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.print-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 44px;
+  padding: 0 24px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.print-toolbar a {
+  color: #fff;
+  text-decoration: none;
+}
+.print-toolbar a:hover { text-decoration: underline; }
+.print-toolbar__hint {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Каждый слот — контейнер размером с viewport, в котором .slide
+   (1920×1080) масштабируется через CSS-переменную --print-scale. */
+.print-slot {
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  flex: 0 0 auto;
+}
+.print-slot .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(var(--print-scale, 0.6667));
+  transform-origin: top left;
+}
+
+/* ============================================================
+   ПЕЧАТЬ — каждый .print-slot становится страницей 1920×1080
+   ============================================================ */
+
+@media print {
+  /* Принуждаем Chrome печатать цвета и фоны как на экране.
+     Без этого html/body/слоты теряют свой --bg и становятся белыми
+     даже при включённой опции «Background graphics». */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html, body {
+    height: auto !important;
+    width: 1920px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FAFAF7 !important;
+  }
+
+  .print-toolbar { display: none !important; }
+
+  .print-page {
+    background: #FAFAF7 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    display: block !important;
+    min-height: 0 !important;
+    width: 1920px !important;
+  }
+
+  .print-slot {
+    width: 1920px !important;
+    height: 1080px !important;
+    background: #FAFAF7 !important;
+    overflow: visible !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+  }
+  .print-slot:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* .slide уже получает transform: none !important из slide.css.
+     Дополнительно гасим инлайн-position и принудительно задаём фон. */
+  .print-slot .slide {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    background: #FAFAF7 !important;
+  }
+}

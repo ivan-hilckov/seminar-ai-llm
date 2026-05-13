@@ -33,6 +33,19 @@ export default function Index() {
               <strong>Секция 2 — Карта слайдов</strong>
               <span>{section2Slides.length} слайдов · методика работы с LLM</span>
             </Link>
+            <Link to="/print" className="home-card">
+              <strong>Все слайды подряд → PDF</strong>
+              <span>{allSlides.length} слайдов · Cmd/Ctrl+P · Landscape · Margins None</span>
+            </Link>
+            <a
+              href="/seminar-ai-llm.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="home-card home-card--wide"
+            >
+              <strong>Скачать PDF · готовый файл</strong>
+              <span>seminar-ai-llm.pdf</span>
+            </a>
           </div>
         </section>
 

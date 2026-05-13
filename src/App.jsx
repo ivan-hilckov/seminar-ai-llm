@@ -6,6 +6,7 @@ import Section1 from './routes/Section1.jsx';
 import Section2 from './routes/Section2.jsx';
 import Slide from './routes/Slide.jsx';
 import Notes from './routes/Notes.jsx';
+import Print from './routes/Print.jsx';
 import NotFound from './routes/NotFound.jsx';
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/section/2" element={<Section2 />} />
       <Route path="/slide/:id" element={<Slide />} />
       <Route path="/notes/:id" element={<Notes />} />
+      <Route path="/print" element={<Print />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
