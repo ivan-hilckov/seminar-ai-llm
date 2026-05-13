@@ -32,10 +32,13 @@ export default function Section1() {
 }
 
 function Header() {
+  const total = slides.length;
   return (
     <header className="map-header">
       <div className="map-header__left">
-        <div className="map-eyebrow">Секция 1 · 56 слайдов · 90 минут</div>
+        <div className="map-eyebrow">
+          Секция 1 · {total} {plural(total, 'слайд', 'слайда', 'слайдов')}
+        </div>
         <h1 className="map-title">История и устройство языковых моделей</h1>
       </div>
       <div className="map-header__right">
@@ -64,7 +67,8 @@ function Part({ info, slides: list, marker }) {
           <span className="part-name">{info.title}</span>
         </div>
         <div className="part-head__stats">
-          {pad(info.range[0])} — {pad(info.range[1])} · {list.length} {plural(list.length, 'слайд', 'слайда', 'слайдов')} · {info.time}
+          {pad(info.range[0])} — {pad(info.range[1])} · {list.length}{' '}
+          {plural(list.length, 'слайд', 'слайда', 'слайдов')}
         </div>
       </div>
       <div className="card-grid">

@@ -5,7 +5,6 @@ export default function Slide06() {
     <ASlide
       num="06"
       roman="I"
-      meta="Часть I · слайды 06 — 32 · 27 слайдов · ≈ 45 мин"
       title={
         <>
           Откуда взялись

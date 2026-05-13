@@ -23,15 +23,15 @@ export default function Index() {
           <div className="grid">
             <Link to="/opening" className="home-card">
               <strong>Открытие — Карта слайдов</strong>
-              <span>{openingSlides.length} слайдов · 15 мин · титул + цели</span>
+              <span>{openingSlides.length} слайдов · титул + цели</span>
             </Link>
             <Link to="/section/1" className="home-card">
               <strong>Секция 1 — Карта слайдов</strong>
-              <span>{section1Slides.length} слайдов · 90 мин · история и устройство LLM</span>
+              <span>{section1Slides.length} слайдов · история и устройство LLM</span>
             </Link>
             <Link to="/section/2" className="home-card">
               <strong>Секция 2 — Карта слайдов</strong>
-              <span>{section2Slides.length} слайдов · 90 мин · методика работы с LLM</span>
+              <span>{section2Slides.length} слайдов · методика работы с LLM</span>
             </Link>
           </div>
         </section>
@@ -54,27 +54,6 @@ export default function Index() {
                 )}
               </li>
             ))}
-          </ul>
-        </section>
-
-        <section>
-          <h2>Контекст и материалы</h2>
-          <ul className="list">
-            <li>
-              <a href="/stuff/md/Программа_семинара_AI_LLM_v3_1.md" target="_blank" rel="noreferrer">
-                Программа семинара (v3.1)
-              </a>
-            </li>
-            <li>
-              <a href="/stuff/md/Brief_for_Claude_Design.md" target="_blank" rel="noreferrer">
-                Бриф для Claude Design
-              </a>
-            </li>
-            <li>
-              <a href="/stuff/" target="_blank" rel="noreferrer">
-                Папка stuff/ — все референсы
-              </a>
-            </li>
           </ul>
         </section>
       </div>

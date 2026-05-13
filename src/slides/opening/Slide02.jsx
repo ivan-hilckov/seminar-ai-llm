@@ -5,7 +5,7 @@ export default function Slide02() {
   return (
     <Stage label="02 Карта дня">
       <div className="s02-eyebrow">Карта дня</div>
-      <h2 className="s02-title">Сегодня — три секции по 90 минут</h2>
+      <h2 className="s02-title">Сегодня — три секции</h2>
 
       <div className="s02-grid">
         <div className="pair current">
@@ -46,7 +46,7 @@ export default function Slide02() {
           </div>
         </div>
 
-        <div className="pair current">
+        <div className="pair">
           <div className="num">
             <span>Секция 3</span>
             <span className="now">после обеда</span>
@@ -64,10 +64,6 @@ export default function Slide02() {
             <span>Материалы</span>
           </div>
         </div>
-      </div>
-
-      <div className="s02-foot">
-        <span>15-минутные перерывы между секциями</span>
       </div>
 
       <div className="svc">
