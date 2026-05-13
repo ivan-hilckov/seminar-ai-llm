@@ -10,10 +10,10 @@ const TYPE_LABEL = {
   E: 'момент',
 };
 
-const PART_ORDER = ['opening', 'IV', 'V', 'VI', 'closing'];
+const PART_ORDER = ['IV', 'V'];
 
 export default function Section2() {
-  const byPart = { opening: [], IV: [], V: [], VI: [], closing: [] };
+  const byPart = { IV: [], V: [] };
   for (const s of slides) byPart[partOf(s)].push(s);
 
   return (
@@ -32,10 +32,13 @@ export default function Section2() {
 }
 
 function Header() {
+  const total = slides.length;
   return (
     <header className="map-header">
       <div className="map-header__left">
-        <div className="map-eyebrow">Секция 2 · 43 слайда · 90 минут</div>
+        <div className="map-eyebrow">
+          Секция 2 · {total} {plural(total, 'слайд', 'слайда', 'слайдов')}
+        </div>
         <h1 className="map-title">Методика работы с языковыми моделями</h1>
       </div>
       <div className="map-header__right">
@@ -55,16 +58,17 @@ function Header() {
 
 function Part({ info, slides: list, marker }) {
   const pad = (n) => String(n).padStart(2, '0');
-  const markerLabel = marker === 'closing' || marker === 'opening' ? '·' : marker;
+  const cls = ['part', info.inactive ? 'part--inactive' : ''].filter(Boolean).join(' ');
   return (
-    <section className="part">
+    <section className={cls}>
       <div className="part-head">
         <div className="part-head__title">
-          <span className="part-marker">{markerLabel}</span>
+          <span className="part-marker">{marker}</span>
           <span className="part-name">{info.title}</span>
         </div>
         <div className="part-head__stats">
-          {pad(info.range[0])} — {pad(info.range[1])} · {list.length} {plural(list.length, 'слайд', 'слайда', 'слайдов')} · {info.time}
+          {pad(info.range[0])} — {pad(info.range[1])} · {list.length}{' '}
+          {plural(list.length, 'слайд', 'слайда', 'слайдов')}
         </div>
       </div>
       <div className="card-grid">

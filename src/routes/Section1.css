@@ -219,6 +219,19 @@
 .card.is-draft .card-num { color: var(--mute-2); }
 .card.is-draft:hover { border-color: var(--mute); }
 
+/* Часть в плане, без контента и черновиков — приглушённая. */
+.part--inactive .part-name,
+.part--inactive .part-marker,
+.part--inactive .part-head__stats {
+  color: var(--mute-2);
+}
+.part--inactive .card {
+  opacity: 0.55;
+}
+.part--inactive .card .chip {
+  filter: grayscale(0.85);
+}
+
 /* Главный тезис — акцентная обводка */
 .card.is-keystone {
   border-color: var(--accent);
