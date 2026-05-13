@@ -64,7 +64,7 @@
   margin: 0 4px;
 }
 
-.slide-nav__map {
+.slide-nav__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +76,7 @@
   font-size: 16px;
   transition: background 80ms ease-out;
 }
-.slide-nav__map:hover {
+.slide-nav__icon:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 

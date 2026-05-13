@@ -6,14 +6,16 @@ import './SlideNav.css';
 /**
  * Плавающий бар внизу слайда. Показывается на /slide/:id.
  * Левая стрелка → предыдущий, правая → следующий.
- * Cmd/Ctrl+M → назад на карту секции.
+ * N → открыть заметки (если есть), Cmd/Ctrl+M / Esc → назад на карту секции.
  */
 export default function SlideNav({ currentId }) {
   const navigate = useNavigate();
   const idx = allSlides.findIndex((s) => s.id === currentId);
+  const entry = idx >= 0 ? allSlides[idx] : null;
   const prev = idx > 0 ? allSlides[idx - 1] : null;
   const next = idx >= 0 && idx < allSlides.length - 1 ? allSlides[idx + 1] : null;
   const total = allSlides.length;
+  const hasNotes = !!entry?.hasNotes;
 
   // Куда возвращаться по «Назад на карту».
   const numericId = Number(currentId);
@@ -42,11 +44,16 @@ export default function SlideNav({ currentId }) {
         }
       } else if (e.key === 'Escape') {
         navigate(mapHref);
+      } else if ((e.key === 'n' || e.key === 'N' || e.key === 'т' || e.key === 'Т') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (hasNotes) {
+          e.preventDefault();
+          navigate(`/notes/${currentId}`);
+        }
       }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [navigate, prev, next, mapHref]);
+  }, [navigate, prev, next, mapHref, hasNotes, currentId]);
 
   return (
     <div className="slide-nav">
@@ -78,7 +85,33 @@ export default function SlideNav({ currentId }) {
 
       <div className="slide-nav__divider" />
 
-      <Link to={mapHref} className="slide-nav__map" title={mapLabel} aria-label={mapLabel}>
+      {hasNotes && (
+        <Link
+          to={`/notes/${currentId}`}
+          className="slide-nav__icon"
+          title="Заметки к слайду (N)"
+          aria-label="Заметки к слайду"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M3.5 2h6L13 5.5v8a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-11A.5.5 0 0 1 3.5 2z" />
+            <path d="M9.5 2v3.5H13" />
+            <path d="M5.5 8.5h5" />
+            <path d="M5.5 11h3.5" />
+          </svg>
+        </Link>
+      )}
+
+      <Link to={mapHref} className="slide-nav__icon" title={mapLabel} aria-label={mapLabel}>
         <svg
           width="16"
           height="16"

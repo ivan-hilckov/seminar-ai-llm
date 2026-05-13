@@ -28,9 +28,9 @@ export default function Notes() {
       <div className="prose-wrap">
         <nav className="prose-nav">
           <Link to={backTo}>← {backLabel}</Link>
-          <span>
-            <Link to={`/slide/${id}`}>слайд {id} →</Link>
-          </span>
+          <Link to={`/slide/${id}`} className="prose-nav__back-to-slide">
+            к&nbsp;слайду {id} →
+          </Link>
         </nav>
 
         {source ? (

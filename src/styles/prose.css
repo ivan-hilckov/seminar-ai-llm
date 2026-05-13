@@ -35,6 +35,23 @@
 }
 .prose-nav a:hover { color: var(--ink); }
 
+/* Подсвечиваем правую часть: возврат к слайду — основное действие на странице заметок. */
+.prose-nav__back-to-slide {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink) !important;
+  background: #fff;
+  transition: background 80ms ease-out, border-color 80ms ease-out;
+}
+.prose-nav__back-to-slide:hover {
+  background: var(--hi);
+  border-color: var(--mute-2);
+}
+
 .prose {
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--ink);
