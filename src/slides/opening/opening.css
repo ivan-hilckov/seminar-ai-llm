@@ -264,3 +264,8 @@
   min-width: 72px;
   align-self: baseline;
 }
+
+/* Приглушённый режим — для целей секций, которые ещё впереди */
+.is-muted .s03-title { color: var(--mute); }
+.is-muted .s03-row { color: var(--mute); }
+.is-muted .s03-row .idx { color: var(--mute-2); }
