@@ -5,8 +5,8 @@ export default function Slide51() {
     <ESlide
       num="51"
       variant="momentum"
-      phrase="Доверяй, но проверяй"
-      partLabel="Часть III"
+      phrase="Доверяй — но проверяй"
+      anchor="Обязательно для фактов, цитат и цифр"
     />
   );
 }
