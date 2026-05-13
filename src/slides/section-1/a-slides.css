@@ -52,3 +52,23 @@
   margin: 0;
   color: var(--ink);
 }
+
+/* При наличии subtitle поднимаем заголовок, чтобы освободить место */
+.a-slide--has-subtitle .a-slide__title {
+  bottom: 220px;
+}
+
+.a-slide__subtitle {
+  position: absolute;
+  right: 96px;
+  bottom: 140px;
+  width: 900px;
+  text-align: right;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.002em;
+  color: var(--mute);
+  margin: 0;
+}

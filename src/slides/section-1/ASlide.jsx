@@ -9,15 +9,18 @@ import './a-slides.css';
  *  — Тонкая линия сверху
  *  — Мета (mono) слева внизу
  *  — Заголовок справа внизу
+ *  — Опциональная подпись (subtitle) под заголовком, мельче, серая
  */
-export default function ASlide({ num, roman, meta, title }) {
+export default function ASlide({ num, roman, meta, title, subtitle }) {
+  const cls = subtitle ? 'a-slide a-slide--has-subtitle' : 'a-slide';
   return (
-    <Stage label={`${num} · A`} className="a-slide">
+    <Stage label={`${num} · A`} className={cls}>
       <Meta num={num} type="A" />
       <div className="a-slide__rule" />
       <div className="a-slide__roman">{roman}</div>
       <div className="a-slide__meta">{meta}</div>
       <h1 className="a-slide__title">{title}</h1>
+      {subtitle && <p className="a-slide__subtitle">{subtitle}</p>}
       <Foot />
     </Stage>
   );
