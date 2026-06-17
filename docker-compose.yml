@@ -1,0 +1,41 @@
+# svc-what-is-llm — seminar slides (Vite SPA) built and served by nginx, routed
+# via Traefik. No host ports: routing comes from the Traefik labels below
+# (domain from ${SERVICE_DOMAIN}, set in Dokploy → Environment). Pin images.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    expose:
+      - "80"                 # backend port (loadbalancer.server.port=80); never add `ports:`
+    deploy:
+      resources:
+        limits:
+          memory: 64M        # nginx static is tiny; host has no swap
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO /dev/null http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    # Traefik routing — Dokploy does NOT auto-wire Compose, so the labels live here.
+    # Domain comes from env (Dokploy → Environment) to keep the blueprint
+    # machine-agnostic. The websecure entrypoint's default certResolver issues the
+    # Let's Encrypt cert. SERVICE_NAME must be unique per machine.
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)
+      - traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure
+      - traefik.http.routers.${SERVICE_NAME}.tls.certresolver=letsencrypt
+      - traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80
+      # HTTP → HTTPS redirect
+      - traefik.http.routers.${SERVICE_NAME}-web.rule=Host(`${SERVICE_DOMAIN}`)
+      - traefik.http.routers.${SERVICE_NAME}-web.entrypoints=web
+      - traefik.http.routers.${SERVICE_NAME}-web.middlewares=${SERVICE_NAME}-redirect
+      - traefik.http.middlewares.${SERVICE_NAME}-redirect.redirectscheme.scheme=https
+
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true           # created by Dokploy — do not redefine

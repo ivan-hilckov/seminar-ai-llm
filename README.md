@@ -65,6 +65,39 @@ pnpm build           # → dist/ (статика)
 pnpm preview         # локальный smoke-test сборки
 ```
 
+## Деплой (Dokploy)
+
+Слайды деплоятся на сервер `velvetnet-1` через [Dokploy](https://dokploy.com) +
+Traefik с автоматическим HTTPS. Конфиг лежит в этом же репозитории:
+
+- `Dockerfile` — multi-stage: сборка на `node:22-alpine` (`pnpm build`) → отдача
+  `dist/` из `nginx:1.27-alpine`.
+- `nginx.conf` — SPA-fallback `try_files … /index.html` (без него прямой заход на
+  `/slide/12` отдал бы 404) + кэш хэшированных ассетов.
+- `docker-compose.yml` — `build: .`, без host-портов, роутинг через Traefik-лейблы
+  (домен из `${SERVICE_DOMAIN}`), сеть `dokploy-network`.
+- `.env.example` — `SERVICE_DOMAIN` / `SERVICE_NAME` (задаются в Dokploy, не в git).
+
+Внутренние материалы (`stuff/`, `public/stuff`) исключены из образа через
+`.dockerignore` и публично не отдаются. Подробности и обоснование решения —
+в `CONTEXT.md` и `docs/adr/0001-deploy-via-dokploy-compose-in-repo.md`.
+
+### Локальный smoke-test образа
+
+```bash
+docker build -t svc-what-is-llm .
+docker run --rm -p 8080:80 svc-what-is-llm   # → http://localhost:8080/
+# -p только для локальной проверки; в docker-compose.yml host-портов нет
+```
+
+### Деплой на Dokploy
+
+1. **Create → Compose** в проекте Dokploy.
+2. **Source** = этот репозиторий, ветка `main`, Compose Path `docker-compose.yml`.
+3. **Environment** → `SERVICE_DOMAIN=llm.heliotik.xyz`, `SERVICE_NAME=llm`.
+4. **Deploy.** Traefik поднимет роутер и выпишет Let's Encrypt-сертификат за
+   ~30–60 с. Push в `main` → автопересборка.
+
 ## Что готово
 
 - [x] Инфраструктура (Vite, React Router, markdown viewer)

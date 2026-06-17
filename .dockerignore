@@ -1,0 +1,16 @@
+# Keep the build context small and the image clean.
+.git
+node_modules
+dist
+
+# Internal source materials — referenced only for editing, never served.
+# public/stuff is a symlink → ../stuff; excluding both keeps it out of dist
+# and avoids a dangling symlink during the Vite build.
+stuff
+public/stuff
+
+# Local project docs / notes that don't belong in the image.
+docs
+.yoke
+CONTEXT.md
+WORKLOG.md
