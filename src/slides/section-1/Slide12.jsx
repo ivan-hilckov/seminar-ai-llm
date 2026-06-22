@@ -5,167 +5,220 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '12',
   type: 'C',
-  title: 'Автодополнение в поиске',
-  subblock: '1.2 Автозаполнение',
+  title: 'Линия GPT',
+  subblock: '1.3 От Transformer до GPT-3',
 };
 
 /**
- * Слайд 12 · Автодополнение в поиске
- * Реконструкция поисковой строки с введённым «лесные пожар»
- * и выпадающим списком из 4 подсказок: чёрная типовая часть
- * + серый «достроенный хвост».
+ * Слайд 18 · Линия GPT
+ * График на логарифмической шкале: три точки (GPT-1, GPT-2, GPT-3)
+ * от 100M до 1T параметров за 2018–2020. Монохромно, без --accent.
  */
 export default function Slide12() {
-  const suggestions = [
-    { tail: 'ы в России 2025' },
-    { tail: 'ы статистика' },
-    { tail: 'ы причины' },
-    { tail: 'ы Якутия' },
+  const PLOT_LEFT = 130;
+  const PLOT_RIGHT = 1020;
+  const PLOT_TOP = 70;
+  const PLOT_BOTTOM = 620;
+
+  // Логарифмическая шкала: 1e8 (100M) внизу, 1e12 (1T) вверху.
+  const yForLog = (logVal) => {
+    const t = (logVal - 8) / (12 - 8);
+    return PLOT_BOTTOM - t * (PLOT_BOTTOM - PLOT_TOP);
+  };
+
+  const gridLines = [
+    { logVal: 8, label: '100M' },
+    { logVal: 9, label: '1B' },
+    { logVal: 10, label: '10B' },
+    { logVal: 11, label: '100B' },
+    { logVal: 12, label: '1T' },
   ];
-  const TYPED = 'лесные пожар';
+
+  const points = [
+    {
+      x: 230,
+      year: '2018',
+      name: 'GPT-1 · 117M',
+      subtitle: 'домашняя библиотека',
+      value: 1.17e8,
+      r: 7,
+    },
+    {
+      x: 545,
+      year: '2019',
+      name: 'GPT-2 · 1.5B',
+      subtitle: 'городская библиотека',
+      value: 1.5e9,
+      r: 7,
+    },
+    {
+      x: 860,
+      year: '2020',
+      name: 'GPT-3 · 175B',
+      subtitle: 'национальная библиотека',
+      value: 1.75e11,
+      r: 10,
+    },
+  ];
+
+  const pts = points.map((p) => ({ ...p, y: yForLog(Math.log10(p.value)) }));
 
   return (
-    <Stage label="12 Автодополнение в поиске">
+    <Stage label="12 Линия GPT">
       <Meta num="12" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1080 520"
+          viewBox="0 0 1080 720"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: 1080, height: 'auto' }}
-          aria-label="Поисковая строка с введённым «лесные пожар» и выпадающими подсказками с серыми достроенными хвостами"
+          aria-label="Рост числа параметров: GPT-1 (117M, 2018), GPT-2 (1.5B, 2019), GPT-3 (175B, 2020) на логарифмической шкале"
         >
-          {/* ── Поисковая строка ───────────────────────────────── */}
-          <g>
-            <rect
-              x="20"
-              y="40"
-              width="1040"
-              height="80"
-              rx="40"
-              ry="40"
-              fill="none"
+          {/* ─── Горизонтальные направляющие ───────────────────── */}
+          {gridLines.map((g) => (
+            <line
+              key={`grid-${g.label}`}
+              x1={PLOT_LEFT}
+              y1={yForLog(g.logVal)}
+              x2={PLOT_RIGHT}
+              y2={yForLog(g.logVal)}
               stroke="#D9D7CF"
               strokeWidth="1"
             />
+          ))}
 
-            {/* Нейтральный текстовый «логотип» Яндекса — без цвета и фирменного шрифта */}
+          {/* ─── Подписи оси Y ─────────────────────────────────── */}
+          {gridLines.map((g) => (
             <text
-              x="44"
-              y="90"
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="600"
-              fontSize="28"
-              fill="#1A1A1A"
+              key={`ylabel-${g.label}`}
+              x={PLOT_LEFT - 16}
+              y={yForLog(g.logVal) + 6}
+              fontFamily="IBM Plex Mono, monospace"
+              fontSize="18"
+              textAnchor="end"
+              fill="#9A9893"
+              style={{ fontFeatureSettings: '"tnum" 1, "lnum" 1' }}
             >
-              Яндекс
+              {g.label}
             </text>
+          ))}
 
-            {/* Разделитель между «логотипом» и инпутом */}
-            <line x1="172" y1="58" x2="172" y2="102" stroke="#ECEAE3" strokeWidth="1" />
+          {/* ─── Оси ───────────────────────────────────────────── */}
+          <line
+            x1={PLOT_LEFT}
+            y1={PLOT_TOP}
+            x2={PLOT_LEFT}
+            y2={PLOT_BOTTOM}
+            stroke="#9A9893"
+            strokeWidth="1"
+          />
+          <line
+            x1={PLOT_LEFT}
+            y1={PLOT_BOTTOM}
+            x2={PLOT_RIGHT}
+            y2={PLOT_BOTTOM}
+            stroke="#9A9893"
+            strokeWidth="1"
+          />
 
-            {/* Введённый пользователем текст */}
+          {/* ─── Тики оси X ────────────────────────────────────── */}
+          {pts.map((p) => (
+            <line
+              key={`xtick-${p.year}`}
+              x1={p.x}
+              y1={PLOT_BOTTOM}
+              x2={p.x}
+              y2={PLOT_BOTTOM + 7}
+              stroke="#9A9893"
+              strokeWidth="1"
+            />
+          ))}
+
+          {/* ─── Подписи оси X (годы) ──────────────────────────── */}
+          {pts.map((p) => (
             <text
-              x="200"
-              y="90"
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="400"
-              fontSize="28"
-              fill="#1A1A1A"
+              key={`xlabel-${p.year}`}
+              x={p.x}
+              y={PLOT_BOTTOM + 36}
+              fontFamily="IBM Plex Mono, monospace"
+              fontSize="20"
+              textAnchor="middle"
+              fill="#6B6B68"
+              style={{ fontFeatureSettings: '"tnum" 1, "lnum" 1' }}
             >
-              лесные пожар
+              {p.year}
             </text>
+          ))}
 
-            {/* Курсор после оборванного слова */}
-            <rect x="376" y="62" width="2" height="36" fill="#1A1A1A" />
+          {/* ─── Соединяющая линия ─────────────────────────────── */}
+          <polyline
+            points={pts.map((p) => `${p.x},${p.y}`).join(' ')}
+            fill="none"
+            stroke="#1A1A1A"
+            strokeWidth="1.5"
+          />
 
-            {/* Круглая кнопка поиска с лупой */}
-            <g transform="translate(1020, 80)">
-              <circle cx="0" cy="0" r="26" fill="none" stroke="#D9D7CF" strokeWidth="1" />
-              <circle cx="-3" cy="-3" r="8" fill="none" stroke="#6B6B68" strokeWidth="1.6" />
-              <line
-                x1="3"
-                y1="3"
-                x2="10"
-                y2="10"
-                stroke="#6B6B68"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
+          {/* ─── Точки + подписи ───────────────────────────────── */}
+          {pts.map((p) => (
+            <g key={`pt-${p.year}`}>
+              <circle cx={p.x} cy={p.y} r={p.r} fill="#1A1A1A" />
+              <text
+                x={p.x}
+                y={p.y - 42}
+                fontFamily="IBM Plex Mono, monospace"
+                fontWeight="500"
+                fontSize="22"
+                textAnchor="middle"
+                fill="#1A1A1A"
+                style={{ fontFeatureSettings: '"tnum" 1, "lnum" 1' }}
+              >
+                {p.name}
+              </text>
+              <text
+                x={p.x}
+                y={p.y - 20}
+                fontFamily="IBM Plex Sans, sans-serif"
+                fontWeight="400"
+                fontSize="18"
+                textAnchor="middle"
+                fill="#6B6B68"
+              >
+                {p.subtitle}
+              </text>
             </g>
-          </g>
-
-          {/* ── Выпадающий список подсказок ─────────────────────── */}
-          <g>
-            <rect
-              x="20"
-              y="148"
-              width="1040"
-              height="300"
-              rx="24"
-              ry="24"
-              fill="none"
-              stroke="#D9D7CF"
-              strokeWidth="1"
-            />
-
-            {suggestions.map((s, i) => {
-              const rowCenter = 185 + i * 74;
-              const isLast = i === suggestions.length - 1;
-              return (
-                <g key={i}>
-                  {/* Иконка лупы слева */}
-                  <g transform={`translate(76, ${rowCenter})`}>
-                    <circle cx="-3" cy="-3" r="7" fill="none" stroke="#9A9893" strokeWidth="1.4" />
-                    <line
-                      x1="2"
-                      y1="2"
-                      x2="8"
-                      y2="8"
-                      stroke="#9A9893"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                    />
-                  </g>
-
-                  {/* Текст подсказки: типовая часть чёрным, хвост серым */}
-                  <text
-                    x="120"
-                    y={rowCenter + 9}
-                    fontFamily="IBM Plex Sans, sans-serif"
-                    fontWeight="400"
-                    fontSize="26"
-                    fill="#1A1A1A"
-                  >
-                    {TYPED}
-                    <tspan fill="#6B6B68">{s.tail}</tspan>
-                  </text>
-
-                  {/* Разделитель между строками (кроме последней) */}
-                  {!isLast && (
-                    <line
-                      x1="64"
-                      y1={rowCenter + 37}
-                      x2="1016"
-                      y2={rowCenter + 37}
-                      stroke="#ECEAE3"
-                      strokeWidth="1"
-                    />
-                  )}
-                </g>
-              );
-            })}
-          </g>
+          ))}
         </svg>
       </div>
 
       <div className="right">
-        <div className="sub">1.2 Автозаполнение</div>
+        <div className="sub">1.3 От Transformer до GPT-3</div>
         <h2 className="title" style={{ fontSize: 56, lineHeight: 1.1 }}>
-          Автодополнение в&nbsp;поиске
+          Линия GPT
         </h2>
-        <p className="cap" style={{ fontSize: 32, lineHeight: 1.25, marginTop: 24 }}>
-          Машина достраивает не&nbsp;только письма — и&nbsp;поисковые запросы
+        <p
+          style={{
+            margin: '24px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontWeight: 500,
+            fontSize: 44,
+            lineHeight: 1.2,
+            letterSpacing: '0.01em',
+            color: 'var(--ink)',
+            fontFeatureSettings: '"tnum" 1, "lnum" 1',
+          }}
+        >
+          117M → 1.5B → 175B
+        </p>
+        <p
+          style={{
+            margin: '24px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: 16,
+            letterSpacing: '0.06em',
+            color: 'var(--mute)',
+          }}
+        >
+          2018 → 2019 → 2020 · каждая модель × 10
         </p>
       </div>
 

@@ -9,7 +9,7 @@
 ```bash
 mise install         # подтянуть node + pnpm по .mise.toml
 pnpm install
-pnpm dev             # http://localhost:5173/
+pnpm dev             # http://localhost:5190/
 ```
 
 Если mise не установлен — `curl https://mise.run | sh` или см. https://mise.jdx.dev/.
@@ -108,3 +108,5 @@ docker run --rm -p 8080:80 svc-what-is-llm   # → http://localhost:8080/
 - [ ] Открытие (01–05)
 
 См. `CLAUDE.md` для деталей и приоритетов.
+
+---

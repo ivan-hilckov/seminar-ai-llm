@@ -1,101 +1,52 @@
-import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide64.css';
+import './part-v.css';
 
 export const meta = {
   id: '64',
-  type: 'D',
-  title: 'ChatGPT · Claude · Gemini · DeepSeek',
-  subblock: '4.1 Сервисы LLM',
+  type: 'C',
+  title: 'Шаблон · Литобзор',
+  subblock: '5.4 Четыре шаблона',
 };
 
-/**
- * Слайд 64 · Четыре больших сервиса
- * D-сравнение с 4 колонками. Структура каждой колонки одинакова: название
- * сервиса крупно сверху, под ним 3 строки «лейбл — значение» по общим осям
- * (Кто / Сильная сторона / Особенность). Без логотипов, без бренд-цветов.
- */
-
-const AXES = [
-  {
-    label: 'Кто',
-    values: [
-      'OpenAI · ноябрь 2022',
-      'Anthropic · 2023',
-      'Google · 2023',
-      'DeepSeek · Китай · 2024',
-    ],
-  },
-  {
-    label: 'Сильная сторона',
-    values: [
-      'широкий универсал, лучшая экосистема плагинов и кастомных GPT',
-      'длинные тексты, аккуратная работа с документами, разметка',
-      'интеграция с поиском Google, работа с большими файлами',
-      'сильная математика и код, открытые веса',
-    ],
-  },
-  {
-    label: 'Особенность',
-    values: [
-      'массовое распространение, знаком большинству',
-      'аккуратный тон, осторожен с фактами',
-      'встроен в Google-сервисы (Docs, Gmail)',
-      'дёшево или бесплатно, доступен без зарубежной карты',
-    ],
-  },
+const PROMPT = [
+  ['Роль',     'Ты научный консультант по {область — например, лесному хозяйству}.'],
+  ['Задача',   'Дай короткий обзор исследований по теме: {ваша тема одним предложением}.'],
+  ['Контекст', 'Период — {последние N лет}. Регион — {если применимо}. Журналы, которые стоит учесть: {список или «основные в области»}.'],
+  ['Формат',   '5–8 пунктов. По каждому: тема, ключевой вывод, авторы (если знаешь — иначе «авторы не уверены»).'],
+  ['Огранич.', 'Если не уверен в авторстве или дате — пиши «не уверен». Не выдумывай DOI и ссылки. В конце — 2–3 направления, которые имеет смысл искать дальше.'],
 ];
 
-const SERVICES = ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'];
-
-function Column({ index, title, position }) {
-  return (
-    <div className={`col ${position}`}>
-      <div className="ctitle">{title}</div>
-      <div className="s64-axes">
-        {AXES.map((a) => (
-          <div className="s64-axis" key={a.label}>
-            <div className="s64-axis-label">{a.label}</div>
-            <p className="s64-axis-text">{a.values[index]}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
+/**
+ * Слайд 85 · Шаблон · Литобзор
+ * C-слайд. Слева — готовый промт-шаблон со слотами {в фигурных скобках}.
+ */
 export default function Slide64() {
   return (
-    <Stage label="64 Четыре больших сервиса">
-      <Meta num="64" type="D" />
+    <Stage label="64 Шаблон · Литобзор">
+      <Meta num="64" type="C" />
 
-      <div className="s64-header">
-        <div className="sub">4.1 Четыре сервиса</div>
-        <h2 className="title">Четыре больших сервиса</h2>
-        <p className="lead">Похожие возможности, разные сильные стороны</p>
+      <div className="pv-stack">
+        <div className="pv-card">
+          <div className="pv-card-label">ПРОМТ-ШАБЛОН</div>
+          <div className="pv-grid-prompt">
+            {PROMPT.map(([label, text]) => (
+              <div key={label} className="pv-grid-prompt-row">
+                <div className="pv-grid-prompt-lbl">[{label}]</div>
+                <div className="pv-grid-prompt-text">{text}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="s64-cols">
-        {SERVICES.map((name, i) => {
-          const position =
-            i === 0 ? 'first' : i === SERVICES.length - 1 ? 'last' : '';
-          return (
-            <Fragment key={name}>
-              <Column index={i} title={name} position={position} />
-              {i < SERVICES.length - 1 && <div className="vrule" />}
-            </Fragment>
-          );
-        })}
-      </div>
-
-      <div className="s64-hrule" />
-
-      <div className="s64-summary">
-        <p>
-          Один и&nbsp;тот&nbsp;же тип инструмента — разные акценты. Выбор зависит
-          от&nbsp;задачи и&nbsp;доступа.
+      <div className="pv-right">
+        <div className="sub">5.4 Шаблоны</div>
+        <h2 className="title">Шаблон · Литобзор</h2>
+        <p className="cap">
+          Никогда не&nbsp;использовать как готовый обзор. Только как карту —
+          куда смотреть. Каждую ссылку и&nbsp;автора проверять самостоятельно
         </p>
       </div>
 

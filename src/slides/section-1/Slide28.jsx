@@ -1,79 +1,67 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide28.css';
 
 export const meta = {
   id: '28',
-  type: 'D',
-  title: 'Обычная модель vs думающая',
-  subblock: '1.5 Думающие модели',
+  type: 'B',
+  title: 'Близость = смысл',
+  subblock: '2.1 Векторы смыслов',
 };
 
 /**
- * Слайд 28 · Обычная модель vs думающая
- * D-шаблон по образцу Slide10. Две равноправные колонки разделены 1px-линией.
- * Каждая содержит подзаголовок-метафору и три параллельные оси сравнения
- * (Поведение / Характер / Назначение). Снизу — summary через 1px-линию.
+ * Слайд 36 · Близость = смысл
+ * Закрывающий B-слайд подблока 2.1 — без заголовка.
+ * Только мета-тег «ВЕКТОРЫ СМЫСЛОВ» сверху и тезис по центру.
+ * Знак `=` — обычный --ink, не --accent (он закреплён за keystone слайдом 32).
  */
-
-const AXES = [
-  {
-    label: 'Поведение',
-    left: 'Отвечает сразу',
-    right: 'Сначала пишет черновик',
-  },
-  {
-    label: 'Характер',
-    left: 'Быстрый, без проработки',
-    right: 'Медленный, последовательный',
-  },
-  {
-    label: 'Назначение',
-    left: 'Для коротких вопросов',
-    right: 'Для сложных задач',
-  },
-];
-
-function AxisColumn({ side }) {
-  return (
-    <div className="s28-axes">
-      {AXES.map((a) => (
-        <div key={a.label}>
-          <div className="s28-axis-label">{a.label}</div>
-          <p className="s28-axis-text">{a[side]}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export default function Slide28() {
   return (
-    <Stage label="28 Обычная модель vs думающая">
-      <Meta num="28" type="D" />
+    <Stage label="28 Близость = смысл">
+      <Meta num="28" type="B" />
 
-      <div className="s28-header">
-        <div className="sub">1.5 Думающие модели</div>
-        <h2 className="title">Обычная модель vs думающая</h2>
+      {/* Мета-тег подблока (top-left) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        Векторы смыслов
       </div>
 
-      <div className="s28-cols">
-        <div className="col">
-          <div className="ctitle">Студент-выскочка</div>
-          <AxisColumn side="left" />
-        </div>
-        <div className="vrule" />
-        <div className="col right-col">
-          <div className="ctitle">Студент с&nbsp;черновиком</div>
-          <AxisColumn side="right" />
-        </div>
-      </div>
-
-      <div className="s28-hrule" />
-
-      <div className="s28-summary">
-        <p>Разные режимы — разные задачи</p>
+      {/* Центральный тезис */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 500,
+            fontSize: 56,
+            lineHeight: 1.1,
+            color: 'var(--ink)',
+            margin: 0,
+            letterSpacing: '-0.005em',
+            textWrap: 'nowrap',
+          }}
+        >
+          Близость = смысл
+        </p>
       </div>
 
       <Foot />

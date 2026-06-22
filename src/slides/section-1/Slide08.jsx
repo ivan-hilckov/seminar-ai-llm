@@ -5,80 +5,174 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '08',
   type: 'C',
-  title: 'Как работал Т9',
-  subblock: '1.1 Т9 на Nokia',
+  title: '2017: Transformer · Attention Is All You Need',
+  subblock: '1.3 От Transformer до GPT-3',
 };
 
+/**
+ * Слайд 14 · 2017: Transformer · Attention Is All You Need
+ * Стилизованная титульная страница arXiv-препринта.
+ * Главный визуальный акцент — заголовок статьи и дата 2017.
+ */
 export default function Slide08() {
+  // Имитация абстракта: 6 прямоугольников разной длины, серым.
+  const abstractLines = [
+    { x: 100, w: 880 },
+    { x: 100, w: 920 },
+    { x: 100, w: 820 },
+    { x: 100, w: 900 },
+    { x: 100, w: 780 },
+    { x: 100, w: 540 },
+  ];
+
   return (
-    <Stage label="08 Как работал Т9">
+    <Stage label="08 Transformer · Attention Is All You Need">
       <Meta num="08" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1080 260"
+          viewBox="0 0 1080 780"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: 1080, height: 'auto' }}
-          aria-label="Схема работы Т9: клавиши, словарь, экран"
+          aria-label="Стилизованная титульная страница arXiv-препринта Attention Is All You Need, 12 июня 2017"
         >
-          {/* Block 1: КЛАВИШИ */}
-          <g>
-            <rect x="0.5" y="0.5" width="279" height="259" rx="8" ry="8" fill="none" stroke="#D9D7CF" strokeWidth="1" />
-            <text x="24" y="46" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.1em" fill="#6B6B68">КЛАВИШИ</text>
-            <text
-              x="140"
-              y="168"
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="500"
-              fontSize="48"
-              textAnchor="middle"
-              letterSpacing="0.06em"
-              style={{ fontFeatureSettings: '"tnum" 1, "lnum" 1' }}
-              fill="#1A1A1A"
-            >
-              7 4 4 3 3 6
-            </text>
-          </g>
+          {/* Рамка страницы */}
+          <rect
+            x="20.5"
+            y="20.5"
+            width="1039"
+            height="739"
+            rx="6"
+            ry="6"
+            fill="none"
+            stroke="#D9D7CF"
+            strokeWidth="1"
+          />
 
-          <g stroke="#1A1A1A" fill="#1A1A1A">
-            <line x1="286" y1="130" x2="334" y2="130" strokeWidth="1" />
-            <polygon points="334,126 334,134 340,130" stroke="none" />
-          </g>
+          {/* Шапка arXiv: идентификатор слева, дата справа */}
+          <text
+            x="100"
+            y="106"
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="16"
+            letterSpacing="0.06em"
+            fill="#6B6B68"
+          >
+            arXiv:1706.03762 [cs.CL]
+          </text>
+          <text
+            x="980"
+            y="106"
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="16"
+            letterSpacing="0.06em"
+            textAnchor="end"
+            fill="#6B6B68"
+          >
+            12 Jun 2017
+          </text>
 
-          {/* Block 2: СЛОВАРЬ */}
-          <g>
-            <rect x="340.5" y="0.5" width="399" height="259" rx="8" ry="8" fill="none" stroke="#D9D7CF" strokeWidth="1" />
-            <text x="364" y="46" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.1em" fill="#6B6B68">СЛОВАРЬ</text>
+          {/* Тонкая разделительная линия под шапкой */}
+          <line x1="100" y1="128" x2="980" y2="128" stroke="#ECEAE3" strokeWidth="1" />
 
-            <text x="364" y="111" fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="24" fill="#1A1A1A">прибор</text>
-            <text x="716" y="111" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.06em" textAnchor="end" fill="#6B6B68">редкое</text>
+          {/* Главный заголовок статьи */}
+          <text
+            x="540"
+            y="252"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="600"
+            fontSize="64"
+            textAnchor="middle"
+            fill="#1A1A1A"
+          >
+            Attention Is All You Need
+          </text>
 
-            <rect x="352" y="135" width="376" height="40" rx="4" ry="4" fill="#F0EEE8" />
-            <text x="364" y="163" fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="24" fill="#1A1A1A">привет</text>
-            <text x="716" y="163" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.06em" textAnchor="end" fill="#6B6B68">частое</text>
+          {/* Авторы — две строки по четыре */}
+          <text
+            x="540"
+            y="332"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="22"
+            textAnchor="middle"
+            fill="#6B6B68"
+          >
+            Ashish Vaswani · Noam Shazeer · Niki Parmar · Jakob Uszkoreit
+          </text>
+          <text
+            x="540"
+            y="364"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="22"
+            textAnchor="middle"
+            fill="#6B6B68"
+          >
+            Llion Jones · Aidan N. Gomez · Łukasz Kaiser · Illia Polosukhin
+          </text>
 
-            <text x="364" y="215" fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="24" fill="#1A1A1A">пример</text>
-            <text x="716" y="215" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.06em" textAnchor="end" fill="#6B6B68">редкое</text>
-          </g>
+          {/* Аффилиации — одной строкой, мельче и светлее */}
+          <text
+            x="540"
+            y="406"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="16"
+            textAnchor="middle"
+            fill="#9A9893"
+          >
+            Google Brain · Google Research · University of Toronto
+          </text>
 
-          <g stroke="#1A1A1A" fill="#1A1A1A">
-            <line x1="746" y1="130" x2="794" y2="130" strokeWidth="1" />
-            <polygon points="794,126 794,134 800,130" stroke="none" />
-          </g>
+          {/* Подзаголовок Abstract */}
+          <text
+            x="100"
+            y="486"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="18"
+            letterSpacing="0.18em"
+            fill="#6B6B68"
+          >
+            ABSTRACT
+          </text>
 
-          {/* Block 3: НА ЭКРАНЕ */}
-          <g>
-            <rect x="800.5" y="0.5" width="279" height="259" rx="8" ry="8" fill="none" stroke="#D9D7CF" strokeWidth="1" />
-            <text x="824" y="46" fontFamily="IBM Plex Mono, monospace" fontSize="14" letterSpacing="0.1em" fill="#6B6B68">НА ЭКРАНЕ</text>
-            <text x="940" y="168" fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="48" textAnchor="middle" fill="#1A1A1A">привет</text>
-          </g>
+          {/* Имитация абстракта — серые полосы разной длины */}
+          {abstractLines.map((l, i) => (
+            <rect
+              key={i}
+              x={l.x}
+              y={510 + i * 24}
+              width={l.w}
+              height="8"
+              rx="2"
+              ry="2"
+              fill="#D9D7CF"
+            />
+          ))}
         </svg>
       </div>
 
       <div className="right">
-        <div className="sub">1.1 Т9 на Nokia</div>
-        <h2 className="title">Как работал Т9</h2>
-        <p className="cap">Несколько слов на одну комбинацию. Самое частое выигрывает.</p>
+        <div className="sub">1.3 От Transformer до GPT-3</div>
+        <h2 className="title" style={{ fontSize: 56, lineHeight: 1.1 }}>
+          2017:&nbsp;Transformer
+        </h2>
+        <p className="cap" style={{ fontSize: 32, lineHeight: 1.25, marginTop: 24 }}>
+          Архитектура, на&nbsp;которой построены все современные модели — от&nbsp;GPT-3 до&nbsp;ChatGPT
+        </p>
+        <p
+          style={{
+            margin: '20px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: 14,
+            letterSpacing: '0.08em',
+            color: 'var(--mute-2)',
+          }}
+        >
+          arXiv:1706.03762 · 12 Jun 2017
+        </p>
       </div>
 
       <Foot />

@@ -1,10 +1,10 @@
-.s10-header {
+.s16-header {
   position: absolute;
   left: 96px;
   top: 96px;
   width: 1728px;
 }
-.s10-header .sub {
+.s16-header .sub {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 16px;
   color: var(--mute);
@@ -13,7 +13,7 @@
   margin: 0;
   line-height: 1;
 }
-.s10-header .title {
+.s16-header .title {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 36px;
@@ -22,21 +22,30 @@
   color: var(--ink);
   margin: 24px 0 0 0;
 }
+.s16-header .subtitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--mute);
+  margin: 12px 0 0 0;
+  letter-spacing: -0.002em;
+}
 
-.s10-cols {
+.s16-cols {
   position: absolute;
   left: 96px;
-  top: 242px;
+  top: 260px;
   width: 1728px;
-  height: 533px;
+  height: 740px;
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
 }
-.s10-cols .col { padding: 0 64px 0 0; box-sizing: border-box; }
-.s10-cols .col.right-col { padding: 0 0 0 64px; }
-.s10-cols .vrule { background: var(--rule); width: 1px; height: 100%; }
+.s16-cols .col { padding: 24px 64px 0 0; box-sizing: border-box; }
+.s16-cols .col.right-col { padding: 24px 0 0 64px; }
+.s16-cols .vrule { background: var(--rule); width: 1px; height: 100%; }
 
-.s10-cols .ctitle {
+.s16-cols .ctitle {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 32px;
@@ -45,51 +54,21 @@
   margin: 0;
   letter-spacing: -0.005em;
 }
-.s10-cols .csub {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 1;
-  color: var(--mute);
-  margin: 16px 0 0 0;
+
+.s16-cols .clist {
+  margin: 64px 0 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
-.s10-cols .cdesc {
+.s16-cols .clist li {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 32px 0 0 0;
-  max-width: 680px;
-  text-wrap: pretty;
-}
-
-.s10-hrule {
-  position: absolute;
-  left: 96px;
-  top: 787px;
-  width: 1728px;
-  height: 1px;
-  background: var(--rule);
-}
-
-.s10-summary {
-  position: absolute;
-  left: 96px;
-  top: 823px;
-  width: 1728px;
-  height: 161px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.s10-summary p {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
   font-size: 28px;
-  line-height: 1.2;
+  line-height: 1.35;
   color: var(--ink);
-  margin: 0;
-  text-align: center;
-  letter-spacing: -0.005em;
+  max-width: 720px;
+  text-wrap: pretty;
 }

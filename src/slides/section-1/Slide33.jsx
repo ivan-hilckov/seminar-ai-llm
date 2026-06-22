@@ -4,14 +4,9 @@ export default function Slide33() {
   return (
     <ASlide
       num="33"
-      roman="II"
-      title={
-        <>
-          Как это работает
-          <br />
-          внутри
-        </>
-      }
+      roman="III"
+      meta="Приватность · Контекст · Галлюцинации"
+      title="Особенности в работе"
     />
   );
 }

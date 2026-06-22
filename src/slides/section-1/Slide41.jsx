@@ -5,20 +5,33 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '41',
   type: 'B',
-  title: 'Модель обучают один раз',
-  subblock: '2.3 Обучение и заморозка',
+  title: 'AI берёт на себя задачи, не роль',
+  subblock: '3.5 Границы применения',
 };
 
 /**
- * Слайд 41 · Модель обучают один раз
- * B-шаблон с anchor: заголовок сверху, крупный тезис в центре,
- * меньшая поясняющая фраза снизу. Без мета-тега подблока, без --accent
- * (он закреплён за keystone слайдом 32). Техническое обоснование
- * для закрывающего тезиса 42 «Ваши вопросы её не меняют».
+ * Слайд 53 · AI берёт на себя задачи, не роль
+ * B-шаблон с расширенным центральным блоком: заголовок сверху, три
+ * равноценные строки в центре. Между строкой 2 и строкой 3 — увеличенный
+ * отступ, чтобы Excel-фраза читалась как отдельный смысловой абзац.
+ * Без мета-метки подблока (как 49–51), без --accent, без иллюстраций.
  */
+
+const LINE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  fontSize: 36,
+  lineHeight: 1.4,
+  color: 'var(--ink)',
+  letterSpacing: '-0.005em',
+  margin: 0,
+  textWrap: 'pretty',
+  maxWidth: 1500,
+};
+
 export default function Slide41() {
   return (
-    <Stage label="41 Модель обучают один раз">
+    <Stage label="41 AI берёт на себя задачи, не роль">
       <Meta num="41" type="B" />
 
       {/* Заголовок сверху */}
@@ -37,51 +50,29 @@ export default function Slide41() {
           color: 'var(--ink)',
         }}
       >
-        Модель обучают один раз
+        AI берёт на&nbsp;себя задачи, не&nbsp;роль
       </h2>
 
-      {/* Тезис — визуальный центр */}
-      <p
+      {/* Центральный блок · три строки, оптически по центру */}
+      <div
         style={{
           position: 'absolute',
           top: '50%',
           transform: 'translateY(-50%)',
           left: 96,
           right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 56,
-          lineHeight: 1.18,
-          letterSpacing: '-0.008em',
-          color: 'var(--ink)',
-          textWrap: 'pretty',
-          maxWidth: 1600,
         }}
       >
-        Обучают провайдеры — месяцы и&nbsp;тысячи GPU.
-        <br />
-        Потом веса фиксируются
-      </p>
-
-      {/* Anchor снизу — отдельно от тезиса, мельче и бледнее */}
-      <p
-        style={{
-          position: 'absolute',
-          bottom: 220,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 28,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Обновление модели = новый релиз
-      </p>
+        <p style={LINE}>
+          30&nbsp;лет назад программы для&nbsp;статистики вызывали те&nbsp;же&nbsp;вопросы.
+        </p>
+        <p style={{ ...LINE, marginTop: 16 }}>
+          Они перераспределили задачи.
+        </p>
+        <p style={{ ...LINE, marginTop: 48 }}>
+          Приход Excel не&nbsp;упразднил бухгалтерию — изменил работу.
+        </p>
+      </div>
 
       <Foot />
     </Stage>

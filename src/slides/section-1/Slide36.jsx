@@ -5,19 +5,19 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '36',
   type: 'B',
-  title: 'Близость = смысл',
-  subblock: '2.1 Векторы смыслов',
+  title: 'Когда Память полезна, когда мешает',
+  subblock: '3.2 Память и контекст в работе',
 };
 
 /**
- * Слайд 36 · Близость = смысл
- * Закрывающий B-слайд подблока 2.1 — без заголовка.
- * Только мета-тег «ВЕКТОРЫ СМЫСЛОВ» сверху и тезис по центру.
- * Знак `=` — обычный --ink, не --accent (он закреплён за keystone слайдом 32).
+ * Слайд 47 · Когда Память полезна, когда мешает
+ * Чистый B без anchor: мета-тег + заголовок-вопрос сверху, парный
+ * антитезис по центру в две строки. Зеркальная структура «Полезна
+ * для X. Мешает для Y.» — главный визуальный приём.
  */
 export default function Slide36() {
   return (
-    <Stage label="36 Близость = смысл">
+    <Stage label="36 Когда Память полезна, когда мешает">
       <Meta num="36" type="B" />
 
       {/* Мета-тег подблока (top-left) */}
@@ -33,10 +33,31 @@ export default function Slide36() {
           color: 'var(--mute)',
         }}
       >
-        Векторы смыслов
+        3.2 Память и контекст в работе
       </div>
 
-      {/* Центральный тезис */}
+      {/* Заголовок чуть ниже мета-тега */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 168,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 36,
+          lineHeight: 1.2,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.005em',
+          maxWidth: 1500,
+          textWrap: 'pretty',
+        }}
+      >
+        Когда Память полезна, когда мешает
+      </h2>
+
+      {/* Центральный тезис: парный антитезис в две строки */}
       <div
         style={{
           position: 'absolute',
@@ -44,23 +65,23 @@ export default function Slide36() {
           right: 96,
           top: '50%',
           transform: 'translateY(-50%)',
-          display: 'flex',
-          justifyContent: 'center',
         }}
       >
         <p
           style={{
             fontFamily: 'IBM Plex Sans, sans-serif',
             fontWeight: 500,
-            fontSize: 56,
-            lineHeight: 1.1,
+            fontSize: 88,
+            lineHeight: 1.18,
             color: 'var(--ink)',
             margin: 0,
-            letterSpacing: '-0.005em',
-            textWrap: 'nowrap',
+            letterSpacing: '-0.012em',
+            textWrap: 'pretty',
           }}
         >
-          Близость = смысл
+          Полезна для предпочтений.
+          <br />
+          Мешает для фактов.
         </p>
       </div>
 

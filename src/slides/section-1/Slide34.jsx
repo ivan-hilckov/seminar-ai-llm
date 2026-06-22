@@ -1,67 +1,85 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './Slide34.css';
 
 export const meta = {
   id: '34',
-  type: 'B',
-  title: 'Откуда модель знает, что «врач» и «доктор» близки?',
-  subblock: '2.1 Векторы смыслов',
+  type: 'D',
+  title: 'Облачно vs локально',
+  subblock: '3.1 Данные и приватность',
 };
 
 /**
- * Слайд 34 · Откуда модель знает, что «врач» и «доктор» — почти одно?
- * Минимальный B-шаблон: только заголовок-вопрос и центральный тезис.
- * Без мета-тега подблока, без anchor, без --accent.
+ * Слайд 45 · Облачно vs локально
+ * D-сравнение по образцу Slide20. Две колонки разделены 1px-линией.
+ * 4 параметра построчно (что происходит / где / кто видит / что нужно).
+ * Без иконок, без названий конкретных сервисов, без --accent.
+ * Архитектурный ответ на вопрос слайда 44.
  */
+
+const AXES = [
+  {
+    label: 'Что происходит',
+    left: 'Запрос уходит на сервер провайдера',
+    right: 'Запрос остаётся на вашем компьютере',
+  },
+  {
+    label: 'Где обрабатывается',
+    left: 'Дата-центр (часто в США или ЕС)',
+    right: 'Ваш процессор или видеокарта',
+  },
+  {
+    label: 'Кто видит',
+    left: 'Провайдер (в логах)',
+    right: 'Никто, кроме вас',
+  },
+  {
+    label: 'Что нужно',
+    left: 'Только интернет',
+    right: 'Мощный компьютер, дисковое место',
+  },
+];
+
+function AxisColumn({ side }) {
+  return (
+    <div className="s45-axes">
+      {AXES.map((a) => (
+        <div key={a.label}>
+          <div className="s45-axis-label">{a.label}</div>
+          <p className="s45-axis-text">{a[side]}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Slide34() {
   return (
-    <Stage label="34 Откуда модель знает, что «врач» и «доктор» — почти одно?">
-      <Meta num="34" type="B" />
+    <Stage label="34 Облачно vs локально">
+      <Meta num="34" type="D" />
 
-      {/* Центральный блок: заголовок-вопрос + тезис */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 400,
-            fontSize: 40,
-            lineHeight: 1.2,
-            color: 'var(--mute)',
-            margin: '0 0 56px 0',
-            letterSpacing: '-0.005em',
-            maxWidth: 1700,
-            textWrap: 'pretty',
-          }}
-        >
-          Откуда модель знает, что „врач“ и „доктор“ — почти одно?
-        </h2>
+      <div className="s45-header">
+        <div className="sub">3.1 Данные и приватность</div>
+        <h2 className="title">Облачно vs локально</h2>
+      </div>
 
-        <p
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 500,
-            fontSize: 80,
-            lineHeight: 1.12,
-            color: 'var(--ink)',
-            margin: 0,
-            letterSpacing: '-0.012em',
-            maxWidth: 1700,
-            textWrap: 'pretty',
-          }}
-        >
-          Слова встречаются в одних и тех же контекстах
-          <br />
-          — значит близки
-        </p>
+      <div className="s45-cols">
+        <div className="col">
+          <div className="ctitle">Облако</div>
+          <AxisColumn side="left" />
+        </div>
+        <div className="vrule" />
+        <div className="col right-col">
+          <div className="ctitle">Локально</div>
+          <AxisColumn side="right" />
+        </div>
+      </div>
+
+      <div className="s45-hrule" />
+
+      <div className="s45-summary">
+        <p>Для чувствительных данных — локально</p>
       </div>
 
       <Foot />

@@ -1,6 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
 import MarkdownView from '../components/MarkdownView.jsx';
-import { sectionOf } from '../slides/registry.js';
 
 /**
  * Все .md-заметки (открытие + Секция 1) импортируются как сырой текст
@@ -19,15 +18,12 @@ function findNote(id) {
 export default function Notes() {
   const { id } = useParams();
   const source = findNote(id);
-  const section = sectionOf(id);
-  const backTo = section === 'opening' ? '/opening' : '/section/1';
-  const backLabel = section === 'opening' ? 'Открытие' : 'Секция 1';
 
   return (
     <div className="prose-page">
       <div className="prose-wrap">
         <nav className="prose-nav">
-          <Link to={backTo}>← {backLabel}</Link>
+          <Link to="/map">← Карта слайдов</Link>
           <Link to={`/slide/${id}`} className="prose-nav__back-to-slide">
             к&nbsp;слайду {id} →
           </Link>

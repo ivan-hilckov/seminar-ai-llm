@@ -6,186 +6,92 @@ import './Slide39.css';
 export const meta = {
   id: '39',
   type: 'D',
-  title: 'Новый чат — новый лист',
-  subblock: '2.2 Контекст и память',
+  title: 'Как выглядит галлюцинация',
+  subblock: '3.4 Точность и галлюцинации',
 };
 
-const BG = '#FAFAF7';
-const HI = '#F0EEE8';
-const RULE = '#D9D7CF';
-const RULE_SOFT = '#ECEAE3';
-const MUTE_2 = '#9A9893';
-const INK = '#1A1A1A';
-
-function Bubble({ x, y, w, h = 52, text, role }) {
-  const isUser = role === 'user';
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={14}
-        fill={isUser ? HI : 'none'}
-        stroke={isUser ? 'none' : RULE}
-        strokeWidth={isUser ? 0 : 1}
-      />
-      <text
-        x={x + 18}
-        y={y + h / 2 + 6}
-        fontFamily="IBM Plex Sans, sans-serif"
-        fontWeight="400"
-        fontSize="18"
-        fill={INK}
-      >
-        {text}
-      </text>
-    </g>
-  );
-}
+/**
+ * Слайд 50 · Как выглядит галлюцинация
+ * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
+ * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
+ * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
+ * единственное использование акцентного цвета вне keystone-слайда 32.
+ * Без мета-метки подблока (для смыслового единства с 49).
+ */
 
 function ChatWindow({ children, ariaLabel }) {
   return (
-    <svg
-      viewBox="0 0 768 440"
-      xmlns="http://www.w3.org/2000/svg"
-      className="cchat"
-      aria-label={ariaLabel}
-    >
-      {/* Окно */}
-      <rect
-        x={0.5}
-        y={0.5}
-        width={767}
-        height={439}
-        rx={12}
-        fill={BG}
-        stroke={RULE}
-        strokeWidth={1}
-      />
-      {/* Заголовок окна */}
-      <g fill={RULE}>
-        <circle cx={24} cy={24} r={4} />
-        <circle cx={40} cy={24} r={4} />
-        <circle cx={56} cy={24} r={4} />
-      </g>
-      <line x1={0} y1={44} x2={768} y2={44} stroke={RULE_SOFT} strokeWidth={1} />
-      {children}
-    </svg>
+    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
+      <div className="s50-chat__bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="s50-chat__body">{children}</div>
+    </div>
   );
 }
 
-/**
- * Слайд 39 · Новый чат — новый лист
- * D-сравнение: слева — чат с накопленной историей («Помнит всё»),
- * справа — тот же интерфейс, пустой, с курсором в поле ввода
- * («Не знает ничего»). Тонкая линия --rule между колонками. Снизу —
- * мелкая моно-приписка про исключение Memory (см. слайд 40).
- */
+function Fake({ children }) {
+  return <span className="s50-fake">{children}</span>;
+}
+
 export default function Slide39() {
   return (
-    <Stage label="39 Новый чат — новый лист">
+    <Stage label="39 Как выглядит галлюцинация">
       <Meta num="39" type="D" />
 
-      <div className="s39-header">
-        <h2 className="title">Новый чат — новый лист</h2>
+      <div className="s50-header">
+        <h2 className="title">Как выглядит галлюцинация</h2>
+        <p className="sub">Два случая — один реальный, один реконструированный</p>
       </div>
 
-      <div className="s39-cols">
-        {/* ── Левая колонка · Помнит всё ── */}
+      <div className="s50-cols">
+        {/* Левая колонка · Mata v. Avianca */}
         <div className="col">
-          <div className="ctitle">Помнит всё</div>
+          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
 
-          <ChatWindow ariaLabel="Окно чата с пятью сообщениями: накопленная история">
-            <Bubble
-              x={344}
-              y={68}
-              w={400}
-              text="Помоги составить план эксперимента"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={132}
-              w={320}
-              text="Конечно. Какая тема и цель?"
-              role="assistant"
-            />
-            <Bubble
-              x={284}
-              y={196}
-              w={460}
-              text="Влияние засушливого периода на хвойные"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={260}
-              w={400}
-              text="Понял. Уточним методику измерения?"
-              role="assistant"
-            />
-            <Bubble
-              x={444}
-              y={324}
-              w={300}
-              text="Какие методы предложишь?"
-              role="user"
-            />
+          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
+            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
+            <p className="bot">
+              1.{' '}
+              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
+              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
+              что положения Монреальской конвенции применяются к…
+            </p>
           </ChatWindow>
 
-          <p className="cthesis">Модель помнит всю беседу</p>
+          <p className="ccap">
+            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
+          </p>
         </div>
 
         <div className="vrule" />
 
-        {/* ── Правая колонка · Не знает ничего ── */}
+        {/* Правая колонка · Лесохозяйственный ГОСТ */}
         <div className="col right-col">
-          <div className="ctitle">Не знает ничего</div>
+          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
 
-          <ChatWindow ariaLabel="Пустое окно чата: только поле ввода с курсором">
-            {/* Поле ввода */}
-            <rect
-              x={24}
-              y={376}
-              width={720}
-              height={44}
-              rx={22}
-              fill={BG}
-              stroke={RULE}
-              strokeWidth={1}
-            />
-            {/* Курсор */}
-            <line
-              x1={44}
-              y1={388}
-              x2={44}
-              y2={408}
-              stroke={INK}
-              strokeWidth={1.6}
-            />
-            {/* Плейсхолдер */}
-            <text
-              x={54}
-              y={404}
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="400"
-              fontSize="17"
-              fill={MUTE_2}
-            >
-              Начните новый разговор…
-            </text>
+          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
+            <p className="user">
+              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
+            </p>
+            <p className="bot">
+              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
+              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
+              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
+            </p>
           </ChatWindow>
 
-          <p className="cthesis">Модель не знает ни имени, ни прошлых вопросов</p>
+          <p className="ccap">
+            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
+          </p>
         </div>
       </div>
 
-      <div className="s39-hrule" />
-
-      <div className="s39-summary">
-        <p>Исключение — функция Памяти (см. слайд 40)</p>
+      <div className="s50-hrule" />
+      <div className="s50-summary">
+        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
       </div>
 
       <Foot />

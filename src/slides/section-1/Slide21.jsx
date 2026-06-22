@@ -1,94 +1,74 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './Slide21.css';
 
 export const meta = {
   id: '21',
-  type: 'B',
-  title: 'Попугай, прочитавший интернет',
-  subblock: '1.3 От Transformer до GPT-3',
+  type: 'D',
+  title: 'Что меняется',
+  subblock: '1.5 Думающие модели',
 };
 
 /**
- * Слайд 21 · Попугай, прочитавший интернет
- * B-шаблон: мета-тег подблока сверху-слева, центральный тезис
- * в две фразы с цезурой по точке, anchor (Bender et al.) снизу.
- * Никаких иллюстраций, никакого --accent.
+ * Слайд 29 · Что меняется
+ * D-шаблон: две равноправные колонки с примерами задач из контекста
+ * аудитории (научные сотрудники). Левая — короткие вопросы (обычная модель),
+ * правая — сложные задачи (думающая). Summary внизу: «Думающая не всегда лучше».
  */
+
+const LEFT = [
+  'Переформулировать абзац для статьи',
+  'Перевести аннотацию на английский',
+  'Найти определение термина',
+  'Резюмировать раздел методики',
+  'Составить список ключевых слов к статье',
+];
+
+const RIGHT = [
+  'Разобрать логику чужого эксперимента',
+  'Найти противоречия в двух источниках',
+  'Спланировать дизайн исследования',
+  'Проверить статистические выкладки',
+  'Связать разнородные данные в выводы',
+];
+
 export default function Slide21() {
   return (
-    <Stage label="21 Попугай, прочитавший интернет">
-      <Meta num="21" type="B" />
+    <Stage label="21 Что меняется">
+      <Meta num="21" type="D" />
 
-      {/* Мета-тег подблока (top-left) */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 96,
-          left: 96,
-          fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 20,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-        }}
-      >
-        1.3 От Transformer до GPT-3
+      <div className="s29-header">
+        <div className="sub">1.5 Думающие модели</div>
+        <h2 className="title">Что меняется</h2>
       </div>
 
-      {/* Центральный блок: заголовок, тезис, anchor */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 400,
-            fontSize: 44,
-            lineHeight: 1.15,
-            color: 'var(--mute)',
-            margin: '0 0 48px 0',
-            letterSpacing: '-0.005em',
-          }}
-        >
-          Попугай, прочитавший интернет
-        </h2>
+      <div className="s29-cols">
+        <div className="col">
+          <div className="ctitle">Короткие вопросы</div>
+          <div className="ccode">обычная модель</div>
+          <ul className="s29-list">
+            {LEFT.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="vrule" />
+        <div className="col right-col">
+          <div className="ctitle">Сложные задачи</div>
+          <div className="ccode">думающая модель</div>
+          <ul className="s29-list">
+            {RIGHT.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
-        <p
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 500,
-            fontSize: 96,
-            lineHeight: 1.1,
-            color: 'var(--ink)',
-            margin: 0,
-            letterSpacing: '-0.012em',
-            maxWidth: 1600,
-            textWrap: 'pretty',
-          }}
-        >
-          Знает всё, что написано.
-          <br />
-          Не знает, что это значит.
-        </p>
+      <div className="s29-hrule" />
 
-        <p
-          style={{
-            margin: '72px 0 0 0',
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: 20,
-            letterSpacing: '0.04em',
-            color: 'var(--mute)',
-          }}
-        >
-          Bender et al., 2021 — “On the Dangers of Stochastic Parrots”
-        </p>
+      <div className="s29-summary">
+        <p>Думающая не&nbsp;всегда лучше</p>
       </div>
 
       <Foot />
