@@ -1,120 +1,188 @@
-import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide46.css';
 
 export const meta = {
   id: '46',
-  type: 'D',
-  title: 'Бесплатное · платное · API',
+  type: 'B',
+  title: 'Кому что подходит',
   subblock: '4.3 Тарифы и API',
 };
 
 /**
- * Слайд 67 · Бесплатное, платное, API
- * D-сравнение с 3 колонками. Структура та же, что у Slide45, сокращена
- * до 3 колонок. Последняя ось у каждого тарифа звучит по-своему («что
- * недоступно» / «что даёт сверх» / «что нужно»), потому хранится в массиве
- * лейблов параллельно значениям.
+ * Слайд 68 · Кому что подходит
+ * B-слайд с трёхстрочной матрицей правил. Каждая строка — «роль → рекомендация»
+ * с серой моно-стрелкой посередине. Это не таблица сравнения, а горизонтальное
+ * правило-список под главным тезисом. Внизу — anchor над тонкой линией.
  */
 
-const TARIFFS = [
+const RULES = [
   {
-    name: 'Бесплатное',
-    rows: [
-      ['Доступ', 'веб-интерфейс через браузер'],
-      ['Модели', 'обычные, не самые свежие, с лимитами на запросы'],
-      ['Память диалога', 'есть в рамках чата'],
-      ['Когда подходит', 'познакомиться, разовые задачи, простой текст'],
-      [
-        'Что недоступно',
-        'длинные документы целиком, частые запросы подряд, продвинутые модели',
-      ],
-    ],
+    role: 'Познакомиться, разовая задача',
+    pick: 'бесплатный веб-интерфейс любого из четырёх сервисов',
   },
   {
-    name: 'Платное · ≈ $20 / мес',
-    rows: [
-      ['Доступ', 'тот же веб-интерфейс + приоритет'],
-      ['Модели', 'все актуальные, включая думающие, увеличенные лимиты'],
-      [
-        'Память диалога',
-        'есть, плюс память между диалогами (у некоторых сервисов)',
-      ],
-      [
-        'Когда подходит',
-        'регулярная работа, длинные документы, многошаговые задачи',
-      ],
-      [
-        'Что даёт сверх',
-        'загрузка файлов, проекты, кастомные ассистенты, поиск в интернете',
-      ],
-    ],
+    role: 'Регулярная исследовательская работа',
+    pick: 'один платный сервис (≈ $20 / мес), думающую модель — по требованию',
   },
   {
-    name: 'API',
-    rows: [
-      ['Доступ', 'программный, через код или внешние приложения'],
-      ['Модели', 'все, оплата по количеству обработанного текста'],
-      ['Память диалога', 'только то, что передаёшь в запросе'],
-      [
-        'Когда подходит',
-        'автоматизация, интеграция, обработка тысяч документов',
-      ],
-      ['Что нужно', 'базовое программирование или готовое приложение'],
-    ],
+    role: 'Автоматизация, обработка большого массива',
+    pick: 'API + скрипт или приложение',
   },
 ];
 
-function Column({ tariff, position }) {
-  return (
-    <div className={`col ${position}`}>
-      <div className="ctitle">{tariff.name}</div>
-      <div className="s67-axes">
-        {tariff.rows.map(([label, value]) => (
-          <div key={label}>
-            <div className="s67-axis-label">{label}</div>
-            <p className="s67-axis-text">{value}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+const ROLE_STYLE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 400,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--ink)',
+  margin: 0,
+  letterSpacing: '-0.003em',
+  textWrap: 'pretty',
+};
+
+const PICK_STYLE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--ink)',
+  margin: 0,
+  letterSpacing: '-0.003em',
+  textWrap: 'pretty',
+};
+
+const ARROW_STYLE = {
+  fontFamily: 'IBM Plex Mono, monospace',
+  fontWeight: 400,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--mute)',
+  margin: 0,
+  textAlign: 'center',
+};
 
 export default function Slide46() {
   return (
-    <Stage label="46 Бесплатное, платное, API">
-      <Meta num="46" type="D" />
+    <Stage label="46 Кому что подходит">
+      <Meta num="46" type="B" />
 
-      <div className="s67-header">
-        <div className="sub">4.3 Тарифы</div>
-        <h2 className="title">Бесплатное, платное, API</h2>
-        <p className="lead">Три уровня доступа к&nbsp;одним и&nbsp;тем&nbsp;же моделям</p>
+      {/* Мета-тег подблока */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        4.3 Тарифы
       </div>
 
-      <div className="s67-cols">
-        {TARIFFS.map((t, i) => {
-          const position =
-            i === 0 ? 'first' : i === TARIFFS.length - 1 ? 'last' : '';
-          return (
-            <Fragment key={t.name}>
-              <Column tariff={t} position={position} />
-              {i < TARIFFS.length - 1 && <div className="vrule" />}
-            </Fragment>
-          );
-        })}
+      {/* Заголовок */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 168,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 48,
+          lineHeight: 1.18,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.01em',
+        }}
+      >
+        Кому что подходит
+      </h2>
+
+      {/* Тезис */}
+      <p
+        style={{
+          position: 'absolute',
+          top: 320,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 60,
+          lineHeight: 1.18,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.012em',
+          maxWidth: 1500,
+          textWrap: 'pretty',
+        }}
+      >
+        Для&nbsp;регулярной работы исследователя — один платный сервис.
+      </p>
+
+      {/* Три строки-правила */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 580,
+          left: 96,
+          right: 96,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 36,
+        }}
+      >
+        {RULES.map((r) => (
+          <div
+            key={r.role}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 56px 1fr',
+              alignItems: 'baseline',
+              columnGap: 24,
+            }}
+          >
+            <p style={ROLE_STYLE}>{r.role}</p>
+            <p style={ARROW_STYLE}>→</p>
+            <p style={PICK_STYLE}>{r.pick}</p>
+          </div>
+        ))}
       </div>
 
-      <div className="s67-hrule" />
-
-      <div className="s67-summary">
-        <p>
-          Платная подписка — самый частый вариант для&nbsp;рабочей нагрузки
-          исследователя
-        </p>
-      </div>
+      {/* Тонкая линия + anchor */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 116,
+          height: 1,
+          background: 'var(--rule)',
+        }}
+      />
+      <p
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 60,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 22,
+          lineHeight: 1.4,
+          color: 'var(--mute)',
+          margin: 0,
+          letterSpacing: '-0.002em',
+        }}
+      >
+        Несколько подписок параллельно почти никогда не&nbsp;нужны. Лучше один
+        сервис, в&nbsp;котором научился работать
+      </p>
 
       <Foot />
     </Stage>

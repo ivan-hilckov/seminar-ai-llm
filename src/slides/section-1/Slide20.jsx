@@ -6,74 +6,69 @@ import './Slide20.css';
 export const meta = {
   id: '20',
   type: 'D',
-  title: 'Обычная модель vs думающая',
+  title: 'Что меняется',
   subblock: '1.5 Думающие модели',
 };
 
 /**
- * Слайд 28 · Обычная модель vs думающая
- * D-шаблон по образцу Slide05. Две равноправные колонки разделены 1px-линией.
- * Каждая содержит подзаголовок-метафору и три параллельные оси сравнения
- * (Поведение / Характер / Назначение). Снизу — summary через 1px-линию.
+ * Слайд 29 · Что меняется
+ * D-шаблон: две равноправные колонки с примерами задач из контекста
+ * аудитории (научные сотрудники). Левая — короткие вопросы (обычная модель),
+ * правая — сложные задачи (думающая). Summary внизу: «Думающая не всегда лучше».
  */
 
-const AXES = [
-  {
-    label: 'Поведение',
-    left: 'Отвечает сразу',
-    right: 'Сначала пишет черновик',
-  },
-  {
-    label: 'Характер',
-    left: 'Быстрый, без проработки',
-    right: 'Медленный, последовательный',
-  },
-  {
-    label: 'Назначение',
-    left: 'Для коротких вопросов',
-    right: 'Для сложных задач',
-  },
+const LEFT = [
+  'Переформулировать абзац для статьи',
+  'Перевести аннотацию на английский',
+  'Найти определение термина',
+  'Резюмировать раздел методики',
+  'Составить список ключевых слов к статье',
 ];
 
-function AxisColumn({ side }) {
-  return (
-    <div className="s28-axes">
-      {AXES.map((a) => (
-        <div key={a.label}>
-          <div className="s28-axis-label">{a.label}</div>
-          <p className="s28-axis-text">{a[side]}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
+const RIGHT = [
+  'Разобрать логику чужого эксперимента',
+  'Найти противоречия в двух источниках',
+  'Спланировать дизайн исследования',
+  'Проверить статистические выкладки',
+  'Связать разнородные данные в выводы',
+];
 
 export default function Slide20() {
   return (
-    <Stage label="20 Обычная модель vs думающая">
+    <Stage label="20 Что меняется">
       <Meta num="20" type="D" />
 
-      <div className="s28-header">
+      <div className="s29-header">
         <div className="sub">1.5 Думающие модели</div>
-        <h2 className="title">Обычная модель vs думающая</h2>
+        <h2 className="title">Что меняется</h2>
       </div>
 
-      <div className="s28-cols">
+      <div className="s29-cols">
         <div className="col">
-          <div className="ctitle">Студент-выскочка</div>
-          <AxisColumn side="left" />
+          <div className="ctitle">Короткие вопросы</div>
+          <div className="ccode">обычная модель</div>
+          <ul className="s29-list">
+            {LEFT.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
         <div className="vrule" />
         <div className="col right-col">
-          <div className="ctitle">Студент с&nbsp;черновиком</div>
-          <AxisColumn side="right" />
+          <div className="ctitle">Сложные задачи</div>
+          <div className="ccode">думающая модель</div>
+          <ul className="s29-list">
+            {RIGHT.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div className="s28-hrule" />
+      <div className="s29-hrule" />
 
-      <div className="s28-summary">
-        <p>Разные режимы — разные задачи</p>
+      <div className="s29-summary">
+        <p>Думающая не&nbsp;всегда лучше</p>
       </div>
 
       <Foot />

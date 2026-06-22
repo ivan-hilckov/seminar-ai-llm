@@ -5,159 +5,200 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '16',
   type: 'C',
-  title: 'RLHF · обучение с обратной связью от человека',
+  title: 'ChatGPT, 30 ноября 2022',
   subblock: '1.4 ChatGPT 2022',
 };
 
 /**
- * Слайд 23 · RLHF — обучение с обратной связью от человека
- * Линейная цепочка из 4 блоков: базовая модель → люди-разметчики →
- * reward-модель → базовая модель (дообучённая). Блоки 1 и 4 одного стиля
- * (та же модель в разных состояниях), 2 и 3 — иной стиль (промежуточные шаги).
+ * Слайд 22 · ChatGPT, 30 ноября 2022
+ * Стилизованная SVG-реконструкция первого интерфейса ChatGPT
+ * (не подлинный скриншот): логотип-плейсхолдер, Free Research Preview,
+ * три колонки Examples / Capabilities / Limitations с серыми плашками,
+ * поле ввода «Send a message…». Палитра — система семинара.
  */
-
-const BLOCK_W = 200;
-const BLOCK_H = 130;
-const GAP = 38;
-const TOTAL_W = 4 * BLOCK_W + 3 * GAP; // 914
-const X0 = (1080 - TOTAL_W) / 2; // 83
-const BLOCK_Y = 180;
-const BLOCK_CY = BLOCK_Y + BLOCK_H / 2;
-
-const blocks = [
-  {
-    title: 'Базовая модель',
-    captionL1: 'генерирует',
-    captionL2: 'несколько ответов',
-    sameModel: true,
-  },
-  {
-    title: 'Люди-разметчики',
-    captionL1: 'ранжируют ответы',
-    captionL2: 'от лучшего к худшему',
-    sameModel: false,
-  },
-  {
-    title: 'Reward-модель',
-    captionL1: 'отдельная нейросеть',
-    captionL2: 'учится на ранжированиях',
-    sameModel: false,
-  },
-  {
-    title: 'Базовая модель',
-    captionL1: 'дообучается под',
-    captionL2: 'reward-модель',
-    sameModel: true,
-  },
-];
-
 export default function Slide16() {
+  const columns = [
+    { x: 220, title: 'Examples' },
+    { x: 540, title: 'Capabilities' },
+    { x: 860, title: 'Limitations' },
+  ];
+
+  // Лёгкая нерегулярность ширин — чтобы плашки не выглядели сеткой.
+  const cardLineWidths = [
+    [220, 170],
+    [238, 156],
+    [200, 198],
+    [228, 144],
+    [212, 184],
+    [240, 160],
+  ];
+
   return (
-    <Stage label="16 RLHF · обучение с обратной связью от человека">
+    <Stage label="16 ChatGPT, 30 ноября 2022">
       <Meta num="16" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1080 600"
+          viewBox="0 0 1080 720"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: 1080, height: 'auto' }}
-          aria-label="Линейная схема RLHF: базовая модель генерирует ответы, люди-разметчики их ранжируют, на ранжированиях обучается reward-модель, базовая модель дообучается под reward-модель"
+          aria-label="Стилизованная реконструкция первого интерфейса ChatGPT: логотип-плейсхолдер, подзаголовок Free Research Preview, три колонки Examples / Capabilities / Limitations с плашками-плейсхолдерами, поле ввода с плейсхолдером Send a message"
         >
-          <defs>
-            <marker
-              id="arrow23"
-              viewBox="0 0 10 10"
-              refX="9"
-              refY="5"
-              markerWidth="7"
-              markerHeight="7"
-              orient="auto-start-reverse"
+          {/* ─── Рамка окна ─────────────────────────────────── */}
+          <rect
+            x="0.5"
+            y="0.5"
+            width="1079"
+            height="719"
+            rx="10"
+            ry="10"
+            fill="none"
+            stroke="#D9D7CF"
+            strokeWidth="1"
+          />
+
+          {/* Тайтлбар: три кружочка + разделитель */}
+          <g fill="#D9D7CF">
+            <circle cx="28" cy="28" r="5" />
+            <circle cx="48" cy="28" r="5" />
+            <circle cx="68" cy="28" r="5" />
+          </g>
+          <line x1="0" y1="56" x2="1080" y2="56" stroke="#ECEAE3" strokeWidth="1" />
+
+          {/* ─── Логотип-плейсхолдер ────────────────────────── */}
+          <circle cx="540" cy="116" r="18" fill="none" stroke="#1A1A1A" strokeWidth="1.5" />
+          <text
+            x="540"
+            y="172"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="28"
+            textAnchor="middle"
+            fill="#1A1A1A"
+          >
+            ChatGPT
+          </text>
+
+          {/* ─── Free Research Preview ──────────────────────── */}
+          <text
+            x="540"
+            y="206"
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="14"
+            letterSpacing="0.14em"
+            textAnchor="middle"
+            fill="#9A9893"
+          >
+            FREE RESEARCH PREVIEW
+          </text>
+
+          {/* ─── Заголовки колонок ──────────────────────────── */}
+          {columns.map((col) => (
+            <text
+              key={`h-${col.title}`}
+              x={col.x}
+              y="278"
+              fontFamily="IBM Plex Sans, sans-serif"
+              fontWeight="500"
+              fontSize="20"
+              textAnchor="middle"
+              fill="#1A1A1A"
             >
-              <path d="M0,0 L10,5 L0,10 z" fill="#6B6B68" />
-            </marker>
-          </defs>
+              {col.title}
+            </text>
+          ))}
 
-          {/* ─── Блоки ──────────────────────────────────────── */}
-          {blocks.map((b, i) => {
-            const x = X0 + i * (BLOCK_W + GAP);
-            const cx = x + BLOCK_W / 2;
-            return (
-              <g key={`b-${i}`}>
-                <rect
-                  x={x}
-                  y={BLOCK_Y}
-                  width={BLOCK_W}
-                  height={BLOCK_H}
-                  rx="8"
-                  ry="8"
-                  fill={b.sameModel ? 'none' : '#F0EEE8'}
-                  stroke={b.sameModel ? '#1A1A1A' : '#D9D7CF'}
-                  strokeWidth={b.sameModel ? 1.5 : 1}
-                />
-                <text
-                  x={cx}
-                  y={BLOCK_CY + 8}
-                  fontFamily="IBM Plex Sans, sans-serif"
-                  fontWeight="500"
-                  fontSize="22"
-                  textAnchor="middle"
-                  fill="#1A1A1A"
-                >
-                  {b.title}
-                </text>
-                <text
-                  x={cx}
-                  y={BLOCK_Y + BLOCK_H + 40}
-                  fontFamily="IBM Plex Mono, monospace"
-                  fontSize="14"
-                  letterSpacing="0.04em"
-                  textAnchor="middle"
-                  fill="#6B6B68"
-                >
-                  {b.captionL1}
-                </text>
-                <text
-                  x={cx}
-                  y={BLOCK_Y + BLOCK_H + 62}
-                  fontFamily="IBM Plex Mono, monospace"
-                  fontSize="14"
-                  letterSpacing="0.04em"
-                  textAnchor="middle"
-                  fill="#6B6B68"
-                >
-                  {b.captionL2}
-                </text>
-              </g>
-            );
-          })}
+          {/* ─── Плашки-плейсхолдеры ────────────────────────── */}
+          {columns.map((col, ci) =>
+            [0, 1, 2].map((row) => {
+              const xLeft = col.x - 140;
+              const y = 308 + row * 76;
+              const [w1, w2] = cardLineWidths[(ci * 3 + row) % cardLineWidths.length];
+              return (
+                <g key={`card-${ci}-${row}`}>
+                  <rect
+                    x={xLeft}
+                    y={y}
+                    width="280"
+                    height="60"
+                    rx="6"
+                    ry="6"
+                    fill="#F0EEE8"
+                  />
+                  <rect x={xLeft + 20} y={y + 18} width={w1} height="4" rx="2" fill="#D9D7CF" />
+                  <rect x={xLeft + 20} y={y + 32} width={w2} height="4" rx="2" fill="#D9D7CF" />
+                </g>
+              );
+            })
+          )}
 
-          {/* ─── Стрелки между блоками ──────────────────────── */}
-          {[0, 1, 2].map((i) => {
-            const startX = X0 + (i + 1) * BLOCK_W + i * GAP + 6;
-            const endX = X0 + (i + 1) * (BLOCK_W + GAP) - 4;
-            return (
-              <line
-                key={`arrow-${i}`}
-                x1={startX}
-                y1={BLOCK_CY}
-                x2={endX}
-                y2={BLOCK_CY}
-                stroke="#6B6B68"
-                strokeWidth="1.2"
-                markerEnd="url(#arrow23)"
-              />
-            );
-          })}
+          {/* ─── Поле ввода ─────────────────────────────────── */}
+          <rect
+            x="80"
+            y="588"
+            width="920"
+            height="64"
+            rx="10"
+            ry="10"
+            fill="none"
+            stroke="#D9D7CF"
+            strokeWidth="1"
+          />
+          <text
+            x="108"
+            y="628"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="20"
+            fill="#9A9893"
+          >
+            Send a message…
+          </text>
+          {/* Иконка «отправить» — стрелка вверх в квадратике */}
+          <g transform="translate(940, 604)">
+            <rect
+              x="0"
+              y="0"
+              width="32"
+              height="32"
+              rx="6"
+              ry="6"
+              fill="none"
+              stroke="#D9D7CF"
+              strokeWidth="1"
+            />
+            <path
+              d="M 16 22 L 16 11 M 10.5 16 L 16 10.5 L 21.5 16"
+              fill="none"
+              stroke="#9A9893"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
         </svg>
       </div>
 
       <div className="right">
         <div className="sub">1.4 ChatGPT 2022</div>
-        <h2 className="title" style={{ fontSize: 36, lineHeight: 1.18 }}>
-          RLHF · обучение с&nbsp;обратной связью от&nbsp;человека
+        <h2 className="title" style={{ fontSize: 48, lineHeight: 1.1 }}>
+          ChatGPT,
+          <br />
+          30 ноября 2022
         </h2>
-        <p className="cap" style={{ fontSize: 22, lineHeight: 1.4, marginTop: 24 }}>
-          Базовая модель предсказывает текст. RLHF учит её&nbsp;предсказывать то, что хочет человек.
+        <p className="cap" style={{ fontSize: 24, lineHeight: 1.35, marginTop: 24 }}>
+          Дотренировали GPT-3.5 на&nbsp;диалогах. Сделали чат-оболочку. Технологии стали продуктом.
+        </p>
+        <p
+          style={{
+            margin: '24px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: 16,
+            letterSpacing: '0.08em',
+            color: 'var(--mute-2)',
+          }}
+        >
+          Внутри: GPT-3.5
         </p>
       </div>
 

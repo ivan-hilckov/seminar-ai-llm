@@ -7,58 +7,75 @@ import './Slide45.css';
 export const meta = {
   id: '45',
   type: 'D',
-  title: 'ChatGPT · Claude · Gemini · DeepSeek',
-  subblock: '4.1 Сервисы LLM',
+  title: 'Бесплатное · платное · API',
+  subblock: '4.3 Тарифы и API',
 };
 
 /**
- * Слайд 64 · Четыре больших сервиса
- * D-сравнение с 4 колонками. Структура каждой колонки одинакова: название
- * сервиса крупно сверху, под ним 3 строки «лейбл — значение» по общим осям
- * (Кто / Сильная сторона / Особенность). Без логотипов, без бренд-цветов.
+ * Слайд 67 · Бесплатное, платное, API
+ * D-сравнение с 3 колонками. Структура та же, что у Slide44, сокращена
+ * до 3 колонок. Последняя ось у каждого тарифа звучит по-своему («что
+ * недоступно» / «что даёт сверх» / «что нужно»), потому хранится в массиве
+ * лейблов параллельно значениям.
  */
 
-const AXES = [
+const TARIFFS = [
   {
-    label: 'Кто',
-    values: [
-      'OpenAI · ноябрь 2022',
-      'Anthropic · 2023',
-      'Google · 2023',
-      'DeepSeek · Китай · 2024',
+    name: 'Бесплатное',
+    rows: [
+      ['Доступ', 'веб-интерфейс через браузер'],
+      ['Модели', 'обычные, не самые свежие, с лимитами на запросы'],
+      ['Память диалога', 'есть в рамках чата'],
+      ['Когда подходит', 'познакомиться, разовые задачи, простой текст'],
+      [
+        'Что недоступно',
+        'длинные документы целиком, частые запросы подряд, продвинутые модели',
+      ],
     ],
   },
   {
-    label: 'Сильная сторона',
-    values: [
-      'широкий универсал, лучшая экосистема плагинов и кастомных GPT',
-      'длинные тексты, аккуратная работа с документами, разметка',
-      'интеграция с поиском Google, работа с большими файлами',
-      'сильная математика и код, открытые веса',
+    name: 'Платное · ≈ $20 / мес',
+    rows: [
+      ['Доступ', 'тот же веб-интерфейс + приоритет'],
+      ['Модели', 'все актуальные, включая думающие, увеличенные лимиты'],
+      [
+        'Память диалога',
+        'есть, плюс память между диалогами (у некоторых сервисов)',
+      ],
+      [
+        'Когда подходит',
+        'регулярная работа, длинные документы, многошаговые задачи',
+      ],
+      [
+        'Что даёт сверх',
+        'загрузка файлов, проекты, кастомные ассистенты, поиск в интернете',
+      ],
     ],
   },
   {
-    label: 'Особенность',
-    values: [
-      'массовое распространение, знаком большинству',
-      'аккуратный тон, осторожен с фактами',
-      'встроен в Google-сервисы (Docs, Gmail)',
-      'дёшево или бесплатно, доступен без зарубежной карты',
+    name: 'API',
+    rows: [
+      ['Доступ', 'программный, через код или внешние приложения'],
+      ['Модели', 'все, оплата по количеству обработанного текста'],
+      ['Память диалога', 'только то, что передаёшь в запросе'],
+      [
+        'Когда подходит',
+        'автоматизация, интеграция, обработка тысяч документов',
+      ],
+      ['Что нужно', 'базовое программирование или готовое приложение'],
     ],
   },
 ];
 
-const SERVICES = ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'];
-
-function Column({ index, title, position }) {
+function Column({ tariff, position }) {
   return (
     <div className={`col ${position}`}>
-      <div className="ctitle">{title}</div>
-      <div className="s64-axes">
-        {AXES.map((a) => (
-          <div className="s64-axis" key={a.label}>
-            <div className="s64-axis-label">{a.label}</div>
-            <p className="s64-axis-text">{a.values[index]}</p>
+      <div className="ctitle">{tariff.name}</div>
+      <div className="s67-axes">
+        {tariff.rows.map(([label, value]) => (
+          <div key={label}>
+            <div className="s67-axis-label">{label}</div>
+            <p className="s67-axis-text">{value}</p>
           </div>
         ))}
       </div>
@@ -68,34 +85,34 @@ function Column({ index, title, position }) {
 
 export default function Slide45() {
   return (
-    <Stage label="45 Четыре больших сервиса">
+    <Stage label="45 Бесплатное, платное, API">
       <Meta num="45" type="D" />
 
-      <div className="s64-header">
-        <div className="sub">4.1 Четыре сервиса</div>
-        <h2 className="title">Четыре больших сервиса</h2>
-        <p className="lead">Похожие возможности, разные сильные стороны</p>
+      <div className="s67-header">
+        <div className="sub">4.3 Тарифы</div>
+        <h2 className="title">Бесплатное, платное, API</h2>
+        <p className="lead">Три уровня доступа к&nbsp;одним и&nbsp;тем&nbsp;же моделям</p>
       </div>
 
-      <div className="s64-cols">
-        {SERVICES.map((name, i) => {
+      <div className="s67-cols">
+        {TARIFFS.map((t, i) => {
           const position =
-            i === 0 ? 'first' : i === SERVICES.length - 1 ? 'last' : '';
+            i === 0 ? 'first' : i === TARIFFS.length - 1 ? 'last' : '';
           return (
-            <Fragment key={name}>
-              <Column index={i} title={name} position={position} />
-              {i < SERVICES.length - 1 && <div className="vrule" />}
+            <Fragment key={t.name}>
+              <Column tariff={t} position={position} />
+              {i < TARIFFS.length - 1 && <div className="vrule" />}
             </Fragment>
           );
         })}
       </div>
 
-      <div className="s64-hrule" />
+      <div className="s67-hrule" />
 
-      <div className="s64-summary">
+      <div className="s67-summary">
         <p>
-          Один и&nbsp;тот&nbsp;же тип инструмента — разные акценты. Выбор зависит
-          от&nbsp;задачи и&nbsp;доступа.
+          Платная подписка — самый частый вариант для&nbsp;рабочей нагрузки
+          исследователя
         </p>
       </div>
 

@@ -6,69 +6,49 @@ import './Slide21.css';
 export const meta = {
   id: '21',
   type: 'D',
-  title: 'Что меняется',
+  title: 'У думающих моделей выше галлюцинации',
   subblock: '1.5 Думающие модели',
 };
 
 /**
- * Слайд 29 · Что меняется
- * D-шаблон: две равноправные колонки с примерами задач из контекста
- * аудитории (научные сотрудники). Левая — короткие вопросы (обычная модель),
- * правая — сложные задачи (думающая). Summary внизу: «Думающая не всегда лучше».
+ * Слайд 30 · У думающих моделей выше галлюцинации
+ * D-шаблон с акцентом на крупные числа. Две равноправные колонки:
+ * DeepSeek R1 (14.3%) vs DeepSeek V3 (3.9%). Контраст создаётся
+ * самим размером цифры, без подсветки красным и без --accent.
+ * Источник — Vectara HHEM Leaderboard, под summary мелким моно.
  */
-
-const LEFT = [
-  'Переформулировать абзац для статьи',
-  'Перевести аннотацию на английский',
-  'Найти определение термина',
-  'Резюмировать раздел методики',
-  'Составить список ключевых слов к статье',
-];
-
-const RIGHT = [
-  'Разобрать логику чужого эксперимента',
-  'Найти противоречия в двух источниках',
-  'Спланировать дизайн исследования',
-  'Проверить статистические выкладки',
-  'Связать разнородные данные в выводы',
-];
 
 export default function Slide21() {
   return (
-    <Stage label="21 Что меняется">
+    <Stage label="21 У думающих моделей выше галлюцинации">
       <Meta num="21" type="D" />
 
-      <div className="s29-header">
+      <div className="s30-header">
         <div className="sub">1.5 Думающие модели</div>
-        <h2 className="title">Что меняется</h2>
+        <h2 className="title">У&nbsp;думающих моделей выше галлюцинации</h2>
       </div>
 
-      <div className="s29-cols">
+      <div className="s30-cols">
         <div className="col">
-          <div className="ctitle">Короткие вопросы</div>
-          <div className="ccode">обычная модель</div>
-          <ul className="s29-list">
-            {LEFT.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <div className="ctitle">DeepSeek R1</div>
+          <div className="ccode">думающая модель</div>
+          <div className="cnumber">14.3%</div>
+          <div className="cnumlabel">галлюцинаций</div>
         </div>
         <div className="vrule" />
-        <div className="col right-col">
-          <div className="ctitle">Сложные задачи</div>
-          <div className="ccode">думающая модель</div>
-          <ul className="s29-list">
-            {RIGHT.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+        <div className="col">
+          <div className="ctitle">DeepSeek V3</div>
+          <div className="ccode">обычная модель</div>
+          <div className="cnumber">3.9%</div>
+          <div className="cnumlabel">галлюцинаций</div>
         </div>
       </div>
 
-      <div className="s29-hrule" />
+      <div className="s30-hrule" />
 
-      <div className="s29-summary">
-        <p>Думающая не&nbsp;всегда лучше</p>
+      <div className="s30-summary">
+        <p>Чем длиннее рассуждение — больше места для&nbsp;ошибок</p>
+        <p className="s30-source">Vectara HHEM Leaderboard, summarisation</p>
       </div>
 
       <Foot />

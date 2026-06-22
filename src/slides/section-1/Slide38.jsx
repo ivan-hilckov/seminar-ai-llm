@@ -1,85 +1,98 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './Slide38.css';
 
 export const meta = {
   id: '38',
-  type: 'B',
-  title: 'Не знает фактов — знает статистику текстов',
+  type: 'D',
+  title: 'Как выглядит галлюцинация',
   subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 49 · Не знает фактов — знает статистику текстов
- * B-шаблон без мета-метки подблока: заголовок сверху, крупный тезис
- * в оптическом центре, anchor снизу. Технический разворот keystone-
- * тезиса 32 в плоскость работы с фактами. Без --accent, без визуала,
- * без выделений отдельных слов.
+ * Слайд 50 · Как выглядит галлюцинация
+ * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
+ * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
+ * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
+ * единственное использование акцентного цвета вне keystone-слайда 32.
+ * Без мета-метки подблока (для смыслового единства с 49).
  */
+
+function ChatWindow({ children, ariaLabel }) {
+  return (
+    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
+      <div className="s50-chat__bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="s50-chat__body">{children}</div>
+    </div>
+  );
+}
+
+function Fake({ children }) {
+  return <span className="s50-fake">{children}</span>;
+}
+
 export default function Slide38() {
   return (
-    <Stage label="38 Не знает фактов — знает статистику текстов">
-      <Meta num="38" type="B" />
+    <Stage label="38 Как выглядит галлюцинация">
+      <Meta num="38" type="D" />
 
-      {/* Заголовок сверху */}
-      <h2
-        style={{
-          position: 'absolute',
-          top: 240,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 36,
-          lineHeight: 1.18,
-          letterSpacing: '-0.005em',
-          color: 'var(--ink)',
-        }}
-      >
-        Не знает фактов — знает статистику текстов
-      </h2>
+      <div className="s50-header">
+        <h2 className="title">Как выглядит галлюцинация</h2>
+        <p className="sub">Два случая — один реальный, один реконструированный</p>
+      </div>
 
-      {/* Тезис — оптический центр слайда */}
-      <p
-        style={{
-          position: 'absolute',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 56,
-          lineHeight: 1.18,
-          letterSpacing: '-0.008em',
-          color: 'var(--ink)',
-          textWrap: 'pretty',
-          maxWidth: 1600,
-        }}
-      >
-        Модель не&nbsp;хранит факты — она восстанавливает их&nbsp;по&nbsp;статистике текстов
-      </p>
+      <div className="s50-cols">
+        {/* Левая колонка · Mata v. Avianca */}
+        <div className="col">
+          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
 
-      {/* Anchor снизу — мельче и бледнее, с воздухом до нижнего края */}
-      <p
-        style={{
-          position: 'absolute',
-          bottom: 220,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 28,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Пустоты в&nbsp;знании заполняются тем, что статистически похоже на&nbsp;правду
-      </p>
+          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
+            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
+            <p className="bot">
+              1.{' '}
+              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
+              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
+              что положения Монреальской конвенции применяются к…
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
+          </p>
+        </div>
+
+        <div className="vrule" />
+
+        {/* Правая колонка · Лесохозяйственный ГОСТ */}
+        <div className="col right-col">
+          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
+
+          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
+            <p className="user">
+              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
+            </p>
+            <p className="bot">
+              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
+              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
+              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
+          </p>
+        </div>
+      </div>
+
+      <div className="s50-hrule" />
+      <div className="s50-summary">
+        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
+      </div>
 
       <Foot />
     </Stage>

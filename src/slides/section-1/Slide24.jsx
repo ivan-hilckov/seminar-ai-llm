@@ -1,15 +1,15 @@
-import ESlide from './ESlide.jsx';
+import ASlide from './ASlide.jsx';
 
 export default function Slide24() {
   return (
-    <ESlide
+    <ASlide
       num="24"
-      variant="momentum"
-      phrase={
+      roman="II"
+      title={
         <>
-          Это не интеллект.
+          Как это работает
           <br />
-          Это <span style={{ color: 'var(--accent)' }}>статистика</span>.
+          внутри
         </>
       }
     />

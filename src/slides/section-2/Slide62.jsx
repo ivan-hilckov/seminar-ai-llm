@@ -6,59 +6,53 @@ import './part-v.css';
 export const meta = {
   id: '62',
   type: 'C',
-  title: 'Четыре рабочих шаблона',
+  title: 'Шаблон · Редактура',
   subblock: '5.4 Четыре шаблона',
 };
 
-const TEMPLATES = [
-  {
-    num: '01',
-    name: 'Редактура',
-    desc: 'Сократить, уточнить, причесать собственный текст',
-  },
-  {
-    num: '02',
-    name: 'Литобзор',
-    desc: 'Быстрая карта-обзор темы, дальше — проверка вручную',
-  },
-  {
-    num: '03',
-    name: 'Разбор данных',
-    desc: 'Описать набор данных, посчитать сводные, заметить странности',
-  },
-  {
-    num: '04',
-    name: 'Письма и рецензии',
-    desc: 'Деловое письмо или рецензия с конкретной структурой',
-  },
+const PROMPT = [
+  ['Роль',     'Ты редактор научного текста.'],
+  ['Задача',   'Отредактируй абзац ниже.'],
+  ['Контекст', 'Это {фрагмент статьи / введение / методика / обсуждение}. Целевая длина — {N} слов. Аудитория — {практики / академическая}.'],
+  ['Формат',   'Покажи правки маркерами: [~было~] [+стало+] [-удалено-]. Один отступ — один блок правки.'],
+  ['Огранич.', 'Сохрани все цифры, термины и ссылки. Не добавляй фактов, которых нет в оригинале.'],
 ];
 
 /**
- * Слайд 83 · Четыре рабочих шаблона
- * C-слайд (обзорный). Слева — сетка 2×2 с четырьмя карточками шаблонов,
- * разделённая тонкими линиями --rule. Справа — заголовок и комментарий.
+ * Слайд 84 · Шаблон · Редактура
+ * C-слайд. Слева — готовый промт-шаблон с пустыми слотами в {фигурных скобках},
+ * под ним отдельный блок «ТЕКСТ» для вставки фрагмента.
  */
 export default function Slide62() {
   return (
-    <Stage label="62 Четыре рабочих шаблона">
+    <Stage label="62 Шаблон · Редактура">
       <Meta num="62" type="C" />
 
-      <div className="pv-grid">
-        {TEMPLATES.map((t) => (
-          <div key={t.num} className="pv-grid-cell">
-            <div className="pv-grid-num">{t.num}</div>
-            <h3 className="pv-grid-name">{t.name}</h3>
-            <p className="pv-grid-desc">{t.desc}</p>
+      <div className="pv-stack">
+        <div className="pv-card">
+          <div className="pv-card-label">ПРОМТ-ШАБЛОН</div>
+          <div className="pv-grid-prompt">
+            {PROMPT.map(([label, text]) => (
+              <div key={label} className="pv-grid-prompt-row">
+                <div className="pv-grid-prompt-lbl">[{label}]</div>
+                <div className="pv-grid-prompt-text">{text}</div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="pv-card">
+          <div className="pv-card-label">ТЕКСТ</div>
+          <pre className="pv-pre" style={{ color: 'var(--mute)' }}>{'{вставьте абзац}'}</pre>
+        </div>
       </div>
 
       <div className="pv-right">
         <div className="sub">5.4 Шаблоны</div>
-        <h2 className="title">Четыре шаблона на&nbsp;каждый день</h2>
+        <h2 className="title">Шаблон · Редактура</h2>
         <p className="cap">
-          Дальше — каждый шаблон отдельно: готовый промт и&nbsp;пример вывода.
-          Можно сохранить и&nbsp;использовать как есть
+          Рабочая версия из&nbsp;того, что мы разобрали в&nbsp;итерации. Подставьте свой
+          текст в&nbsp;фигурные скобки — и&nbsp;в&nbsp;дело
         </p>
       </div>
 

@@ -1,72 +1,77 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide40.css';
 
 export const meta = {
   id: '40',
-  type: 'D',
-  title: 'Где проверять обязательно',
-  subblock: '3.4 Точность и галлюцинации',
+  type: 'B',
+  title: 'AI берёт на себя задачи, не роль',
+  subblock: '3.5 Границы применения',
 };
 
 /**
- * Слайд 52 · Где проверять обязательно
- * D-сравнение: развёртка анкора слайда 51 в практическую таблицу 4+4.
- * Левая колонка — категории, требующие проверки. Правая — где можно
- * работать без оглядки. Без иконок, без --accent, без цветовой
- * маркировки зон. Обе колонки одинаково спокойные.
+ * Слайд 53 · AI берёт на себя задачи, не роль
+ * B-шаблон с расширенным центральным блоком: заголовок сверху, три
+ * равноценные строки в центре. Между строкой 2 и строкой 3 — увеличенный
+ * отступ, чтобы Excel-фраза читалась как отдельный смысловой абзац.
+ * Без мета-метки подблока (как 49–51), без --accent, без иллюстраций.
  */
 
-const LEFT = [
-  { text: 'Цифры и статистика', ex: '15%, −20 °C, 1 200 га' },
-  { text: 'Цитаты и ссылки', ex: 'Иванов, 2019, DOI' },
-  { text: 'Нормативные документы', ex: 'ГОСТы, статьи закона, СНиПы' },
-  { text: 'Имена, даты, факты', ex: 'год выхода работы, авторство метода' },
-];
-
-const RIGHT = [
-  { text: 'Объяснения известных понятий', ex: 'что такое регрессия, фотосинтез' },
-  { text: 'Переформулировки', ex: 'сократить, упростить, перевести' },
-  { text: 'Структура черновика', ex: 'оглавление, разделы, тезисы' },
-  { text: 'Поиск аналогий и идей', ex: 'подобрать сравнение, варианты' },
-];
-
-function ItemList({ items }) {
-  return (
-    <ul className="s52-items">
-      {items.map((it) => (
-        <li key={it.text} className="s52-item">
-          {it.text}
-          <span className="s52-item__ex">({it.ex})</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
+const LINE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  fontSize: 36,
+  lineHeight: 1.4,
+  color: 'var(--ink)',
+  letterSpacing: '-0.005em',
+  margin: 0,
+  textWrap: 'pretty',
+  maxWidth: 1500,
+};
 
 export default function Slide40() {
   return (
-    <Stage label="40 Где проверять обязательно">
-      <Meta num="40" type="D" />
+    <Stage label="40 AI берёт на себя задачи, не роль">
+      <Meta num="40" type="B" />
 
-      <div className="s52-header">
-        <h2 className="title">Где проверять обязательно</h2>
-        <p className="sub">Развёрнутое правило для&nbsp;работы</p>
-      </div>
+      {/* Заголовок сверху */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 240,
+          left: 96,
+          right: 96,
+          margin: 0,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 36,
+          lineHeight: 1.18,
+          letterSpacing: '-0.005em',
+          color: 'var(--ink)',
+        }}
+      >
+        AI берёт на&nbsp;себя задачи, не&nbsp;роль
+      </h2>
 
-      <div className="s52-cols">
-        <div className="col">
-          <div className="ctitle">Обязательно проверять</div>
-          <ItemList items={LEFT} />
-        </div>
-
-        <div className="vrule" />
-
-        <div className="col">
-          <div className="ctitle">Можно доверять</div>
-          <ItemList items={RIGHT} />
-        </div>
+      {/* Центральный блок · три строки, оптически по центру */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          left: 96,
+          right: 96,
+        }}
+      >
+        <p style={LINE}>
+          30&nbsp;лет назад программы для&nbsp;статистики вызывали те&nbsp;же&nbsp;вопросы.
+        </p>
+        <p style={{ ...LINE, marginTop: 16 }}>
+          Они перераспределили задачи.
+        </p>
+        <p style={{ ...LINE, marginTop: 48 }}>
+          Приход Excel не&nbsp;упразднил бухгалтерию — изменил работу.
+        </p>
       </div>
 
       <Foot />

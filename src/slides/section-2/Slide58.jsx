@@ -1,114 +1,63 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './part-v.css';
 
 export const meta = {
   id: '58',
-  type: 'B',
-  title: 'Первый ответ — черновик',
+  type: 'C',
+  title: 'Итерация 1 · косметика',
   subblock: '5.3 Итерация на редактуре',
 };
 
+const BEFORE_TEXT = `Лесопатологический мониторинг показал, что очаги
+короеда-типографа в обследованных насаждениях ели
+расширились на 17% по сравнению с предыдущим сезоном.
+Поражены преимущественно перестойные деревья старше
+80 лет на южных склонах.`;
+
+const AFTER_TEXT = `Результаты комплексного лесопатологического
+мониторинга со всей очевидностью продемонстрировали
+значительное расширение очагов поражения
+короедом-типографом. Данное явление носит выраженный
+характер и заслуживает пристального внимания
+специалистов.`;
+
 /**
- * Слайд 79 · Первый ответ — почти всегда черновик
- * B-шаблон по образцу Slide21: мета-тег подблока сверху-слева,
- * заголовок-аппертив серый, центральный тезис крупно, anchor-строка снизу
- * над тонкой линией --rule.
+ * Слайд 80 · Итерация 1 — «улучши абзац»
+ * C-слайд. Слева — короткий промт, под ним два моно-блока «БЫЛО / СТАЛО».
+ * Никаких цветовых маркеров — разница только в плотности и конкретике.
  */
 export default function Slide58() {
   return (
-    <Stage label="58 Первый ответ — черновик">
-      <Meta num="58" type="B" />
+    <Stage label="58 Итерация 1 — улучши абзац">
+      <Meta num="58" type="C" />
 
-      {/* Мета-тег подблока (top-left) */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 96,
-          left: 96,
-          fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 20,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-        }}
-      >
-        5.3 Итерация
+      <div className="pv-stack tight">
+        <div className="pv-card">
+          <div className="pv-card-label">ЗАПРОС НА УЛУЧШЕНИЕ</div>
+          <pre className="pv-pre lg">улучши абзац</pre>
+        </div>
+
+        <div className="pv-card">
+          <div className="pv-card-label">БЫЛО</div>
+          <pre className="pv-pre small">{BEFORE_TEXT}</pre>
+        </div>
+
+        <div className="pv-card">
+          <div className="pv-card-label">СТАЛО</div>
+          <pre className="pv-pre small">{AFTER_TEXT}</pre>
+        </div>
       </div>
 
-      {/* Центральный блок: заголовок (аппертив), тезис, anchor */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 400,
-            fontSize: 44,
-            lineHeight: 1.15,
-            color: 'var(--mute)',
-            margin: '0 0 48px 0',
-            letterSpacing: '-0.005em',
-          }}
-        >
-          Первый ответ — почти всегда черновик
-        </h2>
-
-        <p
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 500,
-            fontSize: 84,
-            lineHeight: 1.1,
-            color: 'var(--ink)',
-            margin: 0,
-            letterSpacing: '-0.012em',
-            maxWidth: 1600,
-            textWrap: 'pretty',
-          }}
-        >
-          Итерация — не&nbsp;починка ошибки.
-          <br />
-          Это нормальный режим работы.
+      <div className="pv-right">
+        <div className="sub">5.3 Итерация</div>
+        <h2 className="title">Итерация 1 — «улучши&nbsp;абзац»</h2>
+        <p className="cap">
+          Стало пышнее, но&nbsp;исчезли цифры, возраст, склоны. Модель
+          не&nbsp;знает, что улучшать, и&nbsp;улучшает форму
         </p>
       </div>
-
-      {/* Anchor над тонкой линией снизу */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          bottom: 116,
-          height: 1,
-          background: 'var(--rule)',
-        }}
-      />
-      <p
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          bottom: 60,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontStyle: 'italic',
-          fontWeight: 400,
-          fontSize: 22,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          margin: 0,
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Хороший результат за&nbsp;один проход — исключение.
-        За&nbsp;2–3 итерации — норма
-      </p>
 
       <Foot />
     </Stage>
