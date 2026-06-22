@@ -1,12 +1,11 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide29.css';
 
 export const meta = {
   id: '29',
-  type: 'D',
-  title: 'Новый чат — новый лист',
+  type: 'C',
+  title: 'Память (Memory) — отдельная функция',
   subblock: '2.2 Контекст и память',
 };
 
@@ -14,178 +13,234 @@ const BG = '#FAFAF7';
 const HI = '#F0EEE8';
 const RULE = '#D9D7CF';
 const RULE_SOFT = '#ECEAE3';
+const MUTE = '#6B6B68';
 const MUTE_2 = '#9A9893';
 const INK = '#1A1A1A';
+const INK_SOFT = '#2B2A28';
 
-function Bubble({ x, y, w, h = 52, text, role }) {
-  const isUser = role === 'user';
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={14}
-        fill={isUser ? HI : 'none'}
-        stroke={isUser ? 'none' : RULE}
-        strokeWidth={isUser ? 0 : 1}
-      />
-      <text
-        x={x + 18}
-        y={y + h / 2 + 6}
-        fontFamily="IBM Plex Sans, sans-serif"
-        fontWeight="400"
-        fontSize="18"
-        fill={INK}
-      >
-        {text}
-      </text>
-    </g>
-  );
-}
-
-function ChatWindow({ children, ariaLabel }) {
-  return (
-    <svg
-      viewBox="0 0 768 440"
-      xmlns="http://www.w3.org/2000/svg"
-      className="cchat"
-      aria-label={ariaLabel}
-    >
-      {/* Окно */}
-      <rect
-        x={0.5}
-        y={0.5}
-        width={767}
-        height={439}
-        rx={12}
-        fill={BG}
-        stroke={RULE}
-        strokeWidth={1}
-      />
-      {/* Заголовок окна */}
-      <g fill={RULE}>
-        <circle cx={24} cy={24} r={4} />
-        <circle cx={40} cy={24} r={4} />
-        <circle cx={56} cy={24} r={4} />
-      </g>
-      <line x1={0} y1={44} x2={768} y2={44} stroke={RULE_SOFT} strokeWidth={1} />
-      {children}
-    </svg>
-  );
-}
+const notes = [
+  'Работает в ВНИИЛМ',
+  'Интересуется засушливыми периодами',
+  'Предпочитает короткие ответы',
+  'Зовут Иван',
+];
 
 /**
- * Слайд 39 · Новый чат — новый лист
- * D-сравнение: слева — чат с накопленной историей («Помнит всё»),
- * справа — тот же интерфейс, пустой, с курсором в поле ввода
- * («Не знает ничего»). Тонкая линия --rule между колонками. Снизу —
- * мелкая моно-приписка про исключение Memory (см. слайд 40).
+ * Слайд 40 · Память (Memory) — отдельная функция
+ * C-шаблон. Слева — нейтральная панель «Заметки о пользователе» с
+ * четырьмя чипами. Стрелка вправо в блок «Системные инструкции», где
+ * заметки выделены курсивной строкой «+ заметки о пользователе».
+ * Стрелка вниз — в нейтральный блок «Модель». Под визуалом — мелкая
+ * моно-приписка с тремя свойствами Memory. Без `--accent`, без AI-стока.
  */
 export default function Slide29() {
   return (
-    <Stage label="29 Новый чат — новый лист">
-      <Meta num="29" type="D" />
+    <Stage label="29 Память — отдельная функция">
+      <Meta num="29" type="C" />
 
-      <div className="s39-header">
-        <h2 className="title">Новый чат — новый лист</h2>
-      </div>
-
-      <div className="s39-cols">
-        {/* ── Левая колонка · Помнит всё ── */}
-        <div className="col">
-          <div className="ctitle">Помнит всё</div>
-
-          <ChatWindow ariaLabel="Окно чата с пятью сообщениями: накопленная история">
-            <Bubble
-              x={344}
-              y={68}
-              w={400}
-              text="Помоги составить план эксперимента"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={132}
-              w={320}
-              text="Конечно. Какая тема и цель?"
-              role="assistant"
-            />
-            <Bubble
-              x={284}
-              y={196}
-              w={460}
-              text="Влияние засушливого периода на хвойные"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={260}
-              w={400}
-              text="Понял. Уточним методику измерения?"
-              role="assistant"
-            />
-            <Bubble
-              x={444}
-              y={324}
-              w={300}
-              text="Какие методы предложишь?"
-              role="user"
-            />
-          </ChatWindow>
-
-          <p className="cthesis">Модель помнит всю беседу</p>
-        </div>
-
-        <div className="vrule" />
-
-        {/* ── Правая колонка · Не знает ничего ── */}
-        <div className="col right-col">
-          <div className="ctitle">Не знает ничего</div>
-
-          <ChatWindow ariaLabel="Пустое окно чата: только поле ввода с курсором">
-            {/* Поле ввода */}
-            <rect
-              x={24}
-              y={376}
-              width={720}
-              height={44}
-              rx={22}
-              fill={BG}
-              stroke={RULE}
-              strokeWidth={1}
-            />
-            {/* Курсор */}
-            <line
-              x1={44}
-              y1={388}
-              x2={44}
-              y2={408}
-              stroke={INK}
-              strokeWidth={1.6}
-            />
-            {/* Плейсхолдер */}
-            <text
-              x={54}
-              y={404}
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="400"
-              fontSize="17"
-              fill={MUTE_2}
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Схема: панель Памяти подмешивается в системные инструкции, оттуда — в модель"
+        >
+          <defs>
+            <marker
+              id="s40-arr"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
             >
-              Начните новый разговор…
-            </text>
-          </ChatWindow>
+              <path d="M 0 0 L 10 5 L 0 10 z" fill={MUTE_2} />
+            </marker>
+          </defs>
 
-          <p className="cthesis">Модель не знает ни имени, ни прошлых вопросов</p>
-        </div>
+          {/* ── Панель «Заметки о пользователе» ── */}
+          <rect
+            x={20}
+            y={140}
+            width={440}
+            height={520}
+            rx={14}
+            fill={BG}
+            stroke={RULE}
+            strokeWidth={1}
+          />
+          <text
+            x={44}
+            y={188}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="22"
+            fill={INK}
+          >
+            Заметки о пользователе
+          </text>
+          <line
+            x1={20}
+            y1={215}
+            x2={460}
+            y2={215}
+            stroke={RULE_SOFT}
+            strokeWidth={1}
+          />
+
+          {notes.map((text, i) => {
+            const y = 235 + i * 96;
+            return (
+              <g key={text}>
+                <rect
+                  x={44}
+                  y={y}
+                  width={392}
+                  height={78}
+                  rx={10}
+                  fill={HI}
+                />
+                <text
+                  x={64}
+                  y={y + 49}
+                  fontFamily="IBM Plex Sans, sans-serif"
+                  fontWeight="400"
+                  fontSize="19"
+                  fill={INK}
+                >
+                  {text}
+                </text>
+                <text
+                  x={418}
+                  y={y + 50}
+                  fontFamily="IBM Plex Sans, sans-serif"
+                  fontWeight="400"
+                  fontSize="22"
+                  fill={MUTE_2}
+                  textAnchor="end"
+                >
+                  ×
+                </text>
+              </g>
+            );
+          })}
+
+          {/* ── Стрелка 1: Memory → Системные инструкции ── */}
+          <line
+            x1={466}
+            y1={400}
+            x2={574}
+            y2={400}
+            stroke={MUTE_2}
+            strokeWidth={1.6}
+            markerEnd="url(#s40-arr)"
+          />
+
+          {/* ── Блок «Системные инструкции» ── */}
+          <text
+            x={580}
+            y={260}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="18"
+            fill={MUTE}
+          >
+            Системные инструкции
+          </text>
+          <rect
+            x={580}
+            y={280}
+            width={420}
+            height={240}
+            rx={12}
+            fill={BG}
+            stroke={MUTE_2}
+            strokeWidth={1}
+          />
+          <text
+            x={604}
+            y={336}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="22"
+            fill={INK_SOFT}
+          >
+            Будь вежлив. Отвечай кратко.
+          </text>
+          <line
+            x1={604}
+            y1={376}
+            x2={976}
+            y2={376}
+            stroke={RULE_SOFT}
+            strokeWidth={1}
+          />
+          <text
+            x={604}
+            y={426}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontStyle="italic"
+            fontSize="22"
+            fill={INK_SOFT}
+          >
+            + заметки о пользователе
+          </text>
+
+          {/* ── Стрелка 2: Системные инструкции → Модель ── */}
+          <line
+            x1={790}
+            y1={526}
+            x2={790}
+            y2={596}
+            stroke={MUTE_2}
+            strokeWidth={1.6}
+            markerEnd="url(#s40-arr)"
+          />
+
+          {/* ── Блок «Модель» ── */}
+          <rect
+            x={690}
+            y={602}
+            width={200}
+            height={100}
+            rx={14}
+            fill={HI}
+            stroke={INK}
+            strokeWidth={1.5}
+          />
+          <text
+            x={790}
+            y={663}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="30"
+            fill={INK}
+            textAnchor="middle"
+          >
+            Модель
+          </text>
+
+          {/* ── Подпись под визуалом ── */}
+          <text
+            x={20}
+            y={760}
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="18"
+            letterSpacing="0.06em"
+            fill={MUTE}
+          >
+            Можно выключить · Можно увидеть · Можно стереть
+          </text>
+        </svg>
       </div>
 
-      <div className="s39-hrule" />
-
-      <div className="s39-summary">
-        <p>Исключение — функция Памяти (см. слайд 40)</p>
+      <div className="right">
+        <h2 className="title">Память (Memory) — отдельная функция</h2>
+        <p className="cap">
+          Не модель вас запоминает — продукт хранит заметки и&nbsp;подмешивает их в&nbsp;промт
+        </p>
       </div>
 
       <Foot />

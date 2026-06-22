@@ -6,92 +6,49 @@ import './Slide38.css';
 export const meta = {
   id: '38',
   type: 'D',
-  title: 'Как выглядит галлюцинация',
+  title: 'У думающих моделей выше галлюцинации',
   subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 50 · Как выглядит галлюцинация
- * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
- * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
- * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
- * единственное использование акцентного цвета вне keystone-слайда 32.
- * Без мета-метки подблока (для смыслового единства с 49).
+ * Слайд 30 · У думающих моделей выше галлюцинации
+ * D-шаблон с акцентом на крупные числа. Две равноправные колонки:
+ * DeepSeek R1 (14.3%) vs DeepSeek V3 (3.9%). Контраст создаётся
+ * самим размером цифры, без подсветки красным и без --accent.
+ * Источник — Vectara HHEM Leaderboard, под summary мелким моно.
  */
-
-function ChatWindow({ children, ariaLabel }) {
-  return (
-    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
-      <div className="s50-chat__bar">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="s50-chat__body">{children}</div>
-    </div>
-  );
-}
-
-function Fake({ children }) {
-  return <span className="s50-fake">{children}</span>;
-}
 
 export default function Slide38() {
   return (
-    <Stage label="38 Как выглядит галлюцинация">
+    <Stage label="38 У думающих моделей выше галлюцинации">
       <Meta num="38" type="D" />
 
-      <div className="s50-header">
-        <h2 className="title">Как выглядит галлюцинация</h2>
-        <p className="sub">Два случая — один реальный, один реконструированный</p>
+      <div className="s30-header">
+        <div className="sub">3.4 Точность и галлюцинации</div>
+        <h2 className="title">У&nbsp;думающих моделей выше галлюцинации</h2>
       </div>
 
-      <div className="s50-cols">
-        {/* Левая колонка · Mata v. Avianca */}
+      <div className="s30-cols">
         <div className="col">
-          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
-
-          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
-            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
-            <p className="bot">
-              1.{' '}
-              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
-              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
-              что положения Монреальской конвенции применяются к…
-            </p>
-          </ChatWindow>
-
-          <p className="ccap">
-            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
-          </p>
+          <div className="ctitle">DeepSeek R1</div>
+          <div className="ccode">думающая модель</div>
+          <div className="cnumber">14.3%</div>
+          <div className="cnumlabel">галлюцинаций</div>
         </div>
-
         <div className="vrule" />
-
-        {/* Правая колонка · Лесохозяйственный ГОСТ */}
-        <div className="col right-col">
-          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
-
-          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
-            <p className="user">
-              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
-            </p>
-            <p className="bot">
-              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
-              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
-              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
-            </p>
-          </ChatWindow>
-
-          <p className="ccap">
-            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
-          </p>
+        <div className="col">
+          <div className="ctitle">DeepSeek V3</div>
+          <div className="ccode">обычная модель</div>
+          <div className="cnumber">3.9%</div>
+          <div className="cnumlabel">галлюцинаций</div>
         </div>
       </div>
 
-      <div className="s50-hrule" />
-      <div className="s50-summary">
-        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
+      <div className="s30-hrule" />
+
+      <div className="s30-summary">
+        <p>Чем длиннее рассуждение — больше места для&nbsp;ошибок</p>
+        <p className="s30-source">Vectara HHEM Leaderboard, summarisation</p>
       </div>
 
       <Foot />
