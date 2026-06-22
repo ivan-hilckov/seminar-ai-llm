@@ -1,71 +1,101 @@
+import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './part-v.css';
+import './Slide51.css';
 
 export const meta = {
   id: '51',
-  type: 'C',
-  title: 'Формула промта',
-  subblock: '5.1 Формула промта',
+  type: 'D',
+  title: 'ChatGPT · Claude · Gemini · DeepSeek',
+  subblock: '4.1 Сервисы LLM',
 };
 
-const COMPONENTS = [
+/**
+ * Слайд 64 · Четыре больших сервиса
+ * D-сравнение с 4 колонками. Структура каждой колонки одинакова: название
+ * сервиса крупно сверху, под ним 3 строки «лейбл — значение» по общим осям
+ * (Кто / Сильная сторона / Особенность). Без логотипов, без бренд-цветов.
+ */
+
+const AXES = [
   {
-    num: '01',
-    name: 'Роль',
-    desc: 'кем модель должна выступать',
+    label: 'Кто',
+    values: [
+      'OpenAI · ноябрь 2022',
+      'Anthropic · 2023',
+      'Google · 2023',
+      'DeepSeek · Китай · 2024',
+    ],
   },
   {
-    num: '02',
-    name: 'Задача',
-    desc: 'что нужно сделать — один глагол',
+    label: 'Сильная сторона',
+    values: [
+      'широкий универсал, лучшая экосистема плагинов и кастомных GPT',
+      'длинные тексты, аккуратная работа с документами, разметка',
+      'интеграция с поиском Google, работа с большими файлами',
+      'сильная математика и код, открытые веса',
+    ],
   },
   {
-    num: '03',
-    name: 'Контекст',
-    desc: 'кто аудитория, какие материалы, что важно',
-  },
-  {
-    num: '04',
-    name: 'Формат',
-    desc: 'как должен выглядеть ответ',
-  },
-  {
-    num: '05',
-    name: 'Ограничения',
-    desc: 'чего избегать, что обязательно учесть',
+    label: 'Особенность',
+    values: [
+      'массовое распространение, знаком большинству',
+      'аккуратный тон, осторожен с фактами',
+      'встроен в Google-сервисы (Docs, Gmail)',
+      'дёшево или бесплатно, доступен без зарубежной карты',
+    ],
   },
 ];
 
-/**
- * Слайд 71 · Формула промта
- * C-слайд. Слева — список из пяти компонентов формулы (номер + название + описание),
- * разделённый горизонтальными линиями. Справа — заголовок и комментарий.
- */
-export default function Slide51() {
-  return (
-    <Stage label="51 Формула промта">
-      <Meta num="51" type="C" />
+const SERVICES = ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'];
 
-      <div className="pv-formula">
-        {COMPONENTS.map((c) => (
-          <div key={c.num} className="pv-formula-row">
-            <div className="pv-formula-num">{c.num}</div>
-            <div>
-              <h3 className="pv-formula-name">{c.name}</h3>
-              <p className="pv-formula-desc">{c.desc}</p>
-            </div>
+function Column({ index, title, position }) {
+  return (
+    <div className={`col ${position}`}>
+      <div className="ctitle">{title}</div>
+      <div className="s64-axes">
+        {AXES.map((a) => (
+          <div className="s64-axis" key={a.label}>
+            <div className="s64-axis-label">{a.label}</div>
+            <p className="s64-axis-text">{a.values[index]}</p>
           </div>
         ))}
       </div>
+    </div>
+  );
+}
 
-      <div className="pv-right">
-        <div className="sub">5.1 Формула промта</div>
-        <h2 className="title">Формула промта</h2>
-        <p className="cap">
-          Не&nbsp;нужно использовать все&nbsp;пять в&nbsp;каждом запросе.
-          Но&nbsp;чем сложнее задача — тем&nbsp;больше компонентов
+export default function Slide51() {
+  return (
+    <Stage label="51 Четыре больших сервиса">
+      <Meta num="51" type="D" />
+
+      <div className="s64-header">
+        <div className="sub">4.1 Четыре сервиса</div>
+        <h2 className="title">Четыре больших сервиса</h2>
+        <p className="lead">Похожие возможности, разные сильные стороны</p>
+      </div>
+
+      <div className="s64-cols">
+        {SERVICES.map((name, i) => {
+          const position =
+            i === 0 ? 'first' : i === SERVICES.length - 1 ? 'last' : '';
+          return (
+            <Fragment key={name}>
+              <Column index={i} title={name} position={position} />
+              {i < SERVICES.length - 1 && <div className="vrule" />}
+            </Fragment>
+          );
+        })}
+      </div>
+
+      <div className="s64-hrule" />
+
+      <div className="s64-summary">
+        <p>
+          Один и&nbsp;тот&nbsp;же тип инструмента — разные акценты. Выбор зависит
+          от&nbsp;задачи и&nbsp;доступа.
         </p>
       </div>
 

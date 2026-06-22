@@ -1,54 +1,88 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide40.css';
 
 export const meta = {
   id: '40',
-  type: 'D',
-  title: 'У думающих моделей выше галлюцинации',
-  subblock: '3.4 Точность и галлюцинации',
+  type: 'B',
+  title: 'Когда Память полезна, когда мешает',
+  subblock: '3.2 Память и контекст в работе',
 };
 
 /**
- * Слайд 30 · У думающих моделей выше галлюцинации
- * D-шаблон с акцентом на крупные числа. Две равноправные колонки:
- * DeepSeek R1 (14.3%) vs DeepSeek V3 (3.9%). Контраст создаётся
- * самим размером цифры, без подсветки красным и без --accent.
- * Источник — Vectara HHEM Leaderboard, под summary мелким моно.
+ * Слайд 47 · Когда Память полезна, когда мешает
+ * Чистый B без anchor: мета-тег + заголовок-вопрос сверху, парный
+ * антитезис по центру в две строки. Зеркальная структура «Полезна
+ * для X. Мешает для Y.» — главный визуальный приём.
  */
-
 export default function Slide40() {
   return (
-    <Stage label="40 У думающих моделей выше галлюцинации">
-      <Meta num="40" type="D" />
+    <Stage label="40 Когда Память полезна, когда мешает">
+      <Meta num="40" type="B" />
 
-      <div className="s30-header">
-        <div className="sub">3.4 Точность и галлюцинации</div>
-        <h2 className="title">У&nbsp;думающих моделей выше галлюцинации</h2>
+      {/* Мета-тег подблока (top-left) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        3.2 Память и контекст в работе
       </div>
 
-      <div className="s30-cols">
-        <div className="col">
-          <div className="ctitle">DeepSeek R1</div>
-          <div className="ccode">думающая модель</div>
-          <div className="cnumber">14.3%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
-        <div className="vrule" />
-        <div className="col">
-          <div className="ctitle">DeepSeek V3</div>
-          <div className="ccode">обычная модель</div>
-          <div className="cnumber">3.9%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
-      </div>
+      {/* Заголовок чуть ниже мета-тега */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 168,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 36,
+          lineHeight: 1.2,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.005em',
+          maxWidth: 1500,
+          textWrap: 'pretty',
+        }}
+      >
+        Когда Память полезна, когда мешает
+      </h2>
 
-      <div className="s30-hrule" />
-
-      <div className="s30-summary">
-        <p>Чем длиннее рассуждение — больше места для&nbsp;ошибок</p>
-        <p className="s30-source">Vectara HHEM Leaderboard, summarisation</p>
+      {/* Центральный тезис: парный антитезис в две строки */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 500,
+            fontSize: 88,
+            lineHeight: 1.18,
+            color: 'var(--ink)',
+            margin: 0,
+            letterSpacing: '-0.012em',
+            textWrap: 'pretty',
+          }}
+        >
+          Полезна для предпочтений.
+          <br />
+          Мешает для фактов.
+        </p>
       </div>
 
       <Foot />

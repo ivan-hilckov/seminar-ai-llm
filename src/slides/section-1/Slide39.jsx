@@ -1,97 +1,246 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide39.css';
 
 export const meta = {
   id: '39',
-  type: 'D',
-  title: 'Как выглядит галлюцинация',
-  subblock: '3.4 Точность и галлюцинации',
+  type: 'C',
+  title: 'Память (Memory) — отдельная функция',
+  subblock: '3.2 Память и контекст в работе',
 };
 
+const BG = '#FAFAF7';
+const HI = '#F0EEE8';
+const RULE = '#D9D7CF';
+const RULE_SOFT = '#ECEAE3';
+const MUTE = '#6B6B68';
+const MUTE_2 = '#9A9893';
+const INK = '#1A1A1A';
+const INK_SOFT = '#2B2A28';
+
+const notes = [
+  'Работает в ВНИИЛМ',
+  'Интересуется засушливыми периодами',
+  'Предпочитает короткие ответы',
+  'Зовут Иван',
+];
+
 /**
- * Слайд 50 · Как выглядит галлюцинация
- * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
- * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
- * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
- * единственное использование акцентного цвета вне keystone-слайда 32.
- * Без мета-метки подблока (для смыслового единства с 49).
+ * Слайд 40 · Память (Memory) — отдельная функция
+ * C-шаблон. Слева — нейтральная панель «Заметки о пользователе» с
+ * четырьмя чипами. Стрелка вправо в блок «Системные инструкции», где
+ * заметки выделены курсивной строкой «+ заметки о пользователе».
+ * Стрелка вниз — в нейтральный блок «Модель». Под визуалом — мелкая
+ * моно-приписка с тремя свойствами Memory. Без `--accent`, без AI-стока.
  */
-
-function ChatWindow({ children, ariaLabel }) {
-  return (
-    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
-      <div className="s50-chat__bar">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="s50-chat__body">{children}</div>
-    </div>
-  );
-}
-
-function Fake({ children }) {
-  return <span className="s50-fake">{children}</span>;
-}
-
 export default function Slide39() {
   return (
-    <Stage label="39 Как выглядит галлюцинация">
-      <Meta num="39" type="D" />
+    <Stage label="39 Память — отдельная функция">
+      <Meta num="39" type="C" />
 
-      <div className="s50-header">
-        <h2 className="title">Как выглядит галлюцинация</h2>
-        <p className="sub">Два случая — один реальный, один реконструированный</p>
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Схема: панель Памяти подмешивается в системные инструкции, оттуда — в модель"
+        >
+          <defs>
+            <marker
+              id="s40-arr"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
+            >
+              <path d="M 0 0 L 10 5 L 0 10 z" fill={MUTE_2} />
+            </marker>
+          </defs>
+
+          {/* ── Панель «Заметки о пользователе» ── */}
+          <rect
+            x={20}
+            y={140}
+            width={440}
+            height={520}
+            rx={14}
+            fill={BG}
+            stroke={RULE}
+            strokeWidth={1}
+          />
+          <text
+            x={44}
+            y={188}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="22"
+            fill={INK}
+          >
+            Заметки о пользователе
+          </text>
+          <line
+            x1={20}
+            y1={215}
+            x2={460}
+            y2={215}
+            stroke={RULE_SOFT}
+            strokeWidth={1}
+          />
+
+          {notes.map((text, i) => {
+            const y = 235 + i * 96;
+            return (
+              <g key={text}>
+                <rect
+                  x={44}
+                  y={y}
+                  width={392}
+                  height={78}
+                  rx={10}
+                  fill={HI}
+                />
+                <text
+                  x={64}
+                  y={y + 49}
+                  fontFamily="IBM Plex Sans, sans-serif"
+                  fontWeight="400"
+                  fontSize="19"
+                  fill={INK}
+                >
+                  {text}
+                </text>
+                <text
+                  x={418}
+                  y={y + 50}
+                  fontFamily="IBM Plex Sans, sans-serif"
+                  fontWeight="400"
+                  fontSize="22"
+                  fill={MUTE_2}
+                  textAnchor="end"
+                >
+                  ×
+                </text>
+              </g>
+            );
+          })}
+
+          {/* ── Стрелка 1: Memory → Системные инструкции ── */}
+          <line
+            x1={466}
+            y1={400}
+            x2={574}
+            y2={400}
+            stroke={MUTE_2}
+            strokeWidth={1.6}
+            markerEnd="url(#s40-arr)"
+          />
+
+          {/* ── Блок «Системные инструкции» ── */}
+          <text
+            x={580}
+            y={260}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="18"
+            fill={MUTE}
+          >
+            Системные инструкции
+          </text>
+          <rect
+            x={580}
+            y={280}
+            width={420}
+            height={240}
+            rx={12}
+            fill={BG}
+            stroke={MUTE_2}
+            strokeWidth={1}
+          />
+          <text
+            x={604}
+            y={336}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontSize="22"
+            fill={INK_SOFT}
+          >
+            Будь вежлив. Отвечай кратко.
+          </text>
+          <line
+            x1={604}
+            y1={376}
+            x2={976}
+            y2={376}
+            stroke={RULE_SOFT}
+            strokeWidth={1}
+          />
+          <text
+            x={604}
+            y={426}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="400"
+            fontStyle="italic"
+            fontSize="22"
+            fill={INK_SOFT}
+          >
+            + заметки о пользователе
+          </text>
+
+          {/* ── Стрелка 2: Системные инструкции → Модель ── */}
+          <line
+            x1={790}
+            y1={526}
+            x2={790}
+            y2={596}
+            stroke={MUTE_2}
+            strokeWidth={1.6}
+            markerEnd="url(#s40-arr)"
+          />
+
+          {/* ── Блок «Модель» ── */}
+          <rect
+            x={690}
+            y={602}
+            width={200}
+            height={100}
+            rx={14}
+            fill={HI}
+            stroke={INK}
+            strokeWidth={1.5}
+          />
+          <text
+            x={790}
+            y={663}
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="500"
+            fontSize="30"
+            fill={INK}
+            textAnchor="middle"
+          >
+            Модель
+          </text>
+
+          {/* ── Подпись под визуалом ── */}
+          <text
+            x={20}
+            y={760}
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="18"
+            letterSpacing="0.06em"
+            fill={MUTE}
+          >
+            Можно выключить · Можно увидеть · Можно стереть
+          </text>
+        </svg>
       </div>
 
-      <div className="s50-cols">
-        {/* Левая колонка · Mata v. Avianca */}
-        <div className="col">
-          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
-
-          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
-            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
-            <p className="bot">
-              1.{' '}
-              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
-              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
-              что положения Монреальской конвенции применяются к…
-            </p>
-          </ChatWindow>
-
-          <p className="ccap">
-            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
-          </p>
-        </div>
-
-        <div className="vrule" />
-
-        {/* Правая колонка · Лесохозяйственный ГОСТ */}
-        <div className="col right-col">
-          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
-
-          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
-            <p className="user">
-              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
-            </p>
-            <p className="bot">
-              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
-              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
-              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
-            </p>
-          </ChatWindow>
-
-          <p className="ccap">
-            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
-          </p>
-        </div>
-      </div>
-
-      <div className="s50-hrule" />
-      <div className="s50-summary">
-        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
+      <div className="right">
+        <h2 className="title">Память (Memory) — отдельная функция</h2>
+        <p className="cap">
+          Не модель вас запоминает — продукт хранит заметки и&nbsp;подмешивает их в&nbsp;промт
+        </p>
       </div>
 
       <Foot />

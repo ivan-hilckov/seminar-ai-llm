@@ -6,67 +6,186 @@ import './Slide41.css';
 export const meta = {
   id: '41',
   type: 'D',
-  title: 'Где проверять обязательно',
-  subblock: '3.4 Точность и галлюцинации',
+  title: 'Новый чат — новый лист',
+  subblock: '3.2 Память и контекст в работе',
 };
 
-/**
- * Слайд 52 · Где проверять обязательно
- * D-сравнение: развёртка анкора слайда 51 в практическую таблицу 4+4.
- * Левая колонка — категории, требующие проверки. Правая — где можно
- * работать без оглядки. Без иконок, без --accent, без цветовой
- * маркировки зон. Обе колонки одинаково спокойные.
- */
+const BG = '#FAFAF7';
+const HI = '#F0EEE8';
+const RULE = '#D9D7CF';
+const RULE_SOFT = '#ECEAE3';
+const MUTE_2 = '#9A9893';
+const INK = '#1A1A1A';
 
-const LEFT = [
-  { text: 'Цифры и статистика', ex: '15%, −20 °C, 1 200 га' },
-  { text: 'Цитаты и ссылки', ex: 'Иванов, 2019, DOI' },
-  { text: 'Нормативные документы', ex: 'ГОСТы, статьи закона, СНиПы' },
-  { text: 'Имена, даты, факты', ex: 'год выхода работы, авторство метода' },
-];
-
-const RIGHT = [
-  { text: 'Объяснения известных понятий', ex: 'что такое регрессия, фотосинтез' },
-  { text: 'Переформулировки', ex: 'сократить, упростить, перевести' },
-  { text: 'Структура черновика', ex: 'оглавление, разделы, тезисы' },
-  { text: 'Поиск аналогий и идей', ex: 'подобрать сравнение, варианты' },
-];
-
-function ItemList({ items }) {
+function Bubble({ x, y, w, h = 52, text, role }) {
+  const isUser = role === 'user';
   return (
-    <ul className="s52-items">
-      {items.map((it) => (
-        <li key={it.text} className="s52-item">
-          {it.text}
-          <span className="s52-item__ex">({it.ex})</span>
-        </li>
-      ))}
-    </ul>
+    <g>
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={14}
+        fill={isUser ? HI : 'none'}
+        stroke={isUser ? 'none' : RULE}
+        strokeWidth={isUser ? 0 : 1}
+      />
+      <text
+        x={x + 18}
+        y={y + h / 2 + 6}
+        fontFamily="IBM Plex Sans, sans-serif"
+        fontWeight="400"
+        fontSize="18"
+        fill={INK}
+      >
+        {text}
+      </text>
+    </g>
   );
 }
 
+function ChatWindow({ children, ariaLabel }) {
+  return (
+    <svg
+      viewBox="0 0 768 440"
+      xmlns="http://www.w3.org/2000/svg"
+      className="cchat"
+      aria-label={ariaLabel}
+    >
+      {/* Окно */}
+      <rect
+        x={0.5}
+        y={0.5}
+        width={767}
+        height={439}
+        rx={12}
+        fill={BG}
+        stroke={RULE}
+        strokeWidth={1}
+      />
+      {/* Заголовок окна */}
+      <g fill={RULE}>
+        <circle cx={24} cy={24} r={4} />
+        <circle cx={40} cy={24} r={4} />
+        <circle cx={56} cy={24} r={4} />
+      </g>
+      <line x1={0} y1={44} x2={768} y2={44} stroke={RULE_SOFT} strokeWidth={1} />
+      {children}
+    </svg>
+  );
+}
+
+/**
+ * Слайд 39 · Новый чат — новый лист
+ * D-сравнение: слева — чат с накопленной историей («Помнит всё»),
+ * справа — тот же интерфейс, пустой, с курсором в поле ввода
+ * («Не знает ничего»). Тонкая линия --rule между колонками. Снизу —
+ * мелкая моно-приписка про исключение Memory (см. слайд 40).
+ */
 export default function Slide41() {
   return (
-    <Stage label="41 Где проверять обязательно">
+    <Stage label="41 Новый чат — новый лист">
       <Meta num="41" type="D" />
 
-      <div className="s52-header">
-        <h2 className="title">Где проверять обязательно</h2>
-        <p className="sub">Развёрнутое правило для&nbsp;работы</p>
+      <div className="s39-header">
+        <h2 className="title">Новый чат — новый лист</h2>
       </div>
 
-      <div className="s52-cols">
+      <div className="s39-cols">
+        {/* ── Левая колонка · Помнит всё ── */}
         <div className="col">
-          <div className="ctitle">Обязательно проверять</div>
-          <ItemList items={LEFT} />
+          <div className="ctitle">Помнит всё</div>
+
+          <ChatWindow ariaLabel="Окно чата с пятью сообщениями: накопленная история">
+            <Bubble
+              x={344}
+              y={68}
+              w={400}
+              text="Помоги составить план эксперимента"
+              role="user"
+            />
+            <Bubble
+              x={24}
+              y={132}
+              w={320}
+              text="Конечно. Какая тема и цель?"
+              role="assistant"
+            />
+            <Bubble
+              x={284}
+              y={196}
+              w={460}
+              text="Влияние засушливого периода на хвойные"
+              role="user"
+            />
+            <Bubble
+              x={24}
+              y={260}
+              w={400}
+              text="Понял. Уточним методику измерения?"
+              role="assistant"
+            />
+            <Bubble
+              x={444}
+              y={324}
+              w={300}
+              text="Какие методы предложишь?"
+              role="user"
+            />
+          </ChatWindow>
+
+          <p className="cthesis">Модель помнит всю беседу</p>
         </div>
 
         <div className="vrule" />
 
-        <div className="col">
-          <div className="ctitle">Можно доверять</div>
-          <ItemList items={RIGHT} />
+        {/* ── Правая колонка · Не знает ничего ── */}
+        <div className="col right-col">
+          <div className="ctitle">Не знает ничего</div>
+
+          <ChatWindow ariaLabel="Пустое окно чата: только поле ввода с курсором">
+            {/* Поле ввода */}
+            <rect
+              x={24}
+              y={376}
+              width={720}
+              height={44}
+              rx={22}
+              fill={BG}
+              stroke={RULE}
+              strokeWidth={1}
+            />
+            {/* Курсор */}
+            <line
+              x1={44}
+              y1={388}
+              x2={44}
+              y2={408}
+              stroke={INK}
+              strokeWidth={1.6}
+            />
+            {/* Плейсхолдер */}
+            <text
+              x={54}
+              y={404}
+              fontFamily="IBM Plex Sans, sans-serif"
+              fontWeight="400"
+              fontSize="17"
+              fill={MUTE_2}
+            >
+              Начните новый разговор…
+            </text>
+          </ChatWindow>
+
+          <p className="cthesis">Модель не знает ни имени, ни прошлых вопросов</p>
         </div>
+      </div>
+
+      <div className="s39-hrule" />
+
+      <div className="s39-summary">
+        <p>Исключение — функция Памяти (см. слайд 40)</p>
       </div>
 
       <Foot />

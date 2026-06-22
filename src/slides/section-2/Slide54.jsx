@@ -1,70 +1,97 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './part-v.css';
+import './Slide54.css';
 
 export const meta = {
   id: '54',
-  type: 'C',
-  title: 'Литобзор · хороший промт',
-  subblock: '5.2 Плохой vs хороший',
+  type: 'D',
+  title: 'Облако vs локально',
+  subblock: '4.4 Облако vs локально',
 };
 
-const PROMPT = [
-  ['Роль',         'Ты научный консультант по лесному хозяйству.'],
-  ['Задача',       'Составь короткий обзор исследований по приживаемости лиственницы сибирской в условиях вечной мерзлоты.'],
-  ['Контекст',     'Период — последние 10 лет. Регион — Якутия и Магаданская область. Журналы «Лесоведение», «Сибирский лесной журнал», Forest Ecology.'],
-  ['Формат',       '5–7 пунктов. По каждому: тема, ключевой вывод, авторы (если знаешь).'],
-  ['Огранич.',     'Если не уверен в авторстве — пиши «авторы не уверены». Не выдумывай ссылки.'],
+/**
+ * Слайд 69 · Облако и локально
+ * D-сравнение по образцу Slide43 (Секция 1). Тема продолжает разговор про
+ * приватность из 44–45 и накладывает выбор инструмента из 64–67. Без иконок
+ * облачка/компьютера, без названий локальных моделей (Llama, Mistral).
+ */
+
+const AXES = [
+  {
+    label: 'Где работает',
+    left: 'на серверах компании (OpenAI, Anthropic, Google, DeepSeek)',
+    right: 'на вашем компьютере (нужны: 16–64 GB RAM, GPU желательно)',
+  },
+  {
+    label: 'Куда уходит запрос',
+    left: 'на сервер компании, обрабатывается там',
+    right: 'никуда, всё считается на устройстве',
+  },
+  {
+    label: 'Что с данными',
+    left: 'хранятся у провайдера, могут использоваться для улучшения сервиса (зависит от тарифа и настроек)',
+    right: 'остаются у вас полностью',
+  },
+  {
+    label: 'Мощность',
+    left: 'любая, ограничена только тарифом',
+    right: 'ограничена железом — обычно слабее облачных моделей',
+  },
+  {
+    label: 'Подходит для',
+    left: 'обычной работы с открытыми материалами, черновиков, поиска, переводов',
+    right: 'работы с конфиденциальными данными, экспериментов, оффлайн-сценариев',
+  },
+  {
+    label: 'Не подходит для',
+    left: 'конфиденциальных данных без явного NDA / корпоративного тарифа',
+    right: 'самых мощных задач — топ-моделей локально не запустить',
+  },
 ];
 
-const ANSWER_TEXT = `1. Влияние климатических аномалий на приживаемость
-   L. sibirica в Центральной Якутии. Снижение
-   приживаемости на 18–24% при ранневесенних
-   оттепелях. Авторы не уверены.
+function AxisColumn({ side }) {
+  return (
+    <div className="s69-axes">
+      {AXES.map((a) => (
+        <div key={a.label}>
+          <div className="s69-axis-label">{a.label}</div>
+          <p className="s69-axis-text">{a[side]}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-2. Сравнение методов посадки на участках с активным
-   слоем мерзлоты до 1.2 м. Контейнерная посадка
-   показала выигрыш +30% к открытой корневой системе.
-   Авторы не уверены.
-
-3. Микоризные ассоциации L. sibirica в северных
-   популяциях... [и так далее, всего 5–7 пунктов]`;
-
-/**
- * Слайд 74 · Литобзор · хороший промт
- * C-слайд. Слева — структурированный промт по формуле, под ним конкретный ответ.
- */
 export default function Slide54() {
   return (
-    <Stage label="54 Литобзор · хороший промт">
-      <Meta num="54" type="C" />
+    <Stage label="54 Облако и локально">
+      <Meta num="54" type="D" />
 
-      <div className="pv-stack tight">
-        <div className="pv-card">
-          <div className="pv-card-label">ПРОМТ</div>
-          <div className="pv-grid-prompt compact">
-            {PROMPT.map(([label, text]) => (
-              <div key={label} className="pv-grid-prompt-row">
-                <div className="pv-grid-prompt-lbl">[{label}]</div>
-                <div className="pv-grid-prompt-text">{text}</div>
-              </div>
-            ))}
-          </div>
+      <div className="s69-header">
+        <div className="sub">4.4 Где живут данные</div>
+        <h2 className="title">Облако и локально</h2>
+        <p className="lead">Где живёт модель — там живут ваши запросы</p>
+      </div>
+
+      <div className="s69-cols">
+        <div className="col">
+          <div className="ctitle">Облако</div>
+          <AxisColumn side="left" />
         </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ</div>
-          <pre className="pv-pre tiny">{ANSWER_TEXT}</pre>
+        <div className="vrule" />
+        <div className="col right-col">
+          <div className="ctitle">Локально</div>
+          <AxisColumn side="right" />
         </div>
       </div>
 
-      <div className="pv-right">
-        <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Литобзор · хороший промт</h2>
-        <p className="cap">
-          Контекст сузил задачу до&nbsp;решаемой. Ограничение «не&nbsp;выдумывай» снизило
-          риск галлюцинации. Результат — основа для&nbsp;проверки, не&nbsp;финал
+      <div className="s69-hrule" />
+
+      <div className="s69-summary">
+        <p>
+          Для&nbsp;большинства задач исследователя — облако. Для&nbsp;конфиденциальных
+          материалов — локально или специальный корпоративный тариф
         </p>
       </div>
 

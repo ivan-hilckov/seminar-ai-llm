@@ -11,14 +11,14 @@ export const meta = {
 
 const BG = '#FAFAF7';
 const HI = '#F0EEE8';
+const PALE = '#F4F3EF';
 const RULE = '#D9D7CF';
 const RULE_SOFT = '#ECEAE3';
 const MUTE = '#6B6B68';
 const MUTE_2 = '#9A9893';
 const INK = '#1A1A1A';
-const INK_SOFT = '#2B2A28';
 
-function Bubble({ x, y, w, h = 60, text, role }) {
+function Bubble({ x, y, w, h = 52, text, role }) {
   const isUser = role === 'user';
   return (
     <g>
@@ -27,31 +27,29 @@ function Bubble({ x, y, w, h = 60, text, role }) {
         y={y}
         width={w}
         height={h}
-        rx={18}
+        rx={14}
         fill={isUser ? HI : 'none'}
         stroke={isUser ? 'none' : RULE}
         strokeWidth={isUser ? 0 : 1}
       />
-      <text
-        x={x + 22}
-        y={y + h / 2 + 8}
-        fontFamily="IBM Plex Sans, sans-serif"
-        fontWeight="400"
-        fontSize="22"
-        fill={INK}
-      >
+      <text x={x + 18} y={y + h / 2 + 6} fontFamily="IBM Plex Sans, sans-serif" fontSize="20" fill={INK}>
         {text}
       </text>
     </g>
   );
 }
 
+const WIN_X = 16;
+const WIN_W = 1058;
+const IN_X = 44;
+const IN_W = 1006;
+const IN_R = IN_X + IN_W; // правый внутренний край
+
 /**
- * Слайд 37 · Что такое контекст
- * C-шаблон. Слева — стилизованная имитация чат-окна с тремя
- * подсвеченными зонами: правила (system), история диалога,
- * текущий вопрос. Под визуалом — мелкая мета-подпись об объёме окна
- * (анонс слайда 38). Справа — заголовок и тезис.
+ * Слайд 29 · Что такое контекст
+ * C-шаблон. Чат-окно с тремя подписанными зонами: правила работы (бледнее,
+ * со значком-замком и припиской «задаёт сервис»), что уже обсудили, ваш
+ * вопрос. Окно = граница знания: чего нет в листе — для модели не существует.
  */
 export default function Slide29() {
   return (
@@ -63,153 +61,61 @@ export default function Slide29() {
           viewBox="0 0 1094 800"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: 1094, height: 800, display: 'block' }}
-          aria-label="Стилизованное чат-окно с тремя подсвеченными зонами: правила, история диалога, текущий вопрос"
+          aria-label="Чат-окно с тремя зонами: правила работы, что уже обсудили, ваш вопрос."
         >
           {/* ── Окно чата ── */}
-          <rect
-            x={20}
-            y={20}
-            width={1054}
-            height={656}
-            rx={14}
-            fill={BG}
-            stroke={RULE}
-            strokeWidth={1}
-          />
-
-          {/* Заголовок окна — три точки */}
+          <rect x={WIN_X} y={20} width={WIN_W} height={656} rx={14} fill={BG} stroke={RULE} strokeWidth={1} />
           <g fill={RULE}>
-            <circle cx={44} cy={42} r={5} />
-            <circle cx={64} cy={42} r={5} />
-            <circle cx={84} cy={42} r={5} />
+            <circle cx={WIN_X + 24} cy={44} r={5} />
+            <circle cx={WIN_X + 44} cy={44} r={5} />
+            <circle cx={WIN_X + 64} cy={44} r={5} />
           </g>
-          <line x1={20} y1={64} x2={1074} y2={64} stroke={RULE_SOFT} strokeWidth={1} />
+          <line x1={WIN_X} y1={66} x2={WIN_X + WIN_W} y2={66} stroke={RULE_SOFT} strokeWidth={1} />
 
-          {/* ── Зона 1 · Правила ── */}
-          <text
-            x={44}
-            y={98}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="18"
-            fill={MUTE}
-          >
-            Правила
+          {/* ── Зона 1 · Правила работы (бледнее) ── */}
+          <g stroke={MUTE_2} strokeWidth="1.4" fill="none">
+            <rect x={IN_X} y={92} width={14} height={11} rx={2} />
+            <path d={`M ${IN_X + 3} 92 v -3 a 4 4 0 0 1 8 0 v 3`} />
+          </g>
+          <text x={IN_X + 24} y={102} fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="18" fill={MUTE}>
+            Правила работы
           </text>
-          <rect
-            x={44}
-            y={108}
-            width={1006}
-            height={72}
-            rx={8}
-            fill={HI}
-            stroke={MUTE_2}
-            strokeWidth={1}
-          />
-          <text
-            x={68}
-            y={152}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="400"
-            fontSize="22"
-            fill={INK_SOFT}
-          >
+          <text x={IN_X + 178} y={102} fontFamily="IBM Plex Sans, sans-serif" fontSize="14" fill={MUTE_2}>
+            задаёт сервис — вы их не пишете и обычно не видите
+          </text>
+          <rect x={IN_X} y={114} width={IN_W} height={64} rx={8} fill={PALE} stroke={RULE_SOFT} strokeWidth={1} />
+          <text x={IN_X + 22} y={152} fontFamily="IBM Plex Sans, sans-serif" fontSize="20" fill={MUTE}>
             Ты — помощник-ассистент. Отвечай вежливо и кратко.
           </text>
 
-          {/* ── Зона 2 · История диалога ── */}
-          <text
-            x={44}
-            y={208}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="18"
-            fill={MUTE}
-          >
-            История диалога
+          {/* ── Зона 2 · Что уже обсудили ── */}
+          <text x={IN_X} y={212} fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="18" fill={MUTE}>
+            Что уже обсудили
           </text>
-          <rect
-            x={44}
-            y={218}
-            width={1006}
-            height={278}
-            rx={8}
-            fill="none"
-            stroke={MUTE_2}
-            strokeWidth={1}
-          />
+          <rect x={IN_X} y={224} width={IN_W} height={246} rx={8} fill="none" stroke={MUTE_2} strokeWidth={1} />
+          <Bubble x={IN_R - 480 - 24} y={248} w={480} text="Помоги составить план эксперимента" role="user" />
+          <Bubble x={IN_X + 24} y={318} w={340} text="Конечно. Какая тема?" role="assistant" />
+          <Bubble x={IN_R - 540 - 24} y={388} w={540} text="Влияние засушливого периода на хвойные" role="user" />
 
-          <Bubble
-            x={546}
-            y={244}
-            w={480}
-            text="Помоги составить план эксперимента"
-            role="user"
-          />
-          <Bubble
-            x={68}
-            y={322}
-            w={320}
-            text="Конечно. Какая тема?"
-            role="assistant"
-          />
-          <Bubble
-            x={486}
-            y={400}
-            w={540}
-            text="Влияние засушливого периода на хвойные"
-            role="user"
-          />
-
-          {/* ── Зона 3 · Текущий вопрос ── */}
-          <text
-            x={44}
-            y={526}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="600"
-            fontSize="18"
-            fill={INK}
-          >
-            Текущий вопрос
+          {/* ── Зона 3 · Ваш вопрос сейчас ── */}
+          <text x={IN_X} y={508} fontFamily="IBM Plex Sans, sans-serif" fontWeight="600" fontSize="18" fill={INK}>
+            Ваш вопрос сейчас
           </text>
-          <rect
-            x={44}
-            y={536}
-            width={1006}
-            height={120}
-            rx={8}
-            fill={BG}
-            stroke={INK}
-            strokeWidth={1.5}
-          />
-          <Bubble
-            x={546}
-            y={566}
-            w={480}
-            text="Какие методы измерения предложишь?"
-            role="user"
-          />
-
-          {/* ── Подпись об объёме окна (анонс слайда 38) ── */}
-          <text
-            x={20}
-            y={730}
-            fontFamily="IBM Plex Mono, monospace"
-            fontSize="22"
-            letterSpacing="0.04em"
-            fill={MUTE}
-          >
-            Объём окна: ~128 000 токенов (~200 страниц)
-          </text>
+          <rect x={IN_X} y={520} width={IN_W} height={120} rx={8} fill={BG} stroke={INK} strokeWidth={1.5} />
+          <Bubble x={IN_R - 480 - 24} y={556} w={480} text="Какие методы измерения предложишь?" role="user" />
         </svg>
       </div>
 
       <div className="right">
+        <div className="sub">Контекст и память</div>
         <h2 className="title">Что такое контекст</h2>
         <p className="cap">
-          Каждый ответ опирается только на три части:
+          Контекст — единственное, что модель видит при ответе:
           <br />
-          правила + история + вопрос
+          правила + что обсудили + ваш вопрос.
+          <br />
+          <br />
+          Чего нет в листе — для модели не существует.
         </p>
       </div>
 

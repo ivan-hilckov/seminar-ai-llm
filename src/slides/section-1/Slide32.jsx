@@ -4,84 +4,107 @@ import Foot from '../../components/Foot.jsx';
 
 export const meta = {
   id: '32',
-  type: 'B',
-  title: 'Модель обучают один раз',
-  subblock: '2.3 Обучение и заморозка',
+  type: 'C',
+  title: 'Как выбирается слово',
+  subblock: '2.3 Как рождается ответ',
 };
 
+const INK = '#1A1A1A';
+const INK_SOFT = '#2B2A28';
+const MUTE = '#6B6B68';
+const RULE = '#D9D7CF';
+const HI = '#F0EEE8';
+
+const candidates = [
+  { w: 'кислая', p: 58, chosen: true },
+  { w: 'влажная', p: 22 },
+  { w: 'бедная', p: 11 },
+  { w: 'тёплая', p: 6 },
+  { w: '…прочие', p: 3 },
+];
+
+const BAR_X = 250;
+const BAR_MAX = 470;
+const PCT_X = 770;
+const ROW_TOP = 196;
+const ROW_PITCH = 66;
+
 /**
- * Слайд 41 · Модель обучают один раз
- * B-шаблон с anchor: заголовок сверху, крупный тезис в центре,
- * меньшая поясняющая фраза снизу. Без мета-тега подблока, без --accent
- * (он закреплён за keystone слайдом 32). Техническое обоснование
- * для закрывающего тезиса 42 «Ваши вопросы её не меняют».
+ * Слайд 32 · Как выбирается слово
+ * C-шаблон. Незаконченная фраза → ранжированные кандидаты с полосками
+ * вероятности (верхний выбран). Внизу — лента «слово за словом». Эхо Т9:
+ * там кандидаты из словаря телефона, здесь — из всего языка.
  */
 export default function Slide32() {
   return (
-    <Stage label="32 Модель обучают один раз">
-      <Meta num="32" type="B" />
+    <Stage label="32 Как выбирается слово">
+      <Meta num="32" type="C" />
 
-      {/* Заголовок сверху */}
-      <h2
-        style={{
-          position: 'absolute',
-          top: 240,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 36,
-          lineHeight: 1.18,
-          letterSpacing: '-0.005em',
-          color: 'var(--ink)',
-        }}
-      >
-        Модель обучают один раз
-      </h2>
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Незаконченная фраза и ранжированные слова-кандидаты с вероятностями; верхнее выбрано"
+        >
+          {/* Незаконченная фраза */}
+          <text x={28} y={74} fontFamily="IBM Plex Sans, sans-serif" fontSize="32" fill={INK}>
+            В ельнике почва обычно
+          </text>
+          <rect x={508} y={50} width={16} height={32} fill={INK} />
+          <text x={536} y={74} fontFamily="IBM Plex Sans, sans-serif" fontSize="32" fill={MUTE}>
+            ______
+          </text>
 
-      {/* Тезис — визуальный центр */}
-      <p
-        style={{
-          position: 'absolute',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 56,
-          lineHeight: 1.18,
-          letterSpacing: '-0.008em',
-          color: 'var(--ink)',
-          textWrap: 'pretty',
-          maxWidth: 1600,
-        }}
-      >
-        Обучают провайдеры — месяцы и&nbsp;тысячи GPU.
-        <br />
-        Потом веса фиксируются
-      </p>
+          <line x1={28} y1={110} x2={1060} y2={110} stroke={RULE} strokeWidth={1} />
 
-      {/* Anchor снизу — отдельно от тезиса, мельче и бледнее */}
-      <p
-        style={{
-          position: 'absolute',
-          bottom: 220,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 28,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Обновление модели = новый релиз
-      </p>
+          {/* Кандидаты */}
+          {candidates.map((c, i) => {
+            const yb = ROW_TOP + i * ROW_PITCH;
+            const barW = (c.p / 58) * BAR_MAX;
+            return (
+              <g key={c.w}>
+                {c.chosen && <rect x={20} y={yb - 34} width={1040} height={50} rx={8} fill={HI} />}
+                <text x={44} y={yb} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={INK}>
+                  {c.w}
+                </text>
+                <rect x={BAR_X} y={yb - 24} width={barW} height={26} rx={3} fill={c.chosen ? INK : INK_SOFT} opacity={c.chosen ? 1 : 0.55} />
+                <text x={PCT_X} y={yb} fontFamily="IBM Plex Mono, monospace" fontSize="26" fill={INK}>
+                  {c.p}%
+                </text>
+                {c.chosen && (
+                  <text x={848} y={yb} fontFamily="IBM Plex Sans, sans-serif" fontSize="26" fill={MUTE}>
+                    ← выбрано
+                  </text>
+                )}
+              </g>
+            );
+          })}
+
+          <line x1={28} y1={552} x2={1060} y2={552} stroke={RULE} strokeWidth={1} />
+
+          {/* Лента «слово за словом» */}
+          <text x={28} y={606} fontFamily="IBM Plex Mono, monospace" fontSize="26" fill={MUTE} letterSpacing="0.03em">
+            …и так, слово за словом →
+          </text>
+          <text x={28} y={664} fontFamily="IBM Plex Sans, sans-serif" fontSize="28" fill={INK}>
+            «В ельнике почва обычно{' '}
+            <tspan fontWeight="600">кислая</tspan>, потому что…»
+          </text>
+        </svg>
+      </div>
+
+      <div className="right">
+        <div className="sub">Как рождается ответ</div>
+        <h2 className="title">Как выбирается слово</h2>
+        <p className="cap">
+          Модель оценивает, насколько вероятно каждое следующее слово, и берёт
+          из верхних.
+          <br />
+          <br />
+          И так — слово за словом, до конца ответа.
+        </p>
+      </div>
 
       <Foot />
     </Stage>

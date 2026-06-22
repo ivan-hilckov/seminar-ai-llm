@@ -6,53 +6,50 @@ import './part-v.css';
 export const meta = {
   id: '57',
   type: 'C',
-  title: 'Код · плохой промт',
-  subblock: '5.2 Плохой vs хороший',
+  title: 'Полный пример по формуле',
+  subblock: '5.1 Формула промта',
 };
 
-const ANSWER_TEXT = `import pandas as pd
-
-# Загрузка данных
-df = pd.read_csv('data.csv')
-
-# Базовая обработка
-df = df.dropna()
-df = df.drop_duplicates()
-
-# Сохранение
-df.to_csv('processed.csv', index=False)
-
-print(f'Обработано строк: {len(df)}')`;
+const PROMPT = [
+  ['Роль',         'Ты редактор научного журнала по лесному хозяйству.'],
+  ['Задача',       'Сократи аннотацию статьи до 150 слов.'],
+  ['Контекст',     'Аудитория — практикующие лесоводы. Сохрани термины\n«лесопатологический мониторинг», «приживаемость».'],
+  ['Формат',       'Один абзац. Без маркеров.'],
+  ['Ограничения',  'Не упрощай специальные термины. Не добавляй информации, которой нет в исходном тексте.'],
+];
 
 /**
- * Слайд 77 · Код · плохой промт
- * C-слайд. Слева — короткий промт, под ним абстрактный Python-скрипт.
- * Никакой подсветки синтаксиса — это часть визуальной идиомы Части V.
+ * Слайд 72 · Полный пример по формуле
+ * C-слайд. Слева — один моно-блок с промтом, размеченный лейблами
+ * [Роль], [Задача], [Контекст], [Формат], [Ограничения]. Справа — комментарий.
+ *
+ * Используем CSS Grid для надёжного выравнивания лейблов и текста.
  */
 export default function Slide57() {
   return (
-    <Stage label="57 Код · плохой промт">
+    <Stage label="57 Промт по формуле">
       <Meta num="57" type="C" />
 
       <div className="pv-stack">
         <div className="pv-card">
           <div className="pv-card-label">ПРОМТ</div>
-          <pre className="pv-pre lg">напиши скрипт для обработки данных</pre>
-        </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ · PYTHON</div>
-          <pre className="pv-pre small">{ANSWER_TEXT}</pre>
+          <div className="pv-grid-prompt">
+            {PROMPT.map(([label, text]) => (
+              <div key={label} className="pv-grid-prompt-row">
+                <div className="pv-grid-prompt-lbl">[{label}]</div>
+                <div className="pv-grid-prompt-text">{text}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="pv-right">
-        <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Код · плохой промт</h2>
+        <div className="sub">5.1 Формула промта</div>
+        <h2 className="title">Промт по формуле</h2>
         <p className="cap">
-          Модель выбрала Python и&nbsp;CSV наугад. Не&nbsp;знает: какие данные,
-          какие колонки, что делать с&nbsp;пропусками. Скрипт абстрактный — на&nbsp;вашей
-          задаче работать не&nbsp;будет
+          Это не шаблон, который надо повторять буквально. Это набор слотов,
+          которые имеет смысл заполнить, когда задача сложнее одного предложения
         </p>
       </div>
 

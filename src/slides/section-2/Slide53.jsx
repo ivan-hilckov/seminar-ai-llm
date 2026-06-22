@@ -1,59 +1,188 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './part-v.css';
 
 export const meta = {
   id: '53',
-  type: 'C',
-  title: 'Литобзор · плохой промт',
-  subblock: '5.2 Плохой vs хороший',
+  type: 'B',
+  title: 'Кому что подходит',
+  subblock: '4.3 Тарифы и API',
 };
 
-const ANSWER_TEXT = `Лиственница (Larix) — род хвойных деревьев семейства
-Сосновые. Распространена в России, Канаде, Скандинавии.
-По лиственнице существует обширная научная литература.
-Изучаются вопросы:
-
-— ботаника и систематика
-— лесоводство и хозяйственное использование
-— устойчивость к климату
-— болезни и вредители
-
-Для подробного изучения рекомендуется обратиться к
-специальным справочникам и научным журналам.`;
-
 /**
- * Слайд 73 · Литобзор · плохой промт
- * C-слайд. Слева — два моно-блока: краткий промт и общий ответ.
- * Разница «плохого» от «хорошего» показывается через размер и плотность текста,
- * не через цветовую подсветку.
+ * Слайд 68 · Кому что подходит
+ * B-слайд с трёхстрочной матрицей правил. Каждая строка — «роль → рекомендация»
+ * с серой моно-стрелкой посередине. Это не таблица сравнения, а горизонтальное
+ * правило-список под главным тезисом. Внизу — anchor над тонкой линией.
  */
+
+const RULES = [
+  {
+    role: 'Познакомиться, разовая задача',
+    pick: 'бесплатный веб-интерфейс любого из четырёх сервисов',
+  },
+  {
+    role: 'Регулярная исследовательская работа',
+    pick: 'один платный сервис (≈ $20 / мес), думающую модель — по требованию',
+  },
+  {
+    role: 'Автоматизация, обработка большого массива',
+    pick: 'API + скрипт или приложение',
+  },
+];
+
+const ROLE_STYLE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 400,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--ink)',
+  margin: 0,
+  letterSpacing: '-0.003em',
+  textWrap: 'pretty',
+};
+
+const PICK_STYLE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--ink)',
+  margin: 0,
+  letterSpacing: '-0.003em',
+  textWrap: 'pretty',
+};
+
+const ARROW_STYLE = {
+  fontFamily: 'IBM Plex Mono, monospace',
+  fontWeight: 400,
+  fontSize: 28,
+  lineHeight: 1.3,
+  color: 'var(--mute)',
+  margin: 0,
+  textAlign: 'center',
+};
+
 export default function Slide53() {
   return (
-    <Stage label="53 Литобзор · плохой промт">
-      <Meta num="53" type="C" />
+    <Stage label="53 Кому что подходит">
+      <Meta num="53" type="B" />
 
-      <div className="pv-stack">
-        <div className="pv-card">
-          <div className="pv-card-label">ПРОМТ</div>
-          <pre className="pv-pre lg">найди статьи про лиственницу</pre>
-        </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ</div>
-          <pre className="pv-pre small">{ANSWER_TEXT}</pre>
-        </div>
+      {/* Мета-тег подблока */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        4.3 Тарифы
       </div>
 
-      <div className="pv-right">
-        <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Литобзор · плохой промт</h2>
-        <p className="cap">
-          Модель не&nbsp;знает: какая лиственница, какой регион, какой период,
-          какие журналы, какой формат. Отвечает «в&nbsp;среднем» — то&nbsp;есть никак
-        </p>
+      {/* Заголовок */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 168,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 48,
+          lineHeight: 1.18,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.01em',
+        }}
+      >
+        Кому что подходит
+      </h2>
+
+      {/* Тезис */}
+      <p
+        style={{
+          position: 'absolute',
+          top: 320,
+          left: 96,
+          right: 96,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 60,
+          lineHeight: 1.18,
+          color: 'var(--ink)',
+          margin: 0,
+          letterSpacing: '-0.012em',
+          maxWidth: 1500,
+          textWrap: 'pretty',
+        }}
+      >
+        Для&nbsp;регулярной работы исследователя — один платный сервис.
+      </p>
+
+      {/* Три строки-правила */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 580,
+          left: 96,
+          right: 96,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 36,
+        }}
+      >
+        {RULES.map((r) => (
+          <div
+            key={r.role}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 56px 1fr',
+              alignItems: 'baseline',
+              columnGap: 24,
+            }}
+          >
+            <p style={ROLE_STYLE}>{r.role}</p>
+            <p style={ARROW_STYLE}>→</p>
+            <p style={PICK_STYLE}>{r.pick}</p>
+          </div>
+        ))}
       </div>
+
+      {/* Тонкая линия + anchor */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 116,
+          height: 1,
+          background: 'var(--rule)',
+        }}
+      />
+      <p
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 60,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 22,
+          lineHeight: 1.4,
+          color: 'var(--mute)',
+          margin: 0,
+          letterSpacing: '-0.002em',
+        }}
+      >
+        Несколько подписок параллельно почти никогда не&nbsp;нужны. Лучше один
+        сервис, в&nbsp;котором научился работать
+      </p>
 
       <Foot />
     </Stage>

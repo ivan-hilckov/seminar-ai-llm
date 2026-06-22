@@ -5,70 +5,27 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '43',
   type: 'B',
-  title: 'Она понимает буквально — не интуитивно',
-  subblock: '3.5 Границы применения',
+  title: 'Не знает фактов — знает статистику текстов',
+  subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 54 · Она понимает буквально — не интуитивно
- * Финальный смысловой слайд Секции 1, мост к Секции 2.
- * B-каркас + локальное мини-сравнение из двух рамок:
- *   заголовок → тезис → [Размыто | Конкретно] → якорь.
- * Без --accent, без иконок, без стрелок между рамками. Левая
- * рамка не «плохая» — обе нейтральные. Иерархия: тезис
- * доминирует, рамки поддерживают, якорь снизу.
+ * Слайд 49 · Не знает фактов — знает статистику текстов
+ * B-шаблон без мета-метки подблока: заголовок сверху, крупный тезис
+ * в оптическом центре, anchor снизу. Технический разворот keystone-
+ * тезиса 32 в плоскость работы с фактами. Без --accent, без визуала,
+ * без выделений отдельных слов.
  */
-
-function ExampleBox({ caption, text }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div
-        style={{
-          fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 16,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-          marginBottom: 14,
-        }}
-      >
-        {caption}
-      </div>
-      <div
-        style={{
-          border: '1px solid var(--rule)',
-          borderRadius: 8,
-          padding: '36px 40px',
-          height: 220,
-          boxSizing: 'border-box',
-          display: 'flex',
-          alignItems: 'center',
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 26,
-          lineHeight: 1.45,
-          color: 'var(--ink)',
-          letterSpacing: '-0.003em',
-          background: 'transparent',
-          textWrap: 'pretty',
-        }}
-      >
-        {text}
-      </div>
-    </div>
-  );
-}
-
 export default function Slide43() {
   return (
-    <Stage label="43 Она понимает буквально — не интуитивно">
+    <Stage label="43 Не знает фактов — знает статистику текстов">
       <Meta num="43" type="B" />
 
-      {/* Заголовок */}
+      {/* Заголовок сверху */}
       <h2
         style={{
           position: 'absolute',
-          top: 144,
+          top: 240,
           left: 96,
           right: 96,
           margin: 0,
@@ -80,66 +37,48 @@ export default function Slide43() {
           color: 'var(--ink)',
         }}
       >
-        Она понимает буквально — не&nbsp;интуитивно
+        Не знает фактов — знает статистику текстов
       </h2>
 
-      {/* Тезис */}
+      {/* Тезис — оптический центр слайда */}
       <p
         style={{
           position: 'absolute',
-          top: 240,
+          top: '50%',
+          transform: 'translateY(-50%)',
           left: 96,
           right: 96,
           margin: 0,
           fontFamily: 'IBM Plex Sans, sans-serif',
           fontWeight: 500,
           fontSize: 56,
-          lineHeight: 1.2,
-          color: 'var(--ink)',
+          lineHeight: 1.18,
           letterSpacing: '-0.008em',
-          maxWidth: 1600,
+          color: 'var(--ink)',
           textWrap: 'pretty',
+          maxWidth: 1600,
         }}
       >
-        Модель выполняет то, что написано, а&nbsp;не&nbsp;то, что вы&nbsp;имели в&nbsp;виду
+        Модель не&nbsp;хранит факты — она восстанавливает их&nbsp;по&nbsp;статистике текстов
       </p>
 
-      {/* Две рамки рядом */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 540,
-          left: 96,
-          right: 96,
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 48,
-        }}
-      >
-        <ExampleBox caption="Размыто" text="Напиши что-нибудь про лес" />
-        <ExampleBox
-          caption="Конкретно"
-          text="Напиши 3 абзаца для введения научной статьи о защите ельников от короеда-типографа в Центральной России"
-        />
-      </div>
-
-      {/* Якорь снизу */}
+      {/* Anchor снизу — мельче и бледнее, с воздухом до нижнего края */}
       <p
         style={{
           position: 'absolute',
-          bottom: 168,
+          bottom: 220,
           left: 96,
           right: 96,
           margin: 0,
           fontFamily: 'IBM Plex Sans, sans-serif',
           fontWeight: 400,
-          fontSize: 24,
+          fontSize: 28,
           lineHeight: 1.4,
           color: 'var(--mute)',
           letterSpacing: '-0.002em',
         }}
       >
-        Поэтому формулировка запроса — навык, а&nbsp;не&nbsp;магия
+        Пустоты в&nbsp;знании заполняются тем, что статистически похоже на&nbsp;правду
       </p>
 
       <Foot />

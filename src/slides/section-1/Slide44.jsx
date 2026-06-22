@@ -5,92 +5,93 @@ import './Slide44.css';
 
 export const meta = {
   id: '44',
-  type: 'C',
-  title: 'Что мы прошли',
-  subblock: 'Итог',
+  type: 'D',
+  title: 'Как выглядит галлюцинация',
+  subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Итоговый слайд первой половины семинара. Сверху — три колонки по главам
- * (без номеров частей), под ними — таймлайн ключевых вех истории LLM.
- * Заменяет прежнюю пару «Что мы прошли» + «Главные тезисы».
+ * Слайд 50 · Как выглядит галлюцинация
+ * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
+ * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
+ * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
+ * единственное использование акцентного цвета вне keystone-слайда 32.
+ * Без мета-метки подблока (для смыслового единства с 49).
  */
 
-const COLUMNS = [
-  {
-    head: 'Откуда взялись современные модели',
-    items: [
-      'Т9 и автозаполнение',
-      'От Transformer до GPT-3',
-      'ChatGPT и диалог',
-      '«Думающие» модели',
-      'Не интеллект — статистика',
-    ],
-  },
-  {
-    head: 'Что происходит при ответе',
-    items: ['Векторы смыслов', 'Контекст и память', 'Обучение и заморозка'],
-  },
-  {
-    head: 'Важные особенности',
-    items: [
-      'Данные и приватность',
-      'Память в работе',
-      'Доступ к интернету',
-      'Точность и галлюцинации',
-      'Границы применения',
-    ],
-  },
-];
+function ChatWindow({ children, ariaLabel }) {
+  return (
+    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
+      <div className="s50-chat__bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="s50-chat__body">{children}</div>
+    </div>
+  );
+}
 
-const TIMELINE = [
-  { year: 'до 2017', label: 'Т9, автозаполнение' },
-  { year: '2017', label: 'Transformer' },
-  { year: '2018', label: 'GPT-1' },
-  { year: '2019', label: 'GPT-2' },
-  { year: '2020', label: 'GPT-3 · 175 млрд' },
-  { year: '2022', label: 'ChatGPT' },
-  { year: '2024–25', label: '«Думающие» модели' },
-];
+function Fake({ children }) {
+  return <span className="s50-fake">{children}</span>;
+}
 
 export default function Slide44() {
   return (
-    <Stage label="44 Что мы прошли">
-      <Meta num="44" type="C" />
+    <Stage label="44 Как выглядит галлюцинация">
+      <Meta num="44" type="D" />
 
-      <div className="s43-header">
-        <h2 className="title">Что мы прошли</h2>
+      <div className="s50-header">
+        <h2 className="title">Как выглядит галлюцинация</h2>
+        <p className="sub">Два случая — один реальный, один реконструированный</p>
       </div>
 
-      <div className="s43-cols">
-        {COLUMNS.map((col) => (
-          <div key={col.head} className="s43-col">
-            <h3 className="s43-col__head">{col.head}</h3>
-            <ul className="s43-list">
-              {col.items.map((it) => (
-                <li key={it} className="s43-item">
-                  <span className="s43-dot" aria-hidden="true" />
-                  <span>{it}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      <div className="s50-cols">
+        {/* Левая колонка · Mata v. Avianca */}
+        <div className="col">
+          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
 
-      <div className="s43-timeline">
-        <div className="s43-tl__caption">История одним взглядом</div>
-        <div className="s43-track">
-          {TIMELINE.map((node) => (
-            <div key={node.year} className="s43-node">
-              <span className="s43-node__year">{node.year}</span>
-              <span className="s43-node__dot-row">
-                <span className="s43-node__dot" aria-hidden="true" />
-              </span>
-              <span className="s43-node__label">{node.label}</span>
-            </div>
-          ))}
+          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
+            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
+            <p className="bot">
+              1.{' '}
+              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
+              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
+              что положения Монреальской конвенции применяются к…
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
+          </p>
         </div>
+
+        <div className="vrule" />
+
+        {/* Правая колонка · Лесохозяйственный ГОСТ */}
+        <div className="col right-col">
+          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
+
+          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
+            <p className="user">
+              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
+            </p>
+            <p className="bot">
+              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
+              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
+              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
+          </p>
+        </div>
+      </div>
+
+      <div className="s50-hrule" />
+      <div className="s50-summary">
+        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
       </div>
 
       <Foot />

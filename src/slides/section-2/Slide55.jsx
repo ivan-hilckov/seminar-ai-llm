@@ -1,58 +1,25 @@
-import Stage from '../../components/Stage.jsx';
-import Meta from '../../components/Meta.jsx';
-import Foot from '../../components/Foot.jsx';
-import './part-v.css';
+import ASlide from '../section-1/ASlide.jsx';
 
 export const meta = {
   id: '55',
-  type: 'C',
-  title: 'Письмо · плохой промт',
-  subblock: '5.2 Плохой vs хороший',
+  type: 'A',
+  title: 'Как формулировать запросы',
+  subblock: '5.0 Заставка',
 };
 
-const ANSWER_TEXT = `Уважаемый коллега!
-
-Надеюсь, у Вас всё хорошо. Хотел бы обратиться к Вам
-по одному рабочему вопросу. Уверен, что Ваш опыт и
-знания будут очень полезны.
-
-Буду признателен за обратную связь в удобное для Вас
-время.
-
-С уважением,
-[Ваше имя]`;
-
 /**
- * Слайд 75 · Письмо коллеге · плохой промт
- * C-слайд. Слева — короткий промт, под ним шаблонно-вежливый ответ.
+ * Слайд 70 · Часть V — Как формулировать запросы
+ * Section divider Части V. Стандартный A: римская цифра V, заголовок и
+ * подпись справа внизу, мета слева внизу.
  */
 export default function Slide55() {
   return (
-    <Stage label="55 Письмо · плохой промт">
-      <Meta num="55" type="C" />
-
-      <div className="pv-stack">
-        <div className="pv-card">
-          <div className="pv-card-label">ПРОМТ</div>
-          <pre className="pv-pre lg">напиши письмо коллеге</pre>
-        </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ</div>
-          <pre className="pv-pre small">{ANSWER_TEXT}</pre>
-        </div>
-      </div>
-
-      <div className="pv-right">
-        <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Письмо коллеге · плохой промт</h2>
-        <p className="cap">
-          Звучит вежливо, но&nbsp;не&nbsp;содержит ни&nbsp;одного фрагмента сути. Такое
-          письмо коллега удалит, не&nbsp;дочитав
-        </p>
-      </div>
-
-      <Foot />
-    </Stage>
+    <ASlide
+      num="55"
+      roman="V"
+      meta="Часть V · слайды 70 — 87 · 18 слайдов · ≈ 50 мин"
+      title="Как формулировать запросы"
+      subtitle="Формула, плохой / хороший, итерация, четыре шаблона"
+    />
   );
 }

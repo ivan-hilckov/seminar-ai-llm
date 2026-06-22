@@ -5,241 +5,110 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '31',
   type: 'C',
-  title: 'Память (Memory) — отдельная функция',
+  title: 'Контекстное окно',
   subblock: '2.2 Контекст и память',
 };
 
-const BG = '#FAFAF7';
 const HI = '#F0EEE8';
-const RULE = '#D9D7CF';
-const RULE_SOFT = '#ECEAE3';
+const PALE = '#F4F3EF';
+const INK = '#1A1A1A';
 const MUTE = '#6B6B68';
 const MUTE_2 = '#9A9893';
-const INK = '#1A1A1A';
-const INK_SOFT = '#2B2A28';
+const RULE = '#D9D7CF';
+const RULE_SOFT = '#ECEAE3';
 
-const notes = [
-  'Работает в ВНИИЛМ',
-  'Интересуется засушливыми периодами',
-  'Предпочитает короткие ответы',
-  'Зовут Иван',
-];
+const B_X = 140;
+const B_W = 820;
+const BH = 64;
+
+function Bubble({ y, label, role, faded }) {
+  const user = role === 'user';
+  const fill = user ? (faded ? PALE : HI) : 'none';
+  const stroke = user ? RULE_SOFT : faded ? RULE_SOFT : RULE;
+  const tag = user ? 'вы' : 'модель';
+  return (
+    <g>
+      <rect x={B_X} y={y} width={B_W} height={BH} rx={16} fill={fill} stroke={stroke} strokeWidth={1.2} />
+      <text x={B_X + 26} y={y + BH / 2 + 9} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={faded ? MUTE_2 : INK}>
+        {label}
+      </text>
+      <text
+        x={B_X + B_W - 26}
+        y={y + BH / 2 + 8}
+        textAnchor="end"
+        fontFamily="IBM Plex Mono, monospace"
+        fontSize="20"
+        letterSpacing="0.06em"
+        fill={MUTE_2}
+      >
+        {tag}
+      </text>
+    </g>
+  );
+}
+
+const FRAME_X = 110;
+const FRAME_W = 880;
+const FRAME_TOP = 248;
+const FRAME_H = 324;
 
 /**
- * Слайд 40 · Память (Memory) — отдельная функция
- * C-шаблон. Слева — нейтральная панель «Заметки о пользователе» с
- * четырьмя чипами. Стрелка вправо в блок «Системные инструкции», где
- * заметки выделены курсивной строкой «+ заметки о пользователе».
- * Стрелка вниз — в нейтральный блок «Модель». Под визуалом — мелкая
- * моно-приписка с тремя свойствами Memory. Без `--accent`, без AI-стока.
+ * Слайд 31 · Контекстное окно
+ * C-шаблон. Тот же диалог, что на слайде 30, одной лентой (читается снизу
+ * вверх). Рамка = контекстное окно: внутри свежие реплики, а две самые
+ * старые — бледные над рамкой: выпали, модель их не видит.
  */
 export default function Slide31() {
   return (
-    <Stage label="31 Память — отдельная функция">
+    <Stage label="31 Контекстное окно">
       <Meta num="31" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1094 800"
+          viewBox="0 0 1094 640"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: 1094, height: 800, display: 'block' }}
-          aria-label="Схема: панель Памяти подмешивается в системные инструкции, оттуда — в модель"
+          style={{ width: 1094, height: 640, display: 'block' }}
+          aria-label="Лента диалога: две старые реплики выше рамки окна, бледные — выпали. В рамке — свежие реплики."
         >
-          <defs>
-            <marker
-              id="s40-arr"
-              viewBox="0 0 10 10"
-              refX="9"
-              refY="5"
-              markerWidth="7"
-              markerHeight="7"
-              orient="auto"
-            >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill={MUTE_2} />
-            </marker>
-          </defs>
-
-          {/* ── Панель «Заметки о пользователе» ── */}
-          <rect
-            x={20}
-            y={140}
-            width={440}
-            height={520}
-            rx={14}
-            fill={BG}
-            stroke={RULE}
-            strokeWidth={1}
-          />
-          <text
-            x={44}
-            y={188}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="22"
-            fill={INK}
-          >
-            Заметки о пользователе
+          {/* Выпавшее из окна — выше рамки, бледное */}
+          <text x={B_X} y={32} fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
+            ↑ выпало из окна — модель это уже не видит
           </text>
-          <line
-            x1={20}
-            y1={215}
-            x2={460}
-            y2={215}
-            stroke={RULE_SOFT}
-            strokeWidth={1}
-          />
+          <Bubble y={52} label="Составь план эксперимента" role="user" faded />
+          <Bubble y={128} label="Конечно. Какая тема?" role="assistant" faded />
 
-          {notes.map((text, i) => {
-            const y = 235 + i * 96;
-            return (
-              <g key={text}>
-                <rect
-                  x={44}
-                  y={y}
-                  width={392}
-                  height={78}
-                  rx={10}
-                  fill={HI}
-                />
-                <text
-                  x={64}
-                  y={y + 49}
-                  fontFamily="IBM Plex Sans, sans-serif"
-                  fontWeight="400"
-                  fontSize="19"
-                  fill={INK}
-                >
-                  {text}
-                </text>
-                <text
-                  x={418}
-                  y={y + 50}
-                  fontFamily="IBM Plex Sans, sans-serif"
-                  fontWeight="400"
-                  fontSize="22"
-                  fill={MUTE_2}
-                  textAnchor="end"
-                >
-                  ×
-                </text>
-              </g>
-            );
-          })}
-
-          {/* ── Стрелка 1: Memory → Системные инструкции ── */}
-          <line
-            x1={466}
-            y1={400}
-            x2={574}
-            y2={400}
-            stroke={MUTE_2}
-            strokeWidth={1.6}
-            markerEnd="url(#s40-arr)"
-          />
-
-          {/* ── Блок «Системные инструкции» ── */}
-          <text
-            x={580}
-            y={260}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="18"
-            fill={MUTE}
-          >
-            Системные инструкции
-          </text>
-          <rect
-            x={580}
-            y={280}
-            width={420}
-            height={240}
-            rx={12}
-            fill={BG}
-            stroke={MUTE_2}
-            strokeWidth={1}
-          />
-          <text
-            x={604}
-            y={336}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="400"
-            fontSize="22"
-            fill={INK_SOFT}
-          >
-            Будь вежлив. Отвечай кратко.
-          </text>
-          <line
-            x1={604}
-            y1={376}
-            x2={976}
-            y2={376}
-            stroke={RULE_SOFT}
-            strokeWidth={1}
-          />
-          <text
-            x={604}
-            y={426}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="400"
-            fontStyle="italic"
-            fontSize="22"
-            fill={INK_SOFT}
-          >
-            + заметки о пользователе
+          {/* Легенда — прижата к верхней границе рамки */}
+          <text x={FRAME_X} y={FRAME_TOP - 16} fontFamily="IBM Plex Mono, monospace" fontSize="25" fill={INK} letterSpacing="0.02em">
+            Контекстное окно ≈ 128 000 токенов
           </text>
 
-          {/* ── Стрелка 2: Системные инструкции → Модель ── */}
-          <line
-            x1={790}
-            y1={526}
-            x2={790}
-            y2={596}
-            stroke={MUTE_2}
-            strokeWidth={1.6}
-            markerEnd="url(#s40-arr)"
-          />
+          {/* Рамка-окно */}
+          <rect x={FRAME_X} y={FRAME_TOP} width={FRAME_W} height={FRAME_H} rx={10} fill="none" stroke={INK} strokeWidth={2.6} />
 
-          {/* ── Блок «Модель» ── */}
-          <rect
-            x={690}
-            y={602}
-            width={200}
-            height={100}
-            rx={14}
-            fill={HI}
-            stroke={INK}
-            strokeWidth={1.5}
-          />
-          <text
-            x={790}
-            y={663}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="30"
-            fill={INK}
-            textAnchor="middle"
-          >
-            Модель
-          </text>
+          {/* Влезло в окно — свежие реплики */}
+          <Bubble y={266} label="Влияние засухи на хвойные" role="user" />
+          <Bubble y={342} label="Уточним методику измерения?" role="assistant" />
+          <Bubble y={418} label="Какие методы предложишь?" role="user" />
+          <Bubble y={494} label="Предлагаю три метода…" role="assistant" />
 
-          {/* ── Подпись под визуалом ── */}
-          <text
-            x={20}
-            y={760}
-            fontFamily="IBM Plex Mono, monospace"
-            fontSize="18"
-            letterSpacing="0.06em"
-            fill={MUTE}
-          >
-            Можно выключить · Можно увидеть · Можно стереть
+          <text x={FRAME_X + FRAME_W / 2} y={FRAME_TOP + FRAME_H + 42} textAnchor="middle" fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
+            ↑ беседа читается снизу вверх
           </text>
         </svg>
       </div>
 
       <div className="right">
-        <h2 className="title">Память (Memory) — отдельная функция</h2>
+        <div className="sub">Контекст и память</div>
+        <h2 className="title">Контекстное окно</h2>
         <p className="cap">
-          Не модель вас запоминает — продукт хранит заметки и&nbsp;подмешивает их в&nbsp;промт
+          Контекстное окно — сколько текста модель читает за один раз.
+          <br />
+          <br />
+          Большое, но конечное: ~128 000 токенов ≈ 200 страниц.
+          <br />
+          <br />
+          Что не поместилось — выпадает: старое начало беседы модель уже не
+          видит.
         </p>
       </div>
 

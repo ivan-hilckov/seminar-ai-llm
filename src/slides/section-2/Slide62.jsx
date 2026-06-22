@@ -6,50 +6,53 @@ import './part-v.css';
 export const meta = {
   id: '62',
   type: 'C',
-  title: 'Итерация 3 · правки маркерами',
-  subblock: '5.3 Итерация на редактуре',
+  title: 'Код · плохой промт',
+  subblock: '5.2 Плохой vs хороший',
 };
 
-const REQUEST_TEXT = `То же самое, но покажи правки маркерами:
-[~было~] [+стало+] [-удалено-].
-Один отступ — один блок правки.`;
+const ANSWER_TEXT = `import pandas as pd
 
-const RESULT_TEXT = `[~Лесопатологический мониторинг показал, что~]
-[+Лесопатологический мониторинг выявил+] расширение
-очагов короеда-типографа [-в обследованных насаждениях
-ели-] на 17% в обследованных еловых насаждениях.
+# Загрузка данных
+df = pd.read_csv('data.csv')
 
-Поражены преимущественно перестойные деревья старше
-80 лет на южных склонах. — сохранено без правок`;
+# Базовая обработка
+df = df.dropna()
+df = df.drop_duplicates()
+
+# Сохранение
+df.to_csv('processed.csv', index=False)
+
+print(f'Обработано строк: {len(df)}')`;
 
 /**
- * Слайд 82 · Итерация 3 — покажи правки маркерами
- * C-слайд. Маркеры [~было~] [+стало+] [-удалено-] остаются обычным моно-текстом,
- * никакой цветовой подсветки — это часть текстовой конвенции, а не визуальной.
+ * Слайд 77 · Код · плохой промт
+ * C-слайд. Слева — короткий промт, под ним абстрактный Python-скрипт.
+ * Никакой подсветки синтаксиса — это часть визуальной идиомы Части V.
  */
 export default function Slide62() {
   return (
-    <Stage label="62 Итерация 3 — правки маркерами">
+    <Stage label="62 Код · плохой промт">
       <Meta num="62" type="C" />
 
       <div className="pv-stack">
         <div className="pv-card">
-          <div className="pv-card-label">ЗАПРОС</div>
-          <pre className="pv-pre">{REQUEST_TEXT}</pre>
+          <div className="pv-card-label">ПРОМТ</div>
+          <pre className="pv-pre lg">напиши скрипт для обработки данных</pre>
         </div>
 
         <div className="pv-card">
-          <div className="pv-card-label">РЕЗУЛЬТАТ</div>
-          <pre className="pv-pre small">{RESULT_TEXT}</pre>
+          <div className="pv-card-label">ОТВЕТ · PYTHON</div>
+          <pre className="pv-pre small">{ANSWER_TEXT}</pre>
         </div>
       </div>
 
       <div className="pv-right">
-        <div className="sub">5.3 Итерация</div>
-        <h2 className="title">Итерация 3 — покажи правки маркерами</h2>
+        <div className="sub">5.2 Плохой и&nbsp;хороший</div>
+        <h2 className="title">Код · плохой промт</h2>
         <p className="cap">
-          Видно каждое решение модели. Можно принять, отклонить, попросить
-          переделать конкретно эту правку. Это рабочая редактура, а&nbsp;не&nbsp;угадывание
+          Модель выбрала Python и&nbsp;CSV наугад. Не&nbsp;знает: какие данные,
+          какие колонки, что делать с&nbsp;пропусками. Скрипт абстрактный — на&nbsp;вашей
+          задаче работать не&nbsp;будет
         </p>
       </div>
 

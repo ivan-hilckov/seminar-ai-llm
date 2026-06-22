@@ -1,60 +1,114 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './part-v.css';
 
 export const meta = {
   id: '64',
-  type: 'C',
-  title: 'Шаблон · Редактура',
-  subblock: '5.4 Четыре шаблона',
+  type: 'B',
+  title: 'Первый ответ — черновик',
+  subblock: '5.3 Итерация на редактуре',
 };
 
-const PROMPT = [
-  ['Роль',     'Ты редактор научного текста.'],
-  ['Задача',   'Отредактируй абзац ниже.'],
-  ['Контекст', 'Это {фрагмент статьи / введение / методика / обсуждение}. Целевая длина — {N} слов. Аудитория — {практики / академическая}.'],
-  ['Формат',   'Покажи правки маркерами: [~было~] [+стало+] [-удалено-]. Один отступ — один блок правки.'],
-  ['Огранич.', 'Сохрани все цифры, термины и ссылки. Не добавляй фактов, которых нет в оригинале.'],
-];
-
 /**
- * Слайд 84 · Шаблон · Редактура
- * C-слайд. Слева — готовый промт-шаблон с пустыми слотами в {фигурных скобках},
- * под ним отдельный блок «ТЕКСТ» для вставки фрагмента.
+ * Слайд 79 · Первый ответ — почти всегда черновик
+ * B-шаблон по образцу Slide21: мета-тег подблока сверху-слева,
+ * заголовок-аппертив серый, центральный тезис крупно, anchor-строка снизу
+ * над тонкой линией --rule.
  */
 export default function Slide64() {
   return (
-    <Stage label="64 Шаблон · Редактура">
-      <Meta num="64" type="C" />
+    <Stage label="64 Первый ответ — черновик">
+      <Meta num="64" type="B" />
 
-      <div className="pv-stack">
-        <div className="pv-card">
-          <div className="pv-card-label">ПРОМТ-ШАБЛОН</div>
-          <div className="pv-grid-prompt">
-            {PROMPT.map(([label, text]) => (
-              <div key={label} className="pv-grid-prompt-row">
-                <div className="pv-grid-prompt-lbl">[{label}]</div>
-                <div className="pv-grid-prompt-text">{text}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">ТЕКСТ</div>
-          <pre className="pv-pre" style={{ color: 'var(--mute)' }}>{'{вставьте абзац}'}</pre>
-        </div>
+      {/* Мета-тег подблока (top-left) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        5.3 Итерация
       </div>
 
-      <div className="pv-right">
-        <div className="sub">5.4 Шаблоны</div>
-        <h2 className="title">Шаблон · Редактура</h2>
-        <p className="cap">
-          Рабочая версия из&nbsp;того, что мы разобрали в&nbsp;итерации. Подставьте свой
-          текст в&nbsp;фигурные скобки — и&nbsp;в&nbsp;дело
+      {/* Центральный блок: заголовок (аппертив), тезис, anchor */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 400,
+            fontSize: 44,
+            lineHeight: 1.15,
+            color: 'var(--mute)',
+            margin: '0 0 48px 0',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          Первый ответ — почти всегда черновик
+        </h2>
+
+        <p
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 500,
+            fontSize: 84,
+            lineHeight: 1.1,
+            color: 'var(--ink)',
+            margin: 0,
+            letterSpacing: '-0.012em',
+            maxWidth: 1600,
+            textWrap: 'pretty',
+          }}
+        >
+          Итерация — не&nbsp;починка ошибки.
+          <br />
+          Это нормальный режим работы.
         </p>
       </div>
+
+      {/* Anchor над тонкой линией снизу */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 116,
+          height: 1,
+          background: 'var(--rule)',
+        }}
+      />
+      <p
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 60,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 22,
+          lineHeight: 1.4,
+          color: 'var(--mute)',
+          margin: 0,
+          letterSpacing: '-0.002em',
+        }}
+      >
+        Хороший результат за&nbsp;один проход — исключение.
+        За&nbsp;2–3 итерации — норма
+      </p>
 
       <Foot />
     </Stage>
