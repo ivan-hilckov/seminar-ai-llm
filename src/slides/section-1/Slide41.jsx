@@ -1,146 +1,73 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './Slide41.css';
 
 export const meta = {
   id: '41',
-  type: 'B',
-  title: 'Она понимает буквально — не интуитивно',
-  subblock: '3.5 Границы применения',
+  type: 'D',
+  title: 'Где проверять обязательно',
+  subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 54 · Она понимает буквально — не интуитивно
- * Финальный смысловой слайд Секции 1, мост к Секции 2.
- * B-каркас + локальное мини-сравнение из двух рамок:
- *   заголовок → тезис → [Размыто | Конкретно] → якорь.
- * Без --accent, без иконок, без стрелок между рамками. Левая
- * рамка не «плохая» — обе нейтральные. Иерархия: тезис
- * доминирует, рамки поддерживают, якорь снизу.
+ * Слайд 52 · Где проверять обязательно
+ * D-сравнение: развёртка анкора слайда 51 в практическую таблицу 4+4.
+ * Левая колонка — категории, требующие проверки. Правая — где можно
+ * работать без оглядки. Без иконок, без --accent, без цветовой
+ * маркировки зон. Обе колонки одинаково спокойные.
  */
 
-function ExampleBox({ caption, text }) {
+const LEFT = [
+  { text: 'Цифры и статистика', ex: '15%, −20 °C, 1 200 га' },
+  { text: 'Цитаты и ссылки', ex: 'Иванов, 2019, DOI' },
+  { text: 'Нормативные документы', ex: 'ГОСТы, статьи закона, СНиПы' },
+  { text: 'Имена, даты, факты', ex: 'год выхода работы, авторство метода' },
+];
+
+const RIGHT = [
+  { text: 'Объяснения известных понятий', ex: 'что такое регрессия, фотосинтез' },
+  { text: 'Переформулировки', ex: 'сократить, упростить, перевести' },
+  { text: 'Структура черновика', ex: 'оглавление, разделы, тезисы' },
+  { text: 'Поиск аналогий и идей', ex: 'подобрать сравнение, варианты' },
+];
+
+function ItemList({ items }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div
-        style={{
-          fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 16,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-          marginBottom: 14,
-        }}
-      >
-        {caption}
-      </div>
-      <div
-        style={{
-          border: '1px solid var(--rule)',
-          borderRadius: 8,
-          padding: '36px 40px',
-          height: 220,
-          boxSizing: 'border-box',
-          display: 'flex',
-          alignItems: 'center',
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 26,
-          lineHeight: 1.45,
-          color: 'var(--ink)',
-          letterSpacing: '-0.003em',
-          background: 'transparent',
-          textWrap: 'pretty',
-        }}
-      >
-        {text}
-      </div>
-    </div>
+    <ul className="s52-items">
+      {items.map((it) => (
+        <li key={it.text} className="s52-item">
+          {it.text}
+          <span className="s52-item__ex">({it.ex})</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
 export default function Slide41() {
   return (
-    <Stage label="41 Она понимает буквально — не интуитивно">
-      <Meta num="41" type="B" />
+    <Stage label="41 Где проверять обязательно">
+      <Meta num="41" type="D" />
 
-      {/* Заголовок */}
-      <h2
-        style={{
-          position: 'absolute',
-          top: 144,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 36,
-          lineHeight: 1.18,
-          letterSpacing: '-0.005em',
-          color: 'var(--ink)',
-        }}
-      >
-        Она понимает буквально — не&nbsp;интуитивно
-      </h2>
-
-      {/* Тезис */}
-      <p
-        style={{
-          position: 'absolute',
-          top: 240,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 56,
-          lineHeight: 1.2,
-          color: 'var(--ink)',
-          letterSpacing: '-0.008em',
-          maxWidth: 1600,
-          textWrap: 'pretty',
-        }}
-      >
-        Модель выполняет то, что написано, а&nbsp;не&nbsp;то, что вы&nbsp;имели в&nbsp;виду
-      </p>
-
-      {/* Две рамки рядом */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 540,
-          left: 96,
-          right: 96,
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 48,
-        }}
-      >
-        <ExampleBox caption="Размыто" text="Напиши что-нибудь про лес" />
-        <ExampleBox
-          caption="Конкретно"
-          text="Напиши 3 абзаца для введения научной статьи о защите ельников от короеда-типографа в Центральной России"
-        />
+      <div className="s52-header">
+        <h2 className="title">Где проверять обязательно</h2>
+        <p className="sub">Развёрнутое правило для&nbsp;работы</p>
       </div>
 
-      {/* Якорь снизу */}
-      <p
-        style={{
-          position: 'absolute',
-          bottom: 168,
-          left: 96,
-          right: 96,
-          margin: 0,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 400,
-          fontSize: 24,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Поэтому формулировка запроса — навык, а&nbsp;не&nbsp;магия
-      </p>
+      <div className="s52-cols">
+        <div className="col">
+          <div className="ctitle">Обязательно проверять</div>
+          <ItemList items={LEFT} />
+        </div>
+
+        <div className="vrule" />
+
+        <div className="col">
+          <div className="ctitle">Можно доверять</div>
+          <ItemList items={RIGHT} />
+        </div>
+      </div>
 
       <Foot />
     </Stage>

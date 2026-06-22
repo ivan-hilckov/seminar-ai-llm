@@ -1,96 +1,77 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide42.css';
 
 export const meta = {
   id: '42',
-  type: 'C',
-  title: 'Что мы прошли',
-  subblock: 'Итог',
+  type: 'B',
+  title: 'AI берёт на себя задачи, не роль',
+  subblock: '3.5 Границы применения',
 };
 
 /**
- * Итоговый слайд первой половины семинара. Сверху — три колонки по главам
- * (без номеров частей), под ними — таймлайн ключевых вех истории LLM.
- * Заменяет прежнюю пару «Что мы прошли» + «Главные тезисы».
+ * Слайд 53 · AI берёт на себя задачи, не роль
+ * B-шаблон с расширенным центральным блоком: заголовок сверху, три
+ * равноценные строки в центре. Между строкой 2 и строкой 3 — увеличенный
+ * отступ, чтобы Excel-фраза читалась как отдельный смысловой абзац.
+ * Без мета-метки подблока (как 49–51), без --accent, без иллюстраций.
  */
 
-const COLUMNS = [
-  {
-    head: 'Откуда взялись современные модели',
-    items: [
-      'Т9 и автозаполнение',
-      'От Transformer до GPT-3',
-      'ChatGPT и диалог',
-      '«Думающие» модели',
-      'Не интеллект — статистика',
-    ],
-  },
-  {
-    head: 'Что происходит при ответе',
-    items: ['Векторы смыслов', 'Контекст и память', 'Обучение и заморозка'],
-  },
-  {
-    head: 'Важные особенности',
-    items: [
-      'Данные и приватность',
-      'Память в работе',
-      'Доступ к интернету',
-      'Точность и галлюцинации',
-      'Границы применения',
-    ],
-  },
-];
-
-const TIMELINE = [
-  { year: 'до 2017', label: 'Т9, автозаполнение' },
-  { year: '2017', label: 'Transformer' },
-  { year: '2018', label: 'GPT-1' },
-  { year: '2019', label: 'GPT-2' },
-  { year: '2020', label: 'GPT-3 · 175 млрд' },
-  { year: '2022', label: 'ChatGPT' },
-  { year: '2024–25', label: '«Думающие» модели' },
-];
+const LINE = {
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  fontSize: 36,
+  lineHeight: 1.4,
+  color: 'var(--ink)',
+  letterSpacing: '-0.005em',
+  margin: 0,
+  textWrap: 'pretty',
+  maxWidth: 1500,
+};
 
 export default function Slide42() {
   return (
-    <Stage label="42 Что мы прошли">
-      <Meta num="42" type="C" />
+    <Stage label="42 AI берёт на себя задачи, не роль">
+      <Meta num="42" type="B" />
 
-      <div className="s43-header">
-        <h2 className="title">Что мы прошли</h2>
-      </div>
+      {/* Заголовок сверху */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 240,
+          left: 96,
+          right: 96,
+          margin: 0,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 36,
+          lineHeight: 1.18,
+          letterSpacing: '-0.005em',
+          color: 'var(--ink)',
+        }}
+      >
+        AI берёт на&nbsp;себя задачи, не&nbsp;роль
+      </h2>
 
-      <div className="s43-cols">
-        {COLUMNS.map((col) => (
-          <div key={col.head} className="s43-col">
-            <h3 className="s43-col__head">{col.head}</h3>
-            <ul className="s43-list">
-              {col.items.map((it) => (
-                <li key={it} className="s43-item">
-                  <span className="s43-dot" aria-hidden="true" />
-                  <span>{it}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="s43-timeline">
-        <div className="s43-tl__caption">История одним взглядом</div>
-        <div className="s43-track">
-          {TIMELINE.map((node) => (
-            <div key={node.year} className="s43-node">
-              <span className="s43-node__year">{node.year}</span>
-              <span className="s43-node__dot-row">
-                <span className="s43-node__dot" aria-hidden="true" />
-              </span>
-              <span className="s43-node__label">{node.label}</span>
-            </div>
-          ))}
-        </div>
+      {/* Центральный блок · три строки, оптически по центру */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          left: 96,
+          right: 96,
+        }}
+      >
+        <p style={LINE}>
+          30&nbsp;лет назад программы для&nbsp;статистики вызывали те&nbsp;же&nbsp;вопросы.
+        </p>
+        <p style={{ ...LINE, marginTop: 16 }}>
+          Они перераспределили задачи.
+        </p>
+        <p style={{ ...LINE, marginTop: 48 }}>
+          Приход Excel не&nbsp;упразднил бухгалтерию — изменил работу.
+        </p>
       </div>
 
       <Foot />

@@ -6,53 +6,49 @@ import './part-v.css';
 export const meta = {
   id: '55',
   type: 'C',
-  title: 'Код · плохой промт',
+  title: 'Письмо · плохой промт',
   subblock: '5.2 Плохой vs хороший',
 };
 
-const ANSWER_TEXT = `import pandas as pd
+const ANSWER_TEXT = `Уважаемый коллега!
 
-# Загрузка данных
-df = pd.read_csv('data.csv')
+Надеюсь, у Вас всё хорошо. Хотел бы обратиться к Вам
+по одному рабочему вопросу. Уверен, что Ваш опыт и
+знания будут очень полезны.
 
-# Базовая обработка
-df = df.dropna()
-df = df.drop_duplicates()
+Буду признателен за обратную связь в удобное для Вас
+время.
 
-# Сохранение
-df.to_csv('processed.csv', index=False)
-
-print(f'Обработано строк: {len(df)}')`;
+С уважением,
+[Ваше имя]`;
 
 /**
- * Слайд 77 · Код · плохой промт
- * C-слайд. Слева — короткий промт, под ним абстрактный Python-скрипт.
- * Никакой подсветки синтаксиса — это часть визуальной идиомы Части V.
+ * Слайд 75 · Письмо коллеге · плохой промт
+ * C-слайд. Слева — короткий промт, под ним шаблонно-вежливый ответ.
  */
 export default function Slide55() {
   return (
-    <Stage label="55 Код · плохой промт">
+    <Stage label="55 Письмо · плохой промт">
       <Meta num="55" type="C" />
 
       <div className="pv-stack">
         <div className="pv-card">
           <div className="pv-card-label">ПРОМТ</div>
-          <pre className="pv-pre lg">напиши скрипт для обработки данных</pre>
+          <pre className="pv-pre lg">напиши письмо коллеге</pre>
         </div>
 
         <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ · PYTHON</div>
+          <div className="pv-card-label">ОТВЕТ</div>
           <pre className="pv-pre small">{ANSWER_TEXT}</pre>
         </div>
       </div>
 
       <div className="pv-right">
         <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Код · плохой промт</h2>
+        <h2 className="title">Письмо коллеге · плохой промт</h2>
         <p className="cap">
-          Модель выбрала Python и&nbsp;CSV наугад. Не&nbsp;знает: какие данные,
-          какие колонки, что делать с&nbsp;пропусками. Скрипт абстрактный — на&nbsp;вашей
-          задаче работать не&nbsp;будет
+          Звучит вежливо, но&nbsp;не&nbsp;содержит ни&nbsp;одного фрагмента сути. Такое
+          письмо коллега удалит, не&nbsp;дочитав
         </p>
       </div>
 

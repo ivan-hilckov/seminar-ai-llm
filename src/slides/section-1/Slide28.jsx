@@ -1,191 +1,124 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide28.css';
 
 export const meta = {
   id: '28',
-  type: 'D',
-  title: 'Новый чат — новый лист',
-  subblock: '2.2 Контекст и память',
+  type: 'C',
+  title: 'Не два числа, а сотни измерений',
+  subblock: '2.1 Векторы смыслов',
 };
 
-const BG = '#FAFAF7';
-const HI = '#F0EEE8';
-const RULE = '#D9D7CF';
-const RULE_SOFT = '#ECEAE3';
-const MUTE_2 = '#9A9893';
 const INK = '#1A1A1A';
+const MUTE = '#6B6B68';
+const RULE = '#D9D7CF';
 
-function Bubble({ x, y, w, h = 52, text, role }) {
-  const isUser = role === 'user';
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={14}
-        fill={isUser ? HI : 'none'}
-        stroke={isUser ? 'none' : RULE}
-        strokeWidth={isUser ? 0 : 1}
-      />
-      <text
-        x={x + 18}
-        y={y + h / 2 + 6}
-        fontFamily="IBM Plex Sans, sans-serif"
-        fontWeight="400"
-        fontSize="18"
-        fill={INK}
-      >
-        {text}
-      </text>
-    </g>
-  );
-}
+// Векторы намеренно правдоподобны: «банан» близок к «яблоку», «машина» — нет.
+const vectors = [
+  { word: 'яблоко', nums: ['0.12', '−0.44', '0.87', '0.05', '−0.21', '0.63'] },
+  { word: 'банан', nums: ['0.09', '−0.40', '0.81', '0.11', '−0.18', '0.55'] },
+  { word: 'машина', nums: ['−0.52', '0.30', '−0.07', '0.66', '0.40', '−0.12'] },
+];
 
-function ChatWindow({ children, ariaLabel }) {
-  return (
-    <svg
-      viewBox="0 0 768 440"
-      xmlns="http://www.w3.org/2000/svg"
-      className="cchat"
-      aria-label={ariaLabel}
-    >
-      {/* Окно */}
-      <rect
-        x={0.5}
-        y={0.5}
-        width={767}
-        height={439}
-        rx={12}
-        fill={BG}
-        stroke={RULE}
-        strokeWidth={1}
-      />
-      {/* Заголовок окна */}
-      <g fill={RULE}>
-        <circle cx={24} cy={24} r={4} />
-        <circle cx={40} cy={24} r={4} />
-        <circle cx={56} cy={24} r={4} />
-      </g>
-      <line x1={0} y1={44} x2={768} y2={44} stroke={RULE_SOFT} strokeWidth={1} />
-      {children}
-    </svg>
-  );
-}
+const LABEL_X = 70;
+const CELL_X = 300;
+const CELL_W = 104;
+const CELL_H = 64;
+const TOP = 150;
+const RGAP = 170;
 
 /**
- * Слайд 39 · Новый чат — новый лист
- * D-сравнение: слева — чат с накопленной историей («Помнит всё»),
- * справа — тот же интерфейс, пустой, с курсором в поле ввода
- * («Не знает ничего»). Тонкая линия --rule между колонками. Снизу —
- * мелкая моно-приписка про исключение Memory (см. слайд 40).
+ * Слайд 27 · Не два числа, а сотни измерений
+ * C-шаблон: каждое слово — длинная строка чисел, обрывающаяся «…».
+ * Снимает упрощение слайдов 25–26 (две оси) и вводит масштаб реальных
+ * эмбеддингов. «банан» по числам близок к «яблоку», «машина» — далеко.
  */
 export default function Slide28() {
   return (
-    <Stage label="28 Новый чат — новый лист">
-      <Meta num="28" type="D" />
+    <Stage label="28 Не два числа, а сотни измерений">
+      <Meta num="28" type="C" />
 
-      <div className="s39-header">
-        <h2 className="title">Новый чат — новый лист</h2>
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Три слова, у каждого длинный список чисел, обрывающийся многоточием — у реальной модели сотни таких чисел"
+        >
+          {vectors.map((v, row) => {
+            const y = TOP + RGAP * row;
+            return (
+              <g key={v.word}>
+                <text
+                  x={LABEL_X}
+                  y={y + CELL_H / 2 + 10}
+                  fontFamily="IBM Plex Sans, sans-serif"
+                  fontSize="30"
+                  fill={INK}
+                >
+                  {v.word}
+                </text>
+                {v.nums.map((n, i) => (
+                  <g key={i}>
+                    <rect
+                      x={CELL_X + i * CELL_W}
+                      y={y}
+                      width={CELL_W - 8}
+                      height={CELL_H}
+                      fill="none"
+                      stroke={RULE}
+                      strokeWidth="1.2"
+                    />
+                    <text
+                      x={CELL_X + i * CELL_W + (CELL_W - 8) / 2}
+                      y={y + CELL_H / 2 + 8}
+                      textAnchor="middle"
+                      fontFamily="IBM Plex Mono, monospace"
+                      fontSize="22"
+                      fill={INK}
+                    >
+                      {n}
+                    </text>
+                  </g>
+                ))}
+                <text
+                  x={CELL_X + vectors[0].nums.length * CELL_W + 6}
+                  y={y + CELL_H / 2 + 12}
+                  fontFamily="IBM Plex Mono, monospace"
+                  fontSize="30"
+                  fill={MUTE}
+                >
+                  …
+                </text>
+              </g>
+            );
+          })}
+
+          {/* Аннотация масштаба */}
+          <text
+            x={LABEL_X}
+            y={TOP + RGAP * vectors.length + 40}
+            fontFamily="IBM Plex Mono, monospace"
+            fontSize="20"
+            fill={MUTE}
+            letterSpacing="0.03em"
+          >
+            у настоящей модели — 300–1500 таких чисел на каждое слово
+          </text>
+        </svg>
       </div>
 
-      <div className="s39-cols">
-        {/* ── Левая колонка · Помнит всё ── */}
-        <div className="col">
-          <div className="ctitle">Помнит всё</div>
-
-          <ChatWindow ariaLabel="Окно чата с пятью сообщениями: накопленная история">
-            <Bubble
-              x={344}
-              y={68}
-              w={400}
-              text="Помоги составить план эксперимента"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={132}
-              w={320}
-              text="Конечно. Какая тема и цель?"
-              role="assistant"
-            />
-            <Bubble
-              x={284}
-              y={196}
-              w={460}
-              text="Влияние засушливого периода на хвойные"
-              role="user"
-            />
-            <Bubble
-              x={24}
-              y={260}
-              w={400}
-              text="Понял. Уточним методику измерения?"
-              role="assistant"
-            />
-            <Bubble
-              x={444}
-              y={324}
-              w={300}
-              text="Какие методы предложишь?"
-              role="user"
-            />
-          </ChatWindow>
-
-          <p className="cthesis">Модель помнит всю беседу</p>
-        </div>
-
-        <div className="vrule" />
-
-        {/* ── Правая колонка · Не знает ничего ── */}
-        <div className="col right-col">
-          <div className="ctitle">Не знает ничего</div>
-
-          <ChatWindow ariaLabel="Пустое окно чата: только поле ввода с курсором">
-            {/* Поле ввода */}
-            <rect
-              x={24}
-              y={376}
-              width={720}
-              height={44}
-              rx={22}
-              fill={BG}
-              stroke={RULE}
-              strokeWidth={1}
-            />
-            {/* Курсор */}
-            <line
-              x1={44}
-              y1={388}
-              x2={44}
-              y2={408}
-              stroke={INK}
-              strokeWidth={1.6}
-            />
-            {/* Плейсхолдер */}
-            <text
-              x={54}
-              y={404}
-              fontFamily="IBM Plex Sans, sans-serif"
-              fontWeight="400"
-              fontSize="17"
-              fill={MUTE_2}
-            >
-              Начните новый разговор…
-            </text>
-          </ChatWindow>
-
-          <p className="cthesis">Модель не знает ни имени, ни прошлых вопросов</p>
-        </div>
-      </div>
-
-      <div className="s39-hrule" />
-
-      <div className="s39-summary">
-        <p>Исключение — функция Памяти (см. слайд 40)</p>
+      <div className="right">
+        <div className="sub">Векторы смыслов</div>
+        <h2 className="title">Не два числа, а сотни измерений</h2>
+        <p className="cap">
+          Две оси — только чтобы поместиться на экране. У настоящей модели для
+          каждого слова сотни-тысячи чисел.
+          <br />
+          <br />
+          Каждое ловит свой оттенок смысла. Назвать их по отдельности человек
+          обычно не может — и не нужно.
+        </p>
       </div>
 
       <Foot />

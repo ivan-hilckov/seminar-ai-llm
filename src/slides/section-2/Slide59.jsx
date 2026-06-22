@@ -1,53 +1,114 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './part-v.css';
 
 export const meta = {
   id: '59',
-  type: 'C',
-  title: 'Итерация 2 · роль и критерии',
+  type: 'B',
+  title: 'Первый ответ — черновик',
   subblock: '5.3 Итерация на редактуре',
 };
 
-const REQUEST_TEXT = `Ты рецензент научного журнала. Перепиши абзац строже:
-сохрани все цифры и факты, убери лишние слова,
-не теряй терминологию.`;
-
-const RESULT_TEXT = `Лесопатологический мониторинг выявил расширение
-очагов короеда-типографа на 17% в обследованных
-еловых насаждениях. Поражены преимущественно
-перестойные деревья старше 80 лет на южных склонах.`;
-
 /**
- * Слайд 81 · Итерация 2 — роль рецензента + критерии
- * C-слайд. Слева — два моно-блока: запрос с ролью и критериями, под ним результат.
+ * Слайд 79 · Первый ответ — почти всегда черновик
+ * B-шаблон по образцу Slide21: мета-тег подблока сверху-слева,
+ * заголовок-аппертив серый, центральный тезис крупно, anchor-строка снизу
+ * над тонкой линией --rule.
  */
 export default function Slide59() {
   return (
-    <Stage label="59 Итерация 2 — роль и критерии">
-      <Meta num="59" type="C" />
+    <Stage label="59 Первый ответ — черновик">
+      <Meta num="59" type="B" />
 
-      <div className="pv-stack">
-        <div className="pv-card">
-          <div className="pv-card-label">ЗАПРОС</div>
-          <pre className="pv-pre">{REQUEST_TEXT}</pre>
-        </div>
-
-        <div className="pv-card">
-          <div className="pv-card-label">РЕЗУЛЬТАТ</div>
-          <pre className="pv-pre">{RESULT_TEXT}</pre>
-        </div>
+      {/* Мета-тег подблока (top-left) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 96,
+          left: 96,
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: 20,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--mute)',
+        }}
+      >
+        5.3 Итерация
       </div>
 
-      <div className="pv-right">
-        <div className="sub">5.3 Итерация</div>
-        <h2 className="title">Итерация 2 — роль рецензента + критерии</h2>
-        <p className="cap">
-          Цифры на&nbsp;месте, фактура сохранена, лишнего меньше. Но&nbsp;видно&nbsp;ли мне,
-          что именно изменилось? Нет — приходится сравнивать построчно
+      {/* Центральный блок: заголовок (аппертив), тезис, anchor */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 400,
+            fontSize: 44,
+            lineHeight: 1.15,
+            color: 'var(--mute)',
+            margin: '0 0 48px 0',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          Первый ответ — почти всегда черновик
+        </h2>
+
+        <p
+          style={{
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontWeight: 500,
+            fontSize: 84,
+            lineHeight: 1.1,
+            color: 'var(--ink)',
+            margin: 0,
+            letterSpacing: '-0.012em',
+            maxWidth: 1600,
+            textWrap: 'pretty',
+          }}
+        >
+          Итерация — не&nbsp;починка ошибки.
+          <br />
+          Это нормальный режим работы.
         </p>
       </div>
+
+      {/* Anchor над тонкой линией снизу */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 116,
+          height: 1,
+          background: 'var(--rule)',
+        }}
+      />
+      <p
+        style={{
+          position: 'absolute',
+          left: 96,
+          right: 96,
+          bottom: 60,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 22,
+          lineHeight: 1.4,
+          color: 'var(--mute)',
+          margin: 0,
+          letterSpacing: '-0.002em',
+        }}
+      >
+        Хороший результат за&nbsp;один проход — исключение.
+        За&nbsp;2–3 итерации — норма
+      </p>
 
       <Foot />
     </Stage>

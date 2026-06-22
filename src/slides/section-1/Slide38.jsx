@@ -1,55 +1,85 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide38.css';
 
 export const meta = {
   id: '38',
-  type: 'D',
-  title: 'У думающих моделей выше галлюцинации',
+  type: 'B',
+  title: 'Не знает фактов — знает статистику текстов',
   subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 30 · У думающих моделей выше галлюцинации
- * D-шаблон с акцентом на крупные числа. Две равноправные колонки:
- * DeepSeek R1 (14.3%) vs DeepSeek V3 (3.9%). Контраст создаётся
- * самим размером цифры, без подсветки красным и без --accent.
- * Источник — Vectara HHEM Leaderboard, под summary мелким моно.
+ * Слайд 49 · Не знает фактов — знает статистику текстов
+ * B-шаблон без мета-метки подблока: заголовок сверху, крупный тезис
+ * в оптическом центре, anchor снизу. Технический разворот keystone-
+ * тезиса 32 в плоскость работы с фактами. Без --accent, без визуала,
+ * без выделений отдельных слов.
  */
-
 export default function Slide38() {
   return (
-    <Stage label="38 У думающих моделей выше галлюцинации">
-      <Meta num="38" type="D" />
+    <Stage label="38 Не знает фактов — знает статистику текстов">
+      <Meta num="38" type="B" />
 
-      <div className="s30-header">
-        <div className="sub">3.4 Точность и галлюцинации</div>
-        <h2 className="title">У&nbsp;думающих моделей выше галлюцинации</h2>
-      </div>
+      {/* Заголовок сверху */}
+      <h2
+        style={{
+          position: 'absolute',
+          top: 240,
+          left: 96,
+          right: 96,
+          margin: 0,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 36,
+          lineHeight: 1.18,
+          letterSpacing: '-0.005em',
+          color: 'var(--ink)',
+        }}
+      >
+        Не знает фактов — знает статистику текстов
+      </h2>
 
-      <div className="s30-cols">
-        <div className="col">
-          <div className="ctitle">DeepSeek R1</div>
-          <div className="ccode">думающая модель</div>
-          <div className="cnumber">14.3%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
-        <div className="vrule" />
-        <div className="col">
-          <div className="ctitle">DeepSeek V3</div>
-          <div className="ccode">обычная модель</div>
-          <div className="cnumber">3.9%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
-      </div>
+      {/* Тезис — оптический центр слайда */}
+      <p
+        style={{
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          left: 96,
+          right: 96,
+          margin: 0,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 500,
+          fontSize: 56,
+          lineHeight: 1.18,
+          letterSpacing: '-0.008em',
+          color: 'var(--ink)',
+          textWrap: 'pretty',
+          maxWidth: 1600,
+        }}
+      >
+        Модель не&nbsp;хранит факты — она восстанавливает их&nbsp;по&nbsp;статистике текстов
+      </p>
 
-      <div className="s30-hrule" />
-
-      <div className="s30-summary">
-        <p>Чем длиннее рассуждение — больше места для&nbsp;ошибок</p>
-        <p className="s30-source">Vectara HHEM Leaderboard, summarisation</p>
-      </div>
+      {/* Anchor снизу — мельче и бледнее, с воздухом до нижнего края */}
+      <p
+        style={{
+          position: 'absolute',
+          bottom: 220,
+          left: 96,
+          right: 96,
+          margin: 0,
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 400,
+          fontSize: 28,
+          lineHeight: 1.4,
+          color: 'var(--mute)',
+          letterSpacing: '-0.002em',
+        }}
+      >
+        Пустоты в&nbsp;знании заполняются тем, что статистически похоже на&nbsp;правду
+      </p>
 
       <Foot />
     </Stage>

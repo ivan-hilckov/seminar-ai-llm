@@ -1,10 +1,10 @@
-.s69-header {
+.s67-header {
   position: absolute;
   left: 96px;
   top: 96px;
   width: 1728px;
 }
-.s69-header .sub {
+.s67-header .sub {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 16px;
   color: var(--mute);
@@ -13,7 +13,7 @@
   margin: 0;
   line-height: 1;
 }
-.s69-header .title {
+.s67-header .title {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 44px;
@@ -22,7 +22,7 @@
   color: var(--ink);
   margin: 18px 0 0 0;
 }
-.s69-header .lead {
+.s67-header .lead {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 22px;
@@ -31,20 +31,30 @@
   margin: 12px 0 0 0;
 }
 
-.s69-cols {
+.s67-cols {
   position: absolute;
   left: 96px;
   top: 280px;
   width: 1728px;
-  height: 570px;
+  height: 560px;
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
 }
-.s69-cols .col { padding: 0 64px 0 0; box-sizing: border-box; }
-.s69-cols .col.right-col { padding: 0 0 0 64px; }
-.s69-cols .vrule { background: var(--rule); width: 1px; height: 100%; }
+.s67-cols .col {
+  padding: 0 36px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.s67-cols .col.first { padding-left: 0; padding-right: 36px; }
+.s67-cols .col.last { padding-right: 0; padding-left: 36px; }
+.s67-cols .vrule {
+  background: var(--rule);
+  width: 1px;
+  height: 100%;
+}
 
-.s69-cols .ctitle {
+.s67-cols .ctitle {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 32px;
@@ -54,12 +64,12 @@
   letter-spacing: -0.005em;
 }
 
-.s69-axes {
+.s67-axes {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
-.s69-axis-label {
+.s67-axis-label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
   color: var(--mute);
@@ -68,10 +78,10 @@
   margin: 0;
   line-height: 1;
 }
-.s69-axis-text {
+.s67-axis-text {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.3;
   color: var(--ink);
   margin: 8px 0 0 0;
@@ -79,26 +89,26 @@
   text-wrap: pretty;
 }
 
-.s69-hrule {
+.s67-hrule {
   position: absolute;
   left: 96px;
-  top: 880px;
+  top: 870px;
   width: 1728px;
   height: 1px;
   background: var(--rule);
 }
 
-.s69-summary {
+.s67-summary {
   position: absolute;
   left: 96px;
-  top: 906px;
+  top: 896px;
   width: 1728px;
-  height: 80px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.s69-summary p {
+.s67-summary p {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 26px;

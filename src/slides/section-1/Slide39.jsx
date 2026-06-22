@@ -6,67 +6,92 @@ import './Slide39.css';
 export const meta = {
   id: '39',
   type: 'D',
-  title: 'Где проверять обязательно',
+  title: 'Как выглядит галлюцинация',
   subblock: '3.4 Точность и галлюцинации',
 };
 
 /**
- * Слайд 52 · Где проверять обязательно
- * D-сравнение: развёртка анкора слайда 51 в практическую таблицу 4+4.
- * Левая колонка — категории, требующие проверки. Правая — где можно
- * работать без оглядки. Без иконок, без --accent, без цветовой
- * маркировки зон. Обе колонки одинаково спокойные.
+ * Слайд 50 · Как выглядит галлюцинация
+ * D-сравнение: два кейса в симметричных «окнах ChatGPT». Слева —
+ * реальный Mata v. Avianca, справа — реконструированный лесохозяйственный
+ * ГОСТ. Выдуманные реквизиты помечены тонкой волнистой линией --accent —
+ * единственное использование акцентного цвета вне keystone-слайда 32.
+ * Без мета-метки подблока (для смыслового единства с 49).
  */
 
-const LEFT = [
-  { text: 'Цифры и статистика', ex: '15%, −20 °C, 1 200 га' },
-  { text: 'Цитаты и ссылки', ex: 'Иванов, 2019, DOI' },
-  { text: 'Нормативные документы', ex: 'ГОСТы, статьи закона, СНиПы' },
-  { text: 'Имена, даты, факты', ex: 'год выхода работы, авторство метода' },
-];
-
-const RIGHT = [
-  { text: 'Объяснения известных понятий', ex: 'что такое регрессия, фотосинтез' },
-  { text: 'Переформулировки', ex: 'сократить, упростить, перевести' },
-  { text: 'Структура черновика', ex: 'оглавление, разделы, тезисы' },
-  { text: 'Поиск аналогий и идей', ex: 'подобрать сравнение, варианты' },
-];
-
-function ItemList({ items }) {
+function ChatWindow({ children, ariaLabel }) {
   return (
-    <ul className="s52-items">
-      {items.map((it) => (
-        <li key={it.text} className="s52-item">
-          {it.text}
-          <span className="s52-item__ex">({it.ex})</span>
-        </li>
-      ))}
-    </ul>
+    <div className="s50-chat" role="figure" aria-label={ariaLabel}>
+      <div className="s50-chat__bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="s50-chat__body">{children}</div>
+    </div>
   );
+}
+
+function Fake({ children }) {
+  return <span className="s50-fake">{children}</span>;
 }
 
 export default function Slide39() {
   return (
-    <Stage label="39 Где проверять обязательно">
+    <Stage label="39 Как выглядит галлюцинация">
       <Meta num="39" type="D" />
 
-      <div className="s52-header">
-        <h2 className="title">Где проверять обязательно</h2>
-        <p className="sub">Развёрнутое правило для&nbsp;работы</p>
+      <div className="s50-header">
+        <h2 className="title">Как выглядит галлюцинация</h2>
+        <p className="sub">Два случая — один реальный, один реконструированный</p>
       </div>
 
-      <div className="s52-cols">
+      <div className="s50-cols">
+        {/* Левая колонка · Mata v. Avianca */}
         <div className="col">
-          <div className="ctitle">Обязательно проверять</div>
-          <ItemList items={LEFT} />
+          <div className="ctitle">Юридический кейс · Mata v. Avianca, 2023</div>
+
+          <ChatWindow ariaLabel="Фрагмент ответа ChatGPT с выдуманным судебным прецедентом">
+            <p className="bot">По вашему запросу нашёл релевантную судебную практику:</p>
+            <p className="bot">
+              1.{' '}
+              <Fake>Varghese v. China Southern Airlines Co., Ltd.</Fake>,{' '}
+              <Fake>925 F.3d 1339 (11th Cir. 2019)</Fake> — суд постановил,
+              что положения Монреальской конвенции применяются к…
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Юрист подал в&nbsp;суд документ с&nbsp;такими ссылками. Дела не&nbsp;существовали. Штраф&nbsp;$5,000.
+          </p>
         </div>
 
         <div className="vrule" />
 
-        <div className="col">
-          <div className="ctitle">Можно доверять</div>
-          <ItemList items={RIGHT} />
+        {/* Правая колонка · Лесохозяйственный ГОСТ */}
+        <div className="col right-col">
+          <div className="ctitle">Лесное хозяйство · вымышленный ГОСТ</div>
+
+          <ChatWindow ariaLabel="Диалог с моделью: вопрос про ГОСТ и выдуманный ответ">
+            <p className="user">
+              Какой ГОСТ регулирует защиту еловых насаждений от&nbsp;короеда-типографа?
+            </p>
+            <p className="bot">
+              Защиту еловых насаждений от&nbsp;короеда-типографа регулирует{' '}
+              <Fake>ГОСТ&nbsp;Р&nbsp;12345-2021</Fake>{' '}
+              <Fake>«Лесозащита. Мероприятия по&nbsp;защите хвойных пород от&nbsp;стволовых вредителей»</Fake>.
+            </p>
+          </ChatWindow>
+
+          <p className="ccap">
+            Такого ГОСТа не&nbsp;существует. Структура, формулировка, шифр — собраны статистически.
+          </p>
         </div>
+      </div>
+
+      <div className="s50-hrule" />
+      <div className="s50-summary">
+        <p>В&nbsp;обоих случаях ответ выглядит безупречно — и&nbsp;не&nbsp;имеет источника</p>
       </div>
 
       <Foot />

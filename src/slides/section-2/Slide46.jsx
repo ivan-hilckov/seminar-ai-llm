@@ -1,188 +1,103 @@
+import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import './Slide46.css';
 
 export const meta = {
   id: '46',
-  type: 'B',
-  title: 'Кому что подходит',
-  subblock: '4.3 Тарифы и API',
+  type: 'D',
+  title: 'ChatGPT · Claude · Gemini · DeepSeek',
+  subblock: '4.1 Сервисы LLM',
 };
 
 /**
- * Слайд 68 · Кому что подходит
- * B-слайд с трёхстрочной матрицей правил. Каждая строка — «роль → рекомендация»
- * с серой моно-стрелкой посередине. Это не таблица сравнения, а горизонтальное
- * правило-список под главным тезисом. Внизу — anchor над тонкой линией.
+ * Слайд 64 · Четыре больших сервиса
+ * D-сравнение с 4 колонками. Структура каждой колонки одинакова: название
+ * сервиса крупно сверху, под ним 3 строки «лейбл — значение» по общим осям
+ * (Кто / Сильная сторона / Особенность). Без логотипов, без бренд-цветов.
  */
 
-const RULES = [
+const AXES = [
   {
-    role: 'Познакомиться, разовая задача',
-    pick: 'бесплатный веб-интерфейс любого из четырёх сервисов',
+    label: 'Кто',
+    values: [
+      'OpenAI · ноябрь 2022',
+      'Anthropic · 2023',
+      'Google · 2023',
+      'DeepSeek · Китай · 2024',
+    ],
   },
   {
-    role: 'Регулярная исследовательская работа',
-    pick: 'один платный сервис (≈ $20 / мес), думающую модель — по требованию',
+    label: 'Сильная сторона',
+    values: [
+      'широкий универсал, лучшая экосистема плагинов и кастомных GPT',
+      'длинные тексты, аккуратная работа с документами, разметка',
+      'интеграция с поиском Google, работа с большими файлами',
+      'сильная математика и код, открытые веса',
+    ],
   },
   {
-    role: 'Автоматизация, обработка большого массива',
-    pick: 'API + скрипт или приложение',
+    label: 'Особенность',
+    values: [
+      'массовое распространение, знаком большинству',
+      'аккуратный тон, осторожен с фактами',
+      'встроен в Google-сервисы (Docs, Gmail)',
+      'дёшево или бесплатно, доступен без зарубежной карты',
+    ],
   },
 ];
 
-const ROLE_STYLE = {
-  fontFamily: 'IBM Plex Sans, sans-serif',
-  fontWeight: 400,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--ink)',
-  margin: 0,
-  letterSpacing: '-0.003em',
-  textWrap: 'pretty',
-};
+const SERVICES = ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'];
 
-const PICK_STYLE = {
-  fontFamily: 'IBM Plex Sans, sans-serif',
-  fontWeight: 500,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--ink)',
-  margin: 0,
-  letterSpacing: '-0.003em',
-  textWrap: 'pretty',
-};
-
-const ARROW_STYLE = {
-  fontFamily: 'IBM Plex Mono, monospace',
-  fontWeight: 400,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--mute)',
-  margin: 0,
-  textAlign: 'center',
-};
-
-export default function Slide46() {
+function Column({ index, title, position }) {
   return (
-    <Stage label="46 Кому что подходит">
-      <Meta num="46" type="B" />
-
-      {/* Мета-тег подблока */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 96,
-          left: 96,
-          fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 20,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-        }}
-      >
-        4.3 Тарифы
-      </div>
-
-      {/* Заголовок */}
-      <h2
-        style={{
-          position: 'absolute',
-          top: 168,
-          left: 96,
-          right: 96,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 48,
-          lineHeight: 1.18,
-          color: 'var(--ink)',
-          margin: 0,
-          letterSpacing: '-0.01em',
-        }}
-      >
-        Кому что подходит
-      </h2>
-
-      {/* Тезис */}
-      <p
-        style={{
-          position: 'absolute',
-          top: 320,
-          left: 96,
-          right: 96,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontWeight: 500,
-          fontSize: 60,
-          lineHeight: 1.18,
-          color: 'var(--ink)',
-          margin: 0,
-          letterSpacing: '-0.012em',
-          maxWidth: 1500,
-          textWrap: 'pretty',
-        }}
-      >
-        Для&nbsp;регулярной работы исследователя — один платный сервис.
-      </p>
-
-      {/* Три строки-правила */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 580,
-          left: 96,
-          right: 96,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 36,
-        }}
-      >
-        {RULES.map((r) => (
-          <div
-            key={r.role}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 56px 1fr',
-              alignItems: 'baseline',
-              columnGap: 24,
-            }}
-          >
-            <p style={ROLE_STYLE}>{r.role}</p>
-            <p style={ARROW_STYLE}>→</p>
-            <p style={PICK_STYLE}>{r.pick}</p>
+    <div className={`col ${position}`}>
+      <div className="ctitle">{title}</div>
+      <div className="s64-axes">
+        {AXES.map((a) => (
+          <div className="s64-axis" key={a.label}>
+            <div className="s64-axis-label">{a.label}</div>
+            <p className="s64-axis-text">{a.values[index]}</p>
           </div>
         ))}
       </div>
+    </div>
+  );
+}
 
-      {/* Тонкая линия + anchor */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          bottom: 116,
-          height: 1,
-          background: 'var(--rule)',
-        }}
-      />
-      <p
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          bottom: 60,
-          fontFamily: 'IBM Plex Sans, sans-serif',
-          fontStyle: 'italic',
-          fontWeight: 400,
-          fontSize: 22,
-          lineHeight: 1.4,
-          color: 'var(--mute)',
-          margin: 0,
-          letterSpacing: '-0.002em',
-        }}
-      >
-        Несколько подписок параллельно почти никогда не&nbsp;нужны. Лучше один
-        сервис, в&nbsp;котором научился работать
-      </p>
+export default function Slide46() {
+  return (
+    <Stage label="46 Четыре больших сервиса">
+      <Meta num="46" type="D" />
+
+      <div className="s64-header">
+        <div className="sub">4.1 Четыре сервиса</div>
+        <h2 className="title">Четыре больших сервиса</h2>
+        <p className="lead">Похожие возможности, разные сильные стороны</p>
+      </div>
+
+      <div className="s64-cols">
+        {SERVICES.map((name, i) => {
+          const position =
+            i === 0 ? 'first' : i === SERVICES.length - 1 ? 'last' : '';
+          return (
+            <Fragment key={name}>
+              <Column index={i} title={name} position={position} />
+              {i < SERVICES.length - 1 && <div className="vrule" />}
+            </Fragment>
+          );
+        })}
+      </div>
+
+      <div className="s64-hrule" />
+
+      <div className="s64-summary">
+        <p>
+          Один и&nbsp;тот&nbsp;же тип инструмента — разные акценты. Выбор зависит
+          от&nbsp;задачи и&nbsp;доступа.
+        </p>
+      </div>
 
       <Foot />
     </Stage>
