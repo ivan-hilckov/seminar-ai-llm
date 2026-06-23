@@ -1,275 +1,281 @@
 /* ============================================================
-   Часть V · общая визуальная идиома «промт / ответ»
-   Большинство C-слайдов 71–87 используют одну схему:
-     — слева (62%) один или два моно-блока с тонкой рамкой --rule
-     — справа (38%) мета-тег, заголовок, краткий комментарий
-   Чтобы не повторять стили в каждом слайде, общие классы вынесены сюда.
+   Часть V «Как пользоваться моделями» — общий набор стилей.
+   C-слайды: левая колонка-подпись (38%) + правый стилизованный
+   экран чата (62%). B-слайды: тезис по центру. D-слайды: колонки.
+   Палитра светлая, акцент #8B2A1F не используется (кроме волнистой
+   линии на слайде галлюцинации — задаётся инлайном там).
    ============================================================ */
 
-.pv-stack {
+/* ---------- C-каркас: левая подпись + правый экран ---------- */
+.pvc-left {
   position: absolute;
   left: 96px;
   top: 140px;
-  width: 1094px;
+  width: 560px;
   height: 800px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
   justify-content: center;
 }
-
-.pv-stack.tight { gap: 20px; }
-
-.pv-card {
-  border: 1px solid var(--rule);
-  background: var(--bg);
-  padding: 24px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-sizing: border-box;
-}
-
-.pv-card-label {
+.pvc-eyebrow {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 18px;
   color: var(--mute);
-  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 26px 0;
   line-height: 1;
 }
-
-.pv-pre {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
+.pvc-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 46px;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
   color: var(--ink);
   margin: 0;
-  white-space: pre-wrap;
+  text-wrap: pretty;
+}
+.pvc-rule {
+  width: 72px;
+  height: 3px;
+  background: var(--ink);
+  margin: 30px 0;
+}
+.pvc-meaning {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 29px;
+  line-height: 1.34;
+  letter-spacing: -0.004em;
+  color: var(--text-secondary, #6B6B68);
+  margin: 0;
+  max-width: 520px;
   text-wrap: pretty;
 }
 
-.pv-pre.small { font-size: 16px; }
-.pv-pre.tiny  { font-size: 14px; line-height: 1.5; }
-.pv-pre.lg    { font-size: 22px; }
-
-/* Лейблы [Роль] [Задача] [Контекст] и т.д. внутри моно-блока — серые */
-.pv-pre .lbl {
-  color: var(--mute);
-}
-
-.pv-pre .strike {
-  text-decoration: line-through;
-  text-decoration-color: var(--mute-2);
-  color: var(--mute);
-}
-
-/* ============================================================
-   Сетка промта с лейблами [Роль] [Задача] и т.д.
-   Левая колонка — серые лейблы, правая — текст
-   ============================================================ */
-
-.pv-grid-prompt {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  column-gap: 18px;
-  row-gap: 14px;
-}
-
-.pv-grid-prompt-row {
-  display: contents;
-}
-
-.pv-grid-prompt-lbl {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.45;
-  color: var(--mute);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.pv-grid-prompt-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.45;
-  color: var(--ink);
-  margin: 0;
-  white-space: pre-wrap;
-  text-wrap: pretty;
-}
-
-.pv-grid-prompt.compact .pv-grid-prompt-lbl,
-.pv-grid-prompt.compact .pv-grid-prompt-text {
-  font-size: 17px;
-  line-height: 1.4;
-}
-
-.pv-grid-prompt.compact {
-  grid-template-columns: 150px 1fr;
-  row-gap: 10px;
-}
-
-/* Правая колонка с мета, заголовком и подписью.
-   Центрируется по вертикали относительно левого блока. */
-.pv-right {
+.pvc-stage {
   position: absolute;
-  left: 1254px;
+  left: 720px;
   right: 96px;
   top: 140px;
   height: 800px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
-.pv-right .sub {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
-  color: var(--mute);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0 0 28px 0;
-}
-.pv-right .title {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  font-size: 44px;
-  line-height: 1.16;
-  letter-spacing: -0.008em;
-  color: var(--ink);
-  margin: 0 0 24px 0;
-  text-wrap: pretty;
-}
-.pv-right .cap {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 0;
-  text-wrap: pretty;
-}
 
-/* ============================================================
-   Специфика 71 · список из 5 компонентов формулы
-   ============================================================ */
-
-.pv-formula {
+.pvc-footnote {
   position: absolute;
   left: 96px;
-  top: 140px;
-  width: 1094px;
-  height: 800px;
+  bottom: 92px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 24px;
+  color: var(--mute);
+  letter-spacing: -0.003em;
+}
+
+/* ---------- Экран чата ---------- */
+.pv-screen {
+  width: 100%;
+  max-width: 1040px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 34px 38px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 22px;
 }
-
-.pv-formula-row {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  align-items: baseline;
-  column-gap: 32px;
-  padding: 20px 0;
-  border-top: 1px solid var(--rule);
-}
-.pv-formula-row:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-.pv-formula-num {
+.pv-screen-bar {
   font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 32px;
-  color: var(--mute-2);
-  letter-spacing: 0.04em;
-  margin: 0;
-  line-height: 1;
-  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 16px;
+  margin-bottom: 2px;
 }
 
-.pv-formula-name {
-  font-family: 'IBM Plex Sans', sans-serif;
+.pv-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pv-row--you {
+  align-items: flex-end;
+}
+.pv-row--ai {
+  align-items: flex-start;
+}
+.pv-role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.pv-bubble {
+  max-width: 84%;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 23px;
+  line-height: 1.42;
+  border-radius: 12px;
+  text-wrap: pretty;
+}
+.pv-bubble--you {
+  background: var(--highlight);
+  color: var(--ink);
+  padding: 16px 20px;
+}
+.pv-bubble--ai {
+  background: transparent;
+  color: var(--ink);
+}
+.pv-bubble .mut {
+  color: var(--mute);
+}
+.pv-bubble .strike {
+  text-decoration: line-through;
+  color: var(--mute);
+}
+
+/* мини-таблица внутри экрана (V-08, V-25) */
+.pv-table {
+  border-collapse: collapse;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 21px;
+  color: var(--ink);
+}
+.pv-table td, .pv-table th {
+  border: 1px solid var(--rule);
+  padding: 8px 14px;
+  text-align: left;
+}
+.pv-table th {
+  color: var(--mute);
   font-weight: 500;
-  font-size: 36px;
-  line-height: 1.15;
+}
+
+/* ---------- B-слайды: тезис по центру ---------- */
+.pvb {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 200px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.pvb-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 66px;
+  line-height: 1.14;
+  letter-spacing: -0.018em;
   color: var(--ink);
   margin: 0;
+  max-width: 1420px;
+  text-wrap: balance;
+}
+.pvb-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 1.3;
+  color: var(--text-secondary, #6B6B68);
+  margin: 36px 0 0 0;
+  max-width: 1120px;
+  text-wrap: pretty;
+}
+.pvb-verbs {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  color: var(--mute);
+  letter-spacing: 0.01em;
+  margin-top: 48px;
+  max-width: 1300px;
+  line-height: 1.6;
+}
+
+/* две колонки-списка под тезисом (V-31) */
+.pvb-cols {
+  display: flex;
+  gap: 80px;
+  margin-top: 56px;
+}
+.pvb-col {
+  text-align: left;
+  min-width: 360px;
+}
+.pvb-col-head {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 14px;
+}
+.pvb-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pvb-col li {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 30px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ---------- D-слайды: заголовок сверху + колонки ---------- */
+.pvd-header {
+  position: absolute;
+  left: 96px;
+  top: 96px;
+  width: 1728px;
+}
+.pvd-header .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.pvd-header .title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 46px;
+  line-height: 1.14;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 18px 0 0 0;
+}
+.pvd-footnote {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 84px;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 27px;
+  font-weight: 500;
+  color: var(--ink);
   letter-spacing: -0.005em;
 }
 
-.pv-formula-desc {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--mute);
-  margin: 8px 0 0 0;
-  letter-spacing: -0.002em;
-}
-
 /* ============================================================
-   Специфика 83 · сетка 2×2 «четыре шаблона»
+   ПЕЧАТЬ — фиксируем геометрию, иначе слайд схлопывается
    ============================================================ */
-
-.pv-grid {
-  position: absolute;
-  left: 96px;
-  top: 140px;
-  width: 1094px;
-  height: 800px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0;
-}
-
-.pv-grid-cell {
-  border-top: 1px solid var(--rule);
-  padding: 36px 36px 36px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.pv-grid-cell:nth-child(1),
-.pv-grid-cell:nth-child(2) {
-  border-top: none;
-}
-.pv-grid-cell:nth-child(2n) {
-  padding-left: 36px;
-  padding-right: 0;
-  border-left: 1px solid var(--rule);
-}
-
-.pv-grid-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
-  letter-spacing: 0.14em;
-  color: var(--mute-2);
-  margin: 0 0 24px 0;
-  line-height: 1;
-  font-feature-settings: 'tnum' 1, 'lnum' 1;
-}
-.pv-grid-name {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 1.1;
-  color: var(--ink);
-  margin: 0 0 20px 0;
-  letter-spacing: -0.008em;
-}
-.pv-grid-desc {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.35;
-  color: var(--mute);
-  margin: 0;
-  letter-spacing: -0.002em;
-  text-wrap: pretty;
+@media print {
+  .pvc-left, .pvc-stage, .pvb, .pvd-header { position: absolute !important; }
+  .pv-screen { box-shadow: none !important; }
 }

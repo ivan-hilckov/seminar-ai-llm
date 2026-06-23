@@ -1,75 +1,30 @@
-import Stage from '../../components/Stage.jsx';
-import Meta from '../../components/Meta.jsx';
-import Foot from '../../components/Foot.jsx';
-import './part-v.css';
+import { CFrame, Screen, You, Ai } from './pv-kit.jsx';
 
 export const meta = {
   id: '57',
   type: 'C',
-  title: 'Формула промта',
-  subblock: '5.1 Формула промта',
+  title: 'Сократить',
+  subblock: '5.1 Что решает сразу',
 };
 
-const COMPONENTS = [
-  {
-    num: '01',
-    name: 'Роль',
-    desc: 'кем модель должна выступать',
-  },
-  {
-    num: '02',
-    name: 'Задача',
-    desc: 'что нужно сделать — один глагол',
-  },
-  {
-    num: '03',
-    name: 'Контекст',
-    desc: 'кто аудитория, какие материалы, что важно',
-  },
-  {
-    num: '04',
-    name: 'Формат',
-    desc: 'как должен выглядеть ответ',
-  },
-  {
-    num: '05',
-    name: 'Ограничения',
-    desc: 'чего избегать, что обязательно учесть',
-  },
-];
-
-/**
- * Слайд 71 · Формула промта
- * C-слайд. Слева — список из пяти компонентов формулы (номер + название + описание),
- * разделённый горизонтальными линиями. Справа — заголовок и комментарий.
- */
 export default function Slide57() {
   return (
-    <Stage label="57 Формула промта">
-      <Meta num="57" type="C" />
-
-      <div className="pv-formula">
-        {COMPONENTS.map((c) => (
-          <div key={c.num} className="pv-formula-row">
-            <div className="pv-formula-num">{c.num}</div>
-            <div>
-              <h3 className="pv-formula-name">{c.name}</h3>
-              <p className="pv-formula-desc">{c.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="pv-right">
-        <div className="sub">5.1 Формула промта</div>
-        <h2 className="title">Формула промта</h2>
-        <p className="cap">
-          Не&nbsp;нужно использовать все&nbsp;пять в&nbsp;каждом запросе.
-          Но&nbsp;чем сложнее задача — тем&nbsp;больше компонентов
-        </p>
-      </div>
-
-      <Foot />
-    </Stage>
+    <CFrame
+      num="57"
+      label="Сократить"
+      eyebrow="5.1 Что решает сразу"
+      title="Сократить"
+      meaning="Длинный текст → несколько тезисов"
+    >
+      <Screen>
+        <You>Сократи до&nbsp;5 тезисов, сохрани все цифры: [абзац методики учёта повреждений]</You>
+        <Ai>
+          1. Учёт на&nbsp;48 пробных площадях.<br />
+          2. Повреждено 31% древостоя.<br />
+          3. Средний прирост очага — 12% в&nbsp;год.<br />
+          …
+        </Ai>
+      </Screen>
+    </CFrame>
   );
 }
