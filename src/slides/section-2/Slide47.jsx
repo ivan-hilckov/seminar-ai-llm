@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
@@ -6,98 +5,67 @@ import './Slide47.css';
 
 export const meta = {
   id: '47',
-  type: 'D',
-  title: 'ChatGPT · Claude · Gemini · DeepSeek',
-  subblock: '4.1 Сервисы LLM',
+  type: 'C',
+  title: 'Моделей десятки — у каждой свой профиль',
+  subblock: '4.1 Карта моделей',
 };
 
 /**
- * Слайд 64 · Четыре больших сервиса
- * D-сравнение с 4 колонками. Структура каждой колонки одинакова: название
- * сервиса крупно сверху, под ним 3 строки «лейбл — значение» по общим осям
- * (Кто / Сильная сторона / Особенность). Без логотипов, без бренд-цветов.
+ * Слайд 47 · Моделей десятки — у каждой свой профиль
+ * C-визуал: россыпь названий, сгруппированная по назначению в 6 зон.
+ * Зона «Текст и диалог» крупнее и подсвечена — наш фокус; остальные мельче.
+ * Смысл — не запомнить имена, а увидеть, что инструментов много и они
+ * специализированы под тип задачи.
  */
 
-const AXES = [
-  {
-    label: 'Кто',
-    values: [
-      'OpenAI · ноябрь 2022',
-      'Anthropic · 2023',
-      'Google · 2023',
-      'DeepSeek · Китай · 2024',
-    ],
-  },
-  {
-    label: 'Сильная сторона',
-    values: [
-      'широкий универсал, лучшая экосистема плагинов и кастомных GPT',
-      'длинные тексты, аккуратная работа с документами, разметка',
-      'интеграция с поиском Google, работа с большими файлами',
-      'сильная математика и код, открытые веса',
-    ],
-  },
-  {
-    label: 'Особенность',
-    values: [
-      'массовое распространение, знаком большинству',
-      'аккуратный тон, осторожен с фактами',
-      'встроен в Google-сервисы (Docs, Gmail)',
-      'дёшево или бесплатно, доступен без зарубежной карты',
-    ],
-  },
+const FOCUS = {
+  title: 'Текст и диалог',
+  names: ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek', 'Llama', 'Mistral', 'YaGPT', 'GigaChat'],
+};
+
+const ZONES = [
+  { title: 'Поиск с источниками', names: ['Perplexity', 'You.com'] },
+  { title: 'Код', names: ['Claude Code', 'Codex', 'Copilot', 'Cursor'] },
+  { title: 'Изображения', names: ['Midjourney', 'DALL·E', 'FLUX', 'Stable Diffusion'] },
+  { title: 'Видео', names: ['Sora', 'Runway', 'Kling', 'Veo'] },
+  { title: 'Звук и музыка', names: ['Suno', 'Udio', 'ElevenLabs'] },
 ];
-
-const SERVICES = ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek'];
-
-function Column({ index, title, position }) {
-  return (
-    <div className={`col ${position}`}>
-      <div className="ctitle">{title}</div>
-      <div className="s64-axes">
-        {AXES.map((a) => (
-          <div className="s64-axis" key={a.label}>
-            <div className="s64-axis-label">{a.label}</div>
-            <p className="s64-axis-text">{a.values[index]}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function Slide47() {
   return (
-    <Stage label="47 Четыре больших сервиса">
-      <Meta num="47" type="D" />
+    <Stage label="47 Моделей десятки">
+      <Meta num="47" type="C" />
 
-      <div className="s64-header">
-        <div className="sub">4.1 Четыре сервиса</div>
-        <h2 className="title">Четыре больших сервиса</h2>
-        <p className="lead">Похожие возможности, разные сильные стороны</p>
+      <div className="s47-header">
+        <div className="sub">4.1 Карта моделей</div>
+        <h2 className="title">Моделей десятки — у&nbsp;каждой свой профиль</h2>
       </div>
 
-      <div className="s64-cols">
-        {SERVICES.map((name, i) => {
-          const position =
-            i === 0 ? 'first' : i === SERVICES.length - 1 ? 'last' : '';
-          return (
-            <Fragment key={name}>
-              <Column index={i} title={name} position={position} />
-              {i < SERVICES.length - 1 && <div className="vrule" />}
-            </Fragment>
-          );
-        })}
+      <div className="s47-board">
+        <div className="s47-focus">
+          <div className="s47-zone-title">{FOCUS.title}</div>
+          <div className="s47-focus-names">
+            {FOCUS.names.map((n) => (
+              <span key={n} className="s47-name">{n}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="s47-grid">
+          {ZONES.map((z) => (
+            <div key={z.title} className="s47-zone">
+              <div className="s47-zone-title">{z.title}</div>
+              <div className="s47-zone-names">
+                {z.names.map((n) => (
+                  <span key={n} className="s47-name s47-name--sm">{n}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="s64-hrule" />
-
-      <div className="s64-summary">
-        <p>
-          Один и&nbsp;тот&nbsp;же тип инструмента — разные акценты. Выбор зависит
-          от&nbsp;задачи и&nbsp;доступа.
-        </p>
-      </div>
+      <div className="s47-foot-note">Дальше — только четыре, с&nbsp;которыми будем работать</div>
 
       <Foot />
     </Stage>

@@ -1,0 +1,108 @@
+/* Единый шаблон портрета модели (слайды 49–52, тип C).
+   Имя крупно → назначение → 2–3 сильные фичи → служебная строка доступа. */
+
+.mp-eyebrow {
+  position: absolute;
+  left: 96px;
+  top: 96px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 19px;
+  color: var(--mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.mp-name {
+  position: absolute;
+  left: 96px;
+  top: 150px;
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 104px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.mp-purpose {
+  position: absolute;
+  left: 96px;
+  top: 312px;
+  width: 1500px;
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.25;
+  letter-spacing: -0.006em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.mp-features {
+  position: absolute;
+  left: 96px;
+  top: 470px;
+  width: 1560px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.mp-feature {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+.mp-feature-dot {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translateY(-4px);
+}
+.mp-feature-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: -0.004em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.mp-access {
+  position: absolute;
+  left: 96px;
+  bottom: 92px;
+  width: 1560px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.mp-access-label {
+  flex: 0 0 auto;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  background: var(--highlight);
+  border-radius: 6px;
+  padding: 8px 14px;
+  line-height: 1;
+}
+.mp-access-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--text-secondary, #6B6B68);
+}
+.mp-access-text strong {
+  font-weight: 600;
+  color: var(--ink);
+}

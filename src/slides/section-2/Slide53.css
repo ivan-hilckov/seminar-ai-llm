@@ -1,0 +1,117 @@
+.s53-header {
+  position: absolute;
+  left: 96px;
+  top: 80px;
+  width: 1728px;
+}
+.s53-header .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  color: var(--mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+.s53-header .title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 16px 0 0 0;
+}
+
+.s53-table {
+  position: absolute;
+  left: 96px;
+  top: 224px;
+  width: 1728px;
+}
+
+.s53-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  min-height: 72px;
+  border-bottom: 1px solid var(--rule);
+}
+.s53-row--head {
+  border-bottom: 2px solid var(--ink);
+  min-height: 64px;
+}
+
+.s53-cell {
+  padding: 10px 16px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.s53-cell--feat {
+  text-align: left;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.004em;
+  color: var(--ink);
+}
+.s53-cell--model {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+
+.s53-yes {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.s53-check {
+  font-size: 30px;
+  line-height: 1;
+  color: var(--ink);
+}
+.s53-note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  color: var(--mute);
+  letter-spacing: 0.02em;
+}
+.s53-dash {
+  font-size: 28px;
+  color: var(--text-secondary, #6B6B68);
+  opacity: 0.5;
+}
+.s53-txt {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.004em;
+}
+
+.s53-footnote {
+  position: absolute;
+  left: 96px;
+  bottom: 60px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--mute);
+  letter-spacing: 0.02em;
+}
+.s53-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 56px;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
