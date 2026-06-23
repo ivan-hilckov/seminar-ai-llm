@@ -4,116 +4,116 @@ import Foot from '../../components/Foot.jsx';
 
 export const meta = {
   id: '35',
-  type: 'C',
-  title: 'После обучения карта застывает',
-  subblock: '2.4 Обучение и заморозка',
+  type: 'D',
+  title: 'Тот же вопрос — разный ответ',
+  subblock: '2.4 Как рождается ответ',
 };
 
-const INK = '#1A1A1A';
-const MUTE = '#6B6B68';
-const RULE = '#D9D7CF';
-const PALE = '#F1F0EC';
-
-const terms = [
-  { x: 150, y: 200, label: 'ель' },
-  { x: 320, y: 178, label: 'сосна' },
-  { x: 230, y: 268, label: 'пихта' },
-  { x: 560, y: 196, label: 'почва' },
-  { x: 720, y: 232, label: 'кислотность' },
-  { x: 210, y: 372, label: 'засуха' },
-  { x: 470, y: 360, label: 'короед' },
-];
-
-function Snow({ x, y, r = 16 }) {
-  const a = [0, 60, 120];
+// Различающиеся слова — лёгкая заливка (волнистое подчёркивание зарезервировано под ошибки)
+function Hi({ children }) {
   return (
-    <g stroke={MUTE} strokeWidth={1.6} strokeLinecap="round">
-      {a.map((deg) => {
-        const rad = (deg * Math.PI) / 180;
-        const dx = r * Math.cos(rad);
-        const dy = r * Math.sin(rad);
-        return <line key={deg} x1={x - dx} y1={y - dy} x2={x + dx} y2={y + dy} />;
-      })}
-    </g>
+    <span style={{ background: 'var(--highlight)', borderRadius: 4, padding: '1px 6px' }}>{children}</span>
   );
 }
 
-function Lock({ x, y }) {
-  return (
-    <g stroke={MUTE} strokeWidth={2} fill="none">
-      <rect x={x} y={y} width={30} height={24} rx={4} />
-      <path d={`M ${x + 6} ${y} v -7 a 9 9 0 0 1 18 0 v 7`} />
-      <circle cx={x + 15} cy={y + 12} r={2.4} fill={MUTE} stroke="none" />
-    </g>
-  );
-}
+const runBox = {
+  flex: 1,
+  border: '1.5px solid var(--line)',
+  borderRadius: 16,
+  padding: '28px 30px',
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontSize: 28,
+  lineHeight: 1.5,
+  color: 'var(--ink)',
+  background: 'var(--bg)',
+};
+
+const runLabel = {
+  fontFamily: 'IBM Plex Mono, monospace',
+  fontSize: 24,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: 'var(--mute)',
+  margin: '0 0 16px 0',
+};
 
 /**
- * Слайд 35 · После обучения карта застывает
- * C-шаблон. Та же карта смыслов, но «подмёрзшая» (иней + замок), точки
- * на местах. Снизу — стрелка «ваши вопросы» упирается в карту (✕) и не
- * меняет её. Мост к Части III: куда тогда уходят данные.
+ * Слайд 33 · Тот же вопрос — разный ответ
+ * D-шаблон. Один запрос → два прогона. Смысл один, формулировки разные;
+ * различия — лёгкой заливкой. Недетерминизм → вопрос воспроизводимости.
+ * Температуру/случайность здесь не называем (рычаг Секции 2).
  */
 export default function Slide35() {
   return (
-    <Stage label="35 После обучения карта застывает">
-      <Meta num="35" type="C" />
+    <Stage label="35 Тот же вопрос — разный ответ">
+      <Meta num="35" type="D" />
 
-      <div className="visual">
-        <svg
-          viewBox="0 0 1094 800"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ width: 1094, height: 800, display: 'block' }}
-          aria-label="Замёрзшая карта смыслов с замком; вопросы снизу упираются в неё и не меняют"
+      <div style={{ position: 'absolute', top: 92, left: 96 }}>
+        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 18, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--mute)', marginBottom: 14 }}>
+          Как рождается ответ
+        </div>
+        <h2 style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 500, fontSize: 50, lineHeight: 1.1, color: 'var(--ink)', margin: 0, letterSpacing: '-0.01em' }}>
+          Тот же вопрос — разный ответ
+        </h2>
+      </div>
+
+      {/* Один и тот же вопрос */}
+      <div style={{ position: 'absolute', top: 244, left: 0, width: 1920, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 28 }}>
+        <div
+          style={{
+            border: '1.5px solid var(--ink)',
+            borderRadius: 16,
+            padding: '22px 34px',
+            fontFamily: 'IBM Plex Sans, sans-serif',
+            fontSize: 30,
+            color: 'var(--ink)',
+            background: 'var(--bg)',
+          }}
         >
-          {/* Заголовок-иней */}
-          <Snow x={300} y={64} />
-          <text x={547} y={74} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={INK}>
-            карта смыслов застыла
-          </text>
-          <Snow x={794} y={64} />
+          Чем засуха опасна для ельника?
+        </div>
+        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 24, color: 'var(--mute)' }}>
+          один и тот же вопрос
+        </div>
+      </div>
 
-          {/* Подмёрзшая карта */}
-          <rect x={64} y={120} width={966} height={320} rx={14} fill={PALE} stroke={RULE} strokeWidth={1.5} />
-          <Lock x={968} y={140} />
-          <Snow x={120} y={400} r={11} />
-          <Snow x={960} y={380} r={11} />
-
-          {terms.map((t) => (
-            <g key={t.label}>
-              <circle cx={t.x} cy={t.y} r={5} fill={INK} />
-              <text x={t.x + 16} y={t.y + 8} fontFamily="IBM Plex Sans, sans-serif" fontSize="25" fill={INK}>
-                {t.label}
-              </text>
-            </g>
-          ))}
-
-          {/* Вопросы упираются в карту */}
-          <line x1={547} y1={566} x2={547} y2={476} stroke={INK} strokeWidth={2} />
-          <polygon points="547,460 538,478 556,478" fill={INK} />
-          {/* перечёркивание у границы */}
-          <g stroke={INK} strokeWidth={3} strokeLinecap="round">
-            <line x1={534} y1={444} x2={560} y2={470} />
-            <line x1={560} y1={444} x2={534} y2={470} />
-          </g>
-          <text x={547} y={606} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="26" fill={INK}>
-            ваши вопросы
-          </text>
-          <text x={620} y={462} fontFamily="IBM Plex Sans, sans-serif" fontSize="24" fill={MUTE}>
-            карта не меняется
-          </text>
+      {/* Дерево: стояк от вопроса → перекладина → две стрелки вниз в прогоны */}
+      <div style={{ position: 'absolute', top: 326, left: 96, width: 1728, height: 104 }}>
+        <svg viewBox="0 0 1728 104" style={{ width: 1728, height: 104, display: 'block' }} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="864" y1="0" x2="864" y2="40" stroke="#1A1A1A" strokeWidth="1.8" />
+          <line x1="444" y1="40" x2="1284" y2="40" stroke="#1A1A1A" strokeWidth="1.8" />
+          <line x1="444" y1="40" x2="444" y2="84" stroke="#1A1A1A" strokeWidth="1.8" />
+          <polygon points="444,94 435,80 453,80" fill="#1A1A1A" />
+          <line x1="1284" y1="40" x2="1284" y2="84" stroke="#1A1A1A" strokeWidth="1.8" />
+          <polygon points="1284,94 1275,80 1293,80" fill="#1A1A1A" />
         </svg>
       </div>
 
-      <div className="right">
-        <div className="sub">Обучение и заморозка</div>
-        <h2 className="title">После обучения карта застывает</h2>
-        <p className="cap">
-          Когда обучение закончилось — карта застывает. Дальше модель только
-          пользуется тем, что уже сложилось, и сама по себе не меняется.
-          <br />
-          <br />
-          Сколько бы вы её ни спрашивали — карта остаётся прежней.
+      {/* Два прогона */}
+      <div style={{ position: 'absolute', top: 440, left: 160, right: 160, display: 'flex', gap: 80 }}>
+        <div style={{ flex: 1 }}>
+          <div style={runLabel}>Прогон 1</div>
+          <div style={runBox}>
+            Засуха <Hi>ослабляет</Hi> ели: <Hi>падает</Hi> прирост, <Hi>растёт риск усыхания</Hi> и вспышек короеда.
+          </div>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={runLabel}>Прогон 2</div>
+          <div style={runBox}>
+            <Hi>В засушливый период</Hi> ели <Hi>теряют влагу</Hi> — прирост <Hi>снижается</Hi>, <Hi>выше уязвимость</Hi> к&nbsp;короеду.
+          </div>
+        </div>
+      </div>
+
+      {/* Итог + подпись */}
+      <div style={{ position: 'absolute', top: 770, left: 96, right: 96, textAlign: 'center' }}>
+        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 26, color: 'var(--mute)', letterSpacing: '0.04em' }}>
+          оба верны · формулировки разные
+        </div>
+        <p style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontSize: 26, lineHeight: 1.4, color: 'var(--ink)', margin: '26px auto 0', maxWidth: 1480, textWrap: 'balance' }}>
+          Выбор из вероятных — значит ответ каждый раз немного другой. Оба верны,
+          но не идентичны. Сослаться на «модель сказала» как на фиксированный факт
+          нельзя — это вопрос воспроизводимости.
         </p>
       </div>
 

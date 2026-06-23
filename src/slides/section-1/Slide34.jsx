@@ -5,42 +5,39 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '34',
   type: 'C',
-  title: 'Как училась модель',
-  subblock: '2.4 Обучение и заморозка',
+  title: 'Как выбирается слово',
+  subblock: '2.4 Как рождается ответ',
 };
 
 const INK = '#1A1A1A';
+const INK_SOFT = '#2B2A28';
 const MUTE = '#6B6B68';
 const RULE = '#D9D7CF';
+const HI = '#F0EEE8';
 
-const sources = ['сайты', 'книги', 'статьи', 'код', 'форумы'];
-const srcY = [178, 230, 282, 334, 386];
-
-// Мини-карта смыслов (та же кластеризация, что на слайде «Пространство смыслов»)
-const mapDots = [
-  { x: 744, y: 206, label: 'ель' },
-  { x: 884, y: 190, label: 'сосна' },
-  { x: 800, y: 262, label: 'пихта' },
-  { x: 744, y: 410, label: 'почва' },
-  { x: 884, y: 404, label: 'грунт' },
-  { x: 760, y: 474, label: 'кислотность' },
+const candidates = [
+  { w: 'кислая', p: 58, chosen: true },
+  { w: 'влажная', p: 22 },
+  { w: 'бедная', p: 11 },
+  { w: 'тёплая', p: 6 },
+  { w: '…прочие', p: 3 },
 ];
 
-const BOX_X = 382;
-const BOX_Y = 228;
-const BOX_W = 268;
-const BOX_H = 128;
-const BOX_CY = BOX_Y + BOX_H / 2;
+const BAR_X = 250;
+const BAR_MAX = 470;
+const PCT_X = 770;
+const ROW_TOP = 196;
+const ROW_PITCH = 66;
 
 /**
- * Слайд 34 · Как училась модель
- * C-шаблон. Конвейер слева направо: поток разных текстов → коробка «модель
- * сама подстраивается» (с подписью про цену) → мини-карта смыслов с той же
- * кластеризацией. Карту никто не расставлял — она сложилась сама из текста.
+ * Слайд 32 · Как выбирается слово
+ * C-шаблон. Незаконченная фраза → ранжированные кандидаты с полосками
+ * вероятности (верхний выбран). Внизу — лента «слово за словом». Эхо Т9:
+ * там кандидаты из словаря телефона, здесь — из всего языка.
  */
 export default function Slide34() {
   return (
-    <Stage label="34 Как училась модель">
+    <Stage label="34 Как выбирается слово">
       <Meta num="34" type="C" />
 
       <div className="visual">
@@ -48,66 +45,64 @@ export default function Slide34() {
           viewBox="0 0 1094 800"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: 1094, height: 800, display: 'block' }}
-          aria-label="Конвейер: источники текста → модель подстраивается → карта смыслов с кластерами"
+          aria-label="Незаконченная фраза и ранжированные слова-кандидаты с вероятностями; верхнее выбрано"
         >
-          {/* Заголовки этапов */}
-          <g fontFamily="IBM Plex Mono, monospace" fontSize="18" fill={MUTE} letterSpacing="0.08em">
-            <text x={120} y={86} textAnchor="middle">ИСТОЧНИКИ</text>
-            <text x={BOX_X + BOX_W / 2} y={86} textAnchor="middle">ОБУЧЕНИЕ</text>
-            <text x={822} y={86} textAnchor="middle">КАРТА СМЫСЛОВ</text>
-          </g>
-
-          {/* Источники + воронка в коробку */}
-          {sources.map((s, i) => (
-            <g key={s}>
-              <line x1={222} y1={srcY[i] - 8} x2={BOX_X} y2={BOX_CY} stroke={RULE} strokeWidth={1} />
-              <text x={206} y={srcY[i]} textAnchor="end" fontFamily="IBM Plex Sans, sans-serif" fontSize="25" fill={INK}>
-                {s}
-              </text>
-            </g>
-          ))}
-
-          {/* Коробка обучения */}
-          <rect x={BOX_X} y={BOX_Y} width={BOX_W} height={BOX_H} rx={14} fill="none" stroke={INK} strokeWidth={1.6} />
-          <text x={BOX_X + BOX_W / 2} y={BOX_CY - 8} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="25" fill={INK}>
-            модель сама
+          {/* Незаконченная фраза */}
+          <text x={28} y={74} fontFamily="IBM Plex Sans, sans-serif" fontSize="32" fill={INK}>
+            В ельнике почва обычно
           </text>
-          <text x={BOX_X + BOX_W / 2} y={BOX_CY + 26} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="25" fill={INK}>
-            подстраивается
-          </text>
-          <text x={BOX_X + BOX_W / 2} y={416} textAnchor="middle" fontFamily="IBM Plex Mono, monospace" fontSize="20" fill={MUTE}>
-            один раз · месяцы ·
-          </text>
-          <text x={BOX_X + BOX_W / 2} y={446} textAnchor="middle" fontFamily="IBM Plex Mono, monospace" fontSize="20" fill={MUTE}>
-            тысячи видеокарт
+          <rect x={508} y={50} width={16} height={32} fill={INK} />
+          <text x={536} y={74} fontFamily="IBM Plex Sans, sans-serif" fontSize="32" fill={MUTE}>
+            ______
           </text>
 
-          {/* Стрелка коробка → карта */}
-          <line x1={BOX_X + BOX_W} y1={BOX_CY} x2={702} y2={BOX_CY} stroke={INK} strokeWidth={1.8} />
-          <polygon points={`712,${BOX_CY} 698,${BOX_CY - 8} 698,${BOX_CY + 8}`} fill={INK} />
+          <line x1={28} y1={110} x2={1060} y2={110} stroke={RULE} strokeWidth={1} />
 
-          {/* Карта смыслов — кластеры */}
-          {mapDots.map((d) => (
-            <g key={d.label}>
-              <circle cx={d.x} cy={d.y} r={5} fill={INK} />
-              <text x={d.x + 16} y={d.y + 8} fontFamily="IBM Plex Sans, sans-serif" fontSize="24" fill={INK}>
-                {d.label}
-              </text>
-            </g>
-          ))}
+          {/* Кандидаты */}
+          {candidates.map((c, i) => {
+            const yb = ROW_TOP + i * ROW_PITCH;
+            const barW = (c.p / 58) * BAR_MAX;
+            return (
+              <g key={c.w}>
+                {c.chosen && <rect x={20} y={yb - 34} width={1040} height={50} rx={8} fill={HI} />}
+                <text x={44} y={yb} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={INK}>
+                  {c.w}
+                </text>
+                <rect x={BAR_X} y={yb - 24} width={barW} height={26} rx={3} fill={c.chosen ? INK : INK_SOFT} opacity={c.chosen ? 1 : 0.55} />
+                <text x={PCT_X} y={yb} fontFamily="IBM Plex Mono, monospace" fontSize="26" fill={INK}>
+                  {c.p}%
+                </text>
+                {c.chosen && (
+                  <text x={848} y={yb} fontFamily="IBM Plex Sans, sans-serif" fontSize="26" fill={MUTE}>
+                    ← выбрано
+                  </text>
+                )}
+              </g>
+            );
+          })}
+
+          <line x1={28} y1={552} x2={1060} y2={552} stroke={RULE} strokeWidth={1} />
+
+          {/* Лента «слово за словом» */}
+          <text x={28} y={606} fontFamily="IBM Plex Mono, monospace" fontSize="26" fill={MUTE} letterSpacing="0.03em">
+            …и так, слово за словом →
+          </text>
+          <text x={28} y={664} fontFamily="IBM Plex Sans, sans-serif" fontSize="28" fill={INK}>
+            «В ельнике почва обычно{' '}
+            <tspan fontWeight="600">кислая</tspan>, потому что…»
+          </text>
         </svg>
       </div>
 
       <div className="right">
-        <div className="sub">Обучение и заморозка</div>
-        <h2 className="title">Как училась модель</h2>
+        <div className="sub">Как рождается ответ</div>
+        <h2 className="title">Как выбирается слово</h2>
         <p className="cap">
-          Модель не писали по правилам. Ей показали огромное количество текста —
-          и она сама подстроилась под него.
+          Модель оценивает, насколько вероятно каждое следующее слово, и берёт
+          из верхних.
           <br />
           <br />
-          Так и сложилась карта смыслов: близкие по смыслу слова встали рядом.
-          Это делается один раз и очень долго — месяцы работы тысяч видеокарт.
+          И так — слово за словом, до конца ответа.
         </p>
       </div>
 

@@ -5,110 +5,117 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '31',
   type: 'C',
-  title: 'Контекстное окно',
-  subblock: '2.2 Контекст и память',
+  title: 'Что такое контекст',
+  subblock: '2.3 Контекст и память',
 };
 
+const BG = '#FAFAF7';
 const HI = '#F0EEE8';
 const PALE = '#F4F3EF';
-const INK = '#1A1A1A';
-const MUTE = '#6B6B68';
-const MUTE_2 = '#9A9893';
 const RULE = '#D9D7CF';
 const RULE_SOFT = '#ECEAE3';
+const MUTE = '#6B6B68';
+const MUTE_2 = '#9A9893';
+const INK = '#1A1A1A';
 
-const B_X = 140;
-const B_W = 820;
-const BH = 64;
-
-function Bubble({ y, label, role, faded }) {
-  const user = role === 'user';
-  const fill = user ? (faded ? PALE : HI) : 'none';
-  const stroke = user ? RULE_SOFT : faded ? RULE_SOFT : RULE;
-  const tag = user ? 'вы' : 'модель';
+function Bubble({ x, y, w, h = 52, text, role }) {
+  const isUser = role === 'user';
   return (
     <g>
-      <rect x={B_X} y={y} width={B_W} height={BH} rx={16} fill={fill} stroke={stroke} strokeWidth={1.2} />
-      <text x={B_X + 26} y={y + BH / 2 + 9} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={faded ? MUTE_2 : INK}>
-        {label}
-      </text>
-      <text
-        x={B_X + B_W - 26}
-        y={y + BH / 2 + 8}
-        textAnchor="end"
-        fontFamily="IBM Plex Mono, monospace"
-        fontSize="20"
-        letterSpacing="0.06em"
-        fill={MUTE_2}
-      >
-        {tag}
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={14}
+        fill={isUser ? HI : 'none'}
+        stroke={isUser ? 'none' : RULE}
+        strokeWidth={isUser ? 0 : 1}
+      />
+      <text x={x + 18} y={y + h / 2 + 6} fontFamily="IBM Plex Sans, sans-serif" fontSize="20" fill={INK}>
+        {text}
       </text>
     </g>
   );
 }
 
-const FRAME_X = 110;
-const FRAME_W = 880;
-const FRAME_TOP = 248;
-const FRAME_H = 324;
+const WIN_X = 16;
+const WIN_W = 1058;
+const IN_X = 44;
+const IN_W = 1006;
+const IN_R = IN_X + IN_W; // правый внутренний край
 
 /**
- * Слайд 31 · Контекстное окно
- * C-шаблон. Тот же диалог, что на слайде 30, одной лентой (читается снизу
- * вверх). Рамка = контекстное окно: внутри свежие реплики, а две самые
- * старые — бледные над рамкой: выпали, модель их не видит.
+ * Слайд 29 · Что такое контекст
+ * C-шаблон. Чат-окно с тремя подписанными зонами: правила работы (бледнее,
+ * со значком-замком и припиской «задаёт сервис»), что уже обсудили, ваш
+ * вопрос. Окно = граница знания: чего нет в листе — для модели не существует.
  */
 export default function Slide31() {
   return (
-    <Stage label="31 Контекстное окно">
+    <Stage label="31 Что такое контекст">
       <Meta num="31" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1094 640"
+          viewBox="0 0 1094 800"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: 1094, height: 640, display: 'block' }}
-          aria-label="Лента диалога: две старые реплики выше рамки окна, бледные — выпали. В рамке — свежие реплики."
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Чат-окно с тремя зонами: правила работы, что уже обсудили, ваш вопрос."
         >
-          {/* Выпавшее из окна — выше рамки, бледное */}
-          <text x={B_X} y={32} fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
-            ↑ выпало из окна — модель это уже не видит
+          {/* ── Окно чата ── */}
+          <rect x={WIN_X} y={20} width={WIN_W} height={656} rx={14} fill={BG} stroke={RULE} strokeWidth={1} />
+          <g fill={RULE}>
+            <circle cx={WIN_X + 24} cy={44} r={5} />
+            <circle cx={WIN_X + 44} cy={44} r={5} />
+            <circle cx={WIN_X + 64} cy={44} r={5} />
+          </g>
+          <line x1={WIN_X} y1={66} x2={WIN_X + WIN_W} y2={66} stroke={RULE_SOFT} strokeWidth={1} />
+
+          {/* ── Зона 1 · Правила работы (бледнее) ── */}
+          <g stroke={MUTE_2} strokeWidth="1.4" fill="none">
+            <rect x={IN_X} y={92} width={14} height={11} rx={2} />
+            <path d={`M ${IN_X + 3} 92 v -3 a 4 4 0 0 1 8 0 v 3`} />
+          </g>
+          <text x={IN_X + 24} y={102} fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="18" fill={MUTE}>
+            Правила работы
           </text>
-          <Bubble y={52} label="Составь план эксперимента" role="user" faded />
-          <Bubble y={128} label="Конечно. Какая тема?" role="assistant" faded />
-
-          {/* Легенда — прижата к верхней границе рамки */}
-          <text x={FRAME_X} y={FRAME_TOP - 16} fontFamily="IBM Plex Mono, monospace" fontSize="25" fill={INK} letterSpacing="0.02em">
-            Контекстное окно ≈ 128 000 токенов
+          <text x={IN_X + 178} y={102} fontFamily="IBM Plex Sans, sans-serif" fontSize="14" fill={MUTE_2}>
+            задаёт сервис — вы их не пишете и обычно не видите
+          </text>
+          <rect x={IN_X} y={114} width={IN_W} height={64} rx={8} fill={PALE} stroke={RULE_SOFT} strokeWidth={1} />
+          <text x={IN_X + 22} y={152} fontFamily="IBM Plex Sans, sans-serif" fontSize="20" fill={MUTE}>
+            Ты — помощник-ассистент. Отвечай вежливо и кратко.
           </text>
 
-          {/* Рамка-окно */}
-          <rect x={FRAME_X} y={FRAME_TOP} width={FRAME_W} height={FRAME_H} rx={10} fill="none" stroke={INK} strokeWidth={2.6} />
-
-          {/* Влезло в окно — свежие реплики */}
-          <Bubble y={266} label="Влияние засухи на хвойные" role="user" />
-          <Bubble y={342} label="Уточним методику измерения?" role="assistant" />
-          <Bubble y={418} label="Какие методы предложишь?" role="user" />
-          <Bubble y={494} label="Предлагаю три метода…" role="assistant" />
-
-          <text x={FRAME_X + FRAME_W / 2} y={FRAME_TOP + FRAME_H + 42} textAnchor="middle" fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
-            ↑ беседа читается снизу вверх
+          {/* ── Зона 2 · Что уже обсудили ── */}
+          <text x={IN_X} y={212} fontFamily="IBM Plex Sans, sans-serif" fontWeight="500" fontSize="18" fill={MUTE}>
+            Что уже обсудили
           </text>
+          <rect x={IN_X} y={224} width={IN_W} height={246} rx={8} fill="none" stroke={MUTE_2} strokeWidth={1} />
+          <Bubble x={IN_R - 480 - 24} y={248} w={480} text="Помоги составить план эксперимента" role="user" />
+          <Bubble x={IN_X + 24} y={318} w={340} text="Конечно. Какая тема?" role="assistant" />
+          <Bubble x={IN_R - 540 - 24} y={388} w={540} text="Влияние засушливого периода на хвойные" role="user" />
+
+          {/* ── Зона 3 · Ваш вопрос сейчас ── */}
+          <text x={IN_X} y={508} fontFamily="IBM Plex Sans, sans-serif" fontWeight="600" fontSize="18" fill={INK}>
+            Ваш вопрос сейчас
+          </text>
+          <rect x={IN_X} y={520} width={IN_W} height={120} rx={8} fill={BG} stroke={INK} strokeWidth={1.5} />
+          <Bubble x={IN_R - 480 - 24} y={556} w={480} text="Какие методы измерения предложишь?" role="user" />
         </svg>
       </div>
 
       <div className="right">
         <div className="sub">Контекст и память</div>
-        <h2 className="title">Контекстное окно</h2>
+        <h2 className="title">Что такое контекст</h2>
         <p className="cap">
-          Контекстное окно — сколько текста модель читает за один раз.
+          Контекст — единственное, что модель видит при ответе:
+          <br />
+          правила + что обсудили + ваш вопрос.
           <br />
           <br />
-          Большое, но конечное: ~128 000 токенов ≈ 200 страниц.
-          <br />
-          <br />
-          Что не поместилось — выпадает: старое начало беседы модель уже не
-          видит.
+          Чего нет в листе — для модели не существует.
         </p>
       </div>
 

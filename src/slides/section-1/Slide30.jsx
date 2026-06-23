@@ -1,152 +1,97 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
+import { SpaceIcon, SPACE_CLUSTERS } from './meaningSpace.jsx';
 
 export const meta = {
   id: '30',
-  type: 'B',
-  title: 'Модель не помнит — перечитывает',
-  subblock: '2.2 Контекст и память',
+  type: 'C',
+  title: 'После обучения пространство фиксируется',
+  subblock: '2.2 Обучение и заморозка',
 };
 
 const INK = '#1A1A1A';
-const MUTE_2 = '#9A9893';
 const RULE = '#D9D7CF';
-const HI = '#F0EEE8';
+const PALE = '#F1F0EC';
 
-const BH = 70;
-const PITCH = 86;
-const TOP = 24;
-
-// Реальный диалог (тот же, что на слайде 31)
-const chat = [
-  { label: 'Составь план эксперимента', role: 'user' },
-  { label: 'Конечно. Какая тема?', role: 'bot' },
-  { label: 'Влияние засухи на хвойные', role: 'user' },
-  { label: 'Уточним методику измерения?', role: 'bot' },
-  { label: 'Какие методы предложишь?', role: 'user' },
-  { label: 'Предлагаю три метода…', role: 'bot' },
-];
-
-const U_X = 1086;
-const U_W = 600;
-const A_X = 300;
-const A_W = 600;
-
-function Bubble({ y, label, role }) {
-  const user = role === 'user';
-  const x = user ? U_X : A_X;
-  const w = user ? U_W : A_W;
-  return (
-    <g>
-      <rect x={x} y={y} width={w} height={BH} rx={16} fill={user ? HI : 'none'} stroke={user ? 'none' : RULE} strokeWidth={1.2} />
-      <text x={x + 26} y={y + BH / 2 + 9} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={INK}>
-        {label}
-      </text>
-      <text
-        x={user ? x + w - 26 : x + w - 26}
-        y={y + BH / 2 + 8}
-        textAnchor="end"
-        fontFamily="IBM Plex Mono, monospace"
-        fontSize="19"
-        letterSpacing="0.06em"
-        fill={MUTE_2}
-      >
-        {user ? 'вы' : 'модель'}
-      </text>
-    </g>
-  );
-}
-
-// Петля ↻ — «перечитывает всё»
-function Loop({ cx, cy, r = 30 }) {
-  const RAD = Math.PI / 180;
-  const pt = (d) => [cx + r * Math.cos(d * RAD), cy - r * Math.sin(d * RAD)];
-  const [sx, sy] = pt(60);
-  const [ex, ey] = pt(120);
-  return (
-    <g fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round">
-      <path d={`M ${sx} ${sy} A ${r} ${r} 0 1 1 ${ex} ${ey}`} />
-      <polyline points={`${ex - 9},${ey - 3} ${ex + 3},${ey - 8} ${ex + 6},${ey + 5}`} />
-    </g>
-  );
-}
+// То же пространство, что на слайде 34. Рамка отцентрована по вертикали визуала
+// (= по центру текста справа): её центр совпадает с серединой viewBox (400).
+const UNIT = 84;
+const GMAX = 6;
+const FRAME_PAD = 36;
+const FRAME_H = GMAX * UNIT + FRAME_PAD * 2;
+const FRAME_TOP = 400 - FRAME_H / 2;
+const ORIGIN_X = 295;
+const ORIGIN_Y = FRAME_TOP + FRAME_PAD + GMAX * UNIT; // нижняя ось (gy=0)
+const toX = (gx) => ORIGIN_X + gx * UNIT;
+const toY = (gy) => ORIGIN_Y - gy * UNIT;
+const MIDX = toX(3);
+const FRAME_BOTTOM = FRAME_TOP + FRAME_H;
 
 /**
- * Слайд 30 · Модель не помнит — перечитывает
- * B-шаблон. Реальный короткий диалог (тот же, что на слайде 31). Слева —
- * скоба со значком ↻: перед каждым ответом модель перечитывает всю беседу
- * заново, с начала. Слово «окно» не используем (вводится на слайде 31).
+ * Слайд 35 · После обучения пространство фиксируется
+ * C-шаблон. То же пространство смыслов, что сложилось на слайде 34, но теперь
+ * зафиксированное: точки на местах, фон бледный. Снизу стрелка «ваши вопросы»
+ * упирается в него и не меняет. Мост к Части III: куда тогда уходят данные.
  */
 export default function Slide30() {
-  const bottom = TOP + PITCH * (chat.length - 1) + BH;
-
   return (
-    <Stage label="30 Модель не помнит — перечитывает">
-      <Meta num="30" type="B" />
+    <Stage label="30 После обучения пространство фиксируется">
+      <Meta num="30" type="C" />
 
-      <div style={{ position: 'absolute', top: 92, left: 96 }}>
-        <div
-          style={{
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: 18,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--mute)',
-            marginBottom: 14,
-          }}
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 800"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 800, display: 'block' }}
+          aria-label="Зафиксированное пространство смыслов; вопросы снизу упираются в него и не меняют"
         >
-          Контекст и память
-        </div>
-        <h2
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 500,
-            fontSize: 50,
-            lineHeight: 1.1,
-            color: 'var(--ink)',
-            margin: 0,
-            letterSpacing: '-0.01em',
-          }}
-        >
-          Модель не помнит — перечитывает
-        </h2>
-        <p
-          style={{
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontWeight: 400,
-            fontSize: 28,
-            lineHeight: 1.3,
-            color: 'var(--ink)',
-            margin: '20px 0 0 0',
-            maxWidth: 1500,
-          }}
-        >
-          Чтобы ответить, модель каждый раз перечитывает всю беседу заново — с самого начала. Чем длиннее диалог, тем больше.
-        </p>
+          <text x={MIDX} y={FRAME_TOP - 26} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="28" fill={INK}>
+            пространство смыслов зафиксировано
+          </text>
+
+          {/* Рамка вокруг сетки */}
+          <rect x={toX(0) - FRAME_PAD} y={FRAME_TOP} width={GMAX * UNIT + FRAME_PAD * 2} height={FRAME_H} rx={16} fill={PALE} stroke={RULE} strokeWidth={1.5} />
+
+          {/* Лёгкая сетка без чисел */}
+          <g stroke={RULE} strokeWidth="1">
+            {Array.from({ length: GMAX + 1 }, (_, i) => (
+              <line key={`vx-${i}`} x1={toX(i)} y1={toY(0)} x2={toX(i)} y2={toY(GMAX)} />
+            ))}
+            {Array.from({ length: GMAX + 1 }, (_, i) => (
+              <line key={`hy-${i}`} x1={toX(0)} y1={toY(i)} x2={toX(GMAX)} y2={toY(i)} />
+            ))}
+          </g>
+          <line x1={toX(0)} y1={toY(0)} x2={toX(GMAX)} y2={toY(0)} stroke={INK} strokeWidth="1.6" />
+          <line x1={toX(0)} y1={toY(0)} x2={toX(0)} y2={toY(GMAX)} stroke={INK} strokeWidth="1.6" />
+
+          {/* Те же объекты на местах */}
+          {SPACE_CLUSTERS.map((it) => (
+            <g key={it.name} transform={`translate(${toX(it.gx)}, ${toY(it.gy)}) scale(1.9)`}>
+              <SpaceIcon name={it.name} c={INK} />
+            </g>
+          ))}
+
+          {/* Вопросы упираются в зафиксированное пространство */}
+          <line x1={MIDX} y1={FRAME_BOTTOM + 70} x2={MIDX} y2={FRAME_BOTTOM + 24} stroke={INK} strokeWidth={2.4} />
+          <polygon points={`${MIDX},${FRAME_BOTTOM + 8} ${MIDX - 11},${FRAME_BOTTOM + 30} ${MIDX + 11},${FRAME_BOTTOM + 30}`} fill={INK} />
+          <text x={MIDX} y={FRAME_BOTTOM + 104} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="28" fill={INK}>
+            ваши вопросы его не меняют
+          </text>
+        </svg>
       </div>
 
-      <div style={{ position: 'absolute', top: 332, left: 96, width: 1728, height: 600 }}>
-        <svg viewBox="0 0 1728 600" xmlns="http://www.w3.org/2000/svg" style={{ width: 1728, height: 600, display: 'block' }} aria-label="Короткий диалог; слева значок перечитывания: каждый ответ — заново вся беседа">
-          {/* Скоба слева — охватывает всю беседу */}
-          <path
-            d={`M 296 ${TOP} h -22 v ${bottom - TOP} h 22`}
-            fill="none"
-            stroke={INK}
-            strokeWidth={1.6}
-          />
-          <Loop cx={170} cy={(TOP + bottom) / 2 - 44} />
-          <text x={170} y={(TOP + bottom) / 2 + 8} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="26" fill={INK}>
-            читает
-          </text>
-          <text x={170} y={(TOP + bottom) / 2 + 42} textAnchor="middle" fontFamily="IBM Plex Sans, sans-serif" fontSize="26" fill={INK}>
-            всё заново
-          </text>
-
-          {chat.map((m, i) => (
-            <Bubble key={i} y={TOP + i * PITCH} label={m.label} role={m.role} />
-          ))}
-        </svg>
+      <div className="right">
+        <div className="sub">Обучение и заморозка</div>
+        <h2 className="title">После обучения пространство фиксируется</h2>
+        <p className="cap">
+          Когда обучение закончилось, пространство смыслов фиксируется. Дальше
+          модель только пользуется тем, что уже сложилось, и сама по себе не
+          меняется.
+          <br />
+          <br />
+          Сколько бы вы её ни спрашивали — пространство остаётся прежним.
+        </p>
       </div>
 
       <Foot />

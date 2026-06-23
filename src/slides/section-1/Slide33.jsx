@@ -4,116 +4,111 @@ import Foot from '../../components/Foot.jsx';
 
 export const meta = {
   id: '33',
-  type: 'D',
-  title: 'Тот же вопрос — разный ответ',
-  subblock: '2.3 Как рождается ответ',
+  type: 'C',
+  title: 'Контекстное окно',
+  subblock: '2.3 Контекст и память',
 };
 
-// Различающиеся слова — лёгкая заливка (волнистое подчёркивание зарезервировано под ошибки)
-function Hi({ children }) {
+const HI = '#F0EEE8';
+const PALE = '#F4F3EF';
+const INK = '#1A1A1A';
+const MUTE = '#6B6B68';
+const MUTE_2 = '#9A9893';
+const RULE = '#D9D7CF';
+const RULE_SOFT = '#ECEAE3';
+
+const B_X = 140;
+const B_W = 820;
+const BH = 64;
+
+function Bubble({ y, label, role, faded }) {
+  const user = role === 'user';
+  const fill = user ? (faded ? PALE : HI) : 'none';
+  const stroke = user ? RULE_SOFT : faded ? RULE_SOFT : RULE;
+  const tag = user ? 'вы' : 'модель';
   return (
-    <span style={{ background: 'var(--highlight)', borderRadius: 4, padding: '1px 6px' }}>{children}</span>
+    <g>
+      <rect x={B_X} y={y} width={B_W} height={BH} rx={16} fill={fill} stroke={stroke} strokeWidth={1.2} />
+      <text x={B_X + 26} y={y + BH / 2 + 9} fontFamily="IBM Plex Sans, sans-serif" fontSize="27" fill={faded ? MUTE_2 : INK}>
+        {label}
+      </text>
+      <text
+        x={B_X + B_W - 26}
+        y={y + BH / 2 + 8}
+        textAnchor="end"
+        fontFamily="IBM Plex Mono, monospace"
+        fontSize="20"
+        letterSpacing="0.06em"
+        fill={MUTE_2}
+      >
+        {tag}
+      </text>
+    </g>
   );
 }
 
-const runBox = {
-  flex: 1,
-  border: '1.5px solid var(--line)',
-  borderRadius: 16,
-  padding: '28px 30px',
-  fontFamily: 'IBM Plex Sans, sans-serif',
-  fontSize: 28,
-  lineHeight: 1.5,
-  color: 'var(--ink)',
-  background: 'var(--bg)',
-};
-
-const runLabel = {
-  fontFamily: 'IBM Plex Mono, monospace',
-  fontSize: 24,
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase',
-  color: 'var(--mute)',
-  margin: '0 0 16px 0',
-};
+const FRAME_X = 110;
+const FRAME_W = 880;
+const FRAME_TOP = 248;
+const FRAME_H = 324;
 
 /**
- * Слайд 33 · Тот же вопрос — разный ответ
- * D-шаблон. Один запрос → два прогона. Смысл один, формулировки разные;
- * различия — лёгкой заливкой. Недетерминизм → вопрос воспроизводимости.
- * Температуру/случайность здесь не называем (рычаг Секции 2).
+ * Слайд 31 · Контекстное окно
+ * C-шаблон. Тот же диалог, что на слайде 30, одной лентой (читается снизу
+ * вверх). Рамка = контекстное окно: внутри свежие реплики, а две самые
+ * старые — бледные над рамкой: выпали, модель их не видит.
  */
 export default function Slide33() {
   return (
-    <Stage label="33 Тот же вопрос — разный ответ">
-      <Meta num="33" type="D" />
+    <Stage label="33 Контекстное окно">
+      <Meta num="33" type="C" />
 
-      <div style={{ position: 'absolute', top: 92, left: 96 }}>
-        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 18, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--mute)', marginBottom: 14 }}>
-          Как рождается ответ
-        </div>
-        <h2 style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 500, fontSize: 50, lineHeight: 1.1, color: 'var(--ink)', margin: 0, letterSpacing: '-0.01em' }}>
-          Тот же вопрос — разный ответ
-        </h2>
-      </div>
-
-      {/* Один и тот же вопрос */}
-      <div style={{ position: 'absolute', top: 244, left: 0, width: 1920, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 28 }}>
-        <div
-          style={{
-            border: '1.5px solid var(--ink)',
-            borderRadius: 16,
-            padding: '22px 34px',
-            fontFamily: 'IBM Plex Sans, sans-serif',
-            fontSize: 30,
-            color: 'var(--ink)',
-            background: 'var(--bg)',
-          }}
+      <div className="visual">
+        <svg
+          viewBox="0 0 1094 640"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1094, height: 640, display: 'block' }}
+          aria-label="Лента диалога: две старые реплики выше рамки окна, бледные — выпали. В рамке — свежие реплики."
         >
-          Чем засуха опасна для ельника?
-        </div>
-        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 24, color: 'var(--mute)' }}>
-          один и тот же вопрос
-        </div>
-      </div>
+          {/* Выпавшее из окна — выше рамки, бледное */}
+          <text x={B_X} y={32} fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
+            ↑ выпало из окна — модель это уже не видит
+          </text>
+          <Bubble y={52} label="Составь план эксперимента" role="user" faded />
+          <Bubble y={128} label="Конечно. Какая тема?" role="assistant" faded />
 
-      {/* Дерево: стояк от вопроса → перекладина → две стрелки вниз в прогоны */}
-      <div style={{ position: 'absolute', top: 326, left: 96, width: 1728, height: 104 }}>
-        <svg viewBox="0 0 1728 104" style={{ width: 1728, height: 104, display: 'block' }} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="864" y1="0" x2="864" y2="40" stroke="#1A1A1A" strokeWidth="1.8" />
-          <line x1="444" y1="40" x2="1284" y2="40" stroke="#1A1A1A" strokeWidth="1.8" />
-          <line x1="444" y1="40" x2="444" y2="84" stroke="#1A1A1A" strokeWidth="1.8" />
-          <polygon points="444,94 435,80 453,80" fill="#1A1A1A" />
-          <line x1="1284" y1="40" x2="1284" y2="84" stroke="#1A1A1A" strokeWidth="1.8" />
-          <polygon points="1284,94 1275,80 1293,80" fill="#1A1A1A" />
+          {/* Легенда — прижата к верхней границе рамки */}
+          <text x={FRAME_X} y={FRAME_TOP - 16} fontFamily="IBM Plex Mono, monospace" fontSize="25" fill={INK} letterSpacing="0.02em">
+            Контекстное окно ≈ 128 000 токенов
+          </text>
+
+          {/* Рамка-окно */}
+          <rect x={FRAME_X} y={FRAME_TOP} width={FRAME_W} height={FRAME_H} rx={10} fill="none" stroke={INK} strokeWidth={2.6} />
+
+          {/* Влезло в окно — свежие реплики */}
+          <Bubble y={266} label="Влияние засухи на хвойные" role="user" />
+          <Bubble y={342} label="Уточним методику измерения?" role="assistant" />
+          <Bubble y={418} label="Какие методы предложишь?" role="user" />
+          <Bubble y={494} label="Предлагаю три метода…" role="assistant" />
+
+          <text x={FRAME_X + FRAME_W / 2} y={FRAME_TOP + FRAME_H + 42} textAnchor="middle" fontFamily="IBM Plex Mono, monospace" fontSize="24" fill={MUTE}>
+            ↑ беседа читается снизу вверх
+          </text>
         </svg>
       </div>
 
-      {/* Два прогона */}
-      <div style={{ position: 'absolute', top: 440, left: 160, right: 160, display: 'flex', gap: 80 }}>
-        <div style={{ flex: 1 }}>
-          <div style={runLabel}>Прогон 1</div>
-          <div style={runBox}>
-            Засуха <Hi>ослабляет</Hi> ели: <Hi>падает</Hi> прирост, <Hi>растёт риск усыхания</Hi> и вспышек короеда.
-          </div>
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={runLabel}>Прогон 2</div>
-          <div style={runBox}>
-            <Hi>В засушливый период</Hi> ели <Hi>теряют влагу</Hi> — прирост <Hi>снижается</Hi>, <Hi>выше уязвимость</Hi> к&nbsp;короеду.
-          </div>
-        </div>
-      </div>
-
-      {/* Итог + подпись */}
-      <div style={{ position: 'absolute', top: 770, left: 96, right: 96, textAlign: 'center' }}>
-        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 26, color: 'var(--mute)', letterSpacing: '0.04em' }}>
-          оба верны · формулировки разные
-        </div>
-        <p style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontSize: 26, lineHeight: 1.4, color: 'var(--ink)', margin: '26px auto 0', maxWidth: 1480, textWrap: 'balance' }}>
-          Выбор из вероятных — значит ответ каждый раз немного другой. Оба верны,
-          но не идентичны. Сослаться на «модель сказала» как на фиксированный факт
-          нельзя — это вопрос воспроизводимости.
+      <div className="right">
+        <div className="sub">Контекст и память</div>
+        <h2 className="title">Контекстное окно</h2>
+        <p className="cap">
+          Контекстное окно — сколько текста модель читает за один раз.
+          <br />
+          <br />
+          Большое, но конечное: ~128 000 токенов ≈ 200 страниц.
+          <br />
+          <br />
+          Что не поместилось — выпадает: старое начало беседы модель уже не
+          видит.
         </p>
       </div>
 
