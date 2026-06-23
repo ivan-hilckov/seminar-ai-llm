@@ -1,121 +1,137 @@
-.s30-header {
+.s43-header {
   position: absolute;
   left: 96px;
   top: 96px;
   width: 1728px;
 }
-.s30-header .sub {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px;
-  color: var(--mute);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1;
-}
-.s30-header .title {
+.s43-header .title {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
-  font-size: 36px;
+  font-size: 44px;
   line-height: 1.18;
   letter-spacing: -0.005em;
   color: var(--ink);
-  margin: 24px 0 0 0;
+  margin: 0;
 }
 
-.s30-cols {
+/* Три колонки по главам */
+.s43-cols {
   position: absolute;
   left: 96px;
-  top: 242px;
-  width: 1728px;
-  height: 533px;
+  right: 96px;
+  top: 224px;
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
 }
-.s30-cols .col {
+
+.s43-col__head {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0 0 20px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  min-height: 76px;
+}
+
+.s43-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.s43-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.4;
+  letter-spacing: -0.003em;
+  color: var(--ink);
+}
+.s43-dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mute);
+}
+
+/* Таймлайн истории LLM */
+.s43-timeline {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  bottom: 132px;
+}
+.s43-tl__caption {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 28px;
+}
+.s43-track {
+  display: flex;
+}
+.s43-node {
+  flex: 1;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 32px;
-  box-sizing: border-box;
 }
-.s30-cols .vrule { background: var(--rule); width: 1px; height: 100%; }
-
-.s30-cols .ctitle {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 1;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-.s30-cols .ccode {
+.s43-node__year {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 16px;
-  color: var(--mute);
-  letter-spacing: 0.04em;
-  margin: 16px 0 0 0;
-  line-height: 1;
-}
-.s30-cols .cnumber {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
-  font-size: 120px;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  margin: 72px 0 0 0;
-  font-feature-settings: "tnum" 1, "lnum" 1;
-}
-.s30-cols .cnumlabel {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 400;
-  font-size: 24px;
+  letter-spacing: 0.02em;
   color: var(--mute);
-  margin: 16px 0 0 0;
-  line-height: 1;
+  margin-bottom: 12px;
 }
-
-.s30-hrule {
-  position: absolute;
-  left: 96px;
-  top: 787px;
-  width: 1728px;
-  height: 1px;
-  background: var(--rule);
-}
-
-.s30-summary {
-  position: absolute;
-  left: 96px;
-  top: 823px;
-  width: 1728px;
-  height: 161px;
+.s43-node__dot-row {
+  position: relative;
+  width: 100%;
+  height: 14px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 }
-.s30-summary p {
+/* Сегмент линии на всю ширину узла — соседние узлы стыкуются в одну линию */
+.s43-node__dot-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--rule);
+}
+.s43-node__dot {
+  position: relative;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.s43-node__label {
   font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 1.2;
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
   color: var(--ink);
-  margin: 0;
-  text-align: center;
-  letter-spacing: -0.005em;
-}
-.s30-summary .s30-source {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--mute-2);
-  letter-spacing: 0.04em;
-  margin: 0;
-  text-align: center;
+  margin-top: 16px;
+  padding: 0 8px;
 }

@@ -5,183 +5,141 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '53',
   type: 'B',
-  title: 'Кому что подходит',
-  subblock: '4.3 Тарифы и API',
+  title: 'Она понимает буквально — не интуитивно',
+  subblock: 'Перед началом',
 };
 
 /**
- * Слайд 68 · Кому что подходит
- * B-слайд с трёхстрочной матрицей правил. Каждая строка — «роль → рекомендация»
- * с серой моно-стрелкой посередине. Это не таблица сравнения, а горизонтальное
- * правило-список под главным тезисом. Внизу — anchor над тонкой линией.
+ * Слайд 54 · Она понимает буквально — не интуитивно
+ * Финальный смысловой слайд Секции 1, мост к Секции 2.
+ * B-каркас + локальное мини-сравнение из двух рамок:
+ *   заголовок → тезис → [Размыто | Конкретно] → якорь.
+ * Без --accent, без иконок, без стрелок между рамками. Левая
+ * рамка не «плохая» — обе нейтральные. Иерархия: тезис
+ * доминирует, рамки поддерживают, якорь снизу.
  */
 
-const RULES = [
-  {
-    role: 'Познакомиться, разовая задача',
-    pick: 'бесплатный веб-интерфейс любого из четырёх сервисов',
-  },
-  {
-    role: 'Регулярная исследовательская работа',
-    pick: 'один платный сервис (≈ $20 / мес), думающую модель — по требованию',
-  },
-  {
-    role: 'Автоматизация, обработка большого массива',
-    pick: 'API + скрипт или приложение',
-  },
-];
-
-const ROLE_STYLE = {
-  fontFamily: 'IBM Plex Sans, sans-serif',
-  fontWeight: 400,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--ink)',
-  margin: 0,
-  letterSpacing: '-0.003em',
-  textWrap: 'pretty',
-};
-
-const PICK_STYLE = {
-  fontFamily: 'IBM Plex Sans, sans-serif',
-  fontWeight: 500,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--ink)',
-  margin: 0,
-  letterSpacing: '-0.003em',
-  textWrap: 'pretty',
-};
-
-const ARROW_STYLE = {
-  fontFamily: 'IBM Plex Mono, monospace',
-  fontWeight: 400,
-  fontSize: 28,
-  lineHeight: 1.3,
-  color: 'var(--mute)',
-  margin: 0,
-  textAlign: 'center',
-};
-
-export default function Slide53() {
+function ExampleBox({ caption, text }) {
   return (
-    <Stage label="53 Кому что подходит">
-      <Meta num="53" type="B" />
-
-      {/* Мета-тег подблока */}
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div
         style={{
-          position: 'absolute',
-          top: 96,
-          left: 96,
           fontFamily: 'IBM Plex Mono, monospace',
-          fontSize: 20,
+          fontSize: 16,
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           color: 'var(--mute)',
+          marginBottom: 14,
         }}
       >
-        4.3 Тарифы
+        {caption}
       </div>
+      <div
+        style={{
+          border: '1px solid var(--rule)',
+          borderRadius: 8,
+          padding: '36px 40px',
+          height: 220,
+          boxSizing: 'border-box',
+          display: 'flex',
+          alignItems: 'center',
+          fontFamily: 'IBM Plex Sans, sans-serif',
+          fontWeight: 400,
+          fontSize: 26,
+          lineHeight: 1.45,
+          color: 'var(--ink)',
+          letterSpacing: '-0.003em',
+          background: 'transparent',
+          textWrap: 'pretty',
+        }}
+      >
+        {text}
+      </div>
+    </div>
+  );
+}
+
+export default function Slide53() {
+  return (
+    <Stage label="53 Она понимает буквально — не интуитивно">
+      <Meta num="53" type="B" />
 
       {/* Заголовок */}
       <h2
         style={{
           position: 'absolute',
-          top: 168,
+          top: 144,
           left: 96,
           right: 96,
+          margin: 0,
           fontFamily: 'IBM Plex Sans, sans-serif',
           fontWeight: 500,
-          fontSize: 48,
+          fontSize: 36,
           lineHeight: 1.18,
+          letterSpacing: '-0.005em',
           color: 'var(--ink)',
-          margin: 0,
-          letterSpacing: '-0.01em',
         }}
       >
-        Кому что подходит
+        Она понимает буквально — не&nbsp;интуитивно
       </h2>
 
       {/* Тезис */}
       <p
         style={{
           position: 'absolute',
-          top: 320,
+          top: 240,
           left: 96,
           right: 96,
+          margin: 0,
           fontFamily: 'IBM Plex Sans, sans-serif',
           fontWeight: 500,
-          fontSize: 60,
-          lineHeight: 1.18,
+          fontSize: 56,
+          lineHeight: 1.2,
           color: 'var(--ink)',
-          margin: 0,
-          letterSpacing: '-0.012em',
-          maxWidth: 1500,
+          letterSpacing: '-0.008em',
+          maxWidth: 1600,
           textWrap: 'pretty',
         }}
       >
-        Для&nbsp;регулярной работы исследователя — один платный сервис.
+        Модель выполняет то, что написано, а&nbsp;не&nbsp;то, что вы&nbsp;имели в&nbsp;виду
       </p>
 
-      {/* Три строки-правила */}
+      {/* Две рамки рядом */}
       <div
         style={{
           position: 'absolute',
-          top: 580,
+          top: 540,
           left: 96,
           right: 96,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 36,
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 48,
         }}
       >
-        {RULES.map((r) => (
-          <div
-            key={r.role}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 56px 1fr',
-              alignItems: 'baseline',
-              columnGap: 24,
-            }}
-          >
-            <p style={ROLE_STYLE}>{r.role}</p>
-            <p style={ARROW_STYLE}>→</p>
-            <p style={PICK_STYLE}>{r.pick}</p>
-          </div>
-        ))}
+        <ExampleBox caption="Размыто" text="Напиши что-нибудь про лес" />
+        <ExampleBox
+          caption="Конкретно"
+          text="Напиши 3 абзаца для введения научной статьи о защите ельников от короеда-типографа в Центральной России"
+        />
       </div>
 
-      {/* Тонкая линия + anchor */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 96,
-          right: 96,
-          bottom: 116,
-          height: 1,
-          background: 'var(--rule)',
-        }}
-      />
+      {/* Якорь снизу */}
       <p
         style={{
           position: 'absolute',
+          bottom: 168,
           left: 96,
           right: 96,
-          bottom: 60,
+          margin: 0,
           fontFamily: 'IBM Plex Sans, sans-serif',
-          fontStyle: 'italic',
           fontWeight: 400,
-          fontSize: 22,
+          fontSize: 24,
           lineHeight: 1.4,
           color: 'var(--mute)',
-          margin: 0,
           letterSpacing: '-0.002em',
         }}
       >
-        Несколько подписок параллельно почти никогда не&nbsp;нужны. Лучше один
-        сервис, в&nbsp;котором научился работать
+        Поэтому формулировка запроса — навык, а&nbsp;не&nbsp;магия
       </p>
 
       <Foot />

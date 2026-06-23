@@ -1,118 +1,130 @@
-import { Fragment } from 'react';
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide52.css';
 
 export const meta = {
   id: '52',
-  type: 'D',
-  title: 'Бесплатное · платное · API',
-  subblock: '4.3 Тарифы и API',
+  type: 'C',
+  title: 'Как отключить обучение на ваших данных',
+  subblock: 'Перед началом',
 };
 
 /**
- * Слайд 67 · Бесплатное, платное, API
- * D-сравнение с 3 колонками. Структура та же, что у Slide44, сокращена
- * до 3 колонок. Последняя ось у каждого тарифа звучит по-своему («что
- * недоступно» / «что даёт сверх» / «что нужно»), потому хранится в массиве
- * лейблов параллельно значениям.
+ * Слайд 46 · Как отключить обучение на ваших данных
+ * Семантическая SVG-реконструкция раздела Data controls в DeepSeek:
+ * заголовок раздела + одна строка с переключателем «Improve the model
+ * for everyone» в положении OFF. Без логотипов, без фирменных цветов,
+ * без зелёного/красного — нейтральная палитра проекта.
  */
-
-const TARIFFS = [
-  {
-    name: 'Бесплатное',
-    rows: [
-      ['Доступ', 'веб-интерфейс через браузер'],
-      ['Модели', 'обычные, не самые свежие, с лимитами на запросы'],
-      ['Память диалога', 'есть в рамках чата'],
-      ['Когда подходит', 'познакомиться, разовые задачи, простой текст'],
-      [
-        'Что недоступно',
-        'длинные документы целиком, частые запросы подряд, продвинутые модели',
-      ],
-    ],
-  },
-  {
-    name: 'Платное · ≈ $20 / мес',
-    rows: [
-      ['Доступ', 'тот же веб-интерфейс + приоритет'],
-      ['Модели', 'все актуальные, включая думающие, увеличенные лимиты'],
-      [
-        'Память диалога',
-        'есть, плюс память между диалогами (у некоторых сервисов)',
-      ],
-      [
-        'Когда подходит',
-        'регулярная работа, длинные документы, многошаговые задачи',
-      ],
-      [
-        'Что даёт сверх',
-        'загрузка файлов, проекты, кастомные ассистенты, поиск в интернете',
-      ],
-    ],
-  },
-  {
-    name: 'API',
-    rows: [
-      ['Доступ', 'программный, через код или внешние приложения'],
-      ['Модели', 'все, оплата по количеству обработанного текста'],
-      ['Память диалога', 'только то, что передаёшь в запросе'],
-      [
-        'Когда подходит',
-        'автоматизация, интеграция, обработка тысяч документов',
-      ],
-      ['Что нужно', 'базовое программирование или готовое приложение'],
-    ],
-  },
-];
-
-function Column({ tariff, position }) {
-  return (
-    <div className={`col ${position}`}>
-      <div className="ctitle">{tariff.name}</div>
-      <div className="s67-axes">
-        {tariff.rows.map(([label, value]) => (
-          <div key={label}>
-            <div className="s67-axis-label">{label}</div>
-            <p className="s67-axis-text">{value}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function Slide52() {
   return (
-    <Stage label="52 Бесплатное, платное, API">
-      <Meta num="52" type="D" />
+    <Stage label="52 Как отключить обучение на ваших данных">
+      <Meta num="52" type="C" />
 
-      <div className="s67-header">
-        <div className="sub">4.3 Тарифы</div>
-        <h2 className="title">Бесплатное, платное, API</h2>
-        <p className="lead">Три уровня доступа к&nbsp;одним и&nbsp;тем&nbsp;же моделям</p>
+      <div className="visual">
+        <svg
+          viewBox="0 0 1080 520"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: 1080, height: 'auto' }}
+          aria-label="Раздел настроек Data controls с переключателем Improve the model for everyone в положении OFF"
+        >
+          {/* Карточка панели настроек */}
+          <rect
+            x="0.5"
+            y="0.5"
+            width="1079"
+            height="519"
+            rx="14"
+            ry="14"
+            fill="#FAFAF7"
+            stroke="#D9D7CF"
+            strokeWidth="1"
+          />
+
+          {/* Заголовок раздела */}
+          <text
+            x="56"
+            y="92"
+            fontFamily="IBM Plex Sans, sans-serif"
+            fontWeight="600"
+            fontSize="34"
+            fill="#1A1A1A"
+          >
+            Data controls
+          </text>
+
+          {/* Тонкая линия под заголовком */}
+          <line x1="56" y1="132" x2="1024" y2="132" stroke="#ECEAE3" strokeWidth="1" />
+
+          {/* Строка настройки: название + описание + toggle */}
+          <g>
+            {/* Название переключателя */}
+            <text
+              x="56"
+              y="262"
+              fontFamily="IBM Plex Sans, sans-serif"
+              fontWeight="500"
+              fontSize="28"
+              fill="#1A1A1A"
+            >
+              Improve the model for everyone
+            </text>
+
+            {/* Серое описание под названием */}
+            <text
+              x="56"
+              y="306"
+              fontFamily="IBM Plex Sans, sans-serif"
+              fontWeight="400"
+              fontSize="20"
+              fill="#6B6B68"
+            >
+              Allow your content to be used to train our models and improve our services.
+            </text>
+
+            {/* Toggle справа · OFF (круг слева, нейтральный серый) */}
+            <g transform="translate(896, 244)">
+              <rect
+                x="0"
+                y="0"
+                width="80"
+                height="40"
+                rx="20"
+                ry="20"
+                fill="#D9D7CF"
+                stroke="#9A9893"
+                strokeWidth="1"
+              />
+              <circle cx="20" cy="20" r="14" fill="#FAFAF7" stroke="#9A9893" strokeWidth="1" />
+            </g>
+          </g>
+
+          {/* Тонкая линия под строкой — намёк на продолжение списка */}
+          <line x1="56" y1="380" x2="1024" y2="380" stroke="#ECEAE3" strokeWidth="1" />
+        </svg>
       </div>
 
-      <div className="s67-cols">
-        {TARIFFS.map((t, i) => {
-          const position =
-            i === 0 ? 'first' : i === TARIFFS.length - 1 ? 'last' : '';
-          return (
-            <Fragment key={t.name}>
-              <Column tariff={t} position={position} />
-              {i < TARIFFS.length - 1 && <div className="vrule" />}
-            </Fragment>
-          );
-        })}
-      </div>
-
-      <div className="s67-hrule" />
-
-      <div className="s67-summary">
-        <p>
-          Платная подписка — самый частый вариант для&nbsp;рабочей нагрузки
-          исследователя
+      <div className="right">
+        <div className="sub">Перед началом</div>
+        <h2 className="title" style={{ fontSize: 44, lineHeight: 1.15 }}>
+          Как отключить обучение на&nbsp;ваших данных
+        </h2>
+        <p className="cap" style={{ fontSize: 26, lineHeight: 1.3, marginTop: 20 }}>
+          Чтобы данные не&nbsp;учили модель — найдите этот тоггл в&nbsp;настройках
+        </p>
+        <p
+          style={{
+            margin: '28px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: 14,
+            lineHeight: 1.5,
+            letterSpacing: '0.04em',
+            color: 'var(--mute-2)',
+          }}
+        >
+          Settings → Data controls →
+          <br />
+          Improve the model for everyone
         </p>
       </div>
 

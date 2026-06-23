@@ -5,7 +5,7 @@ export default function Slide36() {
     <ASlide
       num="36"
       roman="III"
-      meta="Приватность · Контекст · Галлюцинации"
+      meta="Память · Поиск · Галлюцинации"
       title="Особенности в работе"
     />
   );

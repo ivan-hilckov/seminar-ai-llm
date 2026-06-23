@@ -5,50 +5,96 @@ import './Slide45.css';
 
 export const meta = {
   id: '45',
-  type: 'D',
-  title: 'У думающих моделей выше галлюцинации',
-  subblock: '3.4 Точность и галлюцинации',
+  type: 'C',
+  title: 'Что мы прошли',
+  subblock: 'Итог',
 };
 
 /**
- * Слайд 30 · У думающих моделей выше галлюцинации
- * D-шаблон с акцентом на крупные числа. Две равноправные колонки:
- * DeepSeek R1 (14.3%) vs DeepSeek V3 (3.9%). Контраст создаётся
- * самим размером цифры, без подсветки красным и без --accent.
- * Источник — Vectara HHEM Leaderboard, под summary мелким моно.
+ * Итоговый слайд первой половины семинара. Сверху — три колонки по главам
+ * (без номеров частей), под ними — таймлайн ключевых вех истории LLM.
+ * Заменяет прежнюю пару «Что мы прошли» + «Главные тезисы».
  */
+
+const COLUMNS = [
+  {
+    head: 'Откуда взялись современные модели',
+    items: [
+      'Т9 и автозаполнение',
+      'От Transformer до GPT-3',
+      'ChatGPT и диалог',
+      '«Думающие» модели',
+      'Не интеллект — статистика',
+    ],
+  },
+  {
+    head: 'Что происходит при ответе',
+    items: [
+      'Векторы смыслов',
+      'Обучение и заморозка',
+      'Контекст и память',
+      'Как рождается ответ',
+    ],
+  },
+  {
+    head: 'Важные особенности',
+    items: [
+      'Память и контекст',
+      'Доступ к интернету',
+      'Точность и галлюцинации',
+      'Склонность соглашаться',
+    ],
+  },
+];
+
+const TIMELINE = [
+  { year: 'до 2017', label: 'Т9, автозаполнение' },
+  { year: '2017', label: 'Transformer' },
+  { year: '2018', label: 'GPT-1' },
+  { year: '2019', label: 'GPT-2' },
+  { year: '2020', label: 'GPT-3 · 175 млрд' },
+  { year: '2022', label: 'ChatGPT' },
+  { year: '2024–25', label: '«Думающие» модели' },
+];
 
 export default function Slide45() {
   return (
-    <Stage label="45 У думающих моделей выше галлюцинации">
-      <Meta num="45" type="D" />
+    <Stage label="45 Что мы прошли">
+      <Meta num="45" type="C" />
 
-      <div className="s30-header">
-        <div className="sub">3.4 Точность и галлюцинации</div>
-        <h2 className="title">У&nbsp;думающих моделей выше галлюцинации</h2>
+      <div className="s43-header">
+        <h2 className="title">Что мы прошли</h2>
       </div>
 
-      <div className="s30-cols">
-        <div className="col">
-          <div className="ctitle">DeepSeek R1</div>
-          <div className="ccode">думающая модель</div>
-          <div className="cnumber">14.3%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
-        <div className="vrule" />
-        <div className="col">
-          <div className="ctitle">DeepSeek V3</div>
-          <div className="ccode">обычная модель</div>
-          <div className="cnumber">3.9%</div>
-          <div className="cnumlabel">галлюцинаций</div>
-        </div>
+      <div className="s43-cols">
+        {COLUMNS.map((col) => (
+          <div key={col.head} className="s43-col">
+            <h3 className="s43-col__head">{col.head}</h3>
+            <ul className="s43-list">
+              {col.items.map((it) => (
+                <li key={it} className="s43-item">
+                  <span className="s43-dot" aria-hidden="true" />
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
-      <div className="s30-hrule" />
-
-      <div className="s30-summary">
-        <p>Чем длиннее рассуждение — больше места для&nbsp;ошибок</p>
-        <p className="s30-source">Vectara HHEM Leaderboard, summarisation</p>
+      <div className="s43-timeline">
+        <div className="s43-tl__caption">История одним взглядом</div>
+        <div className="s43-track">
+          {TIMELINE.map((node) => (
+            <div key={node.year} className="s43-node">
+              <span className="s43-node__year">{node.year}</span>
+              <span className="s43-node__dot-row">
+                <span className="s43-node__dot" aria-hidden="true" />
+              </span>
+              <span className="s43-node__label">{node.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Foot />

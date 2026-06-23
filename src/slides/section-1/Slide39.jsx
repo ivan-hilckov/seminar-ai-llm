@@ -5,241 +5,213 @@ import Foot from '../../components/Foot.jsx';
 export const meta = {
   id: '39',
   type: 'C',
-  title: 'Память (Memory) — отдельная функция',
-  subblock: '3.2 Память и контекст в работе',
+  title: 'Поиск — отдельная функция',
+  subblock: '3.2 Доступ к интернету',
 };
 
-const BG = '#FAFAF7';
-const HI = '#F0EEE8';
-const RULE = '#D9D7CF';
-const RULE_SOFT = '#ECEAE3';
-const MUTE = '#6B6B68';
-const MUTE_2 = '#9A9893';
-const INK = '#1A1A1A';
-const INK_SOFT = '#2B2A28';
-
-const notes = [
-  'Работает в ВНИИЛМ',
-  'Интересуется засушливыми периодами',
-  'Предпочитает короткие ответы',
-  'Зовут Иван',
-];
-
 /**
- * Слайд 40 · Память (Memory) — отдельная функция
- * C-шаблон. Слева — нейтральная панель «Заметки о пользователе» с
- * четырьмя чипами. Стрелка вправо в блок «Системные инструкции», где
- * заметки выделены курсивной строкой «+ заметки о пользователе».
- * Стрелка вниз — в нейтральный блок «Модель». Под визуалом — мелкая
- * моно-приписка с тремя свойствами Memory. Без `--accent`, без AI-стока.
+ * Слайд 48 · Поиск — отдельная функция
+ * Параллель двух сцен интерфейса DeepSeek: вверху — Search не нажат,
+ * стрелка к книге «знания до 2024», подпись «модель вспоминает».
+ * Внизу — Search нажат (инверсия чёрным, БЕЗ --accent), стрелка
+ * к глобусу «интернет, сейчас», подпись «модель ищет».
+ * Меняется только нажата ли кнопка Search — это и есть «отдельная функция».
  */
+
+function PillButton({ x, y, w, label, active }) {
+  const fill = active ? '#1A1A1A' : 'none';
+  const stroke = active ? '#1A1A1A' : '#D9D7CF';
+  const textFill = active ? '#FAFAF7' : '#6B6B68';
+  return (
+    <g>
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={36}
+        rx={18}
+        ry={18}
+        fill={fill}
+        stroke={stroke}
+        strokeWidth={1}
+      />
+      <text
+        x={x + w / 2}
+        y={y + 24}
+        fontFamily="IBM Plex Sans, sans-serif"
+        fontWeight="500"
+        fontSize="16"
+        letterSpacing="0.02em"
+        fill={textFill}
+        textAnchor="middle"
+      >
+        {label}
+      </text>
+    </g>
+  );
+}
+
+function Arrow({ y, x1, x2 }) {
+  return (
+    <g stroke="#1A1A1A" strokeWidth={1.5} fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <line x1={x1} y1={y} x2={x2} y2={y} />
+      <polyline points={`${x2 - 12},${y - 7} ${x2},${y} ${x2 - 12},${y + 7}`} />
+    </g>
+  );
+}
+
+function Book() {
+  return (
+    <g fill="none" stroke="#1A1A1A" strokeWidth={1.5} strokeLinejoin="round">
+      <path d="M6 12 L40 8 L40 76 L6 72 Z" />
+      <path d="M74 12 L40 8 L40 76 L74 72 Z" />
+      <line x1="40" y1="8" x2="40" y2="76" />
+      <g stroke="#9A9893" strokeWidth="1">
+        <line x1="14" y1="26" x2="34" y2="24" />
+        <line x1="14" y1="38" x2="34" y2="36" />
+        <line x1="14" y1="50" x2="34" y2="48" />
+        <line x1="46" y1="24" x2="66" y2="26" />
+        <line x1="46" y1="36" x2="66" y2="38" />
+        <line x1="46" y1="48" x2="66" y2="50" />
+      </g>
+    </g>
+  );
+}
+
+function Globe() {
+  return (
+    <g fill="none" stroke="#1A1A1A" strokeWidth={1.5}>
+      <circle cx="40" cy="40" r="34" />
+      <ellipse cx="40" cy="40" rx="34" ry="13" />
+      <ellipse cx="40" cy="40" rx="13" ry="34" />
+      <line x1="6" y1="40" x2="74" y2="40" />
+    </g>
+  );
+}
+
+function Scene({ yOffset, searchActive, IconRight, captionRight, sceneCaption }) {
+  return (
+    <g transform={`translate(0, ${yOffset})`}>
+      {/* Input */}
+      <rect
+        x="60"
+        y="40"
+        width="680"
+        height="80"
+        rx="16"
+        ry="16"
+        fill="none"
+        stroke="#D9D7CF"
+        strokeWidth={1}
+      />
+      <text
+        x="88"
+        y="88"
+        fontFamily="IBM Plex Sans, sans-serif"
+        fontSize="22"
+        fill="#9A9893"
+      >
+        Спросите что-нибудь
+      </text>
+
+      {/* Pill buttons under input */}
+      <PillButton x={60} y={150} w={156} label="DeepThink" active={false} />
+      <PillButton x={236} y={150} w={132} label="Search" active={searchActive} />
+
+      {/* Arrow input → icon */}
+      <Arrow y={80} x1={780} x2={920} />
+
+      {/* Icon + caption */}
+      <g transform="translate(940, 40)">
+        <IconRight />
+      </g>
+      <text
+        x="980"
+        y="146"
+        fontFamily="IBM Plex Mono, monospace"
+        fontSize="14"
+        letterSpacing="0.06em"
+        fill="#9A9893"
+        textAnchor="middle"
+      >
+        {captionRight}
+      </text>
+
+      {/* Scene caption */}
+      <text
+        x="540"
+        y="240"
+        fontFamily="IBM Plex Sans, sans-serif"
+        fontWeight="500"
+        fontSize="24"
+        fill="#1A1A1A"
+        textAnchor="middle"
+      >
+        {sceneCaption}
+      </text>
+    </g>
+  );
+}
+
 export default function Slide39() {
   return (
-    <Stage label="39 Память — отдельная функция">
+    <Stage label="39 Поиск — отдельная функция">
       <Meta num="39" type="C" />
 
       <div className="visual">
         <svg
-          viewBox="0 0 1094 800"
+          viewBox="0 0 1080 600"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: 1094, height: 800, display: 'block' }}
-          aria-label="Схема: панель Памяти подмешивается в системные инструкции, оттуда — в модель"
+          style={{ width: 1080, height: 'auto' }}
+          aria-label="Две сцены интерфейса DeepSeek: вверху Search выключен и стрелка к книге, внизу Search нажат и стрелка к глобусу"
         >
-          <defs>
-            <marker
-              id="s40-arr"
-              viewBox="0 0 10 10"
-              refX="9"
-              refY="5"
-              markerWidth="7"
-              markerHeight="7"
-              orient="auto"
-            >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill={MUTE_2} />
-            </marker>
-          </defs>
-
-          {/* ── Панель «Заметки о пользователе» ── */}
-          <rect
-            x={20}
-            y={140}
-            width={440}
-            height={520}
-            rx={14}
-            fill={BG}
-            stroke={RULE}
-            strokeWidth={1}
-          />
-          <text
-            x={44}
-            y={188}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="22"
-            fill={INK}
-          >
-            Заметки о пользователе
-          </text>
-          <line
-            x1={20}
-            y1={215}
-            x2={460}
-            y2={215}
-            stroke={RULE_SOFT}
-            strokeWidth={1}
+          <Scene
+            yOffset={0}
+            searchActive={false}
+            IconRight={Book}
+            captionRight="знания до 2024"
+            sceneCaption="модель вспоминает"
           />
 
-          {notes.map((text, i) => {
-            const y = 235 + i * 96;
-            return (
-              <g key={text}>
-                <rect
-                  x={44}
-                  y={y}
-                  width={392}
-                  height={78}
-                  rx={10}
-                  fill={HI}
-                />
-                <text
-                  x={64}
-                  y={y + 49}
-                  fontFamily="IBM Plex Sans, sans-serif"
-                  fontWeight="400"
-                  fontSize="19"
-                  fill={INK}
-                >
-                  {text}
-                </text>
-                <text
-                  x={418}
-                  y={y + 50}
-                  fontFamily="IBM Plex Sans, sans-serif"
-                  fontWeight="400"
-                  fontSize="22"
-                  fill={MUTE_2}
-                  textAnchor="end"
-                >
-                  ×
-                </text>
-              </g>
-            );
-          })}
+          {/* Разделитель сцен */}
+          <line x1="60" y1="290" x2="1020" y2="290" stroke="#D9D7CF" strokeWidth="1" />
 
-          {/* ── Стрелка 1: Memory → Системные инструкции ── */}
-          <line
-            x1={466}
-            y1={400}
-            x2={574}
-            y2={400}
-            stroke={MUTE_2}
-            strokeWidth={1.6}
-            markerEnd="url(#s40-arr)"
+          <Scene
+            yOffset={310}
+            searchActive={true}
+            IconRight={Globe}
+            captionRight="интернет, сейчас"
+            sceneCaption="модель ищет"
           />
-
-          {/* ── Блок «Системные инструкции» ── */}
-          <text
-            x={580}
-            y={260}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="18"
-            fill={MUTE}
-          >
-            Системные инструкции
-          </text>
-          <rect
-            x={580}
-            y={280}
-            width={420}
-            height={240}
-            rx={12}
-            fill={BG}
-            stroke={MUTE_2}
-            strokeWidth={1}
-          />
-          <text
-            x={604}
-            y={336}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="400"
-            fontSize="22"
-            fill={INK_SOFT}
-          >
-            Будь вежлив. Отвечай кратко.
-          </text>
-          <line
-            x1={604}
-            y1={376}
-            x2={976}
-            y2={376}
-            stroke={RULE_SOFT}
-            strokeWidth={1}
-          />
-          <text
-            x={604}
-            y={426}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="400"
-            fontStyle="italic"
-            fontSize="22"
-            fill={INK_SOFT}
-          >
-            + заметки о пользователе
-          </text>
-
-          {/* ── Стрелка 2: Системные инструкции → Модель ── */}
-          <line
-            x1={790}
-            y1={526}
-            x2={790}
-            y2={596}
-            stroke={MUTE_2}
-            strokeWidth={1.6}
-            markerEnd="url(#s40-arr)"
-          />
-
-          {/* ── Блок «Модель» ── */}
-          <rect
-            x={690}
-            y={602}
-            width={200}
-            height={100}
-            rx={14}
-            fill={HI}
-            stroke={INK}
-            strokeWidth={1.5}
-          />
-          <text
-            x={790}
-            y={663}
-            fontFamily="IBM Plex Sans, sans-serif"
-            fontWeight="500"
-            fontSize="30"
-            fill={INK}
-            textAnchor="middle"
-          >
-            Модель
-          </text>
-
-          {/* ── Подпись под визуалом ── */}
-          <text
-            x={20}
-            y={760}
-            fontFamily="IBM Plex Mono, monospace"
-            fontSize="18"
-            letterSpacing="0.06em"
-            fill={MUTE}
-          >
-            Можно выключить · Можно увидеть · Можно стереть
-          </text>
         </svg>
       </div>
 
       <div className="right">
-        <h2 className="title">Память (Memory) — отдельная функция</h2>
-        <p className="cap">
-          Не модель вас запоминает — продукт хранит заметки и&nbsp;подмешивает их в&nbsp;промт
+        <div className="sub">3.2 Доступ к интернету</div>
+        <h2 className="title" style={{ fontSize: 44, lineHeight: 1.15 }}>
+          Поиск — отдельная функция
+        </h2>
+        <p
+          className="cap"
+          style={{
+            fontSize: 22,
+            lineHeight: 1.45,
+            marginTop: 20,
+            color: 'var(--mute)',
+          }}
+        >
+          По умолчанию модель отвечает по&nbsp;памяти — той, что сложилась во&nbsp;время обучения. Чтобы она пошла в&nbsp;интернет, нужно нажать отдельную кнопку.
+        </p>
+        <p
+          style={{
+            margin: '32px 0 0',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: 14,
+            letterSpacing: '0.06em',
+            color: 'var(--mute-2)',
+          }}
+        >
+          DeepSeek · кнопка Search в&nbsp;инпуте
         </p>
       </div>
 

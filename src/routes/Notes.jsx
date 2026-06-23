@@ -6,7 +6,7 @@ import MarkdownView from '../components/MarkdownView.jsx';
  * на этапе сборки — никаких рантайм-fetch.
  */
 const noteModules = import.meta.glob(
-  ['../notes/section-1/*.md', '../notes/opening/*.md'],
+  ['../notes/section-1/*.md', '../notes/section-2/*.md', '../notes/opening/*.md'],
   { query: '?raw', import: 'default', eager: true },
 );
 

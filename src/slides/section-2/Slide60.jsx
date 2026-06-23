@@ -6,49 +6,53 @@ import './part-v.css';
 export const meta = {
   id: '60',
   type: 'C',
-  title: 'Письмо · плохой промт',
+  title: 'Код · плохой промт',
   subblock: '5.2 Плохой vs хороший',
 };
 
-const ANSWER_TEXT = `Уважаемый коллега!
+const ANSWER_TEXT = `import pandas as pd
 
-Надеюсь, у Вас всё хорошо. Хотел бы обратиться к Вам
-по одному рабочему вопросу. Уверен, что Ваш опыт и
-знания будут очень полезны.
+# Загрузка данных
+df = pd.read_csv('data.csv')
 
-Буду признателен за обратную связь в удобное для Вас
-время.
+# Базовая обработка
+df = df.dropna()
+df = df.drop_duplicates()
 
-С уважением,
-[Ваше имя]`;
+# Сохранение
+df.to_csv('processed.csv', index=False)
+
+print(f'Обработано строк: {len(df)}')`;
 
 /**
- * Слайд 75 · Письмо коллеге · плохой промт
- * C-слайд. Слева — короткий промт, под ним шаблонно-вежливый ответ.
+ * Слайд 77 · Код · плохой промт
+ * C-слайд. Слева — короткий промт, под ним абстрактный Python-скрипт.
+ * Никакой подсветки синтаксиса — это часть визуальной идиомы Части V.
  */
 export default function Slide60() {
   return (
-    <Stage label="60 Письмо · плохой промт">
+    <Stage label="60 Код · плохой промт">
       <Meta num="60" type="C" />
 
       <div className="pv-stack">
         <div className="pv-card">
           <div className="pv-card-label">ПРОМТ</div>
-          <pre className="pv-pre lg">напиши письмо коллеге</pre>
+          <pre className="pv-pre lg">напиши скрипт для обработки данных</pre>
         </div>
 
         <div className="pv-card">
-          <div className="pv-card-label">ОТВЕТ</div>
+          <div className="pv-card-label">ОТВЕТ · PYTHON</div>
           <pre className="pv-pre small">{ANSWER_TEXT}</pre>
         </div>
       </div>
 
       <div className="pv-right">
         <div className="sub">5.2 Плохой и&nbsp;хороший</div>
-        <h2 className="title">Письмо коллеге · плохой промт</h2>
+        <h2 className="title">Код · плохой промт</h2>
         <p className="cap">
-          Звучит вежливо, но&nbsp;не&nbsp;содержит ни&nbsp;одного фрагмента сути. Такое
-          письмо коллега удалит, не&nbsp;дочитав
+          Модель выбрала Python и&nbsp;CSV наугад. Не&nbsp;знает: какие данные,
+          какие колонки, что делать с&nbsp;пропусками. Скрипт абстрактный — на&nbsp;вашей
+          задаче работать не&nbsp;будет
         </p>
       </div>
 

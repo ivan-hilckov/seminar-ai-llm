@@ -1,97 +1,71 @@
 import Stage from '../../components/Stage.jsx';
 import Meta from '../../components/Meta.jsx';
 import Foot from '../../components/Foot.jsx';
-import './Slide54.css';
+import './part-v.css';
 
 export const meta = {
   id: '54',
-  type: 'D',
-  title: 'Облако vs локально',
-  subblock: '4.4 Облако vs локально',
+  type: 'C',
+  title: 'Формула промта',
+  subblock: '5.1 Формула промта',
 };
 
-/**
- * Слайд 69 · Облако и локально
- * D-сравнение по образцу Slide43 (Секция 1). Тема продолжает разговор про
- * приватность из 44–45 и накладывает выбор инструмента из 64–67. Без иконок
- * облачка/компьютера, без названий локальных моделей (Llama, Mistral).
- */
-
-const AXES = [
+const COMPONENTS = [
   {
-    label: 'Где работает',
-    left: 'на серверах компании (OpenAI, Anthropic, Google, DeepSeek)',
-    right: 'на вашем компьютере (нужны: 16–64 GB RAM, GPU желательно)',
+    num: '01',
+    name: 'Роль',
+    desc: 'кем модель должна выступать',
   },
   {
-    label: 'Куда уходит запрос',
-    left: 'на сервер компании, обрабатывается там',
-    right: 'никуда, всё считается на устройстве',
+    num: '02',
+    name: 'Задача',
+    desc: 'что нужно сделать — один глагол',
   },
   {
-    label: 'Что с данными',
-    left: 'хранятся у провайдера, могут использоваться для улучшения сервиса (зависит от тарифа и настроек)',
-    right: 'остаются у вас полностью',
+    num: '03',
+    name: 'Контекст',
+    desc: 'кто аудитория, какие материалы, что важно',
   },
   {
-    label: 'Мощность',
-    left: 'любая, ограничена только тарифом',
-    right: 'ограничена железом — обычно слабее облачных моделей',
+    num: '04',
+    name: 'Формат',
+    desc: 'как должен выглядеть ответ',
   },
   {
-    label: 'Подходит для',
-    left: 'обычной работы с открытыми материалами, черновиков, поиска, переводов',
-    right: 'работы с конфиденциальными данными, экспериментов, оффлайн-сценариев',
-  },
-  {
-    label: 'Не подходит для',
-    left: 'конфиденциальных данных без явного NDA / корпоративного тарифа',
-    right: 'самых мощных задач — топ-моделей локально не запустить',
+    num: '05',
+    name: 'Ограничения',
+    desc: 'чего избегать, что обязательно учесть',
   },
 ];
 
-function AxisColumn({ side }) {
-  return (
-    <div className="s69-axes">
-      {AXES.map((a) => (
-        <div key={a.label}>
-          <div className="s69-axis-label">{a.label}</div>
-          <p className="s69-axis-text">{a[side]}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
+/**
+ * Слайд 71 · Формула промта
+ * C-слайд. Слева — список из пяти компонентов формулы (номер + название + описание),
+ * разделённый горизонтальными линиями. Справа — заголовок и комментарий.
+ */
 export default function Slide54() {
   return (
-    <Stage label="54 Облако и локально">
-      <Meta num="54" type="D" />
+    <Stage label="54 Формула промта">
+      <Meta num="54" type="C" />
 
-      <div className="s69-header">
-        <div className="sub">4.4 Где живут данные</div>
-        <h2 className="title">Облако и локально</h2>
-        <p className="lead">Где живёт модель — там живут ваши запросы</p>
+      <div className="pv-formula">
+        {COMPONENTS.map((c) => (
+          <div key={c.num} className="pv-formula-row">
+            <div className="pv-formula-num">{c.num}</div>
+            <div>
+              <h3 className="pv-formula-name">{c.name}</h3>
+              <p className="pv-formula-desc">{c.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="s69-cols">
-        <div className="col">
-          <div className="ctitle">Облако</div>
-          <AxisColumn side="left" />
-        </div>
-        <div className="vrule" />
-        <div className="col right-col">
-          <div className="ctitle">Локально</div>
-          <AxisColumn side="right" />
-        </div>
-      </div>
-
-      <div className="s69-hrule" />
-
-      <div className="s69-summary">
-        <p>
-          Для&nbsp;большинства задач исследователя — облако. Для&nbsp;конфиденциальных
-          материалов — локально или специальный корпоративный тариф
+      <div className="pv-right">
+        <div className="sub">5.1 Формула промта</div>
+        <h2 className="title">Формула промта</h2>
+        <p className="cap">
+          Не&nbsp;нужно использовать все&nbsp;пять в&nbsp;каждом запросе.
+          Но&nbsp;чем сложнее задача — тем&nbsp;больше компонентов
         </p>
       </div>
 
